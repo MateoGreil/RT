@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-int			check_ray_objects(t_env *e, t_vec3 origin, t_vec3 direction)
+int			check_ray_objects(t_env *e, t_vec origin, t_vec direction)
 {
 	t_list *tmp;
 
@@ -20,35 +20,37 @@ int			check_ray_objects(t_env *e, t_vec3 origin, t_vec3 direction)
 	while (e->objs != NULL)
 	{
 		if (e->objs->type == SPH)
-			sphere_intersection_init(e, origin, direction);
+			sphere_init(e, origin, direction);
 		if (e->objs->type == CYL)
-			cylindre_intersection_init(e, origin, direction);
+			cylindre_init(e, origin, direction);
 		if (e->objs->type == CON)
-			cone_intersection_init(e, origin, direction);
+			cone_init(e, origin, direction);
 		if (e->objs->type == PLA)
-			plan_intersection_init(e, origin, direction);
+			plan_init(e, origin, direction);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
 	return (0);
 }
 
-static int	create_ray(t_env *e, t_cam *cam, double i, double j)
+static int	create_ray(t_env *e, double i, double j)
 {
-	cam->ray[e->map->light_count]->origin =
-	vector_assign_values(cam->cam_pos.x, cam->cam_pos.y, cam->cam_pos.z);
-	cam->forward = vector_substraction(cam->view_dir, cam->cam_pos);
-	cam->forward = vector_normalize(cam->forward);
-	cam->right = vector_cross((t_vec3){0.0, 1.0, 0.0}, cam->forward);
-	cam->right = vector_normalize(cam->right);
-	cam->up = vector_cross(cam->forward, cam->right);
-	cam->ray[e->map->light_count]->direction =
-	(t_vec3){i * cam->right.x + j * cam->up.x + FOV * cam->forward.x,
-		i * cam->right.y + j * cam->up.y + FOV * cam->forward.y,
-		i * cam->right.z + j * cam->up.z + FOV * cam->forward.z};
-	cam->ray[e->map->light_count]->direction =
-	vector_normalize(cam->ray[e->map->light_count]->direction);
-	cam->ray[e->map->light_count]->length = 1000000000000;
+	double	length;
+
+	length = 0;
+	e->cam->ray->origin =
+	vector_assign_values(e->cam->pos.x, e->cam->pos.y, e->cam->pos.z);
+	e->cam->forward = vector_substraction(e->cam->dir, e->cam->pos);
+	e->cam->forward = vector_normalize(e->cam->forward);
+	e->cam->right = vector_cross((t_vec3){0.0, 1.0, 0.0}, e->cam->forward);
+	e->cam->right = vector_normalize(e->cam->right);
+	e->cam->up = vector_cross(e->cam->forward, e->cam->right);
+	e->cam->ray = (t_vec3){i * e->cam->right.x + j * e->cam->up.x +
+		FOV * e->cam->forward.x, i * e->cam->right.y + j * e->cam->up.y +
+		FOV * e->cam->forward.y, i * e->cam->right.z + j * e->cam->up.z +
+		FOV * e->cam->forward.z};
+	e->cam->ray= vector_normalize(e->cam->ray);
+	e->cam->ray->length = 1000000000000;
 	return (0);
 }
 

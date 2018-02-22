@@ -42,6 +42,8 @@
 # define INVALID_FILE 1
 # define INVALID_ARG 2
 
+# define FOV 2
+
 # define ERROR -1
 # define SPH 0
 # define PLA 1
@@ -81,7 +83,9 @@ typedef struct	s_cam
 {
 	t_vec	pos;
 	t_vec	dir;
-
+	t_vec	foward;
+	t_vec	right;
+	t_vec	up;
 }				t_cam;
 
 typedef struct	s_env
