@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 16:46:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 19:23:30 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ static int	create_ray(t_env *e, double i, double j)
 		FOV * e->cam->forward.y, i * e->cam->right.z + j * e->cam->up.z +
 		FOV * e->cam->forward.z};
 	e->cam->ray= vector_normalize(e->cam->ray);
-	e->cam->ray->length = DOUBLE_MAX;
+	length = 1000000000000;
 	return (0);
 }
 
-int			ray_loop(t_env *e)
+int			ray_loop(t_env *e)//ET L'IMPLEMENTATION DU MULTI-THREAD EST PASSÉ OÙ ?
 {
 	double	i;
 	double	j;
