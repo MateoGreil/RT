@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/22 11:54:20 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 12:24:37 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	get_cam(t_list **line_lst, t_env *e)
 
 void	parse_file(t_list *line_lst, t_env *e)
 {
-	get_cam(&line_lst, &(e->cam))
+	get_cam(&line_lst, e);
+	get_objs(&line_lst, e);
 }
 
 t_list	*get_objs_and_cam(t_env *e, char *path_file)
