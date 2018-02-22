@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   vector_calc1.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:03:35 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/01/29 18:03:36 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:37:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_vec	vector_assign_values(double x, double y, double z)
 	return (v);
 }
 
-t_vec	vector_addition(t_vec v1, t_vec3 v2)
+t_vec	vector_addition(t_vec v1, t_vec v2)
 {
 	t_vec	res;
 

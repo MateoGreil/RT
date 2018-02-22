@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 12:48:37 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/22 14:37:43 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,13 +47,6 @@
 # define CYL 2
 # define CON 3
 # define LIG 4
-
-typedef	struct	s_vec
-{
-	double	x;
-	double	y;
-	double	z;
-}				t_vec;
 
 typedef struct	s_color
 {
@@ -101,17 +94,6 @@ typedef struct	s_env
 t_img	new_image(void *mlx, int img_size_x, int img_size_y);
 void	del_image(void *mlx, t_img *img);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
-
-t_vec	vector_cross(t_vec v1, t_vec v2);
-t_vec	vector_product(t_vec v1, t_vec v2);
-t_vec	vector_normalize(t_vec v);
-t_vec 	vector_double_substraction(t_vec v1, double i);
-t_vec	vector_substraction(t_vec v1, t_vec v2);
-t_vec 	vector_int_product(t_vec v1, int i);
-t_vec	vector_assign_values(double x, double y, double z);
-t_vec	vector_addition(t_vec v1, t_vec3 v2);
-t_vec 	vector_double_product(t_vec v1, double i);
-double	vector_dot_product(t_vec v1, t_vec v2);
 
 t_list	*get_objs_and_cam(t_env *e, char *path_file);
 

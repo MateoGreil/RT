@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/17 16:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2017/12/08 16:00:48 by mgreil           ###   ########.fr        #
+#    Updated: 2018/02/22 14:35:58 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -101,7 +101,9 @@ SRC_NAME =	ft_memset.c \
 				ft_sqrtroundup.c \
 				ft_power.c \
 				get_next_line.c \
-				read_to_lst.c
+				read_to_lst.c \
+				vector_calc1.c \
+				vector_calc2.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

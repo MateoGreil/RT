@@ -6,13 +6,13 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/02/18 15:04:52 by mgreil           ###   ########.fr        #
+#    Updated: 2018/02/22 14:38:41 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 .PHONY: all $(NAME) clean fclean re proper
 
-NAME = wolf3d
+NAME = rt
 
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
