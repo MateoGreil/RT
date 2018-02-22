@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:38:03 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/22 11:30:05 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 09:22:17 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		get_objs_and_cam(&e, av[1]);
-		draw(&e);
 	}
 	/*else
 		error(INVALID_ARG);*/
