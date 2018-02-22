@@ -51,7 +51,7 @@ double	vector_dot_product(t_vec v1, t_vec v2)
 	return (dot);
 }
 
-t_vec vector_double_substraction(t_vec v1, double i)
+t_vec	vector_double_substraction(t_vec v1, double i)
 {
 	t_vec	res;
 

@@ -137,18 +137,18 @@ int				ft_power(int nbr, int power);
 int				get_next_line(const int fd, char **line);
 int				read_to_lst(const char *path_file, t_list **b_list);
 
-double 			ft_deg2rad(double degrees);
+double			ft_deg2rad(double degrees);
 double			ft_clamp(double value, double min, double max);
 
 t_vec			vector_cross(t_vec v1, t_vec v2);
 t_vec			vector_product(t_vec v1, t_vec v2);
 t_vec			vector_normalize(t_vec v);
-t_vec 			vector_double_substraction(t_vec v1, double i);
+t_vec			vector_double_substraction(t_vec v1, double i);
 t_vec			vector_substraction(t_vec v1, t_vec v2);
-t_vec 			vector_int_product(t_vec v1, int i);
+t_vec			vector_int_product(t_vec v1, int i);
 t_vec			vector_assign_values(double x, double y, double z);
 t_vec			vector_addition(t_vec v1, t_vec v2);
-t_vec 			vector_double_product(t_vec v1, double i);
+t_vec			vector_double_product(t_vec v1, double i);
 double			vector_dot_product(t_vec v1, t_vec v2);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 15:49:51 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 15:51:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ typedef struct	s_cam
 {
 	t_vec	pos;
 	t_vec	dir;
-	
+
 }				t_cam;
 
 typedef struct	s_env
@@ -99,5 +99,8 @@ void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
 char	get_type(char *str_obj);
 void	get_objs_and_cam(t_env *e, char *path_file);
+int		draw(t_env *e);
+int		ray_loop(t_env *e);
+int		check_ray_objects(t_env *e, t_vec origin, t_vec direction);
 
 #endif
