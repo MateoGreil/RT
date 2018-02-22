@@ -19,6 +19,7 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		get_objs_and_cam(&e, av[1]);
+		draw(&e);
 	}
 	/*else
 		error(INVALID_ARG);*/

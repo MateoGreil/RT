@@ -22,7 +22,7 @@ t_vec	vector_substraction(t_vec v1, t_vec v2)
 	return (res);
 }
 
-t_vec vector_int_product(t_vec v1, int i)
+t_vec	vector_int_product(t_vec v1, int i)
 {
 	t_vec	res;
 
@@ -52,7 +52,7 @@ t_vec	vector_addition(t_vec v1, t_vec v2)
 	return (res);
 }
 
-t_vec vector_double_product(t_vec v1, double i)
+t_vec	vector_double_product(t_vec v1, double i)
 {
 	t_vec	res;
 

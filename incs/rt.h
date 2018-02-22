@@ -96,5 +96,8 @@ void	del_image(void *mlx, t_img *img);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
 t_list	*get_objs_and_cam(t_env *e, char *path_file);
+int		draw(t_env *e);
+int		ray_loop(t_env *e);
+int		check_ray_objects(t_env *e, t_vec3 origin, t_vec3 direction);
 
 #endif

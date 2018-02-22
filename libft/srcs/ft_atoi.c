@@ -19,7 +19,7 @@ static int	ft_inbase(char c, int base)
 	return ((c >= '0' && c <= '9') || (c >= 'A' && c <= ('A' + base - 10)));
 }
 
-int	ft_atoi_base(char *str, int base)
+int			ft_atoi_base(char *str, int base)
 {
 	int	value;
 	int	sign;
@@ -44,7 +44,7 @@ int	ft_atoi_base(char *str, int base)
 	return (value * sign);
 }
 
-int	ft_atoi(const char *str)
+int			ft_atoi(const char *str)
 {
 	int			neg;
 	int			res;
