@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "rt.h"
 
 t_img	new_image(void *mlx, int img_size_x, int img_size_y)
 {

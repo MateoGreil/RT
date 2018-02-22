@@ -130,4 +130,7 @@ int				ft_power(int nbr, int power);
 int				get_next_line(const int fd, char **line);
 int				read_to_lst(const char *path_file, t_list **b_list);
 
+double 			ft_deg2rad(double degrees);
+double			ft_clamp(double value, double min, double max);
+
 #endif
