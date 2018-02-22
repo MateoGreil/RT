@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 15:15:37 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/22 16:46:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int	create_ray(t_env *e, double i, double j)
 		FOV * e->cam->forward.y, i * e->cam->right.z + j * e->cam->up.z +
 		FOV * e->cam->forward.z};
 	e->cam->ray= vector_normalize(e->cam->ray);
-	e->cam->ray->length = 1000000000000;
+	e->cam->ray->length = DOUBLE_MAX;
 	return (0);
 }
 
