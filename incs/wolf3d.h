@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/06 09:50:24 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/22 11:23:06 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 12:17:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,12 +41,31 @@
 # define INVALID_FILE 1
 # define INVALID_ARG 2
 
-typedef	struct	s_coor
+# define SPHERE 0
+
+typedef	struct	s_vec
 {
-	float	x;
-	float	y;
-	float	z;
-}				t_coor;
+	double	x;
+	double	y;
+	double	z;
+}				t_vec;
+
+typedef struct	s_color
+{
+	char	r;
+	char	g;
+	char	b;
+}				t_color;
+
+typedef struct	s_obj
+{
+	char	type;
+	t_vec	pos;
+	double	ray;
+	t_color	color;
+	t_vec	rot;
+	t_vec	trans;
+}
 
 typedef struct	s_img
 {
@@ -61,8 +80,8 @@ typedef struct	s_img
 
 typedef struct	s_cam
 {
-	t_coor	pos;
-	t_coor	dir;
+	t_vec	pos;
+	t_vec	dir;
 }				t_cam;
 
 typedef struct	s_env
