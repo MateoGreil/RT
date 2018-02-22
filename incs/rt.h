@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 14:37:43 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 15:49:51 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@
 # define INVALID_FILE 1
 # define INVALID_ARG 2
 
+# define ERROR -1
 # define SPH 0
 # define PLA 1
 # define CYL 2
@@ -59,11 +60,11 @@ typedef struct	s_obj
 {
 	char	type;
 	t_vec	pos;
-	double	ray;
+	double	rad;
 	t_color	color;
 	t_vec	rot;
 	t_vec	trans;
-}
+}				t_obj;
 
 typedef struct	s_img
 {
@@ -80,6 +81,7 @@ typedef struct	s_cam
 {
 	t_vec	pos;
 	t_vec	dir;
+	
 }				t_cam;
 
 typedef struct	s_env
@@ -95,6 +97,7 @@ t_img	new_image(void *mlx, int img_size_x, int img_size_y);
 void	del_image(void *mlx, t_img *img);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
-t_list	*get_objs_and_cam(t_env *e, char *path_file);
+char	get_type(char *str_obj);
+void	get_objs_and_cam(t_env *e, char *path_file);
 
 #endif
