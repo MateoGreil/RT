@@ -6,13 +6,13 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/22 15:49:54 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 16:40:42 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	get_one_obj(char *str_obj, t_env *e)
+t_obj	get_one_obj(char *str_obj, t_env *e)
 {
 	t_obj	obj;
 	int		i_str;
@@ -56,7 +56,7 @@ void	get_objs(t_list **line_lst, t_env *e)
 				str_obj = ft_strstr((*line_lst)->data, "LIG")
 			*line_lst = (*line_lst)->next;
 		}
-		get_one_obj(str_obj, e)
+		ft_listadd(&(e->objs), ft_listnew(get_one_obj(str_obj, e)));
 	}
 }
 
@@ -88,14 +88,18 @@ void	get_cam(t_list **line_lst, t_env *e)
 	e->cam.dir.z = ft_atoi(str_cam + i_str);
 }
 
-ft_delstr
+void	ft_delstr(void *content, size_t content_size)
+{
+	free(content);
+	content_size = 0;
+}
 
-t_list	*get_objs_and_cam(t_env *e, char *path_file)
+void	get_objs_and_cam(t_env *e, char *path_file)
 {
 	t_list	*line_lst;
 
 	read_to_lst(path_file, &line_lst);
 	get_cam(&line_lst, e);
 	get_objs(&line_lst, e);
-
+	ft_lstdel(&line_lst, &ft_delstr);
 }
