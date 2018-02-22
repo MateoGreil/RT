@@ -50,7 +50,7 @@ static int	create_ray(t_env *e, double i, double j)
 		FOV * e->cam->forward.y, i * e->cam->right.z + j * e->cam->up.z +
 		FOV * e->cam->forward.z};
 	e->cam->ray= vector_normalize(e->cam->ray);
-	e->cam->ray->length = 1000000000000;
+	length = 1000000000000;
 	return (0);
 }
 
