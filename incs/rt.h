@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 15:51:39 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/22 19:36:22 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@
 # include "libft.h"
 # include "mlx.h"
 # include <math.h>
-# include <stdio.h>
+# include <pthread.h>
+# include <stdio.h> //<- A SUPPRIMER
 
 # define WIN_SIZE_X 1080
 # define WIN_SIZE_Y 720
