@@ -30,7 +30,6 @@ static int	create_ray(t_env *e, double i, double j)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	printf("%f\n", e->ray.length);
 	return (0);
 }
 
