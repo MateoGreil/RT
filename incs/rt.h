@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 12:10:31 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 14:34:49 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct		s_obj
 	t_vec			pos;
 	double			rad;
 	t_color			color;
-	t_vec			rot; 
+	t_vec			rot;
 	t_vec			trans;
 }					t_obj;
 
@@ -107,6 +107,8 @@ typedef struct		s_env
 	t_list			*objs;
 	t_list			*lights;
 }					t_env;
+
+void	ft_delstr(void *content, size_t content_size);
 
 t_img	new_image(void *mlx, int img_size_x, int img_size_y);
 void	del_image(void *mlx, t_img *img);
