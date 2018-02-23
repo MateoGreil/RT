@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 15:08:21 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 17:49:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	create_ray(t_env *e, double i, double j)
 		FOV * e->cam.forward.x, i * e->cam.right.y + j * e->cam.up.y +
 		FOV * e->cam.forward.y, i * e->cam.right.z + j * e->cam.up.z +
 		FOV * e->cam.forward.z};
-	e->ray.dir= vector_normalize(e->ray.dir);
+	e->ray.dir = vector_normalize(e->ray.dir);
 	e->ray.length = 1000000000;
 	tmp = e->objs;
 	while (e->objs != NULL)
