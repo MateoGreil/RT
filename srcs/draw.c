@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 15:03:01 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 15:06:40 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ static int	create_ray(t_env *e, double i, double j)
 		FOV * e->cam.forward.y, i * e->cam.right.z + j * e->cam.up.z +
 		FOV * e->cam.forward.z};
 	e->ray.dir= vector_normalize(e->ray.dir);
-	e->ray.length = 1000000000000;
+	e->ray.length = 1000000000;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
@@ -50,7 +50,7 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
 			create_ray(e, i, j);
-			if (e->ray.length < 1000000000000)
+			if (e->ray.length < 1000000000)
 				color = e->ray.hit_color;
 			put_pixel_to_image(&e->img, x, y, color);
 			x++;
