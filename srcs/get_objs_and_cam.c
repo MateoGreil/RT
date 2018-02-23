@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 12:14:42 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 14:34:16 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ static void	get_cam(t_list **line_lst, t_env *e)
 	e->cam.dir = get_vec(str_cam, &i_str);
 }
 
-static void	ft_delstr(void *content, size_t content_size)
+void	ft_delstr(void *content, size_t content_size)
 {
 	free(content);
 	content_size = 0;
