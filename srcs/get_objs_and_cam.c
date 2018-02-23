@@ -34,6 +34,7 @@ t_obj	get_one_obj(char *str_obj, t_env *e)
 	while (!ft_isdigit(str_obj[i_str]))
 		i_str++;
 	obj.trans = get_vec(str_obj, &i_str);
+	return (obj);
 }
 
 void	get_objs(t_list **line_lst, t_env *e)
