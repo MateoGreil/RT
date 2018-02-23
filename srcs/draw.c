@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 14:48:47 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 15:03:01 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,17 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 	int			y;
 	t_color		color;
 
-	color = (t_color){0, 0, 0};
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
+			color = (t_color){0, 0, 0};
 			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
 			create_ray(e, i, j);
-			if (e->ray.length != 1000000000000)
+			if (e->ray.length < 1000000000000)
 				color = e->ray.hit_color;
 			put_pixel_to_image(&e->img, x, y, color);
 			x++;
@@ -62,6 +62,7 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 
 int			draw(t_env *e)
 {
+	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
 	e->cam.forward = vector_substraction(e->cam.dir, e->cam.pos);
 	e->cam.forward = vector_normalize(e->cam.forward);
 	e->cam.right = vector_cross((t_vec){0.0, 1.0, 0.0}, e->cam.forward);
@@ -69,5 +70,6 @@ int			draw(t_env *e)
 	e->cam.up = vector_cross(e->cam.forward, e->cam.right);
 	ray_loop(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
+	del_image(e->mlx, &e->img);
 	return (0);
 }
