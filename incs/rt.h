@@ -59,51 +59,51 @@ typedef struct	s_color
 
 typedef struct	s_ray
 {
-	t_vec	dir;
-	double	length;
-	t_vec	hit_color;
-	t_vec	hit_pos;
+	t_vec			dir;
+	double			length;
+	t_color			hit_color;
+	t_vec			hit_pos;
 }				t_ray;
 
 typedef struct	s_obj
 {
-	char	type;
-	t_vec	pos;
-	double	rad;
-	t_color	color;
-	t_vec	rot; 
-	t_vec	trans;
+	char			type;
+	t_vec			pos;
+	double			rad;
+	t_color			color;
+	t_vec			rot; 
+	t_vec			trans;
 }				t_obj;
 
 typedef struct	s_img
 {
-	void	*img;
-	char	*data;
-	int		size_x;
-	int		size_y;
-	int		bpp;
-	int		size_line;
-	int		endian;
+	void			*img;
+	char			*data;
+	int				size_x;
+	int				size_y;
+	int				bpp;
+	int				size_line;
+	int				endian;
 }				t_img;
 
 typedef struct	s_cam
 {
-	t_vec	pos;
-	t_vec	dir;
-	t_vec	forward;
-	t_vec	right;
-	t_vec	up;
-	t_ray	ray;
+	t_vec			pos;
+	t_vec			dir;
+	t_vec			forward;
+	t_vec			right;
+	t_vec			up;
 }				t_cam;
 
 typedef struct	s_env
 {
-	void	*mlx;
-	void	*win;
-	t_img	img;
-	t_cam	cam;
-	t_list	*objs;
-	t_list	*lights;
+	void			*mlx;
+	void			*win;
+	t_img			img;
+	t_cam			cam;
+	t_ray			ray;
+	t_list			*objs;
+	t_list			*lights;
 }				t_env;
 
 t_img	new_image(void *mlx, int img_size_x, int img_size_y);
@@ -116,6 +116,6 @@ t_color	get_color(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
 int		draw(t_env *e);
 int		ray_loop(t_env *e);
-int		check_inter_objects(t_env *e, t_vec origin, t_vec direction, double length);
+int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
 
 #endif

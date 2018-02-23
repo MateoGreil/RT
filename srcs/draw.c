@@ -12,8 +12,6 @@
 
 #include "rt.h"
 
-
-
 static int	create_ray(t_env *e, double i, double j)
 {
 	t_list *tmp;	
@@ -29,7 +27,7 @@ static int	create_ray(t_env *e, double i, double j)
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
-		length = check_inter_objects(e, e->cam.pos, e->ray, length);
+		check_inter_objects(e, e->cam.pos, e->ray);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
@@ -38,11 +36,13 @@ static int	create_ray(t_env *e, double i, double j)
 
 int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 {
-	double	i;
-	double	j;
-	int		x;
-	int		y;
+	double		i;
+	double		j;
+	int			x;
+	int			y;
+	t_color		color;
 
+	color = (t_color){0, 0, 0};
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
@@ -52,6 +52,8 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
 			create_ray(e, e->cam, i, j);
+			if (e->ray->length != 1000000000000)
+				color = e->ray->hit_color;
 			put_pixel_to_image(e->img, x, y, color);
 		}
 		x++;
