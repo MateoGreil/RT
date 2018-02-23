@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:11:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 10:01:16 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 10:29:46 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,14 @@ t_vec	get_vec(char *str_obj, int *i_str)
 	vec.x = (double)ft_atoi(str_obj + (*i_str));
 	while (str_obj[(*i_str)] && ft_isdigit(str_obj[(*i_str)]))
 		(*i_str)++;
-	while (str_obj[(*i_str)] && !ft_isdigit(str_obj[(*i_str)]))
+	while (str_obj[(*i_str)] && !ft_isdigit(str_obj[(*i_str)]) &&
+	str_obj[(*i_str)] != '-')
 		(*i_str)++;
 	vec.y = (double)ft_atoi(str_obj + (*i_str));
 	while (str_obj[(*i_str)] && ft_isdigit(str_obj[(*i_str)]))
 		(*i_str)++;
-	while (str_obj[(*i_str)] && !ft_isdigit(str_obj[(*i_str)]))
+	while (str_obj[(*i_str)] && !ft_isdigit(str_obj[(*i_str)]) &&
+	str_obj[(*i_str)] != '-')
 		(*i_str)++;
 	vec.z = (double)ft_atoi(str_obj + (*i_str));
 	while (str_obj[(*i_str)] && ft_isdigit(str_obj[(*i_str)]))
