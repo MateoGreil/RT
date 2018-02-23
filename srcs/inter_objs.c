@@ -46,10 +46,10 @@ static int	plan_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	double	new_length;
 
-	new_length = ((vector_dot_product((t_vec){1, 0, 0},
+	new_length = ((vector_dot_product((t_vec){0, 1, 0},
 		((t_obj*)e->objs->content)->pos) -
-		vector_dot_product((t_vec){1, 0, 0}, origin)) /
-		vector_dot_product((t_vec){1, 0, 0}, direction));
+		vector_dot_product((t_vec){0, 1, 0}, origin)) /
+		vector_dot_product((t_vec){0, 1, 0}, direction));
 	if (new_length < 0.0001)
 		return (e->ray.length);
 	return (new_length);
@@ -97,7 +97,8 @@ static int	sphere_inter(t_env *e, t_vec origin, t_vec direction)
 		vector_double_product(direction, projection));
 	distance_sq = vector_dot_product(distance_vector, distance_vector);
 	if (distance_sq > (((t_obj*)e->objs->content)->rad * ((t_obj*)e->objs->content)->rad))
-		new_length = projection - sqrtf((((t_obj*)e->objs->content)->rad *
+		return (e->ray.length);
+	new_length = projection - sqrtf((((t_obj*)e->objs->content)->rad *
 			((t_obj*)e->objs->content)->rad) - distance_sq);
 	return (new_length);
 }
