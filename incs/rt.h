@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 19:36:22 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 10:02:24 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,8 @@ void	del_image(void *mlx, t_img *img);
 void	put_pixel_to_image(t_img *img, int x, int y, int color);
 
 char	get_type(char *str_obj);
+t_vec	get_vec(char *str_obj, int *i_str);
+t_color	get_color(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
 int		draw(t_env *e);
 int		ray_loop(t_env *e);

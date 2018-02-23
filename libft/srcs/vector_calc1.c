@@ -6,11 +6,11 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/29 18:03:35 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 14:37:39 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 10:09:43 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "libft.h"
 
 t_vec	vector_substraction(t_vec v1, t_vec v2)
 {

@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   vector_calc2.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/30 11:21:06 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/01/30 11:21:09 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/23 10:09:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "libft.h"
 
 t_vec	vector_cross(t_vec v1, t_vec v2)
 {

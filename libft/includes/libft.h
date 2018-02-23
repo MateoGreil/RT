@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/22 16:36:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 10:10:03 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include <sys/stat.h>
+# include <math.h>
 
 # define BUFF_SIZE 32
 

@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/02/22 14:38:41 by mgreil           ###   ########.fr        #
+#    Updated: 2018/02/23 10:09:09 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,14 +21,9 @@ MLXFLAGS = -framework OpenGL -framework AppKit -lpthread
 LIBFT = -lft -L$(LIBFT_PATH)
 LIBMLX = -lmlx -L$(LIBMLX_PATH)
 
-SRC_NAME =	wolf3d.c \
-						get_map.c \
-						lst_to_map.c \
-						raycasting.c \
-						tools_mlx.c \
-						drawing.c \
-						key_hook.c \
-						error.c
+SRC_NAME =	main.c \
+			get_obj_detail.c \
+			get_objs_and_cam.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
