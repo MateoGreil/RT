@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/17 16:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/02/23 10:11:25 by mgreil           ###   ########.fr        #
+#    Updated: 2018/02/23 11:47:27 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,6 +80,7 @@ SRC_NAME =	ft_memset.c \
 			ft_islower.c \
 			ft_isgraph.c \
 			ft_ishex.c \
+			ft_isnum.c \
 			ft_isblank.c \
 			ft_ispunct.c \
 			ft_iscntrl.c \
