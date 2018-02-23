@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 10:02:24 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 12:10:31 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,6 @@
 # define INVALID_FILE 1
 # define INVALID_ARG 2
 
-# define FOV 2
-
 # define ERROR -1
 # define SPH 0
 # define PLA 1
@@ -54,9 +52,9 @@
 
 typedef struct	s_color
 {
-	char	r;
-	char	g;
-	char	b;
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
 }				t_color;
 
 typedef struct	s_ray
@@ -73,7 +71,7 @@ typedef struct	s_obj
 	t_vec	pos;
 	double	rad;
 	t_color	color;
-	t_vec	rot; 
+	t_vec	rot;
 	t_vec	trans;
 }				t_obj;
 
@@ -92,10 +90,9 @@ typedef struct	s_cam
 {
 	t_vec	pos;
 	t_vec	dir;
-	t_vec	foward;
+	t_vec	forward;
 	t_vec	right;
 	t_vec	up;
-	t_ray	ray;
 }				t_cam;
 
 typedef struct	s_env
@@ -104,6 +101,7 @@ typedef struct	s_env
 	void	*win;
 	t_img	img;
 	t_cam	cam;
+	t_ray	ray;
 	t_list	*objs;
 	t_list	*lights;
 }				t_env;

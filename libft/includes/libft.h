@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 10:10:03 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 11:47:50 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,6 +111,7 @@ void			ft_lstsortrev(t_list **b_list, int (*f)(t_list *e_one,
 void			ft_lstrev(t_list **b_list);
 void			ft_putlst(t_list *b_list);
 
+int				ft_isnum(int c);
 int				ft_isupper(int c);
 int				ft_islower(int c);
 int				ft_isgraph(int c);
