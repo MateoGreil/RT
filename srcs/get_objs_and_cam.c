@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 11:50:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 12:14:42 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,10 @@ static void	get_objs(t_list **line_lst, t_env *e)
 			*line_lst = (*line_lst)->next;
 		}
 		obj = get_one_obj(str_obj);
-		ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));
+		if (obj.type < LIG)
+			ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));
+		else
+			ft_lstaddback(&(e->lights), ft_lstnew(&obj, sizeof(t_obj)));
 	}
 }
 
