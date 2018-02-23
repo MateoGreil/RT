@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "wolf3d.h"
+#include "rt.h"
 
 int			key_hook(int keycode, t_env *e)
 {
@@ -21,8 +21,8 @@ int			key_hook(int keycode, t_env *e)
 
 int			button_exit(int keycode, t_env *e)
 {
-	ft_lstdel(e->lights, sizeof(t_obj));
-	ft_lstdel(e->objs, sizeof(t_obj));
+	ft_lstdel(&e->lights, sizeof(t_obj));
+	ft_lstdel(&e->objs, sizeof(t_obj));
 	keycode = 0;
 	exit(0);
 }

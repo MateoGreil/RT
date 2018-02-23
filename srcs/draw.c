@@ -67,6 +67,6 @@ int			draw(t_env *e)
 	e->cam.right = vector_cross((t_vec){0.0, 1.0, 0.0}, e->cam.forward);
 	e->cam.right = vector_normalize(e->cam.right);
 	e->cam.up = vector_cross(e->cam.forward, e->cam.right);
-	ray_loop(&e);
+	ray_loop(e);
 	return (0);
 }
