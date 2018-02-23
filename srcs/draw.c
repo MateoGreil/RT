@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/22 19:28:01 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 14:48:47 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,10 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 			if (e->ray.length != 1000000000000)
 				color = e->ray.hit_color;
 			put_pixel_to_image(&e->img, x, y, color);
+			x++;
 		}
-		x++;
+		y++;
 	}
-	y++;
 	return (0);
 }
 
@@ -68,5 +68,6 @@ int			draw(t_env *e)
 	e->cam.right = vector_normalize(e->cam.right);
 	e->cam.up = vector_cross(e->cam.forward, e->cam.right);
 	ray_loop(e);
+	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 	return (0);
 }

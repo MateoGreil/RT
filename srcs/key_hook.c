@@ -27,8 +27,8 @@ void	ft_delstr(void *content, size_t content_size)
 
 int			button_exit(int keycode, t_env *e)
 {
-	ft_lstdel(e->lights, &ft_delstr);
-	ft_lstdel(e->objs, &ft_delstr);
+	ft_lstdel(&e->lights, &ft_delstr);
+	ft_lstdel(&e->objs, &ft_delstr);
 	keycode = 0;
 	exit(0);
 }

@@ -86,12 +86,6 @@ static void	get_cam(t_list **line_lst, t_env *e)
 	e->cam.dir = get_vec(str_cam, &i_str);
 }
 
-void	ft_delstr(void *content, size_t content_size)
-{
-	free(content);
-	content_size = 0;
-}
-
 void	get_objs_and_cam(t_env *e, char *path_file)
 {
 	t_list	*line_lst;
