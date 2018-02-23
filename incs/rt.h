@@ -50,22 +50,22 @@
 # define CON 3
 # define LIG 4
 
-typedef struct	s_color
+typedef struct		s_color
 {
 	unsigned char	r;
 	unsigned char	g;
 	unsigned char	b;
-}				t_color;
+}					t_color;
 
-typedef struct	s_ray
+typedef struct		s_ray
 {
 	t_vec			dir;
 	double			length;
 	t_color			hit_color;
 	t_vec			hit_pos;
-}				t_ray;
+}					t_ray;
 
-typedef struct	s_obj
+typedef struct		s_obj
 {
 	char			type;
 	t_vec			pos;
@@ -73,9 +73,9 @@ typedef struct	s_obj
 	t_color			color;
 	t_vec			rot; 
 	t_vec			trans;
-}				t_obj;
+}					t_obj;
 
-typedef struct	s_img
+typedef struct		s_img
 {
 	void			*img;
 	char			*data;
@@ -84,18 +84,18 @@ typedef struct	s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
-}				t_img;
+}					t_img;
 
-typedef struct	s_cam
+typedef struct		s_cam
 {
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			forward;
 	t_vec			right;
 	t_vec			up;
-}				t_cam;
+}					t_cam;
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
@@ -104,7 +104,7 @@ typedef struct	s_env
 	t_ray			ray;
 	t_list			*objs;
 	t_list			*lights;
-}				t_env;
+}					t_env;
 
 t_img	new_image(void *mlx, int img_size_x, int img_size_y);
 void	del_image(void *mlx, t_img *img);
