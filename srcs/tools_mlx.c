@@ -33,7 +33,7 @@ void	del_image(void *mlx, t_img *img)
 	img->data = NULL;
 }
 
-void	put_pixel_to_image(t_img *img, int x, int y, int color)
+void	put_pixel_to_image(t_img *img, int x, int y, t_color color)
 {
 	int	pos;
 

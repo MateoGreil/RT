@@ -23,7 +23,11 @@ LIBMLX = -lmlx -L$(LIBMLX_PATH)
 
 SRC_NAME =	main.c \
 			get_obj_detail.c \
-			get_objs_and_cam.c
+			get_objs_and_cam.c \
+			draw.c \
+			inter_objs.c \
+			key_hook.c \
+			tools_mlx.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

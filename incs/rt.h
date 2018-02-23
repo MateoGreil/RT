@@ -21,8 +21,8 @@
 # include <pthread.h>
 # include <stdio.h> //<- A SUPPRIMER
 
-# define WIN_SIZE_X 1080
-# define WIN_SIZE_Y 720
+# define WIN_WIDTH 1080
+# define WIN_HEIGHT 720
 
 # define KEY_PRESS 2
 # define MOUSE_PRESS 4
@@ -42,6 +42,8 @@
 # define INVALID_FILE_DESCRIPTION 0
 # define INVALID_FILE 1
 # define INVALID_ARG 2
+
+# define FOV 2
 
 # define ERROR -1
 # define SPH 0
@@ -108,7 +110,7 @@ typedef struct		s_env
 
 t_img	new_image(void *mlx, int img_size_x, int img_size_y);
 void	del_image(void *mlx, t_img *img);
-void	put_pixel_to_image(t_img *img, int x, int y, int color);
+void	put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
 char	get_type(char *str_obj);
 t_vec	get_vec(char *str_obj, int *i_str);
@@ -117,5 +119,7 @@ void	get_objs_and_cam(t_env *e, char *path_file);
 int		draw(t_env *e);
 int		ray_loop(t_env *e);
 int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
+int		key_hook(int keycode, t_env *e);
+int		button_exit(int keycode, t_env *e);
 
 #endif
