@@ -29,6 +29,7 @@ static int	create_ray(t_env *e, double i, double j)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
+	printf("%f\n", e->ray.length);
 	return (0);
 }
 
@@ -40,17 +41,17 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 	int			y;
 	t_color		color;
 
-	color = (t_color){0, 0, 0};
 	y = 0;
 	while (y < WIN_HEIGHT)
 	{
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
+			color = (t_color){0, 0, 0};
 			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
 			create_ray(e, i, j);
-			if (e->ray.length < 1000000000000)
+			if (e->ray.length < 10000000000)
 				color = e->ray.hit_color;
 			put_pixel_to_image(&e->img, x, y, color);
 			x++;
