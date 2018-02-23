@@ -1,0 +1,3 @@
+*.[oa] #Tous les fichiers en .o ou .a
+*.DS_Store
+*._DS_Store
