@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 10:30:14 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/23 11:50:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,19 +19,21 @@ static t_obj	get_one_obj(char *str_obj)
 
 	obj.type = get_type(str_obj);
 	i_str = 0;
-	while (!ft_isdigit(str_obj[i_str]))
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.pos = get_vec(str_obj, &i_str);
-	while (!ft_isdigit(str_obj[i_str]))
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.rad = (double)ft_atoi(str_obj + i_str);
-	while (!ft_isdigit(str_obj[i_str]))
+	while (str_obj[(i_str)] && ft_isnum(str_obj[(i_str)]))
+		i_str++;
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.color = get_color(str_obj, &i_str);
-	while (!ft_isdigit(str_obj[i_str]))
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.rot = get_vec(str_obj, &i_str);
-	while (!ft_isdigit(str_obj[i_str]))
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.trans = get_vec(str_obj, &i_str);
 	return (obj);
@@ -39,8 +41,8 @@ static t_obj	get_one_obj(char *str_obj)
 
 static void	get_objs(t_list **line_lst, t_env *e)
 {
-	char	*str_obj;
 	t_obj	obj;
+	char	*str_obj;
 
 	while (*line_lst)
 	{
@@ -59,7 +61,7 @@ static void	get_objs(t_list **line_lst, t_env *e)
 			*line_lst = (*line_lst)->next;
 		}
 		obj = get_one_obj(str_obj);
-		ft_lstadd(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));
+		ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));
 	}
 }
 
@@ -71,10 +73,12 @@ static void	get_cam(t_list **line_lst, t_env *e)
 	while (!(str_cam = ft_strstr((*line_lst)->content, "CAM")))
 		*line_lst = (*line_lst)->next;
 	i_str = 0;
-	while (str_cam[(i_str)] && !ft_isdigit(str_cam[(i_str)]) && str_cam[(i_str)] != '-')
+	while (str_cam[(i_str)] && !ft_isdigit(str_cam[(i_str)]) &&
+														str_cam[(i_str)] != '-')
 		i_str++;
 	e->cam.pos = get_vec(str_cam, &i_str);
-	while (str_cam[(i_str)] && !ft_isdigit(str_cam[(i_str)]) && str_cam[(i_str)] != '-')
+	while (str_cam[(i_str)] && !ft_isdigit(str_cam[(i_str)]) &&
+														str_cam[(i_str)] != '-')
 		i_str++;
 	e->cam.dir = get_vec(str_cam, &i_str);
 }
