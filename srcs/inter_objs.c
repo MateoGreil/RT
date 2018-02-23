@@ -21,16 +21,16 @@ static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 	t_vec	dist;
 
 	dist = vector_substraction(origin, ((t_obj*)e->objs->content)->pos);
-	vector_normalize((t_vec){1, 0, 0});
 	tmp.x = vector_dot_product(direction, direction)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2)) *
 		pow(vector_dot_product(direction, (t_vec){1, 0, 0}), 2);
 	tmp.y = 2 * (vector_dot_product(direction, dist)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
-		* vector_dot_product(direction, (t_vec){1, 0, 0}) 
+		* vector_dot_product(direction, (t_vec){1, 0, 0})
 		* vector_dot_product(dist, (t_vec){1, 0, 0}));
-	tmp.z = vector_dot_product(dist, dist) - (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2)) 
-	* pow(vector_dot_product(dist, (t_vec){1, 0, 0}), 2);
+	tmp.z = vector_dot_product(dist, dist) - (1 + pow(tan((
+		(t_obj*)e->objs->content)->rad), 2)) *
+		pow(vector_dot_product(dist, (t_vec){1, 0, 0}), 2);
 	disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;
 	if (disc < 0)
 		return (e->ray.length);
@@ -40,7 +40,6 @@ static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 		new_length = new_length_2;
 	return (new_length);
 }
-
 
 static int	plan_inter(t_env *e, t_vec origin, t_vec direction)
 {
@@ -62,7 +61,7 @@ static int	cylindre_inter(t_env *e, t_vec origin, t_vec direction)
 	double	disc;
 	double	new_length;
 	double	new_length_2;
-	
+
 	dist = vector_substraction(origin, ((t_obj*)e->objs->content)->pos);
 	vector_normalize((t_vec){1, 0, 0});
 	tmp.x = vector_dot_product(direction, direction) -
@@ -70,7 +69,9 @@ static int	cylindre_inter(t_env *e, t_vec origin, t_vec direction)
 	tmp.y = 2 * (vector_dot_product(direction, dist) -
 		(vector_dot_product(direction, (t_vec){1, 0, 0}) *
 			vector_dot_product(dist, (t_vec){1, 0, 0})));
-	tmp.z = vector_dot_product(dist, dist) - pow(vector_dot_product(dist, (t_vec){1, 0, 0}), 2) - pow(((t_obj*)e->objs->content)->rad, 2);
+	tmp.z = vector_dot_product(dist, dist) -
+	pow(vector_dot_product(dist, (t_vec){1, 0, 0}), 2) -
+	pow(((t_obj*)e->objs->content)->rad, 2);
 	disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;
 	if (disc < 0)
 		return (e->ray.length);
@@ -90,16 +91,19 @@ static int	sphere_inter(t_env *e, t_vec origin, t_vec direction)
 	double		new_length;
 
 	new_length = e->ray.length;
-	origin_to_sphere = vector_substraction(((t_obj*)e->objs->content)->pos, origin);
+	origin_to_sphere = vector_substraction((
+		(t_obj*)e->objs->content)->pos, origin);
 	if ((projection = vector_dot_product(origin_to_sphere, direction)) < 0)
 		return (e->ray.length);
 	distance_vector = vector_substraction(origin_to_sphere,
 		vector_double_product(direction, projection));
-	distance_sq = vector_dot_product(distance_vector, distance_vector);
-	if (distance_sq > (((t_obj*)e->objs->content)->rad * ((t_obj*)e->objs->content)->rad))
+	distance_sq =
+		vector_dot_product(distance_vector, distance_vector);
+	if (distance_sq > (((t_obj*)e->objs->content)->rad *
+		((t_obj*)e->objs->content)->rad))
 		return (e->ray.length);
 	new_length = projection - sqrtf((((t_obj*)e->objs->content)->rad *
-			((t_obj*)e->objs->content)->rad) - distance_sq);
+		((t_obj*)e->objs->content)->rad) - distance_sq);
 	return (new_length);
 }
 

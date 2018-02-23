@@ -39,7 +39,7 @@ static t_obj	get_one_obj(char *str_obj)
 	return (obj);
 }
 
-static void	get_objs(t_list **line_lst, t_env *e)
+static void		get_objs(t_list **line_lst, t_env *e)
 {
 	t_obj	obj;
 	char	*str_obj;
@@ -68,7 +68,7 @@ static void	get_objs(t_list **line_lst, t_env *e)
 	}
 }
 
-static void	get_cam(t_list **line_lst, t_env *e)
+static void		get_cam(t_list **line_lst, t_env *e)
 {
 	char	*str_cam;
 	int		i_str;
@@ -86,7 +86,7 @@ static void	get_cam(t_list **line_lst, t_env *e)
 	e->cam.dir = get_vec(str_cam, &i_str);
 }
 
-void	get_objs_and_cam(t_env *e, char *path_file)
+void			get_objs_and_cam(t_env *e, char *path_file)
 {
 	t_list	*line_lst;
 	t_list	*b_lst;
