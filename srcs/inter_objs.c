@@ -23,14 +23,14 @@ static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 	dist = vector_substraction(origin, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(direction, direction)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2)) *
-		pow(vector_dot_product(direction, (t_vec){1, 0, 0}), 2);
+		pow(vector_dot_product(direction, (t_vec)((t_obj*)e->objs->content)->dir), 2);
 	tmp.y = 2 * (vector_dot_product(direction, dist)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
-		* vector_dot_product(direction, (t_vec){1, 0, 0})
-		* vector_dot_product(dist, (t_vec){1, 0, 0}));
+		* vector_dot_product(direction, (t_vec)((t_obj*)e->objs->content)->dir)
+		* vector_dot_product(dist, (t_vec)((t_obj*)e->objs->content)->dir));
 	tmp.z = vector_dot_product(dist, dist) - (1 + pow(tan((
 		(t_obj*)e->objs->content)->rad), 2)) *
-		pow(vector_dot_product(dist, (t_vec){1, 0, 0}), 2);
+		pow(vector_dot_product(dist, (t_vec)((t_obj*)e->objs->content)->dir), 2);
 	disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;
 	if (disc < 0)
 		return (e->ray.length);
@@ -45,10 +45,10 @@ static int	plan_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	double	new_length;
 
-	new_length = ((vector_dot_product((t_vec){0, 1, 0},
+	new_length = ((vector_dot_product((t_vec)((t_obj*)e->objs->content)->dir,
 		((t_obj*)e->objs->content)->pos) -
-		vector_dot_product((t_vec){0, 1, 0}, origin)) /
-		vector_dot_product((t_vec){0, 1, 0}, direction));
+		vector_dot_product((t_vec)((t_obj*)e->objs->content)->dir, origin)) /
+		vector_dot_product((t_vec)((t_obj*)e->objs->content)->dir, direction));
 	if (new_length < 0.0001)
 		return (e->ray.length);
 	return (new_length);
@@ -63,14 +63,14 @@ static int	cylindre_inter(t_env *e, t_vec origin, t_vec direction)
 	double	new_length_2;
 
 	dist = vector_substraction(origin, ((t_obj*)e->objs->content)->pos);
-	vector_normalize((t_vec){1, 0, 0});
+	vector_normalize(((t_obj*)e->objs->content)->dir);
 	tmp.x = vector_dot_product(direction, direction) -
-	pow(vector_dot_product(direction, (t_vec){1, 0, 0}), 2);
+	pow(vector_dot_product(direction, ((t_obj*)e->objs->content)->dir), 2);
 	tmp.y = 2 * (vector_dot_product(direction, dist) -
-		(vector_dot_product(direction, (t_vec){1, 0, 0}) *
-			vector_dot_product(dist, (t_vec){1, 0, 0})));
+		(vector_dot_product(direction, ((t_obj*)e->objs->content)->dir) *
+			vector_dot_product(dist, ((t_obj*)e->objs->content)->dir)));
 	tmp.z = vector_dot_product(dist, dist) -
-	pow(vector_dot_product(dist, (t_vec){1, 0, 0}), 2) -
+	pow(vector_dot_product(dist, (t_vec)((t_obj*)e->objs->content)->dir), 2) -
 	pow(((t_obj*)e->objs->content)->rad, 2);
 	disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;
 	if (disc < 0)

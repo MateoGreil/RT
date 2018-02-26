@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-double	ft_deg2rad(double degrees)
+double ft_deg2rad(double degrees) 
 {
-	return (degrees * 4.0 * atan(1.0) / 180.0);
+	return (degrees * 4.0 * atan (1.0) / 180.0);
 }
