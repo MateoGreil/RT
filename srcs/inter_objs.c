@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   inter_objs.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 11:18:10 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/23 17:50:16 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,6 @@ int			check_inter_objects(t_env *e, t_vec origin, t_vec direction)
 	{
 		e->ray.length = new_length;
 		e->ray.hit_color = ((t_obj*)e->objs->content)->color;
-		e->ray.hit_pos = ((t_obj*)e->objs->content)->pos;
 	}
 	return (0);
 }
