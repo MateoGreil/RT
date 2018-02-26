@@ -40,8 +40,8 @@ void	put_pixel_to_image(t_img *img, int x, int y, t_color color)
 	pos = (x + img->size_x * y) * (img->bpp / 8);
 	if (x < img->size_x && x >= 0 && y >= 0 && y < img->size_y)
 	{
-		img->data[pos] = color.r;
+		img->data[pos] = color.b;
 		img->data[pos + 1] = color.g;
-		img->data[pos + 2] = color.b;
+		img->data[pos + 2] = color.r;
 	}
 }
