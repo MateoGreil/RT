@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 static int  search_shadow(t_env *e, t_vec hit_point, t_vec light_dir)
 {
   t_ray		ray;
@@ -25,7 +25,7 @@ static int  search_shadow(t_env *e, t_vec hit_point, t_vec light_dir)
 		return (1);
   return (0);
 }
-
+*/
 t_color	light_calc(t_env *e, t_color color)
 {
 	t_vec	hit_point;
