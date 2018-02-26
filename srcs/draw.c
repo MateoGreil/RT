@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "rt.h"
 
 static int	create_ray(t_env *e, double i, double j)
