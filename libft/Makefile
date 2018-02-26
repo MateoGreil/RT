@@ -104,7 +104,10 @@ SRC_NAME =	ft_memset.c \
 			get_next_line.c \
 			read_to_lst.c \
 			vector_calc1.c \
-			vector_calc2.c
+			vector_calc2.c \
+			color_calc.c \
+			ft_clamp.c \
+			ft_deg2rad.c 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

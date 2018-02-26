@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 11:47:50 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/26 12:49:52 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,13 @@
 # include <math.h>
 
 # define BUFF_SIZE 32
+
+typedef struct	s_color
+{
+	unsigned char	r;
+	unsigned char	g;
+	unsigned char	b;
+}				t_color;
 
 typedef	struct	s_vec
 {
@@ -152,5 +159,10 @@ t_vec			vector_assign_values(double x, double y, double z);
 t_vec			vector_addition(t_vec v1, t_vec v2);
 t_vec			vector_double_product(t_vec v1, double i);
 double			vector_dot_product(t_vec v1, t_vec v2);
+
+t_color			color_double_product(t_color v1, double i);
+t_color			color_product(t_color v1, t_color v2);
+t_color			color_addition(t_color v1, t_color v2);
+t_color			color_mix(t_color v1, t_color v2);
 
 #endif

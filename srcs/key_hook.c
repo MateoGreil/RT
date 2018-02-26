@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-int			key_hook(int keycode, t_env *e)
+int		key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
@@ -25,7 +25,7 @@ void	ft_delstr(void *content, size_t content_size)
 	content_size = 0;
 }
 
-int			button_exit(int keycode, t_env *e)
+int		button_exit(int keycode, t_env *e)
 {
 	ft_lstdel(&e->lights, &ft_delstr);
 	ft_lstdel(&e->objs, &ft_delstr);

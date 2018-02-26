@@ -52,13 +52,6 @@
 # define CON 3
 # define LIG 4
 
-typedef struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_color;
-
 typedef struct		s_ray
 {
 	t_vec			dir;
@@ -86,7 +79,8 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
-}					t_img;
+	int				light_on;
+}						t_img;
 
 typedef struct		s_cam
 {
@@ -95,18 +89,18 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_vec			right;
 	t_vec			up;
-}					t_cam;
+}						t_cam;
 
-typedef struct		s_env
+typedef struct	s_env
 {
 	void			*mlx;
 	void			*win;
 	t_img			img;
 	t_cam			cam;
 	t_ray			ray;
-	t_list			*objs;
-	t_list			*lights;
-}					t_env;
+	t_list		*objs;
+	t_list		*lights;
+}							t_env;
 
 void	ft_delstr(void *content, size_t content_size);
 
@@ -123,5 +117,7 @@ int		ray_loop(t_env *e);
 int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
+t_color light_calc(t_env *e, t_color  color);
+
 
 #endif

@@ -122,6 +122,7 @@ int			check_inter_objects(t_env *e, t_vec origin, t_vec direction)
 	if (new_length < e->ray.length)
 	{
 		e->ray.length = new_length;
+		e->ray.hit_pos = ((t_obj*)e->objs->content)->pos;
 		e->ray.hit_color = ((t_obj*)e->objs->content)->color;
 	}
 	return (0);
