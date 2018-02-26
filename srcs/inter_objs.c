@@ -45,10 +45,10 @@ static int	plan_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	double	new_length;
 
-	new_length = ((vector_dot_product((t_vec){0, 1, 0},
+	new_length = ((vector_dot_product((t_vec){0, 0, -1},
 		((t_obj*)e->objs->content)->pos) -
-		vector_dot_product((t_vec){0, 1, 0}, origin)) /
-		vector_dot_product((t_vec){0, 1, 0}, direction));
+		vector_dot_product((t_vec){0, 0, -1}, origin)) /
+		vector_dot_product((t_vec){0, 0, -1}, direction));
 	if (new_length < 0.0001)
 		return (e->ray.length);
 	return (new_length);
