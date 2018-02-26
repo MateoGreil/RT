@@ -22,8 +22,8 @@ static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 
 	dist = vector_substraction(origin, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(direction, direction)
-		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2)) *
-		pow(vector_dot_product(direction, (t_vec)((t_obj*)e->objs->content)->dir), 2);
+		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2)) * pow(vector_dot_product(direction,
+			(t_vec)((t_obj*)e->objs->content)->dir), 2);
 	tmp.y = 2 * (vector_dot_product(direction, dist)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
 		* vector_dot_product(direction, (t_vec)((t_obj*)e->objs->content)->dir)
