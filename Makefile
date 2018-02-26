@@ -28,7 +28,8 @@ SRC_NAME =	main.c \
 			inter_objs.c \
 			key_hook.c \
 			tools_mlx.c \
-			light.c 
+			light.c \
+			transformations.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
