@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/23 14:34:49 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/26 17:48:56 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@
 # define MOUSE_PRESS_MASK (1L << 2)
 # define MOUSE_MOVE_MASK (1L << 6)
 
+# define KEY_A 0
+# define KEY_S 1
+# define KEY_D 2
+# define KEY_W 13
+# define KEY_SPACE 49
 # define KEY_ECHAP 53
 # define KEYPAD_RIGHT 124
 # define KEYPAD_LEFT 123
@@ -51,6 +56,9 @@
 # define CYL 2
 # define CON 3
 # define LIG 4
+
+# define ROT_SPEED 0.1
+# define MOVE_SPEED 10
 
 typedef struct		s_color
 {
@@ -93,7 +101,7 @@ typedef struct		s_cam
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			forward;
-	t_vec			right;
+	t_vec			left;
 	t_vec			up;
 }					t_cam;
 
@@ -121,6 +129,7 @@ void	get_objs_and_cam(t_env *e, char *path_file);
 int		draw(t_env *e);
 int		ray_loop(t_env *e);
 int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
+
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 
