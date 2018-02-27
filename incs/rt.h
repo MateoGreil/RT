@@ -64,8 +64,11 @@ typedef struct		s_ray
 {
 	t_vec			dir;
 	double			length;
+	int					hit_type;
 	t_color			hit_color;
 	t_vec			hit_pos;
+	t_vec			hit_dir;
+	double		hit_rad;
 }					t_ray;
 
 typedef struct		s_obj
@@ -88,7 +91,6 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
-	int				light_on;
 }						t_img;
 
 typedef struct		s_cam
@@ -129,5 +131,10 @@ int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_color  color);
 void	transformations(t_obj *obj);
+
+int	cone_inter(t_env *e, t_vec origin, t_vec direction);
+int	plan_inter(t_env *e, t_vec origin, t_vec direction);
+int	cylindre_inter(t_env *e, t_vec origin, t_vec direction);
+int	sphere_inter(t_env *e, t_vec origin, t_vec direction);
 
 #endif
