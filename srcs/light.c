@@ -59,7 +59,7 @@ static t_vec	get_normal(t_env *e, t_vec hit_point)
 	t_vec normal;
 
 	if (e->ray.hit_type == PLA)
-		normal = ((t_obj*)e->objs->content)->dir;
+		normal = e->ray.hit_dir;
 	if (e->ray.hit_type == SPH)
 		normal = vector_substraction(hit_point, e->ray.hit_pos);
 	else if (e->ray.hit_type == CON || e->ray.hit_type == CYL)
