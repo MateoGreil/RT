@@ -6,11 +6,17 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/26 12:10:48 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/27 13:40:52 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void	ft_delstr(void *content, size_t content_size)
+{
+	free(content);
+	content_size = 0;
+}
 
 static t_obj	get_one_obj(char *str_obj)
 {
