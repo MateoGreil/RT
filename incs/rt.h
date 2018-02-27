@@ -79,6 +79,7 @@ typedef struct		s_obj
 {
 	char			type;
 	t_vec			pos;
+	t_vec			dir;
 	double			rad;
 	t_color			color;
 	t_vec			rot;
@@ -132,5 +133,6 @@ int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
 
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
+void	transformations(t_obj *obj);
 
 #endif

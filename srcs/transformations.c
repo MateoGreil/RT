@@ -1,0 +1,77 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   transformations.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: gnegri <gnegri@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/02/26 11:27:13 by gnegri            #+#    #+#             */
+/*   Updated: 2018/02/27 14:31:28 by mgreil           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rt.h"
+
+static t_vec	ft_rotation_z(t_vec ex_pos, double angle)
+{
+	double new_x;
+	double new_y;
+	t_vec	new_pos;
+
+	angle = ft_deg2rad(angle);
+	new_x = ex_pos.x * cosf(angle) + ex_pos.y * -sinf(angle);
+	new_y = ex_pos.x * sinf(angle) + ex_pos.y * cosf(angle);
+	new_pos.x = new_x;
+	new_pos.y = new_y;
+	new_pos.z = ex_pos.z;
+	return (new_pos);
+}
+
+static t_vec	ft_rotation_y(t_vec ex_pos, double angle)
+{
+	double new_x;
+	double new_z;
+	t_vec	new_pos;
+
+	angle = ft_deg2rad(angle);
+	new_x = ex_pos.x * cosf(angle) + ex_pos.z * sinf(angle);
+	new_z = ex_pos.x * -sinf(angle) + ex_pos.z * cosf(angle);
+	new_pos.x = new_x;
+	new_pos.z = new_z;
+	new_pos.y = ex_pos.y;
+	return (new_pos);
+}
+
+static t_vec	ft_rotation_x(t_vec ex_pos, double angle)
+{
+	double 	new_y;
+	double 	new_z;
+	t_vec	new_pos;
+
+	angle = ft_deg2rad(angle);
+	new_y = ex_pos.y * cosf(angle) + ex_pos.z * -sinf(angle);
+	new_z = ex_pos.y * sinf(angle) + ex_pos.z * cosf(angle);
+	new_pos.y = new_y;
+	new_pos.z = new_z;
+	new_pos.x = ex_pos.x;
+	return (new_pos);
+}
+
+static t_vec	ft_translation(t_vec ex_pos, t_vec param)
+{
+	t_vec	new_pos;
+
+	new_pos.x = ex_pos.x + param.x;
+	new_pos.y = ex_pos.y + param.y;
+	new_pos.z = ex_pos.z + param.z;
+	return (new_pos);
+}
+
+void			transformations(t_obj *obj)
+{
+	obj->dir = (t_vec){0, 1, 0};
+	obj->dir = ft_rotation_x(obj->dir, obj->rot.x);
+	obj->dir = ft_rotation_y(obj->dir, obj->rot.y);
+	obj->dir = ft_rotation_z(obj->dir, obj->rot.z);
+	obj->pos = ft_translation(obj->pos, obj->trans);
+}

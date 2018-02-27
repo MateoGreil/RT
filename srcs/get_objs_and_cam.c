@@ -42,6 +42,22 @@ static t_obj	get_one_obj(char *str_obj)
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.trans = get_vec(str_obj, &i_str);
+	/*
+	printf("type :%c\n", obj.type);
+	printf("pos: %f\n", obj.pos.x);
+	printf("%f\n", obj.pos.y);
+	printf("%f\n", obj.pos.z);
+	printf("rad : %f\n", obj.rad);
+	printf("color :%u\n", obj.color.r);
+	printf("%u\n", obj.color.g);
+	printf("%u\n", obj.color.b);
+	printf("rot : %f\n", obj.rot.x);
+	printf("%f\n", obj.rot.y);
+	printf("%f\n", obj.rot.z);
+	printf("trans :%f\n", obj.trans.x);
+	printf("%f\n", obj.trans.y);
+	printf("%f\n", obj.trans.z);
+	*/
 	return (obj);
 }
 
@@ -67,6 +83,7 @@ static void		get_objs(t_list **line_lst, t_env *e)
 			*line_lst = (*line_lst)->next;
 		}
 		obj = get_one_obj(str_obj);
+		transformations(&obj);
 		if (obj.type < LIG)
 			ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));
 		else
