@@ -85,8 +85,8 @@ t_color			light_calc(t_env *e, t_color color)
 	//  if (search_shadow(e, hit_point, light_dir) == 1)
 	//    return ((t_color){255, 255, 255});
 	color = e->ray.hit_color;
-	color = color_mix(e->ray.hit_color, ((t_obj*)e->lights->content)->color);
-	color = color_double_product(color, ((t_obj*)e->lights->content)->rad);
-	color = color_double_product(color, d);
+	//color = color_mix(e->ray.hit_color, ((t_obj*)e->lights->content)->color);
+	//color = color_double_product(color, ((t_obj*)e->lights->content)->rad);
+	//color = color_double_product(color, d);
 	return (color);
 }

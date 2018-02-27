@@ -88,6 +88,7 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
+	int				light_on;
 }						t_img;
 
 typedef struct		s_cam

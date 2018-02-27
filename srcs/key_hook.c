@@ -12,11 +12,7 @@
 
 #include "rt.h"
 
-<<<<<<< HEAD
-int		key_hook(int keycode, t_env *e)
-=======
 static void	rotate_XZ_cam(t_cam *cam, int keycode)
->>>>>>> master
 {
 	t_vec	start;
 	t_vec	tmp;

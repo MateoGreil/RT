@@ -75,15 +75,8 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 
 int			draw(t_env *e)
 {
-	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-<<<<<<< HEAD
 	e->img.light_on = 1;
-	e->cam.forward = vector_substraction(e->cam.dir, e->cam.pos);
-	e->cam.forward = vector_normalize(e->cam.forward);
-	e->cam.right = vector_cross((t_vec){0.0, 1.0, 0.0}, e->cam.forward);
-	e->cam.right = vector_normalize(e->cam.right);
-	e->cam.up = vector_cross(e->cam.forward, e->cam.right);
-=======
+	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
 	e->cam.forward = vector_int_product(e->cam.dir, -1);
 	//printf("forward.x = %lf, forward.y = %lf, forward.z = %lf\n", e->cam.forward.x, e->cam.forward.y, e->cam.forward.z);
 	//printf("forward.x = %lf, forward.y = %lf, forward.z = %lf\n", e->cam.forward.x, e->cam.forward.y, e->cam.forward.z);
@@ -92,7 +85,6 @@ int			draw(t_env *e)
 	//printf("left.x = %lf, left.y = %lf, left.z = %lf\n", e->cam.left.x, e->cam.left.y, e->cam.left.z);
 	e->cam.up = vector_cross(e->cam.forward, e->cam.left);
 	//printf("up.x = %lf, up.y = %lf, up.z = %lf\n", e->cam.up.x, e->cam.up.y, e->cam.up.z);
->>>>>>> master
 	ray_loop(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 	del_image(e->mlx, &e->img);
