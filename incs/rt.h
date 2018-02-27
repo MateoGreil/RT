@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/26 17:48:56 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 13:31:01 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define MOUSE_PRESS 4
 # define MOUSE_MOVE 6
 # define EXIT_PRESS 17
-# define EXIT_PRESS_MASK (1L<<17)
+# define EXIT_PRESS_MASK (1L << 17)
 # define KEY_PRESS_MASK (1L << 6)
 # define MOUSE_PRESS_MASK (1L << 2)
 # define MOUSE_MOVE_MASK (1L << 6)
@@ -108,9 +108,8 @@ typedef struct	s_env
 	void			*win;
 	t_img			img;
 	t_cam			cam;
-	t_ray			ray;
-	t_list		*objs;
-	t_list		*lights;
+	t_list			*objs;
+	t_list			*lights;
 }							t_env;
 
 void	ft_delstr(void *content, size_t content_size);
@@ -125,16 +124,16 @@ t_color	get_color(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
 int		draw(t_env *e);
 int		ray_loop(t_env *e);
-int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
+int		check_inter_objects(t_env *e, t_ray ray);
 
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
-t_color light_calc(t_env *e, t_color  color);
+t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
 
-int	cone_inter(t_env *e, t_vec origin, t_vec direction);
-int	plan_inter(t_env *e, t_vec origin, t_vec direction);
-int	cylindre_inter(t_env *e, t_vec origin, t_vec direction);
-int	sphere_inter(t_env *e, t_vec origin, t_vec direction);
+int		cone_inter(t_env *e, t_ray ray);
+int		plan_inter(t_env *e, t_ray ray);
+int		cylindre_inter(t_env *e, t_ray ray);
+int		sphere_inter(t_env *e, t_ray ray);
 
 #endif

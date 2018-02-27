@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:38:03 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/27 14:31:05 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/27 17:29:19 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(int ac, char **av)
 	if (ac == 2)
 	{
 		get_objs_and_cam(&e, av[1]);
+		printf("obj.type = %d", ((t_obj*)e.objs->content)->type);
 		e.mlx = mlx_init();
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 0.2");
 		draw(&e);

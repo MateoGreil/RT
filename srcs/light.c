@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   light.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/26 17:40:22 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/02/27 17:56:33 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,58 +36,59 @@ static int  inter_shadow(t_env *e, t_vec hit_point, t_vec light_dir)
  }
 */
 
-static t_vec	get_normal_2(t_env *e, t_vec hit_point)
+static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 {
 	t_vec tmp;
 	t_vec tmp2;
 	t_vec normal;
 
-	vector_normalize(e->ray.hit_dir);
-	tmp = vector_substraction(hit_point, e->ray.hit_pos);
-	tmp2 = vector_double_product(e->ray.hit_dir,
-	vector_dot_product(e->ray.hit_dir, tmp));
+	vector_normalize(ray.hit_dir);
+	tmp = vector_substraction(hit_point, ray.hit_pos);
+	tmp2 = vector_double_product(ray.hit_dir,
+	vector_dot_product(ray.hit_dir, tmp));
 	normal = (t_vec){2 * (tmp.x - tmp2.x),
 		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
-	if (e->ray.hit_type == CON)
+	if (ray.hit_type == CON)
 		normal = vector_double_product(normal,
-			powf(cosf(e->ray.hit_rad * (M_PI * 180.0f)), 2));
+			powf(cosf(ray.hit_rad * (M_PI * 180.0f)), 2));
 	return (normal);
 }
 
-static t_vec	get_normal(t_env *e, t_vec hit_point)
+static t_vec	get_normal(t_env *e, t_vec hit_point, t_ray ray)
 {
 	t_vec normal;
 
-	if (e->ray.hit_type == PLA)
+	if (ray.hit_type == PLA)
 		normal = ((t_obj*)e->objs->content)->dir;
-	if (e->ray.hit_type == SPH)
-		normal = vector_substraction(hit_point, e->ray.hit_pos);
-	else if (e->ray.hit_type == CON || e->ray.hit_type == CYL)
-		normal = get_normal_2(e, hit_point);
+	if (ray.hit_type == SPH)
+		normal = vector_substraction(hit_point, ray.hit_pos);
+	else if (ray.hit_type == CON || ray.hit_type == CYL)
+		normal = get_normal_2(hit_point, ray);
 	else
 		normal = (t_vec){0, 0, 0};
 	normal = vector_normalize(normal);
 	return (normal);
 }
 
-t_color			light_calc(t_env *e, t_color color)
+t_color			light_calc(t_env *e, t_ray ray)
 {
+	t_color	color;
 	t_vec	hit_point;
 	t_vec	light_dir;
 	t_vec	normal;
 	double	d;
 
 	hit_point = vector_addition(e->cam.pos,
-			vector_double_product(e->ray.dir, e->ray.length));
+			vector_double_product(ray.dir, ray.length));
 	light_dir = vector_substraction(((t_obj*)e->lights->content)->
 			pos, hit_point);
 	light_dir = vector_normalize(light_dir);
-	normal = get_normal(e, hit_point);
+	normal = get_normal(e, hit_point, ray);
 	d = ft_clamp(vector_dot_product(normal, light_dir), 0.0, 1.0);
 	//if (inter_shadow(e, hit_point, light_dir) == 1)
 	//    return ((t_color){255, 255, 255});
-	color = e->ray.hit_color;
-	color = color_mix(e->ray.hit_color, ((t_obj*)e->lights->content)->color);
+	color = ray.hit_color;
+	color = color_mix(ray.hit_color, ((t_obj*)e->lights->content)->color);
 	color = color_double_product(color, ((t_obj*)e->lights->content)->rad);
 	color = color_double_product(color, d);
 	return (color);

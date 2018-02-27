@@ -6,45 +6,47 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/27 12:23:21 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 13:15:16 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void search_color(t_env *e, int x, int y)
+static void search_color(t_env *e, int x, int y, t_ray ray)
 {
 	t_color	color;
 
-	color = (t_color){0, 0, 0};
-	if (e->ray.length < 1000000000)
-		color = light_calc(e, color);
+	if (ray.length < 1000000000)
+		color = light_calc(e, ray);
+	printf("r = %d, g = %d, b = %d\n", ray.hit_color.r, ray.hit_color.g, ray.hit_color.b);
 	put_pixel_to_image(&e->img, x, y, color);
 }
 
-static int	create_ray(t_env *e, double i, double j)
+static t_ray	create_ray(t_env *e, double i, double j)
 {
 	t_list *tmp;
+	t_ray	ray;
 
-	e->ray.dir = (t_vec){i * e->cam.left.x + j * e->cam.up.x +
+	ray.dir = (t_vec){i * e->cam.left.x + j * e->cam.up.x +
 		e->cam.forward.x, i * e->cam.left.y + j * e->cam.up.y +
 		e->cam.forward.y, i * e->cam.left.z + j * e->cam.up.z +
 		e->cam.forward.z};
-	e->ray.dir = vector_normalize(e->ray.dir);
-	e->ray.dir = vector_int_product(e->ray.dir, -1);
-	e->ray.length = 1000000000;
+	ray.dir = vector_normalize(ray.dir);
+	ray.dir = vector_int_product(ray.dir, -1);
+	ray.length = 1000000000;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
-		check_inter_objects(e, e->cam.pos, e->ray.dir);
+		check_inter_objects(e, ray);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	return (0);
+	return (ray);
 }
 
 int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 {
+	t_ray	ray;
 	double	i;
 	double	j;
 	int			x;
@@ -58,8 +60,8 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 		{
 			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
 			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
-			create_ray(e, i, j);
-			search_color(e, x, y);
+			ray = create_ray(e, i, j);
+			search_color(e, x, y, ray);
 			x++;
 		}
 		y++;
