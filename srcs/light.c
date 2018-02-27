@@ -86,9 +86,9 @@ t_color			light_calc(t_env *e, t_color color)
 	d = ft_clamp(vector_dot_product(normal, light_dir), 0.0, 1.0);
 	//if (inter_shadow(e, hit_point, light_dir) == 1)
 	//    return ((t_color){255, 255, 255});
-	color = e->ray.hit_color;
-	color = color_mix(e->ray.hit_color, ((t_obj*)e->lights->content)->color);
-	color = color_double_product(color, ((t_obj*)e->lights->content)->rad);
+	color = color_double_product(((t_obj*)e->lights->content)->color,
+		((t_obj*)e->lights->content)->rad);
+	color = color_mix(e->ray.hit_color, color);
 	color = color_double_product(color, d);
 	return (color);
 }
