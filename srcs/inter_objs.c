@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
+int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	double	disc;
 	double	new_length;
@@ -22,7 +22,8 @@ static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 
 	dist = vector_substraction(origin, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(direction, direction)
-		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2)) * pow(vector_dot_product(direction,
+		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
+		* pow(vector_dot_product(direction,
 			(t_vec)((t_obj*)e->objs->content)->dir), 2);
 	tmp.y = 2 * (vector_dot_product(direction, dist)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
@@ -41,7 +42,7 @@ static int	cone_inter(t_env *e, t_vec origin, t_vec direction)
 	return (new_length);
 }
 
-static int	plan_inter(t_env *e, t_vec origin, t_vec direction)
+int	plan_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	double	new_length;
 
@@ -54,7 +55,7 @@ static int	plan_inter(t_env *e, t_vec origin, t_vec direction)
 	return (new_length);
 }
 
-static int	cylindre_inter(t_env *e, t_vec origin, t_vec direction)
+int	cylindre_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	t_vec	dist;
 	t_vec	tmp;
@@ -82,7 +83,7 @@ static int	cylindre_inter(t_env *e, t_vec origin, t_vec direction)
 	return (new_length);
 }
 
-static int	sphere_inter(t_env *e, t_vec origin, t_vec direction)
+int	sphere_inter(t_env *e, t_vec origin, t_vec direction)
 {
 	t_vec		origin_to_sphere;
 	double		projection;
@@ -122,7 +123,11 @@ int			check_inter_objects(t_env *e, t_vec origin, t_vec direction)
 	if (new_length < e->ray.length)
 	{
 		e->ray.length = new_length;
+		e->ray.hit_pos = ((t_obj*)e->objs->content)->pos;
 		e->ray.hit_color = ((t_obj*)e->objs->content)->color;
+		e->ray.hit_type = ((t_obj*)e->objs->content)->type;
+		e->ray.hit_dir = ((t_obj*)e->objs->content)->dir;
+		e->ray.hit_rad = ((t_obj*)e->objs->content)->rad;
 	}
 	return (0);
 }

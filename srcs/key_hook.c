@@ -122,7 +122,7 @@ int			key_hook(int keycode, t_env *e)
 	return (0);
 }
 
-int			button_exit(int keycode, t_env *e)
+int		button_exit(int keycode, t_env *e)
 {
 	ft_lstdel(&e->lights, &ft_delstr);
 	ft_lstdel(&e->objs, &ft_delstr);

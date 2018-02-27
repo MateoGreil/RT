@@ -60,19 +60,15 @@
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 10
 
-typedef struct		s_color
-{
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
-}					t_color;
-
 typedef struct		s_ray
 {
 	t_vec			dir;
 	double			length;
+	int					hit_type;
 	t_color			hit_color;
 	t_vec			hit_pos;
+	t_vec			hit_dir;
+	double		hit_rad;
 }					t_ray;
 
 typedef struct		s_obj
@@ -95,7 +91,7 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
-}					t_img;
+}						t_img;
 
 typedef struct		s_cam
 {
@@ -104,18 +100,18 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_vec			left;
 	t_vec			up;
-}					t_cam;
+}						t_cam;
 
-typedef struct		s_env
+typedef struct	s_env
 {
 	void			*mlx;
 	void			*win;
 	t_img			img;
 	t_cam			cam;
 	t_ray			ray;
-	t_list			*objs;
-	t_list			*lights;
-}					t_env;
+	t_list		*objs;
+	t_list		*lights;
+}							t_env;
 
 void	ft_delstr(void *content, size_t content_size);
 
@@ -133,6 +129,12 @@ int		check_inter_objects(t_env *e, t_vec origin, t_vec direction);
 
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
+t_color light_calc(t_env *e, t_color  color);
 void	transformations(t_obj *obj);
+
+int	cone_inter(t_env *e, t_vec origin, t_vec direction);
+int	plan_inter(t_env *e, t_vec origin, t_vec direction);
+int	cylindre_inter(t_env *e, t_vec origin, t_vec direction);
+int	sphere_inter(t_env *e, t_vec origin, t_vec direction);
 
 #endif
