@@ -6,13 +6,13 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/27 13:41:00 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/27 15:23:45 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	rotate_XZ_cam(t_cam *cam, int keycode)
+/*static void	rotate_XZ_cam(t_cam *cam, int keycode)
 {
 	t_vec	start;
 	t_vec	tmp;
@@ -62,7 +62,7 @@ static void	rotate_XZ_cam(t_cam *cam, int keycode)
 		tmp = cam->dir;
 		nb_rot--;
 	}
-}
+}*/
 
 static void	rotate_Y_cam(t_cam *cam, int keycode)
 {
@@ -111,8 +111,8 @@ int			key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_D || keycode == KEY_A)
 		rotate_Y_cam(&e->cam, keycode);
-	if (keycode == KEY_W || keycode == KEY_S)
-		rotate_XZ_cam(&e->cam, keycode);
+	/*if (keycode == KEY_W || keycode == KEY_S)
+		rotate_XZ_cam(&e->cam, keycode);*/
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
 		translate_cam(&e->cam, keycode);
