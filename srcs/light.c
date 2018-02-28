@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 20:01:27 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 13:43:18 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,36 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	//printf("%f\n", ray.dir.z);
 	//ray.dir = vector_double_product(ray.dir, -1);
 	//light_dir =  vector_normalize(light_dir);
-	light_ray.length = MAX;/*POS ET DIR N'ETAIENT PAS INITIALISER,
-	C'EST SUREMENT UN PROBLEME LIER A CA.*/
-	light_ray.pos = ((t_obj*)e->lights->content)->pos;
-	light_ray.dir = ((t_obj*)e->lights->content)->dir;
+	light_ray.length = MAX;
+	light_ray.pos = light_ray.hit_pos;
+	light_ray.dir = light_ray.hit_dir;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
-		if (((t_obj*)e->objs->content)->type == SPH)
+		if (((t_obj*)e->objs->content) != light_ray.hit_obj)
 		{
-			printf("ray.pos.x = %lf, ray.pos.y = %lf, ray.pos.z = %lf\n", light_ray.pos.x, light_ray.pos.y, light_ray.pos.z);
-			light_ray.length = sphere_inter(e, &light_ray);
-			printf("length = %lf\n", light_ray.length);
+			if (((t_obj*)e->objs->content)->type == SPH)
+			{
+				light_ray.length = sphere_inter(e, &light_ray);
+				//if (light_ray.hit_pos.x > 70)
+				//{
+				//	printf("ray.pos.x = %lf, ray.pos.y = %lf, ray.pos.z = %lf\n", light_ray.pos.x, light_ray.pos.y, light_ray.pos.z);
+				//	printf("length = %lf\n", light_ray.length);
+				//	printf("dist_light_to_obj = %lf\n", dist_light_to_obj);
+				//}
+			}
+			if (((t_obj*)e->objs->content)->type == CYL)
+				light_ray.length = cylindre_inter(e, &light_ray);
+			if (((t_obj*)e->objs->content)->type == CON)
+				light_ray.length = cone_inter(e, &light_ray);
+			if (((t_obj*)e->objs->content)->type == PLA)
+				light_ray.length = plan_inter(e, &light_ray);
+			if (light_ray.length < dist_light_to_obj)
+			{
+				e->objs = tmp;
+				return (1);
+			}
 		}
-		if (((t_obj*)e->objs->content)->type == CYL)
-			light_ray.length = cylindre_inter(e, &light_ray);
-		if (((t_obj*)e->objs->content)->type == CON)
-			light_ray.length = cone_inter(e, &light_ray);
-		if (((t_obj*)e->objs->content)->type == PLA)
-			light_ray.length = plan_inter(e, &light_ray);
-		if (light_ray.length < dist_light_to_obj)
-			return (1);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
@@ -72,12 +81,13 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_color	color;
 	t_ray 	light_ray;
 
+	//printf("ray.hit_obj.rad = %f\n", ray.hit_obj->rad);
 	light_ray.length = 0;
+	light_ray.hit_obj = ray.hit_obj;
 	color = diffuse_light(e, ray, &light_ray);
 	if (inter_shadow(e, light_ray) == 1)
 	{
-		printf("INTERN_SHADOW == 1");
-		return ((t_color){0, 255, 255});
+		return ((t_color){0, 0, 0});
 	}
 	return (color);
 }

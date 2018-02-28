@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 18:03:22 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 12:33:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@
 
 # define MAX 1000000000
 
-# define NB_THREADS 4
+# define NB_THREADS 8
 
 
 typedef struct		s_obj
