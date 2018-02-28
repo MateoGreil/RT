@@ -19,7 +19,7 @@ static void search_color(t_env *e, int x, int y, t_ray ray)
 	if (ray.length < 1000000000)
 		color = light_calc(e, ray);
 	else
-		color = (t_color){0, 0, 0};
+		color = (t_color){255, 255, 255};
 	put_pixel_to_image(&e->img, x, y, color);
 }
 
