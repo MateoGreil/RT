@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/27 17:56:33 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 17:37:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->dir), 0.0, 1.0);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
-	color = color_mix(ray.hit_color, color);
+	color = color_mix(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	return (color);
 }

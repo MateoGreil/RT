@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 14:31:39 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 17:35:34 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,20 +60,10 @@
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 10
 
+# define MAX 1000000000
+
 # define NB_THREADS 4
 
-typedef struct		s_ray
-{
-	t_vec 		pos;
-	t_vec			dir;
-	double		length;
-	t_vec			normal;
-	int				hit_type;
-	t_color		hit_color;
-	t_vec			hit_pos;
-	t_vec			hit_dir;
-	double		hit_rad;
-}					t_ray;
 
 typedef struct		s_obj
 {
@@ -85,6 +75,17 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 }					t_obj;
+
+typedef struct		s_ray
+{
+	t_vec 			pos;
+	t_vec			dir;
+	double			length;
+	t_vec			normal;
+	t_obj			*hit_obj;
+	t_vec			hit_pos;
+	t_vec			hit_dir;
+}					t_ray;
 
 typedef struct		s_img
 {
@@ -111,6 +112,8 @@ typedef struct	s_env
 	void			*mlx;
 	void			*win;
 	t_img			img;
+	int				y_start;
+	int				y_end;
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
@@ -126,8 +129,7 @@ char	get_type(char *str_obj);
 t_vec	get_vec(char *str_obj, int *i_str);
 t_color	get_color(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
-int		draw(t_env *e);
-int		ray_loop(t_env *e);
+void	draw(t_env *e);
 int		check_inter_objects(t_env *e, t_ray *ray);
 
 int		cone_inter(t_env *e, t_ray *ray);
