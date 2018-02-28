@@ -17,8 +17,8 @@ static int  inter_shadow(t_env *e, t_ray ray)
 	double	light_dist;
 	t_list *tmp;
 
+	light_dist = length_between_vectors(ray.pos, ((t_obj*)e->lights->content)->pos);
 	ray.dir = vector_double_product(ray.dir, -1);
-	light_dist = sqrt(vector_dot_product(ray.dir, ray.dir));
 	//light_dir =  vector_normalize(light_dir);
 	ray.length = 1000000000;
 	tmp = e->objs;
