@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 15:35:58 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 17:53:00 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void search_color(t_env *e, int x, int y, t_ray ray)
 	t_color	color;
 
 	if (ray.length < MAX)
+	{
+		//printf("obj.r = %d, obj.g = %d, obj.b = %d\n", ray.hit_obj->color.r, ray.hit_obj->color.g, ray.hit_obj->color.b);
 		color = light_calc(e, ray);
+	}
 	else
 		color = (t_color){255, 255, 255};
 	//printf("color.r = %d, color.g = %d, color.b = %d\n", color.r, color.g, color.b);

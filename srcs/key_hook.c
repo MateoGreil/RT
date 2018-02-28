@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/28 15:11:58 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 17:25:09 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	rotate_Y_cam(t_cam *cam, int keycode)
 {
 	t_vec	tmp;
 
-	printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", cam->dir.x, cam->dir.y, cam->dir.z);
+	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", cam->dir.x, cam->dir.y, cam->dir.z);
 	tmp = cam->dir;
 	if (keycode == KEY_A)
 	{

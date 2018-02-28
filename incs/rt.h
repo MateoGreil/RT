@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 15:33:19 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:03:22 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,18 +64,6 @@
 
 # define NB_THREADS 4
 
-typedef struct		s_ray
-{
-	double		length;
-	double		hit_rad;
-	int			hit_type;
-	t_vec 		pos;
-	t_vec		dir;
-	t_vec		normal;
-	t_vec		hit_pos;
-	t_vec		hit_dir;
-	t_color		hit_color;
-}					t_ray;
 
 typedef struct		s_obj
 {
@@ -87,6 +75,17 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 }					t_obj;
+
+typedef struct		s_ray
+{
+	t_vec 			pos;
+	t_vec			dir;
+	double			length;
+	t_vec			normal;
+	t_obj			*hit_obj;
+	t_vec			hit_pos;
+	t_vec			hit_dir;
+}					t_ray;
 
 typedef struct		s_img
 {
