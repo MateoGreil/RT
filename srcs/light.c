@@ -11,29 +11,36 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
-// Cette fonction ne peut pas marcher car les formules d intersection prennent
-// les donnes des objets en fonction de la liste
 /*
 static int  inter_shadow(t_env *e, t_vec hit_point, t_vec light_dir)
 {
 	double	light_dist;
 	double	ray_length;
+	t_list *tmp;
 
 	light_dist = sqrt(vector_dot_product(light_dir, light_dir));
-	ray_length = light_dist;
-	if (((t_obj*)e->objs->content)->type == SPH)
-		ray_length = sphere_inter(e, hit_point, light_dir);
-	if (((t_obj*)e->objs->content)->type == CYL)
-		ray_length = cylindre_inter(e, hit_point, light_dir);
-	if (((t_obj*)e->objs->content)->type == CON)
-		ray_length = cone_inter(e, hit_point, light_dir);
-	if (((t_obj*)e->objs->content)->type == PLA)
-		ray_length = plan_inter(e, hit_point, light_dir);
-	if (ray_length > light_dist)
-		return (1);
+	light_dir = vector_double_product(light_dir, -1);
+	//light_dir =  vector_normalize(light_dir);
+	ray_length = 1000000000;
+	tmp = e->objs;
+	while (e->objs != NULL)
+	{
+		if (((t_obj*)e->objs->content)->type == SPH)
+			ray_length = sphere_inter(e, hit_point, ((t_obj*)e->lights->content)->
+					pos);
+		if (((t_obj*)e->objs->content)->type == CYL)
+			ray_length = cylindre_inter(e, hit_point, light_dir);
+		if (((t_obj*)e->objs->content)->type == CON)
+			ray_length = cone_inter(e, hit_point, light_dir);
+		if (((t_obj*)e->objs->content)->type == PLA)
+			ray_length = plan_inter(e, hit_point, light_dir);
+		if (ray_length < light_dist)
+			return (1);
+		e->objs = e->objs->next;
+	}
+	e->objs = tmp;
 	return (0);
- }
+}
 */
 
 static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
@@ -85,11 +92,11 @@ t_color			light_calc(t_env *e, t_ray ray)
 	light_dir = vector_normalize(light_dir);
 	normal = get_normal(e, hit_point, ray);
 	d = ft_clamp(vector_dot_product(normal, light_dir), 0.0, 1.0);
-	//if (inter_shadow(e, hit_point, light_dir) == 1)
-	//    return ((t_color){255, 255, 255});
-	color = ray.hit_color;
-	color = color_mix(ray.hit_color, ((t_obj*)e->lights->content)->color);
-	color = color_double_product(color, ((t_obj*)e->lights->content)->rad);
+	color = color_double_product(((t_obj*)e->lights->content)->color,
+		((t_obj*)e->lights->content)->rad);
+	color = color_mix(ray.hit_color, color);
 	color = color_double_product(color, d);
+	//if (inter_shadow(e, hit_point, light_dir) == 1)
+	//		return ((t_color){0, 0, 0});
 	return (color);
 }
