@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/27 15:23:45 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 15:11:58 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,8 +80,7 @@ static void	rotate_Y_cam(t_cam *cam, int keycode)
 		cam->dir.x = cos(-ROT_SPEED) * tmp.x + sin(-ROT_SPEED) * tmp.z;
 		cam->dir.z = -sin(-ROT_SPEED) * tmp.x + cos(-ROT_SPEED) * tmp.z;
 	}
-
-	printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n\n", cam->dir.x, cam->dir.y, cam->dir.z);
+	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n\n", cam->dir.x, cam->dir.y, cam->dir.z);
 }
 
 static void	translate_cam(t_cam *cam, int keycode)
@@ -124,8 +123,9 @@ int			key_hook(int keycode, t_env *e)
 
 int		button_exit(int keycode, t_env *e)
 {
-	ft_lstdel(&e->lights, &ft_delstr);
-	ft_lstdel(&e->objs, &ft_delstr);
+	e = NULL;
+	//ft_lstdel(&e->lights, &ft_delstr);
+	//ft_lstdel(&e->objs, &ft_delstr);
 	keycode = 0;
 	exit(0);
 }
