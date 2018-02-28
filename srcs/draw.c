@@ -35,6 +35,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	ray.dir = vector_normalize(ray.dir);
 	ray.dir = vector_int_product(ray.dir, -1);
 	ray.length = 1000000000;
+	ray.pos = e->cam.pos;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{

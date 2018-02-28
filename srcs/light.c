@@ -40,62 +40,34 @@ static int  inter_shadow(t_env *e, t_vec hit_point, t_vec light_dir)
 	}
 	e->objs = tmp;
 	return (0);
-}
-*/
+}*/
 
-static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
+static t_color			diffuse_light(t_env *e, t_ray ray, t_ray light_ray)
 {
-	t_vec tmp;
-	t_vec tmp2;
-	t_vec normal;
+	double	d;
+	t_color color;
 
-	vector_normalize(ray.hit_dir);
-	tmp = vector_substraction(hit_point, ray.hit_pos);
-	tmp2 = vector_double_product(ray.hit_dir,
-	vector_dot_product(ray.hit_dir, tmp));
-	normal = (t_vec){2 * (tmp.x - tmp2.x),
-		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
-	if (ray.hit_type == CON)
-		normal = vector_double_product(normal,
-			powf(cosf(ray.hit_rad * (M_PI * 180.0f)), 2));
-	return (normal);
-}
-
-static t_vec	get_normal(t_env *e, t_vec hit_point, t_ray ray)
-{
-	t_vec normal;
-
-	if (ray.hit_type == PLA)
-		normal = ((t_obj*)e->objs->content)->dir;
-	if (ray.hit_type == SPH)
-		normal = vector_substraction(hit_point, ray.hit_pos);
-	else if (ray.hit_type == CON || ray.hit_type == CYL)
-		normal = get_normal_2(hit_point, ray);
-	else
-		normal = (t_vec){0, 0, 0};
-	normal = vector_normalize(normal);
-	return (normal);
+	light_ray.pos = vector_addition(e->cam.pos,
+			vector_double_product(ray.dir, ray.length));
+	light_ray.dir = vector_substraction(((t_obj*)e->lights->content)->
+			pos, light_ray.pos);
+	light_ray.dir = vector_normalize(light_ray.dir);
+	light_ray.normal = get_normal(e, light_ray.pos, ray);
+	d = ft_clamp(vector_dot_product(light_ray.normal, light_ray.dir), 0.0, 1.0);
+	color = color_double_product(((t_obj*)e->lights->content)->color,
+		((t_obj*)e->lights->content)->rad);
+	color = color_mix(ray.hit_color, color);
+	color = color_double_product(color, d);
+	return (color);
 }
 
 t_color			light_calc(t_env *e, t_ray ray)
 {
 	t_color	color;
-	t_vec	hit_point;
-	t_vec	light_dir;
-	t_vec	normal;
-	double	d;
+	t_ray 	light_ray;
 
-	hit_point = vector_addition(e->cam.pos,
-			vector_double_product(ray.dir, ray.length));
-	light_dir = vector_substraction(((t_obj*)e->lights->content)->
-			pos, hit_point);
-	light_dir = vector_normalize(light_dir);
-	normal = get_normal(e, hit_point, ray);
-	d = ft_clamp(vector_dot_product(normal, light_dir), 0.0, 1.0);
-	color = color_double_product(((t_obj*)e->lights->content)->color,
-		((t_obj*)e->lights->content)->rad);
-	color = color_mix(ray.hit_color, color);
-	color = color_double_product(color, d);
+	light_ray.length = 0;
+	color = diffuse_light(e, ray, light_ray);
 	//if (inter_shadow(e, hit_point, light_dir) == 1)
 	//		return ((t_color){0, 0, 0});
 	return (color);

@@ -93,7 +93,7 @@ static int	sphere_inter(t_env *e, t_ray *ray)
 
 	new_length = ray->length;
 	origin_to_sphere = vector_substraction((
-		(t_obj*)e->objs->content)->pos, e->cam.pos);
+		(t_obj*)e->objs->content)->pos, ray->pos);
 	if ((projection = vector_dot_product(origin_to_sphere, ray->dir)) < 0)
 		return (ray->length);
 	distance_vector = vector_substraction(origin_to_sphere,

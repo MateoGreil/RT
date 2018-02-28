@@ -29,7 +29,8 @@ SRC_NAME =	main.c \
 			key_hook.c \
 			tools_mlx.c \
 			light.c \
-			transformations.c
+			transformations.c \
+			get_normal.c 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

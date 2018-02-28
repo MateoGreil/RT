@@ -62,10 +62,12 @@
 
 typedef struct		s_ray
 {
+	t_vec 		pos;
 	t_vec			dir;
-	double			length;
-	int					hit_type;
-	t_color			hit_color;
+	double		length;
+	t_vec			normal;
+	int				hit_type;
+	t_color		hit_color;
 	t_vec			hit_pos;
 	t_vec			hit_dir;
 	double		hit_rad;
@@ -130,5 +132,6 @@ int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
+t_vec	get_normal(t_env *e, t_vec hit_point, t_ray ray);
 
 #endif
