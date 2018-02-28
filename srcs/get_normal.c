@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:11:09 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 17:45:31 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:52:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	t_vec tmp2;
 	t_vec normal;
 
-	vector_normalize(ray.hit_dir);
+	//vector_normalize(ray.hit_dir);
 	tmp = vector_substraction(hit_point, ray.hit_pos);
 	tmp2 = vector_double_product(ray.hit_dir,
 	vector_dot_product(ray.hit_dir, tmp));
