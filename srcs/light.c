@@ -18,7 +18,8 @@ static int  inter_shadow(t_env *e, t_ray ray)
 	t_list *tmp;
 
 	light_dist = length_between_vectors(ray.pos, ((t_obj*)e->lights->content)->pos);
-	ray.dir = vector_double_product(ray.dir, -1);
+	//printf("%f\n", ray.dir.z);
+	//ray.dir = vector_double_product(ray.dir, -1);
 	//light_dir =  vector_normalize(light_dir);
 	ray.length = 1000000000;
 	tmp = e->objs;
@@ -67,6 +68,6 @@ t_color			light_calc(t_env *e, t_ray ray)
 	light_ray.length = 0;
 	color = diffuse_light(e, ray, &light_ray);
 	//if (inter_shadow(e, light_ray) == 1)
-	//	return ((t_color){0, 0, 0});
+	//	return ((t_color){0, 255, 255});
 	return (color);
 }
