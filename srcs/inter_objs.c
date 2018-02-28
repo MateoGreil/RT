@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 18:03:29 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 19:53:20 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,17 +92,23 @@ int	sphere_inter(t_env *e, t_ray *ray)
 	double		new_length;
 
 	new_length = ray->length;
-	origin_to_sphere = vector_substraction((
-		(t_obj*)e->objs->content)->pos, ray->pos);
+	origin_to_sphere = vector_substraction(((t_obj*)e->objs->content)->pos,
+																	ray->pos);
 	if ((projection = vector_dot_product(origin_to_sphere, ray->dir)) < 0)
+	{
 		return (ray->length);
+	}
 	distance_vector = vector_substraction(origin_to_sphere,
 		vector_double_product(ray->dir, projection));
 	distance_sq =
 		vector_dot_product(distance_vector, distance_vector);
 	if (distance_sq > (((t_obj*)e->objs->content)->rad *
 		((t_obj*)e->objs->content)->rad))
+	{
+		if (ray->pos.x == -100)
+			printf("OK\n");
 		return (ray->length);
+	}
 	new_length = projection - sqrtf((((t_obj*)e->objs->content)->rad *
 		((t_obj*)e->objs->content)->rad) - distance_sq);
 	return (new_length);
@@ -124,6 +130,8 @@ int			check_inter_objects(t_env *e, t_ray *ray)
 	{
 		ray->length = new_length;
 		ray->hit_obj = ((t_obj*)e->objs->content);
+		ray->hit_pos = ((t_obj*)e->objs->content)->pos;
+		ray->hit_dir = ((t_obj*)e->objs->content)->dir;
 	}
 	return (0);
 }
