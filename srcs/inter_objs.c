@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 17:37:57 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:03:29 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	cone_inter(t_env *e, t_ray *ray)
 	t_vec	tmp;
 	t_vec	dist;
 
-	dist = vector_substraction(e->cam.pos, ((t_obj*)e->objs->content)->pos);
+	dist = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(ray->dir, ray->dir)
 		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
 		* pow(vector_dot_product(ray->dir,
@@ -63,7 +63,7 @@ int	cylindre_inter(t_env *e, t_ray *ray)
 	double	new_length;
 	double	new_length_2;
 
-	dist = vector_substraction(e->cam.pos, ((t_obj*)e->objs->content)->pos);
+	dist = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	vector_normalize(((t_obj*)e->objs->content)->dir);
 	tmp.x = vector_dot_product(ray->dir, ray->dir) -
 	pow(vector_dot_product(ray->dir, ((t_obj*)e->objs->content)->dir), 2);

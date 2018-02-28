@@ -159,6 +159,8 @@ t_vec			vector_assign_values(double x, double y, double z);
 t_vec			vector_addition(t_vec v1, t_vec v2);
 t_vec			vector_double_product(t_vec v1, double i);
 double			vector_dot_product(t_vec v1, t_vec v2);
+double			vector_length(t_vec v1);
+double			length_between_vectors(t_vec v1, t_vec v2);
 
 t_color			color_double_product(t_color v1, double i);
 t_color			color_product(t_color v1, t_color v2);

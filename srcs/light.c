@@ -6,36 +6,33 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 17:37:25 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:03:19 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 /*
-static int  inter_shadow(t_env *e, t_vec hit_point, t_vec light_dir, t_ray ray)
+static int  inter_shadow(t_env *e, t_ray ray)
 {
 	double	light_dist;
-	double	ray_length;
 	t_list *tmp;
 
-	light_dist = sqrt(vector_dot_product(light_dir, light_dir));
-	light_dir = vector_double_product(light_dir, -1);
+	light_dist = length_between_vectors(ray.pos, ((t_obj*)e->lights->content)->pos);
+	ray.dir = vector_double_product(ray.dir, -1);
 	//light_dir =  vector_normalize(light_dir);
-	ray_length = 1000000000;
-	ray.dir = light_dir;
-	ray.pos = hit_point;
+	ray.length = 1000000000;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
 		if (((t_obj*)e->objs->content)->type == SPH)
-			ray_length = sphere_inter(e, &ray);
+			ray.length = sphere_inter(e, &ray);
 		if (((t_obj*)e->objs->content)->type == CYL)
-			ray_length = cylindre_inter(e, &ray);
+			ray.length = cylindre_inter(e, &ray);
 		if (((t_obj*)e->objs->content)->type == CON)
-			ray_length = cone_inter(e, &ray);
+			ray.length = cone_inter(e, &ray);
 		if (((t_obj*)e->objs->content)->type == PLA)
-			ray_length = plan_inter(e, &ray);
-		if (ray_length < light_dist)
+			ray.length = plan_inter(e, &ray);
+		if (ray.length < light_dist)
 			return (1);
 		e->objs = e->objs->next;
 	}
@@ -69,7 +66,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 
 	light_ray.length = 0;
 	color = diffuse_light(e, ray, &light_ray);
-	//if (inter_shadow(e, hit_point, light_dir) == 1)
-	//		return ((t_color){0, 0, 0});
+	//if (inter_shadow(e, light_ray) == 1)
+	//	return ((t_color){0, 0, 0});
 	return (color);
 }
