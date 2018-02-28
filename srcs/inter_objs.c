@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 18:03:29 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 18:55:28 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,8 @@ int			check_inter_objects(t_env *e, t_ray *ray)
 	{
 		ray->length = new_length;
 		ray->hit_obj = ((t_obj*)e->objs->content);
+		ray->hit_pos = ((t_obj*)e->objs->content)->pos;
+		ray->hit_dir = ((t_obj*)e->objs->content)->dir;
 	}
 	return (0);
 }
