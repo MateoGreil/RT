@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 13:54:36 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 14:32:54 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,9 @@ int			ray_loop(t_env *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 
 int			draw(t_env *e)
 {
+	//pthread_t	thread[NB_THREADS];
+	//int			i_thread;
+
 	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
 	e->cam.forward = vector_int_product(e->cam.dir, -1);
 	e->cam.left = vector_cross(
