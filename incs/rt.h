@@ -66,15 +66,15 @@
 
 typedef struct		s_ray
 {
-	t_vec 		pos;
-	t_vec			dir;
 	double		length;
-	t_vec			normal;
-	int				hit_type;
-	t_color		hit_color;
-	t_vec			hit_pos;
-	t_vec			hit_dir;
 	double		hit_rad;
+	int			hit_type;
+	t_vec 		pos;
+	t_vec		dir;
+	t_vec		normal;
+	t_vec		hit_pos;
+	t_vec		hit_dir;
+	t_color		hit_color;
 }					t_ray;
 
 typedef struct		s_obj
