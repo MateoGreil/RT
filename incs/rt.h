@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 13:58:04 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 14:31:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,8 @@
 
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 10
+
+# define NB_THREADS 4
 
 typedef struct		s_ray
 {
