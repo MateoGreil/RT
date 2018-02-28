@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static int	cone_inter(t_env *e, t_ray *ray)
+int	cone_inter(t_env *e, t_ray *ray)
 {
 	double	disc;
 	double	new_length;
@@ -42,7 +42,7 @@ static int	cone_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-static int	plan_inter(t_env *e, t_ray *ray)
+int	plan_inter(t_env *e, t_ray *ray)
 {
 	double	new_length;
 
@@ -55,7 +55,7 @@ static int	plan_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-static int	cylindre_inter(t_env *e, t_ray *ray)
+int	cylindre_inter(t_env *e, t_ray *ray)
 {
 	t_vec	dist;
 	t_vec	tmp;
@@ -83,7 +83,7 @@ static int	cylindre_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-static int	sphere_inter(t_env *e, t_ray *ray)
+int	sphere_inter(t_env *e, t_ray *ray)
 {
 	t_vec		origin_to_sphere;
 	double		projection;
