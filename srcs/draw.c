@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 13:15:16 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 13:54:36 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ static void search_color(t_env *e, int x, int y, t_ray ray)
 
 	if (ray.length < 1000000000)
 		color = light_calc(e, ray);
-	printf("r = %d, g = %d, b = %d\n", ray.hit_color.r, ray.hit_color.g, ray.hit_color.b);
+	else
+		color = (t_color){0, 0, 0};
 	put_pixel_to_image(&e->img, x, y, color);
 }
 
@@ -37,7 +38,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
-		check_inter_objects(e, ray);
+		check_inter_objects(e, &ray);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;

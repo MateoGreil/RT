@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/02/28 13:31:01 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/02/28 13:58:04 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,16 +124,11 @@ t_color	get_color(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
 int		draw(t_env *e);
 int		ray_loop(t_env *e);
-int		check_inter_objects(t_env *e, t_ray ray);
+int		check_inter_objects(t_env *e, t_ray *ray);
 
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
-
-int		cone_inter(t_env *e, t_ray ray);
-int		plan_inter(t_env *e, t_ray ray);
-int		cylindre_inter(t_env *e, t_ray ray);
-int		sphere_inter(t_env *e, t_ray ray);
 
 #endif
