@@ -51,17 +51,12 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
 			pos, light_ray->hit_pos);
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
-	//printf("x : %f, y : %f, z : %f\n", light_ray->hit_dir.x, light_ray->hit_dir.y, light_ray->hit_dir.z);
 	light_ray->normal = get_normal(e, light_ray->hit_pos, ray);
-	//printf("x : %f, y : %f, z : %f\n", light_ray->normal.x, light_ray->normal.y, light_ray->normal.z);
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
-	printf("%u\n", ((t_obj*)e->lights->content)->color.r);
 	color = color_mix(ray.hit_obj->color, color);
-	//printf("%f\n", d);
 	color = color_double_product(color, d);
-	//printf("%u\n", color.r);
 	return (color);
 }
 
