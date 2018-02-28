@@ -126,6 +126,11 @@ int		draw(t_env *e);
 int		ray_loop(t_env *e);
 int		check_inter_objects(t_env *e, t_ray *ray);
 
+int		cone_inter(t_env *e, t_ray *ray);
+int		plan_inter(t_env *e, t_ray *ray);
+int		cylindre_inter(t_env *e, t_ray *ray);
+int		sphere_inter(t_env *e, t_ray *ray);
+
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);
