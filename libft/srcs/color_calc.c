@@ -51,3 +51,13 @@ t_color	color_mix(t_color v1, t_color v2)
 	v.b = v1.b - (v1.b - v2.b) / 2;
 	return (v);
 }
+
+t_color	color_median(t_color v1, t_color v2)
+{
+	t_color v;
+
+	v.r = (v1.r + v2.r) / 2;
+	v.g = (v1.g + v2.g) / 2;
+	v.b = (v1.b + v2.b) / 2;
+	return (v);
+}
