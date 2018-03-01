@@ -22,7 +22,7 @@ static void search_color(t_env *e, int x, int y, t_ray ray)
 		color = light_calc(e, ray);
 	}
 	else
-		color = (t_color){255, 255, 255};
+		color = (t_color){0, 0, 0};
 	//printf("color.r = %d, color.g = %d, color.b = %d\n", color.r, color.g, color.b);
 	put_pixel_to_image(&e->img, x, y, color);
 }
@@ -65,8 +65,9 @@ static void	*ray_loop(void *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
-			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
+			i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
+			* WIN_WIDTH / WIN_HEIGHT;
+			j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
 			ray = create_ray(((t_env*)e), i, j);
 			search_color(((t_env*)e), x, y, ray);
 			x++;
