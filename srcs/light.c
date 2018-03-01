@@ -46,10 +46,33 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	return (0);
 }
 
+static t_color	specular_light(t_env *e, t_ray *light_ray)
+{
+	t_vec		reflection;
+	t_color		specular;
+	t_color		specular_color;
+	double		max_calc;
+	double		shininess;
+
+	shininess = 200;
+	specular_color = (t_color){255, 255, 255};
+	reflection = vector_double_product(light_ray->normal,
+		vector_dot_product(light_ray->hit_dir, light_ray->normal) * 2);
+	reflection = vector_normalize(vector_substraction(reflection, light_ray->hit_dir));
+	max_calc = vector_dot_product(reflection, vector_normalize(
+		vector_substraction(((t_obj*)e->lights->content)->pos, light_ray->hit_pos)));
+	if (max_calc < 0)
+		max_calc = 0;
+	specular = color_double_product(specular_color, ((t_obj*)e->lights->content)->rad); 
+	specular = color_double_product(specular, pow(max_calc, shininess));
+	return (specular);
+}
+
 static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
 	t_color color;
+	t_color specular;
 
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
@@ -58,8 +81,10 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(e, light_ray->hit_pos, ray);
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
+	specular = specular_light(e, light_ray);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
+	color = color_median(color, specular);
 	color = color_median(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	return (color);
