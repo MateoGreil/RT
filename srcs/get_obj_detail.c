@@ -6,11 +6,20 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:11:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/23 11:53:30 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 15:22:29 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+int	get_nbr(char *str_obj, int *i_str)
+{
+	int	nbr;
+	nbr = ft_atoi(str_obj + *i_str);
+	while (str_obj[(*i_str)] && ft_isnum(str_obj[(*i_str)]))
+		(*i_str)++;
+	return (nbr);
+}
 
 char	get_type(char *str_obj)
 {
