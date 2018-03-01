@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 12:33:11 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:08:14 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_F 3
 # define KEY_W 13
+# define KEY_R 15
 # define KEY_SPACE 49
 # define KEY_ECHAP 53
 # define KEYPAD_RIGHT 124
