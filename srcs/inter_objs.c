@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 13:46:14 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 14:06:02 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	cone_inter(t_env *e, t_ray *ray)
 	double	new_length_2;
 	t_vec	tmp;
 	t_vec	dist;
+
 
 	dist = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(ray->dir, ray->dir)
@@ -39,6 +40,7 @@ int	cone_inter(t_env *e, t_ray *ray)
 	new_length_2 = (-tmp.y - sqrtf(disc)) / (2 * tmp.x);
 	if (new_length > new_length_2)
 		new_length = new_length_2;
+	//printf("new_length = %f", new_length);
 	return (new_length);
 }
 
@@ -124,7 +126,7 @@ int			check_inter_objects(t_env *e, t_ray *ray)
 		new_length = cone_inter(e, ray);
 	if (((t_obj*)e->objs->content)->type == PLA)
 		new_length = plan_inter(e, ray);
-	if (new_length < ray->length)
+	if (new_length < ray->length && new_length > 0)
 	{
 		ray->length = new_length;
 		ray->hit_obj = ((t_obj*)e->objs->content);
