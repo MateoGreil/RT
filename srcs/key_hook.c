@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/28 17:25:09 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 13:24:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,6 +103,18 @@ static void	translate_cam(t_cam *cam, int keycode)
 		cam->pos.x -= dir.x * MOVE_SPEED;
 		cam->pos.y -= dir.y * MOVE_SPEED;
 		cam->pos.z -= dir.z * MOVE_SPEED;
+	}
+	else if (keycode == KEYPAD_RIGHT)
+	{
+		cam->pos.x -= cam->left.x * MOVE_SPEED;
+		cam->pos.y -= cam->left.y * MOVE_SPEED;
+		cam->pos.z -= cam->left.z * MOVE_SPEED;
+	}
+	else
+	{
+		cam->pos.x += cam->left.x * MOVE_SPEED;
+		cam->pos.y += cam->left.y * MOVE_SPEED;
+		cam->pos.z += cam->left.z * MOVE_SPEED;
 	}
 }
 
