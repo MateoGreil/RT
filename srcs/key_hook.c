@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/01 13:24:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 17:08:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static void	rotate_Y_cam(t_cam *cam, int keycode)
 	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n\n", cam->dir.x, cam->dir.y, cam->dir.z);
 }
 
-static void	translate_cam(t_cam *cam, int keycode)
+static void	translate_camXZ(t_cam *cam, int keycode)
 {
 	t_vec	dir;
 
@@ -118,6 +118,22 @@ static void	translate_cam(t_cam *cam, int keycode)
 	}
 }
 
+static void	translate_camY(t_cam *cam, int keycode)
+{
+	if (keycode == KEY_F)
+	{
+		cam->pos.x += cam->up.x * MOVE_SPEED;
+		cam->pos.y += cam->up.y * MOVE_SPEED;
+		cam->pos.z += cam->up.z * MOVE_SPEED;
+	}
+	else
+	{
+		cam->pos.x -= cam->up.x * MOVE_SPEED;
+		cam->pos.y -= cam->up.y * MOVE_SPEED;
+		cam->pos.z -= cam->up.z * MOVE_SPEED;
+	}
+}
+
 int			key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_D || keycode == KEY_A)
@@ -126,7 +142,11 @@ int			key_hook(int keycode, t_env *e)
 		rotate_XZ_cam(&e->cam, keycode);*/
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
-		translate_cam(&e->cam, keycode);
+		translate_camXZ(&e->cam, keycode);
+	else if (keycode == KEY_R || keycode == KEY_F)
+	{
+		translate_camY(&e->cam, keycode);
+	}
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
 	draw(e);
