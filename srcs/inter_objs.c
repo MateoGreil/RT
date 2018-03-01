@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 12:34:30 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/01 13:46:14 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ int			check_inter_objects(t_env *e, t_ray *ray)
 {
 	double new_length;
 
-	if (((t_obj*)e->objs->content)->type == SPH)
+	if (((t_obj*)e->objs->content)->type == SPH)//pointeur sur ft
 		new_length = sphere_inter(e, ray);
 	if (((t_obj*)e->objs->content)->type == CYL)
 		new_length = cylindre_inter(e, ray);
