@@ -107,7 +107,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 		light_ray.hit_obj = ray.hit_obj;
 		tmp_color = diffuse_light(e, ray, &light_ray);
 		if (inter_shadow(e, light_ray) == 1)
-			tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
+			tmp_color = /*color_average(tmp_color, */(t_color){0, 0, 0};
 		if (i == 0)
 			color = tmp_color;
 		color = color_average(color, tmp_color);
