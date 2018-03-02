@@ -100,6 +100,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 
 	tmp = e->lights;
 	i = 0;
+	color = (t_color){0, 0, 0};
 	while (e->lights != NULL)
 	{
 		light_ray.length = 0;
