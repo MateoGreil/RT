@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/02 13:55:15 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 16:39:40 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_obj	get_one_obj(char *str_obj)
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.mirror = (char)get_nbr(str_obj, &i_str);
-	/*
+
 		printf("type :%d\n", obj.type);
 		printf("pos: %f; ", obj.pos.x);
 		printf("%f; ", obj.pos.y);
@@ -59,7 +59,7 @@ static t_obj	get_one_obj(char *str_obj)
 		printf("%f; ", obj.trans.y);
 		printf("%f\n", obj.trans.z);
 		printf("mirror :%d\n", obj.mirror);
-	*/
+
 	return (obj);
 }
 
