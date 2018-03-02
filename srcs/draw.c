@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 16:47:56 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 11:13:38 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,9 @@ static void	*ray_loop(void *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			i = (2 * (x + 0.5) / (double)WIN_WIDTH - 1);
-			j = (1 - 2 * (y + 0.5) / (double)WIN_HEIGHT);
+			i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
+			* WIN_WIDTH / WIN_HEIGHT;
+			j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
 			ray = create_ray(((t_env*)e), i, j);
 			search_color(((t_env*)e), x, y, ray);
 			x++;

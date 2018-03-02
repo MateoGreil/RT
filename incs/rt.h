@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 16:51:47 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 11:13:40 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # include <stdio.h> //<- A SUPPRIMER
 
 # define WIN_WIDTH 800
-# define WIN_HEIGHT 800
+# define WIN_HEIGHT 600
 
 # define KEY_PRESS 2
 # define MOUSE_PRESS 4
@@ -36,7 +36,9 @@
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
+# define KEY_F 3
 # define KEY_W 13
+# define KEY_R 15
 # define KEY_SPACE 49
 # define KEY_ECHAP 53
 # define KEYPAD_RIGHT 124
@@ -148,6 +150,6 @@ int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
-t_vec	get_normal(t_env *e, t_vec hit_point, t_ray ray);
+t_vec	get_normal(t_vec hit_point, t_ray ray);
 
 #endif
