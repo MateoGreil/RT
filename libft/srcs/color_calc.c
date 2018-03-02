@@ -52,7 +52,7 @@ t_color	color_mix(t_color v1, t_color v2)
 	return (v);
 }
 
-t_color	color_median(t_color v1, t_color v2)
+t_color	color_average(t_color v1, t_color v2)
 {
 	t_color v;
 

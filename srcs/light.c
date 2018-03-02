@@ -84,8 +84,8 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	specular = specular_light(e, light_ray);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
-	color = color_median(color, specular);
-	color = color_median(ray.hit_obj->color, color);
+	color = color_average(color, specular);
+	color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	return (color);
 }
@@ -93,14 +93,26 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 t_color			light_calc(t_env *e, t_ray ray)
 {
 	t_color	color;
+	t_color	tmp_color;
 	t_ray 	light_ray;
+	t_list	*tmp;
+	int		i;
 
-	light_ray.length = 0;
-	light_ray.hit_obj = ray.hit_obj;
-	color = diffuse_light(e, ray, &light_ray);
-	if (inter_shadow(e, light_ray) == 1)
+	tmp = e->lights;
+	i = 0;
+	while (e->lights != NULL)
 	{
-		return ((t_color){0, 0, 0});
+		light_ray.length = 0;
+		light_ray.hit_obj = ray.hit_obj;
+		tmp_color = diffuse_light(e, ray, &light_ray);
+		if (inter_shadow(e, light_ray) == 1)
+			tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
+		if (i == 0)
+			color = tmp_color;
+		color = color_average(color, tmp_color);
+		e->lights = e->lights->next;
+		i++;
 	}
+	e->lights = tmp;
 	return (color);
 }

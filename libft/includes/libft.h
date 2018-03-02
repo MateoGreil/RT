@@ -166,6 +166,6 @@ t_color			color_double_product(t_color v1, double i);
 t_color			color_product(t_color v1, t_color v2);
 t_color			color_addition(t_color v1, t_color v2);
 t_color			color_mix(t_color v1, t_color v2);
-t_color			color_median(t_color v1, t_color v2);
+t_color			color_average(t_color v1, t_color v2);
 
 #endif
