@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/02/23 10:09:09 by mgreil           ###   ########.fr        #
+#    Updated: 2018/03/02 13:53:55 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,8 @@ SRC_NAME =	main.c \
 			tools_mlx.c \
 			light.c \
 			transformations.c \
-			get_normal.c 
+			get_normal.c \
+			mirror.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

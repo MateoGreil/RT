@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 11:13:40 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 13:53:41 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,7 +144,7 @@ int		plan_inter(t_env *e, t_ray *ray);
 int		cylindre_inter(t_env *e, t_ray *ray);
 int		sphere_inter(t_env *e, t_ray *ray);
 
-void	ray_mirror(e, &ray);
+double	ray_mirror(t_env *e, t_ray *ray);
 
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
