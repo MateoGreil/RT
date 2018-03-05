@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/05 11:23:08 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 11:25:54 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static t_obj	get_one_obj(char *str_obj)
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.trans = get_vec(str_obj, &i_str);
-	if (obj.type >= LIG && obj.rad > 100)
+	if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
 		obj.rad = 100;
 /*
 	printf("type :%c\n", obj.type);
