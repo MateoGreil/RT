@@ -67,7 +67,7 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 	return (specular);
 }
 
-static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
+static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
 	t_color color;

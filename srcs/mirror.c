@@ -24,7 +24,8 @@ void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
 	new_ray.pos = ray->hit_pos;
 	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);
 	//printf("normal = {%lf, %lf, %lf}\n", normal.x, normal.y, normal.z);
-	new_ray.dir = vector_normalize(vector_int_product(vector_substraction(
+	new_ray.dir = vector_normalize(
+		vector_int_product(vector_substraction(
 		ray->dir, normal), -1));
 	//printf("new_ray.dir = {%lf, %lf, %lf}\n", new_ray.dir.x, new_ray.dir.y, new_ray.dir.z);
 	tmp = e->objs;

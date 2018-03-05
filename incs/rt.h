@@ -69,7 +69,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define NB_MIRRORING 2
+# define NB_MIRRORING 0
 
 typedef struct		s_obj
 {
