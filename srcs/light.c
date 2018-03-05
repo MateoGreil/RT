@@ -63,7 +63,7 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 		vector_substraction(((t_obj*)e->lights->content)->pos, light_ray->hit_pos)));
 	if (max_calc < 0)
 		max_calc = 0;
-	specular = color_double_product(specular_color, ((t_obj*)e->lights->content)->rad); 
+	specular = color_double_product(specular_color, ((t_obj*)e->lights->content)->rad);
 	specular = color_double_product(specular, pow(max_calc, shininess));
 	return (specular);
 }
@@ -73,7 +73,11 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	double	d;
 	t_color color;
 	t_color specular;
+	int	i; /// test
+	t_color tmp_color; /// test
 
+	i = 1; /// test
+	perlin_color(light_ray->hit_pos, &tmp_color); /// test
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
@@ -85,7 +89,10 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
 	color = color_average(color, specular);
-	color = color_average(ray.hit_obj->color, color);
+	if (i == 1 && ray.hit_obj->type == SPH) /// test
+		color = color_average(tmp_color, color); /// test
+	else /// test
+		color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	return (color);
 }

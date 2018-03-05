@@ -51,7 +51,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	return (ray);
 }
 
-static void	*ray_loop(void *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
+static void	*ray_loop(void *e)
 {
 	t_ray	ray;
 	double	i;

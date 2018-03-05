@@ -145,4 +145,12 @@ t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
 t_vec	get_normal(t_vec hit_point, t_ray ray);
 
+void		marble_texture(t_vec hit_point, t_color *color);
+void   perlin_color(t_vec hit_point, t_color *color);
+
+double noise(double x, double y, double z);
+double fade(double t);
+double lerp(double t, double a, double b);
+double grad(int hash, double x, double y, double z);
+
 #endif
