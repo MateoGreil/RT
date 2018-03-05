@@ -16,7 +16,7 @@ static void search_color(t_env *e, int x, int y, t_ray ray)
 {
 	t_color	color;
 
-	if (ray.length < MAX)
+	if (ray.length < MAX && ray.hit_obj && !ray.hit_obj->mirror)
 	{
 		//printf("obj.r = %d, obj.g = %d, obj.b = %d\n", ray.hit_obj->color.r, ray.hit_obj->color.g, ray.hit_obj->color.b);
 		color = light_calc(e, ray);
@@ -51,12 +51,12 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	e->objs = tmp;
 	if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
 	{
-		ray_mirror(e, &ray);
+		ray_mirror(e, &ray, 0);
 	}
 	return (ray);
 }
 
-static void	*ray_loop(void *e) //FAIRE L'IMPLEMENTATION DU MULTI-THREAD
+static void	*ray_loop(void *e)
 {
 	t_ray	ray;
 	double	i;

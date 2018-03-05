@@ -73,7 +73,7 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	t_color color;
 	t_color specular;
 
-	light_ray->hit_pos = vector_addition(e->cam.pos,
+	light_ray->hit_pos = vector_addition(ray.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
 			pos, light_ray->hit_pos);

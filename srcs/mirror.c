@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-void	ray_mirror(t_env *e, t_ray *ray)
+void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
 {
 	t_list	*tmp;
 	t_ray	new_ray;
@@ -36,6 +36,6 @@ void	ray_mirror(t_env *e, t_ray *ray)
 	}
 	e->objs = tmp;
 	*ray = new_ray;
-	if (new_ray.hit_obj && new_ray.hit_obj->mirror == TRUE)
-		ray_mirror(e, &new_ray);
+	if (new_ray.hit_obj && new_ray.hit_obj->mirror && nb_rebond < NB_MIRRORING)
+		ray_mirror(e, &new_ray, nb_rebond + 1);
 }

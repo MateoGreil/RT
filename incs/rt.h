@@ -69,6 +69,7 @@
 # define TRUE 1
 # define FALSE 0
 
+# define NB_MIRRORING 2
 
 typedef struct		s_obj
 {
@@ -144,7 +145,7 @@ int		plan_inter(t_env *e, t_ray *ray);
 int		cylindre_inter(t_env *e, t_ray *ray);
 int		sphere_inter(t_env *e, t_ray *ray);
 
-void	ray_mirror(t_env *e, t_ray *ray);
+void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
