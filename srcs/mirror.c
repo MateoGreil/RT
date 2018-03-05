@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:51:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/05 13:51:20 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 16:35:57 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	ray_mirror(t_env *e, t_ray *ray)
 
 	normal = get_normal(ray->hit_pos, *ray);
 	new_ray.length = MAX;
+	new_ray.hit_obj = NULL;
 	new_ray.pos = ray->hit_pos;
 	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);
 	//printf("normal = {%lf, %lf, %lf}\n", normal.x, normal.y, normal.z);
@@ -35,6 +36,6 @@ void	ray_mirror(t_env *e, t_ray *ray)
 	}
 	e->objs = tmp;
 	*ray = new_ray;
-	/*if (new_ray.hit_obj->mirror == TRUE)
-		ray_mirror(e, &new_ray);*/
+	if (new_ray.hit_obj && new_ray.hit_obj->mirror == TRUE)
+		ray_mirror(e, &new_ray);
 }
