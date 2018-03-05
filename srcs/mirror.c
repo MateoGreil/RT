@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:51:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/02 17:04:07 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 13:51:20 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,10 +21,11 @@ void	ray_mirror(t_env *e, t_ray *ray)
 	normal = get_normal(ray->hit_pos, *ray);
 	new_ray.length = MAX;
 	new_ray.pos = ray->hit_pos;
-	new_ray.dir = vector_int_product(vector_substraction(
-		vector_int_product(ray->dir, -1), normal), -1);
-	//printf("new_ray.dir.x = %lf, new_ray.dir.y = %lf, new_ray.dir.z = %lf\n", new_ray.dir.x, new_ray.dir.y, new_ray.dir.z);
-	//printf("normal.x = %lf, normal.y = %lf, normal.z = %lf\n", normal.x, normal.y, normal.z);
+	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);
+	//printf("normal = {%lf, %lf, %lf}\n", normal.x, normal.y, normal.z);
+	new_ray.dir = vector_normalize(vector_int_product(vector_substraction(
+		ray->dir, normal), -1));
+	//printf("new_ray.dir = {%lf, %lf, %lf}\n", new_ray.dir.x, new_ray.dir.y, new_ray.dir.z);
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
