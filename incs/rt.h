@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 17:08:14 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 10:29:05 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,14 @@
 
 # define NB_THREADS 8
 
+
+typedef	struct		s_vec4
+{
+	double			x;
+	double			y;
+	double			z;
+	double			h;
+}					t_vec4;
 
 typedef struct		s_obj
 {
@@ -144,5 +152,7 @@ int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
 t_vec	get_normal(t_vec hit_point, t_ray ray);
+
+void	matrix(void);
 
 #endif
