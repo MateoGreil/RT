@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/05 10:29:05 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/05 18:38:50 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,6 +153,6 @@ t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
 t_vec	get_normal(t_vec hit_point, t_ray ray);
 
-void	matrix(void);
+void	mult_vec_to_matrix(t_vec4 *vec, double matrix[4][4]);
 
 #endif

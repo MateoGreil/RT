@@ -6,7 +6,7 @@
 #    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/05 10:58:11 by nghaddar         ###   ########.fr        #
+#    Updated: 2018/03/05 18:27:40 by nghaddar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@
 NAME = rt
 
 CC = gcc
-FLAGS = -Wall -Werror -Wextra
+# FLAGS = -Wall -Werror -Wextra
 MLXFLAGS = -framework OpenGL -framework AppKit -lpthread
 
 LIBFT = -lft -L$(LIBFT_PATH)
@@ -31,7 +31,8 @@ SRC_NAME =	main.c \
 			light.c \
 			transformations.c \
 			get_normal.c \
-			matrices.c
+			matrix.c \
+			matrix_tools.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
