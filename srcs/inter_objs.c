@@ -23,14 +23,14 @@ int	cone_inter(t_env *e, t_ray *ray)
 
 	dist = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(ray->dir, ray->dir)
-		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
+		- (1 + pow(cos(((t_obj*)e->objs->content)->rad), 2))
 		* pow(vector_dot_product(ray->dir,
 			(t_vec)((t_obj*)e->objs->content)->dir), 2);
 	tmp.y = 2 * (vector_dot_product(ray->dir, dist)
-		- (1 + pow(tan(((t_obj*)e->objs->content)->rad), 2))
+		- (1 + pow(cos(((t_obj*)e->objs->content)->rad), 2))
 		* vector_dot_product(ray->dir, (t_vec)((t_obj*)e->objs->content)->dir)
 		* vector_dot_product(dist, (t_vec)((t_obj*)e->objs->content)->dir));
-	tmp.z = vector_dot_product(dist, dist) - (1 + pow(tan((
+	tmp.z = vector_dot_product(dist, dist) - (1 + pow(cos((
 		(t_obj*)e->objs->content)->rad), 2)) *
 		pow(vector_dot_product(dist, (t_vec)((t_obj*)e->objs->content)->dir), 2);
 	disc = tmp.y * tmp.y - 4 * tmp.x * tmp.z;

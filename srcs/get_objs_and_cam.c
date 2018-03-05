@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/02 16:39:40 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 11:42:30 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,26 +40,24 @@ static t_obj	get_one_obj(char *str_obj)
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.trans = get_vec(str_obj, &i_str);
-	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
-		i_str++;
-	obj.mirror = (char)get_nbr(str_obj, &i_str);
-
-		printf("type :%d\n", obj.type);
-		printf("pos: %f; ", obj.pos.x);
-		printf("%f; ", obj.pos.y);
-		printf("%f\n", obj.pos.z);
-		printf("rad : %f\n", obj.rad);
-		printf("color :%u; ", obj.color.r);
-		printf("%u; ", obj.color.g);
-		printf("%u\n", obj.color.b);
-		printf("rot : %f; ", obj.rot.x);
-		printf("%f; ", obj.rot.y);
-		printf("%f\n", obj.rot.z);
-		printf("trans :%f; ", obj.trans.x);
-		printf("%f; ", obj.trans.y);
-		printf("%f\n", obj.trans.z);
-		printf("mirror :%d\n", obj.mirror);
-
+	if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
+		obj.rad = 100;
+/*
+	printf("type :%c\n", obj.type);
+	printf("pos: %f\n", obj.pos.x);
+	printf("%f\n", obj.pos.y);
+	printf("%f\n", obj.pos.z);
+	printf("rad : %f\n", obj.rad);
+	printf("color :%u\n", obj.color.r);
+	printf("%u\n", obj.color.g);
+	printf("%u\n", obj.color.b);
+	printf("rot : %f\n", obj.rot.x);
+	printf("%f\n", obj.rot.y);
+	printf("%f\n", obj.rot.z);
+	printf("trans :%f\n", obj.trans.x);
+	printf("%f\n", obj.trans.y);
+	printf("%f\n", obj.trans.z);
+*/
 	return (obj);
 }
 
