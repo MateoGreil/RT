@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 13:44:29 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 11:47:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,17 +62,18 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 		vector_substraction(((t_obj*)e->lights->content)->pos, light_ray->hit_pos)));
 	if (max_calc < 0)
 		max_calc = 0;
+	//specular = color_double_product(specular_color, ((t_obj*)e->lights->content)->rad);
 	specular = color_double_product(specular, pow(max_calc, shininess));
 	return (specular);
 }
 
-static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
+static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
 	t_color color;
 	t_color specular;
 
-	light_ray->hit_pos = vector_addition(e->cam.pos,
+	light_ray->hit_pos = vector_addition(ray.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
 			pos, light_ray->hit_pos);

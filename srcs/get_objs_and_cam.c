@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/05 11:25:54 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 11:55:01 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,7 @@ static t_obj	get_one_obj(char *str_obj)
 	obj.pos = get_vec(str_obj, &i_str);
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
-	obj.rad = (double)ft_atoi(str_obj + i_str);
-	while (str_obj[(i_str)] && ft_isnum(str_obj[(i_str)]))
-		i_str++;
+	obj.rad = (double)get_nbr(str_obj, &i_str);
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.color = get_color(str_obj, &i_str);
@@ -42,8 +40,9 @@ static t_obj	get_one_obj(char *str_obj)
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.trans = get_vec(str_obj, &i_str);
-	if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
-		obj.rad = 100;
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
+		i_str++;
+	obj.mirror = get_nbr(str_obj, &i_str);
 /*
 	printf("type :%c\n", obj.type);
 	printf("pos: %f\n", obj.pos.x);
@@ -85,6 +84,8 @@ static void		get_objs(t_list **line_lst, t_env *e)
 			*line_lst = (*line_lst)->next;
 		}
 		obj = get_one_obj(str_obj);
+		if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
+			obj.rad = 100;
 		transformations(&obj);
 		if (obj.type < LIG)
 			ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));

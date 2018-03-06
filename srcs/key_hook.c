@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/01 17:08:39 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 16:52:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,6 +149,8 @@ int			key_hook(int keycode, t_env *e)
 	}
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
+	/*printf("pos.x = %lf, pos.y = %lf, pos.z = %lf\n", e->cam.pos.x, e->cam.pos.y, e->cam.pos.z);
+	printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", e->cam.dir.x, e->cam.dir.y, e->cam.dir.z);*/
 	draw(e);
 	return (0);
 }
