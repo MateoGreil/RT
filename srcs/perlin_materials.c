@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
 /*
 static void get_perlin_color(double n, double *v, t_color *color)
 {
@@ -21,8 +20,8 @@ static void get_perlin_color(double n, double *v, t_color *color)
   double  f;
 
   c0 = (t_color){0, 0, 255};
-  c1 = (t_color){0, 0, 238};
-  c2 = (t_color){255, 255, 0};
+  c1 = (t_color){255, 0, 0};
+  c2 = (t_color){0, 0, 255};
   if (n <= v[0])
     color = &c0;
   else if (n < v[1])
@@ -53,8 +52,25 @@ void    perlin_color(t_vec hit_point, t_color *color)
   v[2] = 0.5;
   n = noise(hit_point.x, hit_point.y, hit_point.z);
   get_perlin_color(n, v, color);
-}
+}*/
 
+void		wood_texture(t_vec hit_point, t_color *color)
+{
+	int		i;
+	double	res;
+	double	v;
+
+	i = 0;
+	res = 0.0;
+	while (++i < 6)
+	{
+		v = 20 * noise(hit_point.x, hit_point.y, hit_point.z);
+		res += v - (int)v;
+	}
+	color->r = color->r + res * 25 + 255 * (1 - res);
+	color->g = color->g + res * 25 + 255 * (1 - res);
+	color->b = color->b + res * 25 + 255 * (1 - res);
+}
 
 void		marble_texture(t_vec hit_point, t_color *color)
 {
@@ -63,31 +79,12 @@ void		marble_texture(t_vec hit_point, t_color *color)
 
 	res = 0.0;
 	i = 0;
-	while (++i < 10)
-		res += (1.0 / i) * fabs(noise(i * 0.05 * hit_point.x,
-					i * 0.15 * hit_point.y,
-					i * 0.05 * hit_point.z));
-	res = 0.5 * sinf((hit_point.x + hit_point.y) * 0.05 + res) + 0.5;
-	color->r = color->r + res * 25	+ 233 * (1 - res);
-	color->g = color->g + res * 25	+ 233 * (1 - res);
-	color->b = color->b + res * 25	+ 233 * (1 - res);
-}
-*/
-void		perlin_texture(t_vec hit_point, t_color *color)
-{
-	int		i;
-	double	res;
-
-	res = 0.0;
-	i = 0;
-	while (++i < 10)
-		res += (1.0 / i) * fabs(noise(i * 0.05 * hit_point.x,
-					i * 0.05 * hit_point.y,
-					i * 0.05 * hit_point.z));
-	res = (res > 1.0) ? 1.0 : res;
-	color->r = color->r + res * 5 + 255 * (1 - res);
-	color->g = color->g + res * 5 + 255 * (1 - res);
-	color->b = color->b + res * 5 + 255 * (1 - res);
+	while (++i < 6)
+		res += cos(hit_point.x + noise(hit_point.x, hit_point.y, hit_point.z));
+	res = ft_clamp(res, 0.0, 1.0);
+	color->r = color->r + res * 6 + 255 * (1 - res);
+	color->g = color->g + res * 6 + 255 * (1 - res);
+	color->b = color->b + res * 6 + 255 * (1 - res);
 }
 
 t_vec    bump_mapping(t_vec hit_point, t_vec normal)
