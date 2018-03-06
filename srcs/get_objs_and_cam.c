@@ -86,6 +86,8 @@ static void		get_objs(t_list **line_lst, t_env *e)
 		obj = get_one_obj(str_obj);
 		if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
 			obj.rad = 100;
+		if (obj.mirror > 100)
+			obj.mirror = 100;
 		transformations(&obj);
 		if (obj.type < LIG)
 			ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));

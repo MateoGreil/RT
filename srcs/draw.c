@@ -32,10 +32,9 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	t_list *tmp;
 	t_ray	ray;
 
-	ray.dir = (t_vec){i * e->cam.left.x + j * e->cam.up.x +
-		e->cam.forward.x, i * e->cam.left.y + j * e->cam.up.y +
-		e->cam.forward.y, i * e->cam.left.z + j * e->cam.up.z +
-		e->cam.forward.z};
+	ray.dir = (t_vec){i * e->cam.left.x + j * e->cam.up.x + e->cam.forward.x,
+		i * e->cam.left.y + j * e->cam.up.y + e->cam.forward.y,
+		i * e->cam.left.z + j * e->cam.up.z + e->cam.forward.z};
 	ray.dir = vector_normalize(ray.dir);
 	ray.dir = vector_int_product(ray.dir, -1);
 	ray.length = MAX;
