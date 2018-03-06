@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 10:14:22 by nghaddar          #+#    #+#             */
-/*   Updated: 2018/03/06 15:43:30 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/06 18:52:32 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ void	mult_vec_to_matrix(t_vec *vec, double matrix[4][4])
 void	z_rotation(t_vec *vec, double a)
 {
 	double rot_z[4][4] = {
-							{cos(a), -sin(a), 0, 0},
-							{sin(a), cos(a), 0, 0},
-							{0, 0, 1, 0},
-							{0, 0, 0, 0}
+							{cos(a), -sin(a), 0},
+							{sin(a), cos(a), 0},
+							{0, 0, 1},
+							{0, 0, 0, 0},
 						};
 	mult_vec_to_matrix(vec, rot_z);
 }
@@ -44,21 +44,21 @@ void	z_rotation(t_vec *vec, double a)
 void	y_rotation(t_vec *vec, double a)
 {
 	double rot_y[4][4] = {
-							{cos(a), 0, sin(a), 0},
+							{cos(a), 0, -sin(a), 0},
 							{0, 1, 0, 0},
-							{-sin(a), 0, cos(a), 0},
-							{0, 0, 0, 0},
-	};
+							{sin(a), 0, cos(a), 0},
+							{0, 0, 0, 0}
+						};
 	mult_vec_to_matrix(vec, rot_y);
 }
 
 void	x_rotation(t_vec *vec, double a)
 {
 	double rot_x[4][4] = {
-							{1, 0, 0, 0},
-							{0, cos(a), -sin(a), 0},
-							{0, sin(a), cos(a), 0},
+							{1, 0, 0},
+							{0, cos(a), -sin(a)},
+							{0, sin(a), cos(a)},
 							{0, 0, 0, 0}
-	};
+						};
 	mult_vec_to_matrix(vec, rot_x);
 }

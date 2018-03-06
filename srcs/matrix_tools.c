@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/05 18:28:35 by nghaddar          #+#    #+#             */
-/*   Updated: 2018/03/06 15:43:46 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/06 17:27:53 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ void	init_matrix(double	matrix[4][4])
 	}
 }
 
-void	print_vec(t_vec *vec)
+void	print_vec(t_vec vec)
 {
 	printf("vec : { x = %f y = %f z = %f h = %f }\n", 
-		vec->x, vec->y, vec->z, vec->h);
+		vec.x, vec.y, vec.z, vec.h);
 }
 
 void	print_matrix(double matrix[4][4])

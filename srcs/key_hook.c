@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/01 17:08:39 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/06 18:42:59 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,23 +64,21 @@
 	}
 }*/
 
+
 static void	rotate_Y_cam(t_cam *cam, int keycode)
 {
-	t_vec	tmp;
-
-	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", cam->dir.x, cam->dir.y, cam->dir.z);
-	tmp = cam->dir;
 	if (keycode == KEY_A)
-	{
-		cam->dir.x = cos(ROT_SPEED) * tmp.x + sin(ROT_SPEED) * tmp.z;
-		cam->dir.z = -sin(ROT_SPEED) * tmp.x + cos(ROT_SPEED) * tmp.z;
-	}
-	else if (keycode == KEY_D)
-	{
-		cam->dir.x = cos(-ROT_SPEED) * tmp.x + sin(-ROT_SPEED) * tmp.z;
-		cam->dir.z = -sin(-ROT_SPEED) * tmp.x + cos(-ROT_SPEED) * tmp.z;
-	}
-	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n\n", cam->dir.x, cam->dir.y, cam->dir.z);
+		y_rotation(&(cam->dir), ROT_SPEED);
+	else
+		y_rotation(&(cam->dir), -ROT_SPEED);
+}
+
+static	void rotate_X_cam(t_cam *cam, int keycode)
+{
+	if (keycode == KEY_W)
+		x_rotation(&(cam->dir), ROT_SPEED);
+	else
+		x_rotation(&(cam->dir), -ROT_SPEED);
 }
 
 static void	translate_camXZ(t_cam *cam, int keycode)
@@ -138,8 +136,8 @@ int			key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_D || keycode == KEY_A)
 		rotate_Y_cam(&e->cam, keycode);
-	/*if (keycode == KEY_W || keycode == KEY_S)
-		rotate_XZ_cam(&e->cam, keycode);*/
+	if (keycode == KEY_W || keycode == KEY_S)
+		rotate_X_cam(&e->cam, keycode);
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
 		translate_camXZ(&e->cam, keycode);
