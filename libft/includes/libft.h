@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/05 10:07:50 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/06 15:42:56 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef	struct	s_vec
 	double	x;
 	double	y;
 	double	z;
+	double	h;
 }				t_vec;
 
 typedef struct	s_list
