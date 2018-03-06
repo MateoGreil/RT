@@ -12,58 +12,49 @@
 
 #include "rt.h"
 
+/*
 static void get_perlin_color(double n, double *v, t_color *color)
 {
-  t_color color0;
-  t_color color1;
-  t_color color2;
-  t_color color3;
+  t_color c0;
+  t_color c1;
+  t_color c2;
+  double  f;
 
-  color0 = (t_color){0, 0, 255};
-  color1 = (t_color){0, 0, 238};
-  color2 = (t_color){255, 255, 0};
-  color3 = (t_color){0, 0, 139};
-  if (v[0] < n && n < v[1])
+  c0 = (t_color){0, 0, 255};
+  c1 = (t_color){0, 0, 238};
+  c2 = (t_color){255, 255, 0};
+  if (n <= v[0])
+    color = &c0;
+  else if (n < v[1])
   {
-    color->r = color0.r * (n - v[0]) / (v[1] - v[0]) + color1.r * (v[1] - n) / (v[1] - v[0]);
-    color->g = color0.g * (n - v[0]) / (v[1] - v[0]) + color1.g * (v[1] - n) / (v[1] - v[0]);
-    color->b = color0.b * (n - v[0]) / (v[1] - v[0]) + color1.b * (v[1] - n) / (v[1] - v[0]);
+    f = (n - v[0]) / (v[1] - v[0]);
+    color->r = c0.r * (1 - f) + c1.r * f;
+    color->g = c0.g * (1 - f) + c1.g * f;
+    color->b = c0.b * (1 - f) + c1.b * f;
   }
-  if (v[1] < n && n < v[2])
+  if (n < v[2])
   {
-    color->r = color1.r * (n - v[1]) / (v[2] - v[1]) + color2.r * (v[2] - n) / (v[2] - v[1]);
-    color->g = color1.g * (n - v[1]) / (v[2] - v[1]) + color2.g * (v[2] - n) / (v[2] - v[1]);
-    color->b = color1.b * (n - v[1]) / (v[2] - v[1]) + color2.b * (v[2] - n) / (v[2] - v[1]);
+    f = (n - v[1]) / (v[2] - v[1]);
+    color->r = c1.r * (1 - f) + c2.r * f;
+    color->g = c1.g * (1 - f) + c2.g * f;
+    color->b = c1.b * (1 - f) + c2.b * f;
   }
-  if (v[2] < n && n < v[3])
-  {
-    color->r = color2.r * (n - v[2]) / (v[3] - v[2]) + color3.r * (v[3] - n) / (v[3] - v[2]);
-    color->g = color2.g * (n - v[2]) / (v[3] - v[2]) + color3.g * (v[3] - n) / (v[3] - v[2]);
-    color->b = color2.b * (n - v[2]) / (v[3] - v[2]) + color3.b * (v[3] - n) / (v[3] - v[2]);
-  }
+  else
+    color = &c2;
 }
 
 void    perlin_color(t_vec hit_point, t_color *color)
 {
   double n;
-  double v[4];
+  double v[3];
 
-  v[0] = -1.0;
-  v[1] = -0.5;
+  v[0] = 0.0;
+  v[1] = 0.25;
   v[2] = 0.5;
-  v[3] = 1.0;
   n = noise(hit_point.x, hit_point.y, hit_point.z);
-  if (n == v[0] || n < v[0])
-    color = &((t_color){0, 0, 255});
-  if (n == v[1])
-    color = &((t_color){0, 0, 238});
-  if (n == v[2])
-    color = &((t_color){255, 255, 0});
-  if (n == v[3] || n > v[3])
-    color = &((t_color){0, 0, 139});
-  else
-    get_perlin_color(n, v, color);
+  get_perlin_color(n, v, color);
 }
+
 
 void		marble_texture(t_vec hit_point, t_color *color)
 {
@@ -81,8 +72,8 @@ void		marble_texture(t_vec hit_point, t_color *color)
 	color->g = color->g + res * 25	+ 233 * (1 - res);
 	color->b = color->b + res * 25	+ 233 * (1 - res);
 }
-/*
-void		grain_texture(t_vec hit_point, t_color *color)
+*/
+void		perlin_texture(t_vec hit_point, t_color *color)
 {
 	int		i;
 	double	res;
@@ -94,20 +85,26 @@ void		grain_texture(t_vec hit_point, t_color *color)
 					i * 0.05 * hit_point.y,
 					i * 0.05 * hit_point.z));
 	res = (res > 1.0) ? 1.0 : res;
-	color->r = color->r + res * 0 + 255 * (1 - res);
-	color->g = color->g + res * 0 + 255 * (1 - res);
-	color->b = color->b + res * 0 + 255 * (1 - res);
+	color->r = color->r + res * 5 + 255 * (1 - res);
+	color->g = color->g + res * 5 + 255 * (1 - res);
+	color->b = color->b + res * 5 + 255 * (1 - res);
 }
 
-void		wood_texture(t_vec hit_point, t_color *color)
+t_vec    bump_mapping(t_vec hit_point, t_vec normal)
 {
-	double	grain;
-	double	n;
-	double	scale;
+  double  noisecx;
+  double  noisecy;
+  double  noisecz;
+  double  bump;
+  t_vec   new_normal;
 
-	scale = 50.0;
-	grain = fabs(noise(hit_point.x * scale, hit_point.y * scale,
-				hit_point.z * scale)) * 20.0;
-	n = grain - (int)(grain);
-	int_to_rgb(color, 0x462E01 * n + 0x02F1B0C * (1.0 - n));
-}*/
+  bump = 2;
+  noisecx = noise(0.1 * hit_point.x, 0.1 * hit_point.y,0.1 * hit_point.z);
+  noisecy = noise(0.1 * hit_point.y, 0.1 * hit_point.z,0.1 * hit_point.x);
+  noisecz = noise(0.1 * hit_point.z, 0.1 * hit_point.x,0.1 * hit_point.y);
+  new_normal.x = (1.0f - bump ) * normal.x + bump * noisecx;
+  new_normal.y = (1.0f - bump ) * normal.y + bump * noisecy;
+  new_normal.z = (1.0f - bump ) * normal.z + bump * noisecz;
+  new_normal = vector_normalize(new_normal);
+  return (new_normal);
+}

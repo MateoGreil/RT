@@ -77,23 +77,24 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	t_color tmp_color; /// test
 
 	i = 1; /// test
-	perlin_color(light_ray->hit_pos, &tmp_color); /// test
+	perlin_texture(light_ray->hit_pos, &tmp_color); /// test
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
 			pos, light_ray->hit_pos);
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
+	if (i == 1 && ray.hit_obj->type == SPH) /// test
+		light_ray->normal = bump_mapping(light_ray->hit_pos, light_ray->normal); /// test
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
 	specular = specular_light(e, light_ray);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
 	color = color_average(color, specular);
+	color = color_average(ray.hit_obj->color, color);
+	color = color_double_product(color, d);
 	if (i == 1 && ray.hit_obj->type == SPH) /// test
 		color = color_average(tmp_color, color); /// test
-	else /// test
-		color = color_average(ray.hit_obj->color, color);
-	color = color_double_product(color, d);
 	return (color);
 }
 

@@ -40,7 +40,7 @@ static void get_fading(t_vec *fading, double *x, double *y, double *z)
 	fading->z = fade(*z);
 }
 
-static void		init_perlin(int p[512])
+static void		init_perlin(int *p)
 {
 	int		i;
 
@@ -59,10 +59,6 @@ double noise(double x, double y, double z)
   t_vec xyz;
   t_vec a;
   t_vec b;
-
-  x /= 2;
-  y /= 2;
-  z /= 2;
 
   init_perlin(p);
 	xyz.x = (int)floor(x) & 255,
