@@ -17,7 +17,6 @@ static void get_perlin_color(double n, double *v, t_color *color)
   t_color c0;
   t_color c1;
   t_color c2;
-  double  f;
 
   c0 = (t_color){0, 0, 255};
   c1 = (t_color){255, 0, 0};
@@ -26,17 +25,15 @@ static void get_perlin_color(double n, double *v, t_color *color)
     color = &c0;
   else if (n < v[1])
   {
-    f = (n - v[0]) / (v[1] - v[0]);
-    color->r = c0.r * (1 - f) + c1.r * f;
-    color->g = c0.g * (1 - f) + c1.g * f;
-    color->b = c0.b * (1 - f) + c1.b * f;
+    color->r = c0.r * (1 - n) + c1.r * n;
+    color->g = c0.g * (1 - n) + c1.g * n;
+    color->b = c0.b * (1 - n) + c1.b * n;
   }
   if (n < v[2])
   {
-    f = (n - v[1]) / (v[2] - v[1]);
-    color->r = c1.r * (1 - f) + c2.r * f;
-    color->g = c1.g * (1 - f) + c2.g * f;
-    color->b = c1.b * (1 - f) + c2.b * f;
+    color->r = c1.r * (1 - n) + c2.r * n;
+    color->g = c1.g * (1 - n) + c2.g * n;
+    color->b = c1.b * (1 - n) + c2.b * n;
   }
   else
     color = &c2;
@@ -82,7 +79,8 @@ void		wood_texture(t_vec hit_point, t_color *color)
 
 	scale = 40;
 	res = 0.0;
-	v = 20 * fabs(noise(hit_point.x * scale, hit_point.y * scale, hit_point.z * scale));
+	v = 20 * fabs(noise(hit_point.x * scale, hit_point.y
+		* scale, hit_point.z * scale));
 	res += v - (int)v;
 	res = ft_clamp(res, 0.0, 1.0);
   color->r = color->r + 255 * (1.0 - res);
@@ -114,9 +112,9 @@ t_vec    bump_mapping(t_vec hit_point, t_vec normal)
   t_vec   new_normal;
 
   bump = 5;
-  noisecx = noise(0.1 * hit_point.x, 0.1 * hit_point.y,0.1 * hit_point.z);
-  noisecy = noise(0.1 * hit_point.y, 0.1 * hit_point.z,0.1 * hit_point.x);
-  noisecz = noise(0.1 * hit_point.z, 0.1 * hit_point.x,0.1 * hit_point.y);
+  noisecx = noise(0.1 * hit_point.x, 0.1 * hit_point.y, 0.1 * hit_point.z);
+  noisecy = noise(0.1 * hit_point.y, 0.1 * hit_point.z, 0.1 * hit_point.x);
+  noisecz = noise(0.1 * hit_point.z, 0.1 * hit_point.x, 0.1 * hit_point.y);
   new_normal.x = (1.0f - bump ) * normal.x + bump * noisecx;
   new_normal.y = (1.0f - bump ) * normal.y + bump * noisecy;
   new_normal.z = (1.0f - bump ) * normal.z + bump * noisecz;

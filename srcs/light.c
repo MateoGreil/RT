@@ -95,6 +95,8 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	color = color_double_product(color, d);
 	if (i == 1 && ray.hit_obj->type == SPH) /// test
 		color = color_average(tmp_color, color); /// test
+	if (i == 1 && ray.hit_obj->type == PLA) /// test
+		color = damier_texture(light_ray->hit_pos); /// test
 	color = color_average(color, specular);
 	return (color);
 }

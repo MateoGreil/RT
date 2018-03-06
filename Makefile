@@ -34,6 +34,7 @@ SRC_NAME =	main.c \
 			perlin_materials.c \
 			perlin.c \
 			perlin_tools.c \
+			textures.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
