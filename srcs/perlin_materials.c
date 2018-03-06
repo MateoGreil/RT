@@ -54,22 +54,40 @@ void    perlin_color(t_vec hit_point, t_color *color)
   get_perlin_color(n, v, color);
 }*/
 
+void turbulence(t_vec hit_point, t_color *color, double size)
+{
+  double	value;
+	double	tmp;
+	int			i;
+
+	value = 0.0;
+	tmp = size;
+  while (size >= 1)
+  {
+    value += noise(hit_point.x / size, hit_point.y / size, hit_point.z / size)
+			* size;
+    size /= 2.0;
+  }
+	i = (int)(128.0 * value / tmp);
+	color->r = color->r + i * 25 + 255 * (1 - i);
+	color->g = color->g + i * 25 + 255 * (1 - i);
+	color->b = color->b + i * 25 + 255 * (1 - i);
+}
+
 void		wood_texture(t_vec hit_point, t_color *color)
 {
-	int		i;
+	double	scale;
 	double	res;
 	double	v;
 
-	i = 0;
+	scale = 40;
 	res = 0.0;
-	while (++i < 6)
-	{
-		v = 20 * noise(hit_point.x, hit_point.y, hit_point.z);
-		res += v - (int)v;
-	}
-	color->r = color->r + res * 25 + 255 * (1 - res);
-	color->g = color->g + res * 25 + 255 * (1 - res);
-	color->b = color->b + res * 25 + 255 * (1 - res);
+	v = 20 * fabs(noise(hit_point.x * scale, hit_point.y * scale, hit_point.z * scale));
+	res += v - (int)v;
+	res = ft_clamp(res, 0.0, 1.0);
+  color->r = color->r + 255 * (1.0 - res);
+  color->g = color->g + 255 * (1.0 - res);
+  color->b = color->b + 255 * (1.0 - res);
 }
 
 void		marble_texture(t_vec hit_point, t_color *color)
@@ -82,9 +100,9 @@ void		marble_texture(t_vec hit_point, t_color *color)
 	while (++i < 6)
 		res += cos(hit_point.x + noise(hit_point.x, hit_point.y, hit_point.z));
 	res = ft_clamp(res, 0.0, 1.0);
-	color->r = color->r + res * 6 + 255 * (1 - res);
-	color->g = color->g + res * 6 + 255 * (1 - res);
-	color->b = color->b + res * 6 + 255 * (1 - res);
+	color->r = color->r + 255 * (1 - res);
+	color->g = color->g + 255 * (1 - res);
+	color->b = color->b + 255 * (1 - res);
 }
 
 t_vec    bump_mapping(t_vec hit_point, t_vec normal)

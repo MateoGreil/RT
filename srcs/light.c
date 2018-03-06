@@ -77,7 +77,8 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	t_color tmp_color; /// test
 
 	i = 1; /// test
-	wood_texture(light_ray->hit_pos, &tmp_color); /// test
+	marble_texture(light_ray->hit_pos, &tmp_color); /// test
+	//turbulence(light_ray->hit_pos, &tmp_color, 64.0); /// test
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->

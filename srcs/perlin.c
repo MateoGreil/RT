@@ -40,7 +40,7 @@ static void get_fading(t_vec *fading, double *x, double *y, double *z)
 	fading->z = fade(*z);
 }
 
-static void		init_perlin(int *p)
+static void		init_perlin(int p[512])
 {
 	int		i;
 

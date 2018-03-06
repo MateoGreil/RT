@@ -19,7 +19,7 @@ double fade(double t)
 
 double lerp(double t, double a, double b)
 {
-	return a + t * (b - a);
+	return (a + t * (b - a));
 }
 
 double grad(int hash, double x, double y, double z)
