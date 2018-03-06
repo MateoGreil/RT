@@ -98,7 +98,7 @@ t_vec    bump_mapping(t_vec hit_point, t_vec normal)
   double  bump;
   t_vec   new_normal;
 
-  bump = 2;
+  bump = 5;
   noisecx = noise(0.1 * hit_point.x, 0.1 * hit_point.y,0.1 * hit_point.z);
   noisecy = noise(0.1 * hit_point.y, 0.1 * hit_point.z,0.1 * hit_point.x);
   noisecz = noise(0.1 * hit_point.z, 0.1 * hit_point.x,0.1 * hit_point.y);
