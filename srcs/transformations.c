@@ -19,8 +19,8 @@ static t_vec	ft_rotation_z(t_vec ex_pos, double angle)
 	t_vec	new_pos;
 
 	angle = ft_deg2rad(angle);
-	new_x = ex_pos.x * cosf(angle) + ex_pos.y * -sinf(angle);
-	new_y = ex_pos.x * sinf(angle) + ex_pos.y * cosf(angle);
+	new_x = ex_pos.x * cos(angle) + ex_pos.y * -sin(angle);
+	new_y = ex_pos.x * sin(angle) + ex_pos.y * cos(angle);
 	new_pos.x = new_x;
 	new_pos.y = new_y;
 	new_pos.z = ex_pos.z;
@@ -34,8 +34,8 @@ static t_vec	ft_rotation_y(t_vec ex_pos, double angle)
 	t_vec	new_pos;
 
 	angle = ft_deg2rad(angle);
-	new_x = ex_pos.x * cosf(angle) + ex_pos.z * sinf(angle);
-	new_z = ex_pos.x * -sinf(angle) + ex_pos.z * cosf(angle);
+	new_x = ex_pos.x * cos(angle) + ex_pos.z * sin(angle);
+	new_z = ex_pos.x * -sin(angle) + ex_pos.z * cos(angle);
 	new_pos.x = new_x;
 	new_pos.z = new_z;
 	new_pos.y = ex_pos.y;
@@ -49,8 +49,8 @@ static t_vec	ft_rotation_x(t_vec ex_pos, double angle)
 	t_vec	new_pos;
 
 	angle = ft_deg2rad(angle);
-	new_y = ex_pos.y * cosf(angle) + ex_pos.z * -sinf(angle);
-	new_z = ex_pos.y * sinf(angle) + ex_pos.z * cosf(angle);
+	new_y = ex_pos.y * cos(angle) + ex_pos.z * -sin(angle);
+	new_z = ex_pos.y * sin(angle) + ex_pos.z * cos(angle);
 	new_pos.y = new_y;
 	new_pos.z = new_z;
 	new_pos.x = ex_pos.x;
