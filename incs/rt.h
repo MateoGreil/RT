@@ -103,7 +103,7 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
-}						t_img;
+}					t_img;
 
 typedef struct		s_cam
 {
@@ -112,9 +112,9 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_vec			left;
 	t_vec			up;
-}						t_cam;
+}					t_cam;
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
@@ -124,7 +124,7 @@ typedef struct	s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-}							t_env;
+}					t_env;
 
 void	ft_delstr(void *content, size_t content_size);
 
