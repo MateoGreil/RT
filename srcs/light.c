@@ -73,10 +73,8 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	double	d;
 	t_color color;
 	t_color specular;
-	int	i; /// test
 	t_color tmp_color; /// test
 
-	i = 1; /// test
 	marble_texture(light_ray->hit_pos, &tmp_color); /// test
 	//turbulence(light_ray->hit_pos, &tmp_color, 64.0); /// test
 	light_ray->hit_pos = vector_addition(e->cam.pos,
@@ -85,17 +83,15 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 			pos, light_ray->hit_pos);
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
-	//if (i == 1 && ray.hit_obj->type == SPH) /// test
-	//	light_ray->normal = bump_mapping(light_ray->hit_pos, light_ray->normal); /// test
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
 	specular = specular_light(e, light_ray);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);
 	color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
-	if (i == 1 && ray.hit_obj->type == SPH) /// test
+	if (ray.hit_obj->type == SPH) /// test
 		color = color_average(tmp_color, color); /// test
-	if (i == 1 && ray.hit_obj->type == PLA) /// test
+	if (ray.hit_obj->type == PLA) /// test
 		color = damier_texture(light_ray->hit_pos); /// test
 	color = color_average(color, specular);
 	return (color);
