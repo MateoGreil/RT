@@ -147,7 +147,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray);
 
 // PARTIE BENJAMIN //
 t_color damier_texture(t_vec hit_point);
-void 	turbulence(t_vec hit_point, t_color *color, double size);
+void turbulence(t_vec hit_point, t_color *color, double size);
 void 	marble_texture(t_vec hit_point, t_color *color);
 void	wood_texture(t_vec hit_point, t_color *color);
 void  perlin_color(t_vec hit_point, t_color *color);

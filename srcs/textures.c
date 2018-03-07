@@ -13,23 +13,17 @@
 #include "rt.h"
 
 t_color damier_texture(t_vec hit_point)
-{
+{/*
   double  l;
   int x1;
   int y1;
   int z1;
   t_color color;
 
-  l = 10;
+  l = 30;
   x1 = (int)(hit_point.x / l);
   y1 = (int)(hit_point.y / l);
   z1 = (int)(hit_point.z / l);
-  if (hit_point.x < 0)
-    x1 += 1;
-  if (hit_point.y < 0)
-    y1 += 1;
-  if (hit_point.z < 0)
-    z1 += 1;
   if (z1 % 2 == 0)
     {
       if ((x1 % 2 == 0 && y1 % 2 == 0) ||
@@ -46,5 +40,21 @@ t_color damier_texture(t_vec hit_point)
       else
         color = (t_color){0, 0, 255};
     }
-  return (color);
+  return (color);*/
+
+  double x;
+  double y;
+  double z;
+  double size;
+  double eps = -0.000187453738;
+
+  size = 1;
+  x = hit_point.x + eps;
+  y = hit_point.y + eps;
+  z = hit_point.z + eps;
+  if (((int)floor(x / size) + (int)floor(y /  size)
+    + (int)floor(z / size)) % 2 == 0)
+    return ((t_color){0, 0, 0});
+  else
+    return ((t_color){255, 255, 255});
 }

@@ -12,19 +12,17 @@
 
 #include "rt.h"
 
-static void search_color(t_env *e, int x, int y, t_ray ray)
+static void blend_color(t_env *e, t_color *color, int x, int y)
 {
-	t_color	color;
+	t_color final_color;
 
-	if (ray.length < MAX)
-	{
-		//printf("obj.r = %d, obj.g = %d, obj.b = %d\n", ray.hit_obj->color.r, ray.hit_obj->color.g, ray.hit_obj->color.b);
-		color = light_calc(e, ray);
-	}
-	else
-		color = (t_color){0, 0, 0};
-	//printf("color.r = %d, color.g = %d, color.b = %d\n", color.r, color.g, color.b);
-	put_pixel_to_image(&e->img, x, y, color);
+	final_color.r = (color[0].r + color[1].r + color[2].r + color[3].r + color[4].r +
+		color[5].r + color[6].r + color[7].r) / 8;
+	final_color.g = (color[0].g + color[1].g + color[2].g + color[3].g + color[4].g +
+		color[5].g + color[6].g + color[7].g) / 8;
+	final_color.b = (color[0].b + color[1].b + color[2].b + color[3].b + color[4].b +
+		color[5].b + color[6].b + color[7].b) / 8;
+	put_pixel_to_image(&e->img, x, y, final_color);
 }
 
 static t_ray	create_ray(t_env *e, double i, double j)
@@ -44,20 +42,35 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	while (e->objs != NULL)
 	{
 		check_inter_objects(e, &ray);
-		//printf("color.r = %d, color.g = %d, color.b = %d\n", ray.hit_color.r, ray.hit_color.g, ray.hit_color.b);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
 	return (ray);
 }
 
-static void	*ray_loop(void *e)
+static t_color search_color(void *e, int x, int y)
 {
 	t_ray	ray;
 	double	i;
 	double	j;
+	t_color	color;
+
+	i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
+	* WIN_WIDTH / WIN_HEIGHT;
+	j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
+	ray = create_ray(((t_env*)e), i, j);
+	if (ray.length < MAX)
+		color = light_calc(e, ray);
+	else
+		color = (t_color){0, 0, 0};
+	return (color);
+}
+
+static void	*ray_loop(void *e)
+{
 	int		y;
 	int		x;
+	t_color color[8];
 
 	y = ((t_env*)e)->y_start;
 	while (y < ((t_env*)e)->y_end)
@@ -65,11 +78,15 @@ static void	*ray_loop(void *e)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
-			* WIN_WIDTH / WIN_HEIGHT;
-			j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
-			ray = create_ray(((t_env*)e), i, j);
-			search_color(((t_env*)e), x, y, ray);
+			color[0] = search_color(e, x + 1, y);
+      color[1] = search_color(e, x + 1, y + 1);
+      color[2] = search_color(e, x, y);
+      color[3] = search_color(e, x, y + 1);
+      color[4] = search_color(e, x - 1, y);
+      color[5] = search_color(e, x - 1, y - 1);
+      color[6] = search_color(e, x - 1, y + 1);
+      color[7] = search_color(e, x + 1, y - 1);
+			blend_color(e, color, x, y);
 			x++;
 		}
 		y++;
