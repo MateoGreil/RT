@@ -149,6 +149,8 @@ int			key_hook(int keycode, t_env *e)
 	}
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
+	else if (keycode == KEY_I)
+		gtk_start(2, e->av, e);
 	draw(e);
 	return (0);
 }

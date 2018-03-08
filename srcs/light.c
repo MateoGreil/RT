@@ -18,7 +18,7 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	t_list *tmp;
 
 	dist_obj_to_light = length_between_vectors(light_ray.hit_pos, ((t_obj*)e->lights->content)->pos);
-	light_ray.length = MAX;
+	light_ray.length = INFINITE;
 	light_ray.pos = light_ray.hit_pos;
 	light_ray.dir = light_ray.hit_dir;
 	tmp = e->objs;

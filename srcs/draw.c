@@ -36,7 +36,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 		e->cam.forward.z};
 	ray.dir = vector_normalize(ray.dir);
 	ray.dir = vector_int_product(ray.dir, -1);
-	ray.length = MAX;
+	ray.length = INFINITE;
 	ray.pos = e->cam.pos;
 	tmp = e->objs;
 	while (e->objs != NULL)
@@ -59,7 +59,7 @@ static t_color search_color(void *e, int x, int y)
 	* WIN_WIDTH / WIN_HEIGHT;
 	j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
 	ray = create_ray(((t_env*)e), i, j);
-	if (ray.length < MAX)
+	if (ray.length < INFINITE)
 		color = light_calc(e, ray);
 	else
 		color = (t_color){0, 0, 0};
