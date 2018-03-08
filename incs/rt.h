@@ -107,8 +107,12 @@ typedef struct		s_img
 
 typedef struct		s_cam
 {
+	double			d;
 	t_vec			pos;
 	t_vec			dir;
+	t_vec			u;
+	t_vec			v;
+	t_vec			w;
 	t_vec			forward;
 	t_vec			left;
 	t_vec			up;
@@ -131,6 +135,8 @@ void	ft_delstr(void *content, size_t content_size);
 t_img	new_image(void *mlx, int img_size_x, int img_size_y);
 void	del_image(void *mlx, t_img *img);
 void	put_pixel_to_image(t_img *img, int x, int y, t_color color);
+
+void	set_cam_coordinates(t_env *e);
 
 char	get_type(char *str_obj);
 t_vec	get_vec(char *str_obj, int *i_str);

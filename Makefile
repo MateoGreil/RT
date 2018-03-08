@@ -31,7 +31,8 @@ SRC_NAME =	main.c \
 			light.c \
 			transformations.c \
 			get_normal.c \
-			mirror.c
+			mirror.c \
+			cam.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
