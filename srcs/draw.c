@@ -32,18 +32,12 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	t_list *tmp;
 	t_ray	ray;
 
-	/*ray.dir = (t_vec){i * e->cam.left.x + j * e->cam.up.x +
-		e->cam.forward.x, i * e->cam.left.y + j * e->cam.up.y +
-		e->cam.forward.y, i * e->cam.left.z + j * e->cam.up.z +
-		e->cam.forward.z};
+	ray.dir = vector_substraction(vector_addition(
+		vector_double_product(e->cam.u, (0.7 * (i - 0.5 * WIN_WIDTH))),
+		vector_double_product(e->cam.v, (0.7 * (j - 0.5 * WIN_HEIGHT)))),
+		vector_double_product(e->cam.w, e->cam.d));
 	ray.dir = vector_normalize(ray.dir);
-	ray.dir = vector_int_product(ray.dir, -1);*/
-	//ray.dir = (t_vec){(i - WIN_WIDTH / 2 + 0.5), (j - WIN_HEIGHT / 2 + 0.5), -200};
-	ray.dir = vector_addition(vector_addition(
-		vector_double_product(e->cam.u, (i - WIN_WIDTH / 2 + 0.5)),
-		vector_double_product(e->cam.v, (j - WIN_HEIGHT / 2 + 0.5))),
-		vector_double_product(e->cam.w, -100));
-	ray.dir = vector_normalize(ray.dir);
+	//printf("ray - x : %f, y : %f, z : %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
 	ray.length = MAX;
 	ray.pos = e->cam.pos;
 	ray.hit_obj = NULL;
@@ -65,8 +59,6 @@ static t_ray	create_ray(t_env *e, double i, double j)
 static void	*ray_loop(void *e)
 {
 	t_ray	ray;
-	//double	i;
-	//double	j;
 	int		y;
 	int		x;
 
@@ -76,9 +68,6 @@ static void	*ray_loop(void *e)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			//i = (x - 0.5 * (WIN_WIDTH - 1))
-			//* WIN_WIDTH / WIN_HEIGHT;
-			//j = (y - 0.5 * (WIN_HEIGHT - 1));
 			ray = create_ray(((t_env*)e), x, y);
 			search_color(((t_env*)e), x, y, ray);
 			x++;
@@ -120,10 +109,11 @@ void	multi_thread(t_env *e)
 void	draw(t_env *e)
 {
 	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-	e->cam.forward = vector_int_product(e->cam.dir, -1);
-	e->cam.left = vector_cross(
-		vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
-	e->cam.up = vector_cross(e->cam.forward, e->cam.left);
+	//e->cam.forward = vector_int_product(e->cam.dir, -1);
+	//e->cam.left = vector_cross(
+	//	vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
+	printf("cam - x : %f, y : %f, z : %f\n", e->cam.pos.x, e->cam.pos.y, e->cam.pos.z);
+	//e->cam.up = vector_cross(e->cam.forward, e->cam.left);
 	set_cam_coordinates(e);
 	multi_thread(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
