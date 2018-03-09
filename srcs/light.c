@@ -62,7 +62,6 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 		vector_substraction(((t_obj*)e->lights->content)->pos, light_ray->hit_pos)));
 	if (max_calc < 0)
 		max_calc = 0;
-	specular = color_double_product(specular_color, ((t_obj*)e->lights->content)->rad);
 	specular = color_double_product(specular, pow(max_calc, shininess));
 	return (specular);
 }
@@ -107,11 +106,10 @@ t_color			light_calc(t_env *e, t_ray ray)
 	color = (t_color){0, 0, 0};
 	while (e->lights != NULL)
 	{
-		light_ray.length = 0;
 		light_ray.hit_obj = ray.hit_obj;
 		tmp_color = diffuse_light(e, ray, &light_ray);
 		if (inter_shadow(e, light_ray) == 1)
-			tmp_color = /*color_average(tmp_color, */(t_color){0, 0, 0};
+			tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
 		if (i == 0)
 			color = tmp_color;
 		color = color_average(color, tmp_color);
@@ -121,5 +119,6 @@ t_color			light_calc(t_env *e, t_ray ray)
 		i++;
 	}
 	e->lights = tmp;
+	color = cel_shading_shape(e, ray, color);
 	return (color);
 }

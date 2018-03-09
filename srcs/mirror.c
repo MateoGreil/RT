@@ -19,7 +19,7 @@ void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
 	t_vec	normal;
 
 	normal = get_normal(ray->hit_pos, *ray);
-	new_ray.length = MAX;
+	new_ray.length = INFINITE;
 	new_ray.hit_obj = NULL;
 	new_ray.pos = ray->hit_pos;
 	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);

@@ -69,7 +69,7 @@
 
 # define INFINITE 1000000000
 
-# define NB_THREADS 8
+# define NB_THREADS 1
 
 # define TRUE 1
 # define FALSE 0
@@ -119,6 +119,7 @@ typedef struct		s_cam
 	t_vec			up;
 	int 			antialiasing;
 	int				cel_shading;
+	t_obj			*prev_ray_obj;
 }						t_cam;
 
 typedef struct	s_env
@@ -161,6 +162,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray);
 // PARTIE BENJAMIN //
 void	multi_thread(t_env *e);
 double  cel_shading(t_env *e, double d);
+t_color cel_shading_shape(t_env *e, t_ray ray, t_color color);
 t_color damier_texture(t_vec hit_point);
 void turbulence(t_vec hit_point, t_color *color, double size);
 void 	marble_texture(t_vec hit_point, t_color *color);

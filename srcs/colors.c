@@ -12,6 +12,19 @@
 
 #include "rt.h"
 
+t_color cel_shading_shape(t_env *e, t_ray ray, t_color color)
+{
+  if (!e->cam.prev_ray_obj)
+    e->cam.prev_ray_obj = ray.hit_obj;
+  if (e->cam.cel_shading == ON)
+  {
+    if (e->cam.prev_ray_obj != ray.hit_obj)
+      return ((t_color){0, 0, 0});
+  }
+  e->cam.prev_ray_obj = ray.hit_obj;
+  return (color);
+}
+
 double  cel_shading(t_env *e, double d)
 {
   if (e->cam.cel_shading == ON)
