@@ -20,7 +20,6 @@ int	cone_inter(t_env *e, t_ray *ray)
 	t_vec	tmp;
 	t_vec	dist;
 
-
 	dist = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(ray->dir, ray->dir)
 		- (1 + pow(cos(((t_obj*)e->objs->content)->rad), 2))
@@ -105,9 +104,7 @@ int	sphere_inter(t_env *e, t_ray *ray)
 		vector_dot_product(distance_vector, distance_vector);
 	if (distance_sq > (((t_obj*)e->objs->content)->rad *
 		((t_obj*)e->objs->content)->rad))
-	{
 		return (ray->length);
-	}
 	new_length = projection - sqrtf((((t_obj*)e->objs->content)->rad *
 		((t_obj*)e->objs->content)->rad) - distance_sq);
 	return (new_length);

@@ -19,7 +19,10 @@ t_color cel_shading_shape(t_env *e, t_ray ray, t_color color)
   if (e->cam.cel_shading == ON)
   {
     if (e->cam.prev_ray_obj != ray.hit_obj)
+    {
+      e->cam.prev_ray_obj = ray.hit_obj;
       return ((t_color){0, 0, 0});
+    }
   }
   e->cam.prev_ray_obj = ray.hit_obj;
   return (color);

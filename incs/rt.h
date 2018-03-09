@@ -93,6 +93,7 @@ typedef struct		s_ray
 	t_vec 			pos;
 	t_vec			dir;
 	double			length;
+	double		disc;
 	t_vec			normal;
 	t_obj			*hit_obj;
 	t_vec			hit_pos;
