@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-/*static int  inter_shadow(t_env *e, t_ray light_ray)
+static int  inter_shadow(t_env *e, t_ray light_ray)
 {
 	double	dist_obj_to_light;
 	t_list *tmp;
@@ -45,7 +45,7 @@
 	e->objs = tmp;
 	return (0);
 }
-*/
+
 static t_color	specular_light(t_env *e, t_ray *light_ray)
 {
 	t_vec		reflection;
@@ -103,13 +103,11 @@ t_color			light_calc(t_env *e, t_ray ray)
 		light_ray.length = 0;
 		light_ray.hit_obj = ray.hit_obj;
 		tmp_color = diffuse_light(e, ray, &light_ray);
-		//tmp_color = ray.hit_obj->color;
-		//if (inter_shadow(e, light_ray) == 1)
-		//	tmp_color = /*color_average(tmp_color, */(t_color){0, 0, 0};
+		if (inter_shadow(e, light_ray) == 1)
+			tmp_color = /*color_average(tmp_color, */(t_color){0, 0, 0};
 		if (i == 0)
 			color = tmp_color;
-		color = tmp_color;
-		//color = color_average(color, tmp_color);
+		color = color_average(color, tmp_color);
 		color = color_double_product(color,
 		(((t_obj*)e->lights->content)->rad / 100));
 		e->lights = e->lights->next;
