@@ -83,6 +83,7 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
+	d = cel_shading(e, d);
 	specular = specular_light(e, light_ray);
 	color = color_double_product(((t_obj*)e->lights->content)->color,
 		((t_obj*)e->lights->content)->rad);

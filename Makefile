@@ -17,8 +17,6 @@ NAME = rt
 CC = gcc
 FLAGS = -Wall -Werror -Wextra
 MLXFLAGS = -framework OpenGL -framework AppKit -lpthread
-GTKOFLAGS = `pkg-config --cflags gtk+-3.0`
-GTKCFLAGS = `pkg-config --libs gtk+-3.0`
 
 LIBFT = -lft -L$(LIBFT_PATH)
 LIBMLX = -lmlx -L$(LIBMLX_PATH)
@@ -37,7 +35,7 @@ SRC_NAME =	main.c \
 			perlin.c \
 			perlin_tools.c \
 			textures.c \
-			gtk_builder.c \
+			colors.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
@@ -55,12 +53,12 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFT_PATH)
 	@make -C $(LIBMLX_PATH)
-	@$(CC) $(FLAGS) $(MLXFLAGS) $(GTKCFLAGS) $(LIBFT) $(LIBMLX) -o $(NAME) $(OBJS)
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) -o $(NAME) $(OBJS)
 	@echo "$(NAME) compiled ✓"
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@mkdir -p $(OBJ_PATH)
-	@$(CC) $(FLAGS) $(GTKOFLAGS) $(INC_PATH) -o $@ -c $<
+	@$(CC) $(FLAGS) $(INC_PATH) -o $@ -c $<
 	@echo "$@ created ✓"
 
 clean :

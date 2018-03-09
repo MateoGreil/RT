@@ -12,19 +12,6 @@
 
 #include "rt.h"
 
-static void blend_color(t_env *e, t_color *color, int x, int y)
-{
-	t_color final_color;
-
-	final_color.r = (color[0].r + color[1].r + color[2].r + color[3].r + color[4].r +
-		color[5].r + color[6].r + color[7].r) / 8;
-	final_color.g = (color[0].g + color[1].g + color[2].g + color[3].g + color[4].g +
-		color[5].g + color[6].g + color[7].g) / 8;
-	final_color.b = (color[0].b + color[1].b + color[2].b + color[3].b + color[4].b +
-		color[5].b + color[6].b + color[7].b) / 8;
-	put_pixel_to_image(&e->img, x, y, final_color);
-}
-
 static t_ray	create_ray(t_env *e, double i, double j)
 {
 	t_list *tmp;
@@ -48,7 +35,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	return (ray);
 }
 
-static t_color search_color(void *e, int x, int y)
+t_color	search_color(void *e, int x, int y)
 {
 	t_ray	ray;
 	double	i;
@@ -66,11 +53,27 @@ static t_color search_color(void *e, int x, int y)
 	return (color);
 }
 
+static void ray_loop_inter(t_env *e, int x, int y)
+{
+	t_color color[8];
+	t_color final_color;
+
+	if (e->cam.antialiasing == ON)
+	{
+		antialiasing(e, x, y, color);
+		blend_color(e, color, x, y);
+	}
+	else
+	{
+		final_color = search_color(e, x, y);
+		put_pixel_to_image(&e->img, x, y, final_color);
+	}
+}
+
 static void	*ray_loop(void *e)
 {
 	int		y;
 	int		x;
-	t_color color[8];
 
 	y = ((t_env*)e)->y_start;
 	while (y < ((t_env*)e)->y_end)
@@ -78,15 +81,7 @@ static void	*ray_loop(void *e)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			color[0] = search_color(e, x + 1, y);
-      color[1] = search_color(e, x + 1, y + 1);
-      color[2] = search_color(e, x, y);
-      color[3] = search_color(e, x, y + 1);
-      color[4] = search_color(e, x - 1, y);
-      color[5] = search_color(e, x - 1, y - 1);
-      color[6] = search_color(e, x - 1, y + 1);
-      color[7] = search_color(e, x + 1, y - 1);
-			blend_color(e, color, x, y);
+			ray_loop_inter(((t_env*)e), x, y);
 			x++;
 		}
 		y++;
@@ -121,15 +116,4 @@ void	multi_thread(t_env *e)
 		pthread_join(thread[i_thread], NULL);
 		i_thread++;
 	}
-}
-
-void	draw(t_env *e)
-{
-	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-	e->cam.forward = vector_int_product(e->cam.dir, -1);
-	e->cam.left = vector_cross(
-		vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
-	e->cam.up = vector_cross(e->cam.forward, e->cam.left);
-	multi_thread(e);
-	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 }
