@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:11:09 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 11:40:27 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 17:10:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
-			powf(cosf(ray.hit_obj->rad * (M_PI * 180.0f)), 2));
+			powf(cos(ray.hit_obj->rad * (M_PI * 180.0f)), 2));
 	return (normal);
 }
 
@@ -40,7 +40,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 			normal = vector_int_product(normal, -1);
 	}
 	else if (ray.hit_obj->type == SPH)
-		normal = vector_substraction(hit_point, ray.hit_pos);
+		normal = vector_substraction(hit_point, ray.hit_obj->pos);
 	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL)
 		normal = get_normal_2(hit_point, ray);
 	else

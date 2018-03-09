@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 11:20:25 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 16:27:03 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int	sphere_inter(t_env *e, t_ray *ray)
 
 int			check_inter_objects(t_env *e, t_ray *ray)
 {
-	double new_length;
+	double	new_length;
 
 	if (((t_obj*)e->objs->content)->type == SPH)//pointeur sur ft
 		new_length = sphere_inter(e, ray);
@@ -129,7 +129,8 @@ int			check_inter_objects(t_env *e, t_ray *ray)
 	{
 		ray->length = new_length;
 		ray->hit_obj = ((t_obj*)e->objs->content);
-		ray->hit_pos = ((t_obj*)e->objs->content)->pos;
+		ray->hit_pos = vector_addition(ray->pos,
+			vector_double_product(ray->dir, ray->length));
 		ray->hit_dir = ((t_obj*)e->objs->content)->dir;
 	}
 	return (0);

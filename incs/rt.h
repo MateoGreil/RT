@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 17:08:14 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 13:51:27 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,10 @@
 
 # define NB_THREADS 8
 
+# define TRUE 1
+# define FALSE 0
+
+# define NB_MIRRORING 0
 
 typedef struct		s_obj
 {
@@ -81,6 +85,7 @@ typedef struct		s_obj
 	t_color			color;
 	t_vec			rot;
 	t_vec			trans;
+	char			mirror;
 }					t_obj;
 
 typedef struct		s_ray
@@ -137,6 +142,7 @@ void	put_pixel_to_image(t_img *img, int x, int y, t_color color);
 char	get_type(char *str_obj);
 t_vec	get_vec(char *str_obj, int *i_str);
 t_color	get_color(char *str_obj, int *i_str);
+int		get_nbr(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
 int		check_inter_objects(t_env *e, t_ray *ray);
 
@@ -145,6 +151,7 @@ int		plan_inter(t_env *e, t_ray *ray);
 int		cylindre_inter(t_env *e, t_ray *ray);
 int		sphere_inter(t_env *e, t_ray *ray);
 void	draw(t_env *e);
+void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);

@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 13:44:29 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 11:47:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 	return (specular);
 }
 
-static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
+static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
 	t_color color;

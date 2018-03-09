@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/01 12:17:48 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/02 16:53:07 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	ray.dir = vector_int_product(ray.dir, -1);
 	ray.length = INFINITE;
 	ray.pos = e->cam.pos;
+	ray.hit_obj = NULL;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
@@ -32,6 +33,10 @@ static t_ray	create_ray(t_env *e, double i, double j)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
+	if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
+	{
+		ray_mirror(e, &ray, 0);
+	}
 	return (ray);
 }
 
