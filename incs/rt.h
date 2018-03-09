@@ -39,7 +39,6 @@
 # define KEY_F 3
 # define KEY_W 13
 # define KEY_R 15
-# define KEY_I 34
 # define KEY_SPACE 49
 # define KEY_ECHAP 53
 # define KEYPAD_RIGHT 124
@@ -115,7 +114,6 @@ typedef struct	s_env
 	void			*mlx;
 	void			*win;
 	t_img			img;
-	char 			**av;
 	int				y_start;
 	int				y_end;
 	t_cam			cam;
@@ -159,8 +157,6 @@ double noise(double x, double y, double z);
 double fade(double t);
 double lerp(double t, double a, double b);
 double grad(int hash, double x, double y, double z);
-
-int 	gtk_start(int ac, char **av, t_env *e);
 /////////////////////
 
 #endif
