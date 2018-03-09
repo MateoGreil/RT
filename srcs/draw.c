@@ -34,7 +34,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 
 	ray.dir = vector_substraction(vector_addition(
 		vector_double_product(e->cam.u, (0.7 * (i - 0.5 * WIN_WIDTH))),
-		vector_double_product(e->cam.v, (0.7 * (j - 0.5 * WIN_HEIGHT)))),
+		vector_double_product(e->cam.v, 1 - (0.7 * (j - 0.5 * WIN_HEIGHT)))),
 		vector_double_product(e->cam.w, e->cam.d));
 	ray.dir = vector_normalize(ray.dir);
 	//printf("ray - x : %f, y : %f, z : %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
