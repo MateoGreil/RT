@@ -33,9 +33,9 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	t_ray	ray;
 
 	ray.dir = vector_substraction(vector_addition(
-		vector_double_product(e->cam.u, (0.7 * (i - 0.5 * WIN_WIDTH))),
-		vector_double_product(e->cam.v, -1 * (0.7 * (j - 0.5 * WIN_HEIGHT)))),
-		vector_double_product(e->cam.w, e->cam.d));
+		vector_double_product(e->cam.right, (0.7 * (i - 0.5 * WIN_WIDTH))),
+		vector_double_product(e->cam.up, -1 * (0.7 * (j - 0.5 * WIN_HEIGHT)))),
+		vector_double_product(e->cam.forward, e->cam.d));
 	ray.dir = vector_normalize(ray.dir);
 	//printf("ray - x : %f, y : %f, z : %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
 	ray.length = MAX;
@@ -112,7 +112,6 @@ void	draw(t_env *e)
 	//e->cam.forward = vector_int_product(e->cam.dir, -1);
 	//e->cam.left = vector_cross(
 	//	vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
-	printf("cam - x : %f, y : %f, z : %f\n", e->cam.pos.x, e->cam.pos.y, e->cam.pos.z);
 	//e->cam.up = vector_cross(e->cam.forward, e->cam.left);
 	set_cam_coordinates(e);
 	multi_thread(e);

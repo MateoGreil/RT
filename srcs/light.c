@@ -45,7 +45,7 @@
 	e->objs = tmp;
 	return (0);
 }
-
+*/
 static t_color	specular_light(t_env *e, t_ray *light_ray)
 {
 	t_vec		reflection;
@@ -86,7 +86,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	color = color_double_product(color, d);
 	return (color);
 }
-*/
+
 t_color			light_calc(t_env *e, t_ray ray)
 {
 	t_color	color;
@@ -102,8 +102,8 @@ t_color			light_calc(t_env *e, t_ray ray)
 	{
 		light_ray.length = 0;
 		light_ray.hit_obj = ray.hit_obj;
-		//tmp_color = diffuse_light(e, ray, &light_ray);
-		tmp_color = ray.hit_obj->color;
+		tmp_color = diffuse_light(e, ray, &light_ray);
+		//tmp_color = ray.hit_obj->color;
 		//if (inter_shadow(e, light_ray) == 1)
 		//	tmp_color = /*color_average(tmp_color, */(t_color){0, 0, 0};
 		if (i == 0)

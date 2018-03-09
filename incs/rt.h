@@ -110,12 +110,9 @@ typedef struct		s_cam
 	double			d;
 	t_vec			pos;
 	t_vec			dir;
-	t_vec			u;
-	t_vec			v;
-	t_vec			w;
-	t_vec			forward;
-	t_vec			left;
+	t_vec			right;
 	t_vec			up;
+	t_vec			forward;
 }					t_cam;
 
 typedef struct		s_env
