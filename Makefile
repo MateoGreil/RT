@@ -30,7 +30,12 @@ SRC_NAME =	main.c \
 			tools_mlx.c \
 			light.c \
 			transformations.c \
-			get_normal.c 
+			get_normal.c \
+			perlin_materials.c \
+			perlin.c \
+			perlin_tools.c \
+			textures.c \
+			colors.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

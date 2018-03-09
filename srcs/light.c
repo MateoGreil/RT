@@ -18,7 +18,7 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	t_list *tmp;
 
 	dist_obj_to_light = length_between_vectors(light_ray.hit_pos, ((t_obj*)e->lights->content)->pos);
-	light_ray.length = MAX;
+	light_ray.length = INFINITE;
 	light_ray.pos = light_ray.hit_pos;
 	light_ray.dir = light_ray.hit_dir;
 	tmp = e->objs;
@@ -62,6 +62,7 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 		vector_substraction(((t_obj*)e->lights->content)->pos, light_ray->hit_pos)));
 	if (max_calc < 0)
 		max_calc = 0;
+	specular = color_double_product(specular_color, ((t_obj*)e->lights->content)->rad);
 	specular = color_double_product(specular, pow(max_calc, shininess));
 	return (specular);
 }
@@ -71,7 +72,9 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	double	d;
 	t_color color;
 	t_color specular;
+	//t_color tmp_color; /// test
 
+	//marble_texture(light_ray->hit_pos, &tmp_color); /// test
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
@@ -79,10 +82,15 @@ static t_color			diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
+	d = cel_shading(e, d);
 	specular = specular_light(e, light_ray);
-	color = ray.hit_obj->color;
-	color = color_average(color, specular);
+	color = color_double_product(((t_obj*)e->lights->content)->color,
+		((t_obj*)e->lights->content)->rad);
+	color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
+	//color = color_average(tmp_color, color); /// test
+	//color = damier_texture(light_ray->hit_pos); /// test
+	color = color_average(color, specular);
 	return (color);
 }
 

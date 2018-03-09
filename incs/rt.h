@@ -37,6 +37,8 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_F 3
+# define KEY_X 7
+# define KEY_C 8
 # define KEY_W 13
 # define KEY_R 15
 # define KEY_SPACE 49
@@ -50,6 +52,9 @@
 # define INVALID_FILE 1
 # define INVALID_ARG 2
 
+# define ON 1
+# define OFF 0
+
 # define FOV 2
 
 # define ERROR -1
@@ -62,7 +67,7 @@
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 10
 
-# define MAX 1000000000
+# define INFINITE 1000000000
 
 # define NB_THREADS 8
 
@@ -107,6 +112,8 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_vec			left;
 	t_vec			up;
+	int 			antialiasing;
+	int				cel_shading;
 }						t_cam;
 
 typedef struct	s_env
@@ -117,8 +124,8 @@ typedef struct	s_env
 	int				y_start;
 	int				y_end;
 	t_cam			cam;
-	t_list			*objs;
-	t_list			*lights;
+	t_list		*objs;
+	t_list		*lights;
 }							t_env;
 
 void	ft_delstr(void *content, size_t content_size);
@@ -131,18 +138,36 @@ char	get_type(char *str_obj);
 t_vec	get_vec(char *str_obj, int *i_str);
 t_color	get_color(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
-void	draw(t_env *e);
 int		check_inter_objects(t_env *e, t_ray *ray);
 
 int		cone_inter(t_env *e, t_ray *ray);
 int		plan_inter(t_env *e, t_ray *ray);
 int		cylindre_inter(t_env *e, t_ray *ray);
 int		sphere_inter(t_env *e, t_ray *ray);
-
+void	draw(t_env *e);
 int		key_hook(int keycode, t_env *e);
 int		button_exit(int keycode, t_env *e);
 t_color light_calc(t_env *e, t_ray ray);
 void	transformations(t_obj *obj);
 t_vec	get_normal(t_vec hit_point, t_ray ray);
+
+// PARTIE BENJAMIN //
+void	multi_thread(t_env *e);
+double  cel_shading(t_env *e, double d);
+t_color damier_texture(t_vec hit_point);
+void turbulence(t_vec hit_point, t_color *color, double size);
+void 	marble_texture(t_vec hit_point, t_color *color);
+void	wood_texture(t_vec hit_point, t_color *color);
+void  perlin_color(t_vec hit_point, t_color *color);
+t_vec bump_mapping(t_vec hit_point, t_vec normal);
+void  blend_color(t_env *e, t_color *color, int x, int y);
+void antialiasing(t_env *e, int x, int y, t_color *color);
+t_color	search_color(void *e, int x, int y);
+
+double noise(double x, double y, double z);
+double fade(double t);
+double lerp(double t, double a, double b);
+double grad(int hash, double x, double y, double z);
+/////////////////////
 
 #endif

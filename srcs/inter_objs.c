@@ -40,7 +40,6 @@ int	cone_inter(t_env *e, t_ray *ray)
 	new_length_2 = (-tmp.y - sqrtf(disc)) / (2 * tmp.x);
 	if (new_length > new_length_2)
 		new_length = new_length_2;
-	//printf("new_length = %f", new_length);
 	return (new_length);
 }
 
