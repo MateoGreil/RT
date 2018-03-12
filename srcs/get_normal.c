@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation)
 {
 	normal.x = normal.x + cos(ray.hit_obj->pos.x / perturbation.x)
@@ -20,7 +20,7 @@ static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation)
 						* (vector_length(normal) / perturbation.y);
 	normal.z = normal.z + cos(ray.hit_obj->pos.z / perturbation.z)
 						* (vector_length(normal) / perturbation.z);
-}
+}*/
 
 static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 {
@@ -62,6 +62,6 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	normal = vector_normalize(normal);
 	//if (ray.hit_obj->type == SPH && bump == 1) // test
 	//	normal = bump_mapping(hit_point, normal); // test
-	perturbation_normal(ray, normal, perturbation);
+	//perturbation_normal(ray, normal, perturbation); // test
 	return (normal);
 }
