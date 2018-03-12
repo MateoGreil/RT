@@ -37,6 +37,8 @@ SRC_NAME =	main.c \
 			textures.c \
 			colors.c \
 			mirror.c \
+			filter.c \
+			key_hook2.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

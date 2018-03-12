@@ -149,20 +149,7 @@ int			key_hook(int keycode, t_env *e)
 	}
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
-	else if (keycode == KEY_X)
-	{
-		if (e->cam.antialiasing == OFF)
-			e->cam.antialiasing = ON;
-		else
-			e->cam.antialiasing = OFF;
-	}
-	else if (keycode == KEY_C)
-	{
-		if (e->cam.cel_shading == OFF)
-			e->cam.cel_shading = ON;
-		else
-			e->cam.cel_shading = OFF;
-	}
+	key_filter(keycode, e);
 	draw(e);
 	return (0);
 }

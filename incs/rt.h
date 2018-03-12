@@ -37,10 +37,15 @@
 # define KEY_S 1
 # define KEY_D 2
 # define KEY_F 3
+# define KEY_Z 6
 # define KEY_X 7
 # define KEY_C 8
+# define KEY_V 9
+# define KEY_B 11
 # define KEY_W 13
 # define KEY_R 15
+# define KEY_N 45
+# define KEY_M 46
 # define KEY_SPACE 49
 # define KEY_ECHAP 53
 # define KEYPAD_RIGHT 124
@@ -120,6 +125,9 @@ typedef struct		s_cam
 	t_vec			up;
 	int 			antialiasing;
 	int				cel_shading;
+	int				sepia;
+	int				bnw;
+	int				reverse;
 	t_obj			*prev_ray_obj;
 }						t_cam;
 
@@ -173,6 +181,8 @@ t_vec	bump_mapping(t_vec hit_point, t_vec normal);
 void	blend_color(t_env *e, t_color *color, int x, int y);
 void	antialiasing(t_env *e, int x, int y, t_color *color);
 t_color	search_color(void *e, int x, int y);
+t_color filter_color(t_env *e, t_color color, t_ray ray);
+int			key_filter(int keycode, t_env *e);
 
 double	noise(double x, double y, double z);
 double	fade(double t);
