@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/05 13:51:27 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/12 11:18:29 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct		s_cam
 	t_obj			*prev_ray_obj;
 }						t_cam;
 
-typedef struct	s_env
+typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
@@ -130,9 +130,9 @@ typedef struct	s_env
 	int				y_start;
 	int				y_end;
 	t_cam			cam;
-	t_list		*objs;
-	t_list		*lights;
-}							t_env;
+	t_list			*objs;
+	t_list			*lights;
+}					t_env;
 
 void	ft_delstr(void *content, size_t content_size);
 
@@ -161,22 +161,22 @@ t_vec	get_normal(t_vec hit_point, t_ray ray);
 
 // PARTIE BENJAMIN //
 void	multi_thread(t_env *e);
-double  cel_shading(t_env *e, double d);
-t_color cel_shading_shape(t_env *e, t_ray ray, t_color color);
-t_color damier_texture(t_vec hit_point);
-void turbulence(t_vec hit_point, t_color *color, double size);
-void 	marble_texture(t_vec hit_point, t_color *color);
+double	cel_shading(t_env *e, double d);
+t_color	cel_shading_shape(t_env *e, t_ray ray, t_color color);
+t_color	damier_texture(t_vec hit_point);
+void	turbulence(t_vec hit_point, t_color *color, double size);
+void	marble_texture(t_vec hit_point, t_color *color);
 void	wood_texture(t_vec hit_point, t_color *color);
-void  perlin_color(t_vec hit_point, t_color *color);
-t_vec bump_mapping(t_vec hit_point, t_vec normal);
-void  blend_color(t_env *e, t_color *color, int x, int y);
-void antialiasing(t_env *e, int x, int y, t_color *color);
+void 	perlin_color(t_vec hit_point, t_color *color);
+t_vec	bump_mapping(t_vec hit_point, t_vec normal);
+void	blend_color(t_env *e, t_color *color, int x, int y);
+void	antialiasing(t_env *e, int x, int y, t_color *color);
 t_color	search_color(void *e, int x, int y);
 
-double noise(double x, double y, double z);
-double fade(double t);
-double lerp(double t, double a, double b);
-double grad(int hash, double x, double y, double z);
+double	noise(double x, double y, double z);
+double	fade(double t);
+double	lerp(double t, double a, double b);
+double	grad(int hash, double x, double y, double z);
 /////////////////////
 
 #endif
