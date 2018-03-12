@@ -37,6 +37,12 @@ typedef	struct	s_vec
 	double	z;
 }				t_vec;
 
+typedef	struct	s_point
+{
+	double	x;
+	double	y;
+}				t_point;
+
 typedef struct	s_list
 {
 	void			*content;
