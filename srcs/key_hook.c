@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/02 16:52:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/12 17:07:14 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,6 +147,8 @@ int			key_hook(int keycode, t_env *e)
 	{
 		translate_camY(&e->cam, keycode);
 	}*/
+	else if (keycode == KEY_SPACE)
+		screenshot(e);
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
 	key_filter(keycode, e);

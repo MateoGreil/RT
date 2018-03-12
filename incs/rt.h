@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/12 11:18:29 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/12 17:06:13 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -176,6 +176,7 @@ int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
 void				transformations(t_obj *obj);
 t_vec				get_normal(t_vec hit_point, t_ray ray);
+void				screenshot(t_env *e);
 
 // PARTIE BENJAMIN //
 void				multi_thread(t_env *e);
