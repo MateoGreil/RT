@@ -56,18 +56,46 @@ void    antialiasing(t_env *e, t_vec compteur, t_color *color)
   color[7] = search_color(e, compteur.x + 1, compteur.y - 1, compteur.z);
 }
 
-void    blend_color(t_env *e, t_color *color, int x, int y)
+void    sampling_color(t_env *e, t_vec compteur)
+{
+  t_color color[e->cam.num_samples];
+  int i;
+
+  i = 0;
+  compteur.z = 0;
+  while (compteur.z < e->cam.num_samples)
+  {
+    color[i] = search_color(e, compteur.x, compteur.y, compteur.z);
+    i++;
+    compteur.z++;
+  }
+  blend_color(e, color, compteur, e->cam.num_samples);
+}
+
+void    blend_color(t_env *e, t_color *color, t_vec compteur, int n)
 {
 	t_color final_color;
+  double  r;
+  double  g;
+  double  b;
+  int     i;
 
-	final_color.r = (color[0].r + color[1].r +
-    color[2].r + color[3].r + color[4].r +
-		color[5].r + color[6].r + color[7].r) / 8;
-	final_color.g = (color[0].g + color[1].g +
-    color[2].g + color[3].g + color[4].g +
-		color[5].g + color[6].g + color[7].g) / 8;
-	final_color.b = (color[0].b + color[1].b +
-    color[2].b + color[3].b + color[4].b +
-		color[5].b + color[6].b + color[7].b) / 8;
-	put_pixel_to_image(&e->img, x, y, final_color);
+  i = 0;
+  r = 0;
+  g = 0;
+  b = 0;
+  while (i < n)
+  {
+    r += color[i].r;
+    g += color[i].g;
+    b += color[i].b;
+    i++;
+  }
+	r /= i;
+	g /= i;
+	b /= i;
+  final_color.r = r;
+  final_color.g = g;
+  final_color.b = b;
+	put_pixel_to_image(&e->img, compteur.x, compteur.y, final_color);
 }

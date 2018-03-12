@@ -55,10 +55,12 @@ static void ray_loop_inter(t_env *e, t_vec compteur)
 	t_color color[8];
 	t_color final_color;
 
-	if (e->cam.antialiasing == ON)
+	if (e->cam.num_samples > 1)
+		sampling_color(e, compteur);
+	else if (e->cam.antialiasing == ON)
 	{
 		antialiasing(e, compteur, color);
-		blend_color(e, color, compteur.x, compteur.y);
+		blend_color(e, color, compteur, 8);
 	}
 	else
 	{
@@ -78,12 +80,7 @@ static void	*ray_loop(void *e)
 		compteur.x = 0;
 		while (compteur.x < WIN_WIDTH)
 		{
-			compteur.z = 0;
-			while (compteur.z < ((t_env*)e)->cam.num_samples)
-			{
-				ray_loop_inter(((t_env*)e), compteur);
-				compteur.z++;
-			}
+			ray_loop_inter(((t_env*)e), compteur);
 			compteur.x++;
 		}
 		compteur.y++;
