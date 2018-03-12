@@ -11,64 +11,48 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-/*
-static void get_perlin_color(double n, double *v, t_color *color)
+
+static t_color get_perlin_color(double n, double *v)
 {
   t_color c0;
   t_color c1;
   t_color c2;
+  t_color color;
 
-  c0 = (t_color){0, 0, 255};
-  c1 = (t_color){255, 0, 0};
-  c2 = (t_color){0, 0, 255};
+  c0 = (t_color){1, 2, 255};
+  c1 = (t_color){255, 2, 1};
+  c2 = (t_color){1, 2, 255};
   if (n <= v[0])
-    color = &c0;
+    color = c0;
   else if (n < v[1])
   {
-    color->r = c0.r * (1 - n) + c1.r * n;
-    color->g = c0.g * (1 - n) + c1.g * n;
-    color->b = c0.b * (1 - n) + c1.b * n;
+    color.r = c0.r * ((n - v[0]) / (v[1] - v[0])) + c1.r * ((v[1] - n) / (v[1] - v[0]));
+    color.g = c0.g * ((n - v[0]) / (v[1] - v[0])) + c1.g * ((v[1] - n) / (v[1] - v[0]));
+    color.b = c0.b * ((n - v[0]) / (v[1] - v[0])) + c1.b * ((v[1] - n) / (v[1] - v[0]));
   }
   if (n < v[2])
   {
-    color->r = c1.r * (1 - n) + c2.r * n;
-    color->g = c1.g * (1 - n) + c2.g * n;
-    color->b = c1.b * (1 - n) + c2.b * n;
+    color.r = c0.r * ((n - v[1]) / (v[2] - v[1])) + c1.r * ((v[2] - n) / (v[2] - v[1]));
+    color.g = c0.g * ((n - v[1]) / (v[2] - v[1])) + c1.g * ((v[2] - n) / (v[2] - v[1]));
+    color.b = c0.b * ((n - v[1]) / (v[2] - v[1])) + c1.b * ((v[2] - n) / (v[2] - v[1]));
   }
   else
-    color = &c2;
+    color = c2;
+  return (color);
 }
 
-void    perlin_color(t_vec hit_point, t_color *color)
+t_color    perlin_color(t_vec hit_point)
 {
   double n;
   double v[3];
+  t_color f_color;
 
   v[0] = 0.0;
   v[1] = 0.25;
   v[2] = 0.5;
   n = noise(hit_point.x, hit_point.y, hit_point.z);
-  get_perlin_color(n, v, color);
-}*/
-
-void turbulence(t_vec hit_point, t_color *color, double size)
-{
-  double	value;
-	double	tmp;
-	int			i;
-
-	value = 0.0;
-	tmp = size;
-  while (size >= 1)
-  {
-    value += noise(hit_point.x / size, hit_point.y / size, hit_point.z / size)
-			* size;
-    size /= 2.0;
-  }
-	i = (int)(128.0 * value / tmp);
-	color->r = color->r + i * 25 + 255 * (1 - i);
-	color->g = color->g + i * 25 + 255 * (1 - i);
-	color->b = color->b + i * 25 + 255 * (1 - i);
+  f_color = get_perlin_color(n, v);
+  return (f_color);
 }
 
 void		wood_texture(t_vec hit_point, t_color *color)

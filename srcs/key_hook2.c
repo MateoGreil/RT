@@ -28,6 +28,13 @@ static int key_filter_next(int keycode, t_env *e)
 		else
 			e->cam.reverse = OFF;
 	}
+  if (keycode == KEY_N)
+  {
+    if (e->cam.fog == OFF)
+      e->cam.fog = ON;
+    else
+      e->cam.fog = OFF;
+  }
   return (0);
 }
 

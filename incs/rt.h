@@ -128,6 +128,7 @@ typedef struct		s_cam
 	int				sepia;
 	int				bnw;
 	int				reverse;
+	int				fog;
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			right;
@@ -179,6 +180,7 @@ t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
 
 // PARTIE BENJAMIN //
+<<<<<<< HEAD
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
@@ -199,6 +201,26 @@ double				noise(double x, double y, double z);
 double				fade(double t);
 double				lerp(double t, double a, double b);
 double				grad(int hash, double x, double y, double z);
+=======
+void	multi_thread(t_env *e);
+double	cel_shading(t_env *e, double d);
+t_color	cel_shading_shape(t_env *e, t_ray ray, t_color color);
+t_color	damier_texture(t_vec hit_point);
+void	marble_texture(t_vec hit_point, t_color *color);
+void	wood_texture(t_vec hit_point, t_color *color);
+t_color 	perlin_color(t_vec hit_point);
+t_vec	bump_mapping(t_vec hit_point, t_vec normal);
+void	blend_color(t_env *e, t_color *color, int x, int y);
+void	antialiasing(t_env *e, int x, int y, t_color *color);
+t_color	search_color(void *e, int x, int y);
+t_color filter_color(t_env *e, t_color color, t_ray ray);
+int			key_filter(int keycode, t_env *e);
+
+double	noise(double x, double y, double z);
+double	fade(double t);
+double	lerp(double t, double a, double b);
+double	grad(int hash, double x, double y, double z);
+>>>>>>> bmuselet
 /////////////////////
 
 #endif

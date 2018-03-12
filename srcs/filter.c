@@ -12,6 +12,23 @@
 
 #include "rt.h"
 
+static t_color fog(t_color color, t_ray ray)
+{
+  double d_fog;
+  t_color fog_color;
+  t_color f_color;
+
+  d_fog = 50;
+  fog_color = (t_color){255, 255, 255};
+  f_color.r = ft_clamp(fog_color.r * (1 - exp(-(ray.length / d_fog))) +
+    color.r * exp(-((ray.length / d_fog))), 0, 255);
+  f_color.g = ft_clamp(fog_color.g * (1 - exp(-(ray.length / d_fog))) +
+    color.g * exp(-((ray.length / d_fog))), 0, 255);
+  f_color.b = ft_clamp(fog_color.b * (1 - exp(-(ray.length / d_fog))) +
+    color.b * exp(-((ray.length / d_fog))), 0, 255);
+  return (f_color);
+}
+
 static t_color filter_reverse(t_color color)
 {
   unsigned char col[3];
@@ -70,5 +87,7 @@ t_color filter_color(t_env *e, t_color color, t_ray ray)
     color = filter_reverse(color);
   if (e->cam.cel_shading == ON)
     color = cel_shading_shape(e, ray, color);
+  if (e->cam.fog == ON)
+    color = fog(color, ray);
   return (color);
 }
