@@ -39,6 +39,7 @@ SRC_NAME =	main.c \
 			mirror.c \
 			filter.c \
 			key_hook2.c \
+			cam.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

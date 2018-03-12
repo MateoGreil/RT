@@ -12,17 +12,13 @@
 
 #include "rt.h"
 
-static t_ray	create_ray(t_env *e, double i, double j)
+static t_ray	create_ray(t_env *e, double x, double y, double s)
 {
 	t_list *tmp;
 	t_ray	ray;
 
-	ray.dir = (t_vec){i * e->cam.left.x + j * e->cam.up.x +
-		e->cam.forward.x, i * e->cam.left.y + j * e->cam.up.y +
-		e->cam.forward.y, i * e->cam.left.z + j * e->cam.up.z +
-		e->cam.forward.z};
+	ray.dir = ray_dir_cal(e, x, y, s);
 	ray.dir = vector_normalize(ray.dir);
-	ray.dir = vector_int_product(ray.dir, -1);
 	ray.length = INFINITE;
 	ray.pos = e->cam.pos;
 	ray.hit_obj = NULL;
@@ -38,56 +34,59 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	return (ray);
 }
 
-t_color	search_color(void *e, int x, int y)
+t_color	search_color(void *e, int x, int y, int s)
 {
 	t_ray	ray;
-	double	i;
-	double	j;
 	t_color	color;
 
-	i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
-	* WIN_WIDTH / WIN_HEIGHT;
-	j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
-	ray = create_ray(((t_env*)e), i, j);
-	if (ray.length < INFINITE)
+	ray = create_ray(((t_env*)e), x, y, s);
+	if (ray.length < INFINITE && ray.hit_obj && !ray.hit_obj->mirror)
+	{
 		color = light_calc(e, ray);
+		//color = color_division(color, ((t_env*)e)->cam.num_samples);
+	}
 	else
 		color = (t_color){0, 0, 0};
 	return (color);
 }
 
-static void ray_loop_inter(t_env *e, int x, int y)
+static void ray_loop_inter(t_env *e, t_vec compteur)
 {
 	t_color color[8];
 	t_color final_color;
 
 	if (e->cam.antialiasing == ON)
 	{
-		antialiasing(e, x, y, color);
-		blend_color(e, color, x, y);
+		antialiasing(e, compteur, color);
+		blend_color(e, color, compteur.x, compteur.y);
 	}
 	else
 	{
-		final_color = search_color(e, x, y);
-		put_pixel_to_image(&e->img, x, y, final_color);
+		final_color = search_color(e, compteur.x, compteur.y, compteur.z);
+		put_pixel_to_image(&e->img, compteur.x, compteur.y, final_color);
 	}
 }
 
 static void	*ray_loop(void *e)
 {
-	int		y;
-	int		x;
+	t_vec	compteur;
 
-	y = ((t_env*)e)->y_start;
-	while (y < ((t_env*)e)->y_end)
+	((t_env*)e)->cam.num_samples = 1;
+	compteur.y = ((t_env*)e)->y_start;
+	while (compteur.y < ((t_env*)e)->y_end)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
+		compteur.x = 0;
+		while (compteur.x < WIN_WIDTH)
 		{
-			ray_loop_inter(((t_env*)e), x, y);
-			x++;
+			compteur.z = 0;
+			while (compteur.z < ((t_env*)e)->cam.num_samples)
+			{
+				ray_loop_inter(((t_env*)e), compteur);
+				compteur.z++;
+			}
+			compteur.x++;
 		}
-		y++;
+		compteur.y++;
 	}
 	return (NULL);
 }

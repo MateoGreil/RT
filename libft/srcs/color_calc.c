@@ -42,13 +42,13 @@ t_color	color_addition(t_color v1, t_color v2)
 	return (v);
 }
 
-t_color	color_mix(t_color v1, t_color v2)
+t_color	color_division(t_color v1, double i)
 {
 	t_color v;
 
-	v.r = (v1.r + v2.r) / 2;
-	v.g = (v1.g + v2.r) / 2;
-	v.b = (v1.b + v2.b) / 2;
+	v.r = v1.r / i;
+	v.g = v1.g / i;
+	v.b = v1.b / i;
 	return (v);
 }
 

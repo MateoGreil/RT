@@ -24,10 +24,7 @@ static void init_bool(t_env *e)
 void	draw(t_env *e)
 {
 	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-	e->cam.forward = vector_int_product(e->cam.dir, -1);
-	e->cam.left = vector_cross(
-		vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
-	e->cam.up = vector_cross(e->cam.forward, e->cam.left);
+	set_cam_coordinates(e);
 	multi_thread(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 }

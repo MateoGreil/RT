@@ -82,7 +82,7 @@ static void	rotate_Y_cam(t_cam *cam, int keycode)
 	}
 	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n\n", cam->dir.x, cam->dir.y, cam->dir.z);
 }
-
+/*
 static void	translate_camXZ(t_cam *cam, int keycode)
 {
 	t_vec	dir;
@@ -133,20 +133,20 @@ static void	translate_camY(t_cam *cam, int keycode)
 		cam->pos.z -= cam->up.z * MOVE_SPEED;
 	}
 }
-
+*/
 int			key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_D || keycode == KEY_A)
 		rotate_Y_cam(&e->cam, keycode);
 	/*if (keycode == KEY_W || keycode == KEY_S)
-		rotate_XZ_cam(&e->cam, keycode);*/
+		rotate_XZ_cam(&e->cam, keycode);
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
 		translate_camXZ(&e->cam, keycode);
 	else if (keycode == KEY_R || keycode == KEY_F)
 	{
 		translate_camY(&e->cam, keycode);
-	}
+	}*/
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
 	key_filter(keycode, e);

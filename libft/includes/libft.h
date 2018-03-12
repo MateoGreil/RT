@@ -37,6 +37,12 @@ typedef	struct	s_vec
 	double	z;
 }				t_vec;
 
+typedef	struct	s_point
+{
+	double	x;
+	double	y;
+}				t_point;
+
 typedef struct	s_list
 {
 	void			*content;
@@ -165,7 +171,7 @@ double			length_between_vectors(t_vec v1, t_vec v2);
 t_color			color_double_product(t_color v1, double i);
 t_color			color_product(t_color v1, t_color v2);
 t_color			color_addition(t_color v1, t_color v2);
-t_color			color_mix(t_color v1, t_color v2);
+t_color			color_division(t_color v1, double i);
 t_color			color_average(t_color v1, t_color v2);
 
 #endif

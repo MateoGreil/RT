@@ -44,16 +44,16 @@ double  cel_shading(t_env *e, double d)
   return (d);
 }
 
-void    antialiasing(t_env *e, int x, int y, t_color *color)
+void    antialiasing(t_env *e, t_vec compteur, t_color *color)
 {
-  color[0] = search_color(e, x + 1, y);
-  color[1] = search_color(e, x + 1, y + 1);
-  color[2] = search_color(e, x, y);
-  color[3] = search_color(e, x, y + 1);
-  color[4] = search_color(e, x - 1, y);
-  color[5] = search_color(e, x - 1, y - 1);
-  color[6] = search_color(e, x - 1, y + 1);
-  color[7] = search_color(e, x + 1, y - 1);
+  color[0] = search_color(e, compteur.x + 1, compteur.y, compteur.z);
+  color[1] = search_color(e, compteur.x + 1, compteur.y + 1, compteur.z);
+  color[2] = search_color(e, compteur.x, compteur.y, compteur.z);
+  color[3] = search_color(e, compteur.x, compteur.y + 1, compteur.z);
+  color[4] = search_color(e, compteur.x - 1, compteur.y, compteur.z);
+  color[5] = search_color(e, compteur.x - 1, compteur.y - 1, compteur.z);
+  color[6] = search_color(e, compteur.x - 1, compteur.y + 1, compteur.z);
+  color[7] = search_color(e, compteur.x + 1, compteur.y - 1, compteur.z);
 }
 
 void    blend_color(t_env *e, t_color *color, int x, int y)

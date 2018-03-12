@@ -98,7 +98,7 @@ typedef struct		s_ray
 	t_vec 			pos;
 	t_vec			dir;
 	double			length;
-	double		disc;
+	double			disc;
 	t_vec			normal;
 	t_obj			*hit_obj;
 	t_vec			hit_pos;
@@ -114,22 +114,28 @@ typedef struct		s_img
 	int				bpp;
 	int				size_line;
 	int				endian;
-}						t_img;
+}					t_img;
 
 typedef struct		s_cam
 {
-	t_vec			pos;
-	t_vec			dir;
-	t_vec			forward;
-	t_vec			left;
-	t_vec			up;
+	double			dist;
+	double			focal;
+	double			lens_rad;
+	double			zoom;
+	int				num_samples;
 	int 			antialiasing;
 	int				cel_shading;
 	int				sepia;
 	int				bnw;
 	int				reverse;
+	t_vec			pos;
+	t_vec			dir;
+	t_vec			right;
+	t_vec			up;
+	t_vec			forward;
 	t_obj			*prev_ray_obj;
-}						t_cam;
+	t_point			samp;
+}					t_cam;
 
 typedef struct		s_env
 {
@@ -143,51 +149,54 @@ typedef struct		s_env
 	t_list			*lights;
 }					t_env;
 
-void	ft_delstr(void *content, size_t content_size);
+void				ft_delstr(void *content, size_t content_size);
 
-t_img	new_image(void *mlx, int img_size_x, int img_size_y);
-void	del_image(void *mlx, t_img *img);
-void	put_pixel_to_image(t_img *img, int x, int y, t_color color);
+t_img				new_image(void *mlx, int img_size_x, int img_size_y);
+void				del_image(void *mlx, t_img *img);
+void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
-char	get_type(char *str_obj);
-t_vec	get_vec(char *str_obj, int *i_str);
-t_color	get_color(char *str_obj, int *i_str);
-int		get_nbr(char *str_obj, int *i_str);
-void	get_objs_and_cam(t_env *e, char *path_file);
-int		check_inter_objects(t_env *e, t_ray *ray);
+void				set_cam_coordinates(t_env *e);
+t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
 
-double	cone_inter(t_env *e, t_ray *ray);
-double	plan_inter(t_env *e, t_ray *ray);
-double	cylindre_inter(t_env *e, t_ray *ray);
-double	sphere_inter(t_env *e, t_ray *ray);
-void	draw(t_env *e);
-void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
-int		key_hook(int keycode, t_env *e);
-int		button_exit(int keycode, t_env *e);
-t_color light_calc(t_env *e, t_ray ray);
-void	transformations(t_obj *obj);
-t_vec	get_normal(t_vec hit_point, t_ray ray);
+char				get_type(char *str_obj);
+t_vec				get_vec(char *str_obj, int *i_str);
+t_color				get_color(char *str_obj, int *i_str);
+int					get_nbr(char *str_obj, int *i_str);
+void				get_objs_and_cam(t_env *e, char *path_file);
+int					check_inter_objects(t_env *e, t_ray *ray);
+
+double				cone_inter(t_env *e, t_ray *ray);
+double				plan_inter(t_env *e, t_ray *ray);
+double				cylindre_inter(t_env *e, t_ray *ray);
+double				sphere_inter(t_env *e, t_ray *ray);
+void				draw(t_env *e);
+void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
+int					key_hook(int keycode, t_env *e);
+int					button_exit(int keycode, t_env *e);
+t_color 			light_calc(t_env *e, t_ray ray);
+void				transformations(t_obj *obj);
+t_vec				get_normal(t_vec hit_point, t_ray ray);
 
 // PARTIE BENJAMIN //
-void	multi_thread(t_env *e);
-double	cel_shading(t_env *e, double d);
-t_color	cel_shading_shape(t_env *e, t_ray ray, t_color color);
-t_color	damier_texture(t_vec hit_point);
-void	turbulence(t_vec hit_point, t_color *color, double size);
-void	marble_texture(t_vec hit_point, t_color *color);
-void	wood_texture(t_vec hit_point, t_color *color);
-void 	perlin_color(t_vec hit_point, t_color *color);
-t_vec	bump_mapping(t_vec hit_point, t_vec normal);
-void	blend_color(t_env *e, t_color *color, int x, int y);
-void	antialiasing(t_env *e, int x, int y, t_color *color);
-t_color	search_color(void *e, int x, int y);
-t_color filter_color(t_env *e, t_color color, t_ray ray);
-int			key_filter(int keycode, t_env *e);
+void				multi_thread(t_env *e);
+double				cel_shading(t_env *e, double d);
+t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
+t_color				damier_texture(t_vec hit_point);
+void				turbulence(t_vec hit_point, t_color *color, double size);
+void				marble_texture(t_vec hit_point, t_color *color);
+void				wood_texture(t_vec hit_point, t_color *color);
+void 				perlin_color(t_vec hit_point, t_color *color);
+t_vec				bump_mapping(t_vec hit_point, t_vec normal);
+void				blend_color(t_env *e, t_color *color, int x, int y);
+void				antialiasing(t_env *e, t_vec compteur, t_color *color);
+t_color				search_color(void *e, int x, int y, int s);
+t_color 			filter_color(t_env *e, t_color color, t_ray ray);
+int					key_filter(int keycode, t_env *e);
 
-double	noise(double x, double y, double z);
-double	fade(double t);
-double	lerp(double t, double a, double b);
-double	grad(int hash, double x, double y, double z);
+double				noise(double x, double y, double z);
+double				fade(double t);
+double				lerp(double t, double a, double b);
+double				grad(int hash, double x, double y, double z);
 /////////////////////
 
 #endif
