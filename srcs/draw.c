@@ -32,12 +32,8 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	t_list *tmp;
 	t_ray	ray;
 
-	ray.dir = vector_substraction(vector_addition(
-		vector_double_product(e->cam.right, (0.7 * (i - 0.5 * WIN_WIDTH))),
-		vector_double_product(e->cam.up, -1 * (0.7 * (j - 0.5 * WIN_HEIGHT)))),
-		vector_double_product(e->cam.forward, e->cam.d));
+	ray.dir = ray_dir_cal(e, i, j);
 	ray.dir = vector_normalize(ray.dir);
-	//printf("ray - x : %f, y : %f, z : %f\n", ray.dir.x, ray.dir.y, ray.dir.z);
 	ray.length = MAX;
 	ray.pos = e->cam.pos;
 	ray.hit_obj = NULL;
@@ -59,20 +55,19 @@ static t_ray	create_ray(t_env *e, double i, double j)
 static void	*ray_loop(void *e)
 {
 	t_ray	ray;
-	int		y;
-	int		x;
+	t_vec	compteur;
 
-	y = ((t_env*)e)->y_start;
-	while (y < ((t_env*)e)->y_end)
+	compteur.y = ((t_env*)e)->y_start;
+	while (compteur.y < ((t_env*)e)->y_end)
 	{
-		x = 0;
-		while (x < WIN_WIDTH)
+		compteur.x = 0;
+		while (compteur.x < WIN_WIDTH)
 		{
-			ray = create_ray(((t_env*)e), x, y);
-			search_color(((t_env*)e), x, y, ray);
-			x++;
+			ray = create_ray(((t_env*)e), compteur.x, compteur.y);
+			search_color(((t_env*)e), compteur.x, compteur.y, ray);
+			compteur.x++;
 		}
-		y++;
+		compteur.y++;
 	}
 	return (NULL);
 }
