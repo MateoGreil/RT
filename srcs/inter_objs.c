@@ -6,13 +6,13 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 16:27:03 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/12 15:03:08 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	cone_inter(t_env *e, t_ray *ray)
+double	cone_inter(t_env *e, t_ray *ray)
 {
 	double	disc;
 	double	new_length;
@@ -42,7 +42,7 @@ int	cone_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-int	plan_inter(t_env *e, t_ray *ray)
+double	plan_inter(t_env *e, t_ray *ray)
 {
 	double	new_length;
 
@@ -55,7 +55,7 @@ int	plan_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-int	cylindre_inter(t_env *e, t_ray *ray)
+double	cylindre_inter(t_env *e, t_ray *ray)
 {
 	t_vec	dist;
 	t_vec	tmp;
@@ -83,7 +83,7 @@ int	cylindre_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-int	sphere_inter(t_env *e, t_ray *ray)
+double	sphere_inter(t_env *e, t_ray *ray)
 {
 	t_vec		origin_to_sphere;
 	double		projection;

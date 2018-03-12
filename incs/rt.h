@@ -156,10 +156,10 @@ int		get_nbr(char *str_obj, int *i_str);
 void	get_objs_and_cam(t_env *e, char *path_file);
 int		check_inter_objects(t_env *e, t_ray *ray);
 
-int		cone_inter(t_env *e, t_ray *ray);
-int		plan_inter(t_env *e, t_ray *ray);
-int		cylindre_inter(t_env *e, t_ray *ray);
-int		sphere_inter(t_env *e, t_ray *ray);
+double	cone_inter(t_env *e, t_ray *ray);
+double	plan_inter(t_env *e, t_ray *ray);
+double	cylindre_inter(t_env *e, t_ray *ray);
+double	sphere_inter(t_env *e, t_ray *ray);
 void	draw(t_env *e);
 void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int		key_hook(int keycode, t_env *e);
