@@ -32,14 +32,20 @@ t_vec	ray_dir_cal(t_env *e, double i, double j)
 void	set_cam_coordinates(t_env *e)
 {
 	t_vec	tmp;
-	//POUR EVITER DE SEGFAULT SI ON REGARDE EXACTEMENT EN BAS
-	//FAUT FAIRE LA MEME POUR SI ON REGARDE EN HAUT
+	//POUR EVITER DE SEGFAULT SI ON REGARDE EXACTEMENT EN BAS OU EN HAUT
 	if (e->cam.pos.x == e->cam.dir.x && e->cam.pos.z == e->cam.dir.z &&
 		e->cam.dir.y < e->cam.pos.y)
 	{
 		e->cam.right = (t_vec){0, 0, 1};
 		e->cam.up = (t_vec){1, 0, 0};
 		e->cam.forward = (t_vec){0, 1, 0};
+	}
+	else if (e->cam.pos.x == e->cam.dir.x && e->cam.pos.z == e->cam.dir.z &&
+		e->cam.dir.y > e->cam.pos.y)
+	{
+		e->cam.right = (t_vec){1, 0, 0};
+		e->cam.up = (t_vec){0, 0, 1};
+		e->cam.forward = (t_vec){0, -1, 0};
 	}
 	else
 	{
