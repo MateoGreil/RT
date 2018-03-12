@@ -27,12 +27,12 @@ static void search_color(t_env *e, int x, int y, t_ray ray)
 	put_pixel_to_image(&e->img, x, y, color);
 }
 
-static t_ray	create_ray(t_env *e, double i, double j)
+static t_ray	create_ray(t_env *e, double i, double j, double s)
 {
 	t_list *tmp;
 	t_ray	ray;
 
-	ray.dir = ray_dir_cal(e, i, j);
+	ray.dir = ray_dir_cal(e, i, j, s);
 	ray.dir = vector_normalize(ray.dir);
 	ray.length = MAX;
 	ray.pos = e->cam.pos;
@@ -57,14 +57,20 @@ static void	*ray_loop(void *e)
 	t_ray	ray;
 	t_vec	compteur;
 
+	((t_env*)e)->cam.num_samples = 1;
 	compteur.y = ((t_env*)e)->y_start;
 	while (compteur.y < ((t_env*)e)->y_end)
 	{
 		compteur.x = 0;
 		while (compteur.x < WIN_WIDTH)
 		{
-			ray = create_ray(((t_env*)e), compteur.x, compteur.y);
-			search_color(((t_env*)e), compteur.x, compteur.y, ray);
+			compteur.z = 0;
+			while (compteur.z < ((t_env*)e)->cam.num_samples)
+			{
+				ray = create_ray(((t_env*)e), compteur.x, compteur.y, compteur.z);
+				search_color(((t_env*)e), compteur.x, compteur.y, ray);
+				compteur.z++;
+			}
 			compteur.x++;
 		}
 		compteur.y++;
@@ -104,10 +110,6 @@ void	multi_thread(t_env *e)
 void	draw(t_env *e)
 {
 	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-	//e->cam.forward = vector_int_product(e->cam.dir, -1);
-	//e->cam.left = vector_cross(
-	//	vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
-	//e->cam.up = vector_cross(e->cam.forward, e->cam.left);
 	set_cam_coordinates(e);
 	multi_thread(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);

@@ -12,14 +12,31 @@
 
 #include "rt.h"
 
-t_vec	ray_dir_cal(t_env *e, double i, double j)
+double	hammersley(int j)
+{
+	double	x;
+	double	i;
+
+	x = 0;
+	i = 0.5;
+	while (j)
+	{
+		x += i * (double) (j % 2);
+		j /= 2;
+		i *= 0.5;
+	}
+	return (x);
+}
+
+t_vec	ray_dir_cal(t_env *e, double i, double j, int s)
 {
 	t_vec dir;
 	t_point pixel;
 
 	e->cam.focal = 5;
-	pixel.x = 0.7 * (i - 0.5 * WIN_WIDTH);
-	pixel.y = -1 * (0.7 * (j - 0.5 * WIN_HEIGHT));
+	e->cam.samp = (t_point){(double) s / (double) e->cam.num_samples, hammersley(s)};
+	pixel.x = 0.7 * (i - 0.5 * WIN_WIDTH + e->cam.samp.x);
+	pixel.y = -1 * (0.7 * (j - 0.5 * WIN_HEIGHT + e->cam.samp.y));
 	//if (e->cam.focal > 0)
 
 	dir = vector_substraction(vector_addition(

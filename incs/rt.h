@@ -105,28 +105,19 @@ typedef struct		s_img
 	int				endian;
 }					t_img;
 
-typedef struct		s_samp
-{
-	int				num_samps;
-	int				num_sets;
-	int				samp_id;
-	t_point			samp;
-	t_vec			shuffle_id;
-	unsigned long	count;
-	int				jump;
-}					t_samp;
-
 typedef struct		s_cam
 {
 	double			dist;
 	double			focal;
 	double			lens_rad;
 	double			zoom;
+	int				num_samples;
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			right;
 	t_vec			up;
 	t_vec			forward;
+	t_point			samp;
 }					t_cam;
 
 typedef struct		s_env
@@ -139,7 +130,6 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_list			*samps;
 }					t_env;
 
 void	ft_delstr(void *content, size_t content_size);
@@ -149,7 +139,7 @@ void	del_image(void *mlx, t_img *img);
 void	put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
 void	set_cam_coordinates(t_env *e);
-t_vec	ray_dir_cal(t_env *e, double i, double j);
+t_vec	ray_dir_cal(t_env *e, double i, double j, int s);
 
 char	get_type(char *str_obj);
 t_vec	get_vec(char *str_obj, int *i_str);
