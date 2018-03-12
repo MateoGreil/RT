@@ -19,6 +19,7 @@ static void init_bool(t_env *e)
 	e->cam.sepia = OFF;
 	e->cam.bnw = OFF;
 	e->cam.reverse = OFF;
+	e->cam.fog = OFF;
 }
 
 void	draw(t_env *e)
