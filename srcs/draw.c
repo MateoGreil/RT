@@ -12,21 +12,6 @@
 
 #include "rt.h"
 
-static void search_color(t_env *e, int x, int y, t_ray ray)
-{
-	t_color	color;
-
-	if (ray.length < MAX && ray.hit_obj && !ray.hit_obj->mirror)
-	{
-		//printf("obj.r = %d, obj.g = %d, obj.b = %d\n", ray.hit_obj->color.r, ray.hit_obj->color.g, ray.hit_obj->color.b);
-		color = light_calc(e, ray);
-	}
-	else
-		color = (t_color){0, 0, 0};
-	//printf("color.r = %d, color.g = %d, color.b = %d\n", color.r, color.g, color.b);
-	put_pixel_to_image(&e->img, x, y, color);
-}
-
 static t_ray	create_ray(t_env *e, double i, double j)
 {
 	t_list *tmp;
@@ -38,29 +23,58 @@ static t_ray	create_ray(t_env *e, double i, double j)
 		e->cam.forward.z};
 	ray.dir = vector_normalize(ray.dir);
 	ray.dir = vector_int_product(ray.dir, -1);
-	ray.length = MAX;
+	ray.length = INFINITE;
 	ray.pos = e->cam.pos;
 	ray.hit_obj = NULL;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
 		check_inter_objects(e, &ray);
-		//printf("color.r = %d, color.g = %d, color.b = %d\n", ray.hit_color.r, ray.hit_color.g, ray.hit_color.b);
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
 	if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
-	{
 		ray_mirror(e, &ray, 0);
-	}
 	return (ray);
 }
 
-static void	*ray_loop(void *e)
+t_color	search_color(void *e, int x, int y)
 {
 	t_ray	ray;
 	double	i;
 	double	j;
+	t_color	color;
+
+	i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
+	* WIN_WIDTH / WIN_HEIGHT;
+	j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
+	ray = create_ray(((t_env*)e), i, j);
+	if (ray.length < INFINITE)
+		color = light_calc(e, ray);
+	else
+		color = (t_color){0, 0, 0};
+	return (color);
+}
+
+static void ray_loop_inter(t_env *e, int x, int y)
+{
+	t_color color[8];
+	t_color final_color;
+
+	if (e->cam.antialiasing == ON)
+	{
+		antialiasing(e, x, y, color);
+		blend_color(e, color, x, y);
+	}
+	else
+	{
+		final_color = search_color(e, x, y);
+		put_pixel_to_image(&e->img, x, y, final_color);
+	}
+}
+
+static void	*ray_loop(void *e)
+{
 	int		y;
 	int		x;
 
@@ -70,11 +84,7 @@ static void	*ray_loop(void *e)
 		x = 0;
 		while (x < WIN_WIDTH)
 		{
-			i = (2 * ((x + 0.5) / (double)WIN_WIDTH) - 1)
-			* WIN_WIDTH / WIN_HEIGHT;
-			j = (1 - 2 * ((y + 0.5) / (double)WIN_HEIGHT));
-			ray = create_ray(((t_env*)e), i, j);
-			search_color(((t_env*)e), x, y, ray);
+			ray_loop_inter(((t_env*)e), x, y);
 			x++;
 		}
 		y++;
@@ -109,15 +119,4 @@ void	multi_thread(t_env *e)
 		pthread_join(thread[i_thread], NULL);
 		i_thread++;
 	}
-}
-
-void	draw(t_env *e)
-{
-	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-	e->cam.forward = vector_int_product(e->cam.dir, -1);
-	e->cam.left = vector_cross(
-		vector_normalize((t_vec){0.0, 1.0, 0.0}), e->cam.dir);
-	e->cam.up = vector_cross(e->cam.forward, e->cam.left);
-	multi_thread(e);
-	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 }

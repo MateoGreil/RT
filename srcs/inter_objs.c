@@ -6,20 +6,19 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 16:27:03 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/12 15:03:08 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int	cone_inter(t_env *e, t_ray *ray)
+double	cone_inter(t_env *e, t_ray *ray)
 {
 	double	disc;
 	double	new_length;
 	double	new_length_2;
 	t_vec	tmp;
 	t_vec	dist;
-
 
 	dist = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	tmp.x = vector_dot_product(ray->dir, ray->dir)
@@ -40,11 +39,10 @@ int	cone_inter(t_env *e, t_ray *ray)
 	new_length_2 = (-tmp.y - sqrtf(disc)) / (2 * tmp.x);
 	if (new_length > new_length_2)
 		new_length = new_length_2;
-	//printf("new_length = %f", new_length);
 	return (new_length);
 }
 
-int	plan_inter(t_env *e, t_ray *ray)
+double	plan_inter(t_env *e, t_ray *ray)
 {
 	double	new_length;
 
@@ -57,7 +55,7 @@ int	plan_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-int	cylindre_inter(t_env *e, t_ray *ray)
+double	cylindre_inter(t_env *e, t_ray *ray)
 {
 	t_vec	dist;
 	t_vec	tmp;
@@ -85,7 +83,7 @@ int	cylindre_inter(t_env *e, t_ray *ray)
 	return (new_length);
 }
 
-int	sphere_inter(t_env *e, t_ray *ray)
+double	sphere_inter(t_env *e, t_ray *ray)
 {
 	t_vec		origin_to_sphere;
 	double		projection;
@@ -106,9 +104,7 @@ int	sphere_inter(t_env *e, t_ray *ray)
 		vector_dot_product(distance_vector, distance_vector);
 	if (distance_sq > (((t_obj*)e->objs->content)->rad *
 		((t_obj*)e->objs->content)->rad))
-	{
 		return (ray->length);
-	}
 	new_length = projection - sqrtf((((t_obj*)e->objs->content)->rad *
 		((t_obj*)e->objs->content)->rad) - distance_sq);
 	return (new_length);

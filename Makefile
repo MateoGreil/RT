@@ -31,7 +31,14 @@ SRC_NAME =	main.c \
 			light.c \
 			transformations.c \
 			get_normal.c \
-			mirror.c
+			perlin_materials.c \
+			perlin.c \
+			perlin_tools.c \
+			textures.c \
+			colors.c \
+			mirror.c \
+			filter.c \
+			key_hook2.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

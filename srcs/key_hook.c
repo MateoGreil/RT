@@ -149,8 +149,7 @@ int			key_hook(int keycode, t_env *e)
 	}
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
-	/*printf("pos.x = %lf, pos.y = %lf, pos.z = %lf\n", e->cam.pos.x, e->cam.pos.y, e->cam.pos.z);
-	printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", e->cam.dir.x, e->cam.dir.y, e->cam.dir.z);*/
+	key_filter(keycode, e);
 	draw(e);
 	return (0);
 }

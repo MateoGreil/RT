@@ -18,7 +18,6 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	t_vec tmp2;
 	t_vec normal;
 
-	//vector_normalize(ray.hit_dir);
 	tmp = vector_substraction(hit_point, ray.hit_obj->pos);
 	tmp2 = vector_double_product(ray.hit_dir,
 	vector_dot_product(ray.hit_dir, tmp));
@@ -26,7 +25,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
-			powf(cosf(ray.hit_obj->rad * (M_PI * 180.0f)), 2));
+			powf(cos(ray.hit_obj->rad * (M_PI * 180.0f)), 2));
 	return (normal);
 }
 
