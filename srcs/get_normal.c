@@ -18,7 +18,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	t_vec tmp2;
 	t_vec normal;
 
-	tmp = vector_substraction(hit_point, ray.hit_pos);
+	tmp = vector_substraction(hit_point, ray.hit_obj->pos);
 	tmp2 = vector_double_product(ray.hit_dir,
 	vector_dot_product(ray.hit_dir, tmp));
 	normal = (t_vec){2 * (tmp.x - tmp2.x),

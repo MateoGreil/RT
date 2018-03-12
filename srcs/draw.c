@@ -34,9 +34,7 @@ static t_ray	create_ray(t_env *e, double i, double j)
 	}
 	e->objs = tmp;
 	if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
-	{
 		ray_mirror(e, &ray, 0);
-	}
 	return (ray);
 }
 
