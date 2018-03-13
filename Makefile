@@ -58,6 +58,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFT_PATH)
 	@make -C $(LIBMLX_PATH)
+	@mkdir screenshots
 	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) -o $(NAME) $(OBJS)
 	@echo "$(NAME) compiled ✓"
 
