@@ -6,7 +6,7 @@
 #    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/12 17:05:37 by nghaddar         ###   ########.fr        #
+#    Updated: 2018/03/13 15:24:46 by nghaddar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,7 +58,6 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFT_PATH)
 	@make -C $(LIBMLX_PATH)
-	@mkdir screenshots
 	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) -o $(NAME) $(OBJS)
 	@echo "$(NAME) compiled ✓"
 
