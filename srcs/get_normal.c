@@ -14,12 +14,14 @@
 
 static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation)
 {
+	//printf("1 %f ", normal.x);
 	normal.x = normal.x + cos(ray.hit_obj->pos.x / perturbation.x)
 						* (vector_length(normal) / perturbation.x);
 	normal.y = normal.y + cos(ray.hit_obj->pos.y / perturbation.y)
 						* (vector_length(normal) / perturbation.y);
 	normal.z = normal.z + cos(ray.hit_obj->pos.z / perturbation.z)
 						* (vector_length(normal) / perturbation.z);
+	//printf("2 : %f\n", normal.x);
 }
 
 static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
@@ -45,7 +47,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	t_vec perturbation; //test
 	//int bump; // A remplacer par un obj->bump lié au parsing a terme; // test
 
-	perturbation = (t_vec){50, 80, 47};
+	perturbation = (t_vec){1, 2, 3};
 	//bump = 1; // test
 	if (ray.hit_obj->type == PLA)
 	{
@@ -63,5 +65,6 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	//if (ray.hit_obj->type == SPH && bump == 1) // test
 	//	normal = bump_mapping(hit_point, normal); // test
 	perturbation_normal(ray, normal, perturbation);
+	normal = vector_normalize(normal);
 	return (normal);
 }
