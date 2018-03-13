@@ -11,14 +11,14 @@
 /* ************************************************************************** */
 
 #define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "../stb/stb_image_write.h"
+#include "stb_image_write.h"
 #include "rt.h"
 
 static void		put_pixel_to_screenshot(char *data, int x, int y, t_color color)
 {
 	int	pos;
 
-	pos = (y * (WIN_WIDTH * 3)) + (x * 3); 
+	pos = (y * (WIN_WIDTH * 3)) + (x * 3);
 	if (x < WIN_WIDTH && x >= 0 && y >= 0 && y < WIN_HEIGHT)
 	{
 		data[pos] = color.r;
@@ -62,7 +62,7 @@ void			screenshot(t_env *e)
 	int			x;
 	int			y;
 	t_color 	color;
-	
+
 	data = (char *)malloc(sizeof(char) * ((WIN_WIDTH * 3) * (WIN_HEIGHT * 3)));
 	name = get_screenshot_name();
 	y = -1;

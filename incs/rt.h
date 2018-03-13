@@ -128,6 +128,7 @@ typedef struct		s_cam
 	int				sepia;
 	int				bnw;
 	int				reverse;
+	int				fog;
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			right;
@@ -186,7 +187,7 @@ t_color				damier_texture(t_vec hit_point);
 void				turbulence(t_vec hit_point, t_color *color, double size);
 void				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
-void 				perlin_color(t_vec hit_point, t_color *color);
+t_color 				perlin_color(t_vec hit_point);
 t_vec				bump_mapping(t_vec hit_point, t_vec normal);
 void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 void				antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
