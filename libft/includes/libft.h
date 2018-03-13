@@ -163,6 +163,7 @@ t_vec			vector_substraction(t_vec v1, t_vec v2);
 t_vec			vector_int_product(t_vec v1, int i);
 t_vec			vector_assign_values(double x, double y, double z);
 t_vec			vector_addition(t_vec v1, t_vec v2);
+t_vec			vector_double_division(t_vec v1, double i);
 t_vec			vector_double_product(t_vec v1, double i);
 double			vector_dot_product(t_vec v1, t_vec v2);
 double			vector_length(t_vec v1);

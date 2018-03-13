@@ -67,12 +67,15 @@
 # define PLA 1
 # define CYL 2
 # define CON 3
-# define LIG 4
+# define PAR 4
+# define HYP 5
+# define LIG 6
 
 # define ROT_SPEED 0.1
 # define MOVE_SPEED 10
 
 # define INFINITE 1000000000
+# define ZERO 0.0000001
 
 # define NB_THREADS 1
 
@@ -180,11 +183,13 @@ t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
 
 // PARTIE BENJAMIN //
+double		equation_second(t_vec a, double *b);
+double		parab_inter(t_env *e, t_ray *ray);
+double		hyper_inter(t_env *e, t_ray *ray);
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 t_color				damier_texture(t_vec hit_point);
-void				turbulence(t_vec hit_point, t_color *color, double size);
 void				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
 t_color 				perlin_color(t_vec hit_point);
