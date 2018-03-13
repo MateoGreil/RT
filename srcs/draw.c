@@ -52,16 +52,10 @@ t_color	search_color(void *e, int x, int y, int s)
 
 static void ray_loop_inter(t_env *e, t_vec compteur)
 {
-	t_color color[8];
 	t_color final_color;
 
-	if (e->cam.num_samples > 1)
+	if (e->cam.num_samples >= 1)
 		sampling_color(e, compteur);
-	else if (e->cam.antialiasing == ON)
-	{
-		antialiasing(e, compteur, color);
-		blend_color(e, color, compteur, 8);
-	}
 	else
 	{
 		final_color = search_color(e, compteur.x, compteur.y, compteur.z);
@@ -73,7 +67,7 @@ static void	*ray_loop(void *e)
 {
 	t_vec	compteur;
 
-	((t_env*)e)->cam.num_samples = 1;
+	((t_env*)e)->cam.num_samples = 1; // Initialisation du nombre de samples.
 	compteur.y = ((t_env*)e)->y_start;
 	while (compteur.y < ((t_env*)e)->y_end)
 	{

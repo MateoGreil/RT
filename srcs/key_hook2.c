@@ -35,10 +35,10 @@ int key_filter(int keycode, t_env *e)
 {
 	if (keycode == KEY_X)
 	{
-		if (e->cam.antialiasing == OFF)
-			e->cam.antialiasing = ON;
+		if (e->cam.antialiasing == 0)
+			e->cam.antialiasing = 8;
 		else
-			e->cam.antialiasing = OFF;
+			e->cam.antialiasing = 0;
 	}
 	else if (keycode == KEY_C)
 	{

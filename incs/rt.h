@@ -189,7 +189,7 @@ void				wood_texture(t_vec hit_point, t_color *color);
 void 				perlin_color(t_vec hit_point, t_color *color);
 t_vec				bump_mapping(t_vec hit_point, t_vec normal);
 void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
-void				antialiasing(t_env *e, t_vec compteur, t_color *color);
+void				antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
 void    			sampling_color(t_env *e, t_vec compteur);
 t_color				search_color(void *e, int x, int y, int s);
 t_color 			filter_color(t_env *e, t_color color, t_ray ray);

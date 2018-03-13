@@ -44,21 +44,21 @@ double  cel_shading(t_env *e, double d)
   return (d);
 }
 
-void    antialiasing(t_env *e, t_vec compteur, t_color *color)
+void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i)
 {
-  color[0] = search_color(e, compteur.x + 1, compteur.y, compteur.z);
-  color[1] = search_color(e, compteur.x + 1, compteur.y + 1, compteur.z);
-  color[2] = search_color(e, compteur.x, compteur.y, compteur.z);
-  color[3] = search_color(e, compteur.x, compteur.y + 1, compteur.z);
-  color[4] = search_color(e, compteur.x - 1, compteur.y, compteur.z);
-  color[5] = search_color(e, compteur.x - 1, compteur.y - 1, compteur.z);
-  color[6] = search_color(e, compteur.x - 1, compteur.y + 1, compteur.z);
-  color[7] = search_color(e, compteur.x + 1, compteur.y - 1, compteur.z);
+  color[i + 0] = search_color(e, compteur.x + 1, compteur.y, compteur.z);
+  color[i + 1] = search_color(e, compteur.x + 1, compteur.y + 1, compteur.z);
+  color[i + 2] = search_color(e, compteur.x, compteur.y, compteur.z);
+  color[i + 3] = search_color(e, compteur.x, compteur.y + 1, compteur.z);
+  color[i + 4] = search_color(e, compteur.x - 1, compteur.y, compteur.z);
+  color[i + 5] = search_color(e, compteur.x - 1, compteur.y - 1, compteur.z);
+  color[i + 6] = search_color(e, compteur.x - 1, compteur.y + 1, compteur.z);
+  color[i + 7] = search_color(e, compteur.x + 1, compteur.y - 1, compteur.z);
 }
 
 void    sampling_color(t_env *e, t_vec compteur)
 {
-  t_color color[e->cam.num_samples];
+  t_color color[e->cam.num_samples + e->cam.antialiasing];
   int i;
 
   i = 0;
@@ -69,7 +69,9 @@ void    sampling_color(t_env *e, t_vec compteur)
     i++;
     compteur.z++;
   }
-  blend_color(e, color, compteur, e->cam.num_samples);
+  if (e->cam.antialiasing > 0)
+    antialiasing(e, compteur, color, i);
+  blend_color(e, color, compteur, e->cam.num_samples + e->cam.antialiasing);
 }
 
 void    blend_color(t_env *e, t_color *color, t_vec compteur, int n)
