@@ -12,6 +12,15 @@
 
 #include "rt.h"
 
+int		button_exit(int keycode, t_env *e)
+{
+	e = NULL;
+	//ft_lstdel(&e->lights, &ft_delstr);
+	//ft_lstdel(&e->objs, &ft_delstr);
+	keycode = 0;
+	exit(0);
+}
+
 static void	rotate_XZ_cam(t_cam *cam, int keycode)
 {
 	if (keycode == KEY_W)
@@ -26,11 +35,10 @@ static void	rotate_XZ_cam(t_cam *cam, int keycode)
 	}
 }
 
-static void	rotate_Y_cam(t_cam *cam, int keycode)
+static void	rot_trans_Y_cam(t_cam *cam, int keycode)
 {
 	t_vec	tmp;
 
-	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", cam->dir.x, cam->dir.y, cam->dir.z);
 	tmp = cam->dir;
 	if (keycode == KEY_A)
 	{
@@ -41,6 +49,16 @@ static void	rotate_Y_cam(t_cam *cam, int keycode)
 	{
 		cam->forward = ft_rotation_y(cam->forward, -ROT_SPEED);
 		cam->right = ft_rotation_y(cam->right, -ROT_SPEED);
+	}
+	if (keycode == KEY_F)
+	{
+		cam->dir.y += MOVE_SPEED;
+		cam->pos.y += MOVE_SPEED;
+	}
+	else if (keycode == KEY_R)
+	{
+		cam->dir.y -= MOVE_SPEED;
+		cam->pos.y -= MOVE_SPEED;
 	}
 }
 
@@ -71,47 +89,24 @@ static void	translate_camXZ(t_cam *cam, int keycode)
 	}
 }
 
-static void	translate_camY(t_cam *cam, int keycode)
-{
-	if (keycode == KEY_F)
-	{
-		cam->dir.y += MOVE_SPEED;
-		cam->pos.y += MOVE_SPEED;
-	}
-	else
-	{
-		cam->dir.y -= MOVE_SPEED;
-		cam->pos.y -= MOVE_SPEED;
-	}
-}
-
 int			key_hook(int keycode, t_env *e)
 {
-	if (keycode == KEY_D || keycode == KEY_A)
-		rotate_Y_cam(&e->cam, keycode);
-	if (keycode == KEY_W || keycode == KEY_S)
+	if (e->cam.selection == ON)
+		change_object(e, keycode);
+	else if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_R ||
+		keycode == KEY_F)
+		rot_trans_Y_cam(&e->cam, keycode);
+	else if (keycode == KEY_W || keycode == KEY_S)
 		rotate_XZ_cam(&e->cam, keycode);
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
 		translate_camXZ(&e->cam, keycode);
-	else if (keycode == KEY_R || keycode == KEY_F)
-	{
-		translate_camY(&e->cam, keycode);
-	}
 	else if (keycode == KEY_SPACE)
 		screenshot(e);
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
-	key_filter(keycode, e);
+	if (e->cam.selection == OFF)
+		change_filter(keycode, e);
 	draw(e, 0);
 	return (0);
-}
-
-int		button_exit(int keycode, t_env *e)
-{
-	e = NULL;
-	//ft_lstdel(&e->lights, &ft_delstr);
-	//ft_lstdel(&e->objs, &ft_delstr);
-	keycode = 0;
-	exit(0);
 }

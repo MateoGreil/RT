@@ -20,6 +20,7 @@ static void init_bool(t_env *e)
 	e->cam.bnw = OFF;
 	e->cam.reverse = OFF;
 	e->cam.fog = OFF;
+	e->cam.selection = OFF;
 }
 
 void	draw(t_env *e, int loading)
@@ -53,6 +54,7 @@ int	main(int ac, char **av)
 		set_cam_coordinates(&e);
 		draw(&e, 1);
 		mlx_hook(e.win, KEY_PRESS, KEY_PRESS_MASK, &key_hook, &e);
+		mlx_hook(e.win, MOUSE_PRESS, MOUSE_PRESS_MASK, &mouse_hook, &e);
 		mlx_hook(e.win, EXIT_PRESS, EXIT_PRESS_MASK, &button_exit, &e);
 		mlx_loop(e.mlx);
 	}

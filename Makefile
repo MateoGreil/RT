@@ -40,10 +40,12 @@ SRC_NAME =	main.c \
 			colors.c \
 			mirror.c \
 			filter.c \
+			cel_shading.c \
 			cam.c \
 			screenshot.c \
 			equation_second.c \
 			interface.c \
+			mouse_hook.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
