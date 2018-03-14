@@ -31,25 +31,3 @@ void init_loading(t_env *e)
   mlx_put_image_to_window(e->mlx, e->wait_win, e->wait_img.img, 0, 0);
   mlx_string_put(e->mlx, e->wait_win, 100, 40, 0x000000, "RT is loading ...");
 }
-/*
-void update_loading(t_env *e, int i)
-{
-  int x;
-  int y;
-
-  printf("d\n");
-  x = 60;
-  while (x < (60 + (i * (280 / NB_THREADS))))
-  {
-    y = 40;
-    while (y < 60)
-    {
-      mlx_pixel_put(e->mlx, e->wait_win, x, y, 0x000000);
-      y++;
-    }
-    x++;
-  }
-  mlx_put_image_to_window(e->mlx, e->wait_win, e->wait_img.img, 0, 0);
-  mlx_string_put(e->mlx, e->wait_win, 100, 15, 0x000000, "RT is loading ...");
-}
-*/
