@@ -57,9 +57,6 @@ void	cam_to_world_matrix(t_env *e)
 	e->cam.cam_to_world[2][0] = e->cam.forward.x;
 	e->cam.cam_to_world[2][1] = e->cam.forward.y;
 	e->cam.cam_to_world[2][2] = e->cam.forward.z;
-	e->cam.cam_to_world[3][0] = e->cam.pos.x;
-	e->cam.cam_to_world[3][1] = e->cam.pos.y;
-	e->cam.cam_to_world[3][2] = e->cam.pos.z;
 }
 
 void	set_cam_coordinates(t_env *e)

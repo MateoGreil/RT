@@ -136,7 +136,7 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_obj			*prev_ray_obj;
 	t_point			samp;
-	double			cam_to_world[4][4];
+	double			cam_to_world[3][3];
 }					t_cam;
 
 typedef struct		s_env

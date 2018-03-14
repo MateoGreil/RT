@@ -25,7 +25,6 @@ static void init_bool(t_env *e)
 void	draw(t_env *e)
 {
 	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
-	set_cam_coordinates(e);
 	cam_to_world_matrix(e);
 	multi_thread(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
@@ -41,6 +40,7 @@ int	main(int ac, char **av)
 		e.mlx = mlx_init();
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 0.2");
 		init_bool(&e);
+		set_cam_coordinates(&e);
 		draw(&e);
 		mlx_hook(e.win, KEY_PRESS, KEY_PRESS_MASK, &key_hook, &e);
 		mlx_hook(e.win, EXIT_PRESS, EXIT_PRESS_MASK, &button_exit, &e);
