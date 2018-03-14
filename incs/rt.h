@@ -71,7 +71,7 @@
 # define HYP 5
 # define LIG 6
 
-# define ROT_SPEED 0.1
+# define ROT_SPEED 10
 # define MOVE_SPEED 10
 
 # define INFINITE 1000000000
@@ -139,6 +139,7 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_obj			*prev_ray_obj;
 	t_point			samp;
+	double			cam_to_world[3][3];
 }					t_cam;
 
 typedef struct		s_env
@@ -160,6 +161,7 @@ void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
 void				set_cam_coordinates(t_env *e);
+void				cam_to_world_matrix(t_env *e);
 t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
 
 char				get_type(char *str_obj);
@@ -179,6 +181,9 @@ int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
 void				transformations(t_obj *obj);
+t_vec				ft_rotation_x(t_vec ex_pos, double angle);
+t_vec				ft_rotation_y(t_vec ex_pos, double angle);
+t_vec				ft_rotation_z(t_vec ex_pos, double angle);
 t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
 

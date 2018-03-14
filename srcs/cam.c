@@ -46,6 +46,19 @@ t_vec	ray_dir_cal(t_env *e, double x, double y, int s)
 	return (dir);
 }
 
+void	cam_to_world_matrix(t_env *e)
+{
+	e->cam.cam_to_world[0][0] = e->cam.right.x;
+	e->cam.cam_to_world[0][1] = e->cam.right.y;
+	e->cam.cam_to_world[0][2] = e->cam.right.z;
+	e->cam.cam_to_world[1][0] = e->cam.up.x;
+	e->cam.cam_to_world[1][1] = e->cam.up.y;
+	e->cam.cam_to_world[1][2] = e->cam.up.z;
+	e->cam.cam_to_world[2][0] = e->cam.forward.x;
+	e->cam.cam_to_world[2][1] = e->cam.forward.y;
+	e->cam.cam_to_world[2][2] = e->cam.forward.z;
+}
+
 void	set_cam_coordinates(t_env *e)
 {
 	t_vec	tmp;
