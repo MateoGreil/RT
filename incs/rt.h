@@ -84,6 +84,9 @@
 
 # define NB_MIRRORING 0
 
+# define BLACK (t_color){0, 0, 0}
+# define WHITE (t_color){255, 255, 255}
+
 typedef struct		s_obj
 {
 	char			type;
@@ -145,7 +148,9 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
+	void			*wait_win;
 	t_img			img;
+	t_img			wait_img;
 	int				y_start;
 	int				y_end;
 	t_cam			cam;
@@ -186,11 +191,16 @@ void				screenshot(t_env *e);
 double		equation_second(t_vec a, double *b);
 double		parab_inter(t_env *e, t_ray *ray);
 double		hyper_inter(t_env *e, t_ray *ray);
+
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
+
+void 				init_loading(t_env *e);
+void 				update_loading(t_env *e);
+
 t_color				damier_texture(t_vec hit_point);
-void				marble_texture(t_vec hit_point, t_color *color);
+void 				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
 t_color 				perlin_color(t_vec hit_point);
 t_vec				bump_mapping(t_vec hit_point, t_vec normal);

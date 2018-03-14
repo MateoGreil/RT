@@ -81,10 +81,16 @@ static void	*ray_loop(void *e)
 		while (compteur.x < WIN_WIDTH)
 		{
 			ray_loop_inter(((t_env*)e), compteur);
+			if (((t_env*)e)->y_end % 10 == compteur.y)
+			{
+				printf("f\n");
+				update_loading((t_env*)e);
+			}
 			compteur.x++;
 		}
 		compteur.y++;
 	}
+	sleep(10);
 	return (NULL);
 }
 

@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation)
+static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation) // A ENLEVER SI CA MARCHE PAS A TERME
 {
 	//printf("1 %f ", normal.x);
 	normal.x = normal.x + cos(ray.hit_obj->pos.x / perturbation.x)
@@ -37,7 +37,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
-			powf(cos(ray.hit_obj->rad * (M_PI * 180.0f)), 2));
+			pow(sinf(ft_deg2rad(ray.hit_obj->rad)), 2));
 	return (normal);
 }
 
@@ -47,7 +47,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	t_vec perturbation; //test
 	//int bump; // A remplacer par un obj->bump lié au parsing a terme; // test
 
-	perturbation = (t_vec){1, 2, 3};
+	perturbation = (t_vec){1, 1, 1};
 	//bump = 1; // test
 	if (ray.hit_obj->type == PLA)
 	{

@@ -43,6 +43,7 @@ SRC_NAME =	main.c \
 			cam.c \
 			screenshot.c \
 			equation_second.c \
+			interface.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
