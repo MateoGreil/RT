@@ -21,8 +21,8 @@
 # include <pthread.h>
 # include <stdio.h> //<- A SUPPRIMER
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 
 # define KEY_PRESS 2
 # define MOUSE_PRESS 4

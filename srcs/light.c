@@ -123,5 +123,6 @@ t_color			light_calc(t_env *e, t_ray ray)
 	}
 	e->lights = tmp;
 	color = filter_color(e, color, ray);
+	//color = ((t_obj*)e->lights->content)->color;
 	return (color);
 }

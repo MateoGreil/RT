@@ -21,7 +21,9 @@ double	parab_inter(t_env *e, t_ray *ray)
 	t_vec	temp;
 
 	temp = vector_substraction(e->cam.pos, ((t_obj*)e->objs->content)->pos);
-	r = (double)((t_obj*)e->objs->content)->rad * (double)M_PI / 180.0;
+	//r = (double)((t_obj*)e->objs->content)->rad * (double)M_PI / 180.0;
+	r = pow(sin(ft_deg2rad(((t_obj*)e->objs->content)->rad)) /
+		cos(ft_deg2rad(((t_obj*)e->objs->content)->rad)), 2);
 	a.x = pow(ray->dir.x, 2) + pow(ray->dir.y, 2);
 	a.y = 2 * ((temp.x * ray->dir.x) + (temp.y * ray->dir.y)) - (r * ray->dir.z);;
 	a.z = pow(temp.x, 2) + pow(temp.y, 2) - (r * temp.z);
