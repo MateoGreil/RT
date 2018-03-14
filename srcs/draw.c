@@ -43,7 +43,6 @@ t_color	search_color(void *e, int x, int y, int s)
 	if (ray.length < INFINITE && ray.hit_obj && !ray.hit_obj->mirror)
 	{
 		color = light_calc(e, ray);
-		//color = color_division(color, ((t_env*)e)->cam.num_samples);
 	}
 	else
 		color = (t_color){0, 0, 0};
@@ -73,7 +72,7 @@ static void	*ray_loop(void *e)
 {
 	t_vec	compteur;
 
-	((t_env*)e)->cam.num_samples = 1;
+	((t_env*)e)->cam.num_samples = 16;
 	compteur.y = ((t_env*)e)->y_start;
 	while (compteur.y < ((t_env*)e)->y_end)
 	{
@@ -81,16 +80,12 @@ static void	*ray_loop(void *e)
 		while (compteur.x < WIN_WIDTH)
 		{
 			ray_loop_inter(((t_env*)e), compteur);
-			if (((t_env*)e)->y_end % 10 == compteur.y)
-			{
-				printf("f\n");
-				update_loading((t_env*)e);
-			}
 			compteur.x++;
 		}
+	//if (((t_env*)e)->i_thread == NB_THREADS - 1 && (int)compteur.y % 100 == 0)
+	//	update_loading((t_env*)e, (int)compteur.y / 100);
 		compteur.y++;
 	}
-	sleep(10);
 	return (NULL);
 }
 

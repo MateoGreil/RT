@@ -71,13 +71,13 @@
 # define HYP 5
 # define LIG 6
 
-# define ROT_SPEED 0.1
+# define ROT_SPEED 10
 # define MOVE_SPEED 10
 
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 1
+# define NB_THREADS 4
 
 # define TRUE 1
 # define FALSE 0
@@ -142,6 +142,7 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_obj			*prev_ray_obj;
 	t_point			samp;
+	double			cam_to_world[3][3];
 }					t_cam;
 
 typedef struct		s_env
@@ -165,6 +166,7 @@ void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
 void				set_cam_coordinates(t_env *e);
+void				cam_to_world_matrix(t_env *e);
 t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
 
 char				get_type(char *str_obj);
@@ -178,12 +180,15 @@ double				cone_inter(t_env *e, t_ray *ray);
 double				plan_inter(t_env *e, t_ray *ray);
 double				cylindre_inter(t_env *e, t_ray *ray);
 double				sphere_inter(t_env *e, t_ray *ray);
-void				draw(t_env *e);
+void				draw(t_env *e, int loading);
 void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
 void				transformations(t_obj *obj);
+t_vec				ft_rotation_x(t_vec ex_pos, double angle);
+t_vec				ft_rotation_y(t_vec ex_pos, double angle);
+t_vec				ft_rotation_z(t_vec ex_pos, double angle);
 t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
 
@@ -197,7 +202,7 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 
 void 				init_loading(t_env *e);
-void 				update_loading(t_env *e);
+void 				update_loading(t_env *e, int i);
 
 t_color				damier_texture(t_vec hit_point);
 void 				marble_texture(t_vec hit_point, t_color *color);

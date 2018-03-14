@@ -12,57 +12,19 @@
 
 #include "rt.h"
 
-/*static void	rotate_XZ_cam(t_cam *cam, int keycode)
+static void	rotate_XZ_cam(t_cam *cam, int keycode)
 {
-	t_vec	start;
-	t_vec	tmp;
-	int		nb_rot;
-
-	nb_rot = 0;
-	tmp = cam->dir;
-	start = cam->dir;
-	while (cam->dir.x != 0)
-	{
-		if (cam->dir.x < 0)
-		{
-			cam->dir.x = cos(ROT_SPEED) * tmp.x + sin(ROT_SPEED) * tmp.z;
-			cam->dir.z = -sin(ROT_SPEED) * tmp.x + cos(ROT_SPEED) * tmp.z;
-		}
-		else
-		{
-			cam->dir.x = cos(-ROT_SPEED) * tmp.x + sin(-ROT_SPEED) * tmp.z;
-			cam->dir.z = -sin(-ROT_SPEED) * tmp.x + cos(-ROT_SPEED) * tmp.z;
-		}
-		tmp = cam->dir;
-		nb_rot++;
-	}
 	if (keycode == KEY_W)
 	{
-		cam->dir.y = cos(ROT_SPEED) * tmp.y - sin(ROT_SPEED) * tmp.z;
-		cam->dir.z = sin(ROT_SPEED) * tmp.y + cos(ROT_SPEED) * tmp.z;
+		cam->forward = ft_rotation_x(cam->forward, -ROT_SPEED);
+		cam->up = ft_rotation_x(cam->up, -ROT_SPEED);
 	}
 	else
 	{
-		cam->dir.y = cos(-ROT_SPEED) * tmp.y - sin(-ROT_SPEED) * tmp.z;
-		cam->dir.z = sin(-ROT_SPEED) * tmp.y + cos(-ROT_SPEED) * tmp.z;
+		cam->forward = ft_rotation_x(cam->forward, ROT_SPEED);
+		cam->up = ft_rotation_x(cam->up, ROT_SPEED);
 	}
-	tmp = cam->dir;
-	while (nb_rot)
-	{
-		if (start.x > 0)
-		{
-			cam->dir.x = cos(ROT_SPEED) * tmp.x + sin(ROT_SPEED) * tmp.z;
-			cam->dir.z = -sin(ROT_SPEED) * tmp.x + cos(ROT_SPEED) * tmp.z;
-		}
-		else
-		{
-			cam->dir.x = cos(-ROT_SPEED) * tmp.x + sin(-ROT_SPEED) * tmp.z;
-			cam->dir.z = -sin(-ROT_SPEED) * tmp.x + cos(-ROT_SPEED) * tmp.z;
-		}
-		tmp = cam->dir;
-		nb_rot--;
-	}
-}*/
+}
 
 static void	rotate_Y_cam(t_cam *cam, int keycode)
 {
@@ -72,17 +34,16 @@ static void	rotate_Y_cam(t_cam *cam, int keycode)
 	tmp = cam->dir;
 	if (keycode == KEY_A)
 	{
-		cam->dir.x = cos(ROT_SPEED) * tmp.x + sin(ROT_SPEED) * tmp.z;
-		cam->dir.z = -sin(ROT_SPEED) * tmp.x + cos(ROT_SPEED) * tmp.z;
+		cam->forward = ft_rotation_y(cam->forward, ROT_SPEED);
+		cam->right = ft_rotation_y(cam->right, ROT_SPEED);
 	}
 	else if (keycode == KEY_D)
 	{
-		cam->dir.x = cos(-ROT_SPEED) * tmp.x + sin(-ROT_SPEED) * tmp.z;
-		cam->dir.z = -sin(-ROT_SPEED) * tmp.x + cos(-ROT_SPEED) * tmp.z;
+		cam->forward = ft_rotation_y(cam->forward, -ROT_SPEED);
+		cam->right = ft_rotation_y(cam->right, -ROT_SPEED);
 	}
-	//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n\n", cam->dir.x, cam->dir.y, cam->dir.z);
 }
-/*
+
 static void	translate_camXZ(t_cam *cam, int keycode)
 {
 	t_vec	dir;
@@ -90,31 +51,23 @@ static void	translate_camXZ(t_cam *cam, int keycode)
 	dir = vector_normalize(cam->dir);
 	if (keycode == KEYPAD_UP)
 	{
-		//printf("pos.x = %lf, pos.y = %lf, pos.z = %lf\n", cam->pos.x, cam->pos.y, cam->pos.z);
-		//printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n", dir.x, dir.y, dir.z);
-		//printf("MOVE_SPEED = %d\n", MOVE_SPEED);
-		cam->pos.x += dir.x * MOVE_SPEED;
-		cam->pos.y += dir.y * MOVE_SPEED;
-		cam->pos.z += dir.z * MOVE_SPEED;
-		//printf("pos.x = %lf, pos.y = %lf, pos.z = %lf\n", cam->pos.x, cam->pos.y, cam->pos.z);
+		cam->dir.z -= MOVE_SPEED;
+		cam->pos.z -= MOVE_SPEED;
 	}
 	else if (keycode == KEYPAD_DOWN)
 	{
-		cam->pos.x -= dir.x * MOVE_SPEED;
-		cam->pos.y -= dir.y * MOVE_SPEED;
-		cam->pos.z -= dir.z * MOVE_SPEED;
+		cam->dir.z += MOVE_SPEED;
+		cam->pos.z += MOVE_SPEED;
 	}
 	else if (keycode == KEYPAD_RIGHT)
 	{
-		cam->pos.x -= cam->left.x * MOVE_SPEED;
-		cam->pos.y -= cam->left.y * MOVE_SPEED;
-		cam->pos.z -= cam->left.z * MOVE_SPEED;
+		cam->dir.x += MOVE_SPEED;
+		cam->pos.x += MOVE_SPEED;
 	}
 	else
 	{
-		cam->pos.x += cam->left.x * MOVE_SPEED;
-		cam->pos.y += cam->left.y * MOVE_SPEED;
-		cam->pos.z += cam->left.z * MOVE_SPEED;
+		cam->dir.x -= MOVE_SPEED;
+		cam->pos.x -= MOVE_SPEED;
 	}
 }
 
@@ -122,23 +75,21 @@ static void	translate_camY(t_cam *cam, int keycode)
 {
 	if (keycode == KEY_F)
 	{
-		cam->pos.x += cam->up.x * MOVE_SPEED;
-		cam->pos.y += cam->up.y * MOVE_SPEED;
-		cam->pos.z += cam->up.z * MOVE_SPEED;
+		cam->dir.y += MOVE_SPEED;
+		cam->pos.y += MOVE_SPEED;
 	}
 	else
 	{
-		cam->pos.x -= cam->up.x * MOVE_SPEED;
-		cam->pos.y -= cam->up.y * MOVE_SPEED;
-		cam->pos.z -= cam->up.z * MOVE_SPEED;
+		cam->dir.y -= MOVE_SPEED;
+		cam->pos.y -= MOVE_SPEED;
 	}
 }
-*/
+
 int			key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_D || keycode == KEY_A)
 		rotate_Y_cam(&e->cam, keycode);
-	/*if (keycode == KEY_W || keycode == KEY_S)
+	if (keycode == KEY_W || keycode == KEY_S)
 		rotate_XZ_cam(&e->cam, keycode);
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
@@ -146,13 +97,13 @@ int			key_hook(int keycode, t_env *e)
 	else if (keycode == KEY_R || keycode == KEY_F)
 	{
 		translate_camY(&e->cam, keycode);
-	}*/
+	}
 	else if (keycode == KEY_SPACE)
 		screenshot(e);
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
 	key_filter(keycode, e);
-	draw(e);
+	draw(e, 0);
 	return (0);
 }
 

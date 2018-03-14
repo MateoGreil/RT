@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static t_vec	ft_rotation_z(t_vec ex_pos, double angle)
+t_vec	ft_rotation_z(t_vec ex_pos, double angle)
 {
 	double new_x;
 	double new_y;
@@ -27,7 +27,7 @@ static t_vec	ft_rotation_z(t_vec ex_pos, double angle)
 	return (new_pos);
 }
 
-static t_vec	ft_rotation_y(t_vec ex_pos, double angle)
+t_vec	ft_rotation_y(t_vec ex_pos, double angle)
 {
 	double new_x;
 	double new_z;
@@ -42,7 +42,7 @@ static t_vec	ft_rotation_y(t_vec ex_pos, double angle)
 	return (new_pos);
 }
 
-static t_vec	ft_rotation_x(t_vec ex_pos, double angle)
+t_vec	ft_rotation_x(t_vec ex_pos, double angle)
 {
 	double 	new_y;
 	double 	new_z;
