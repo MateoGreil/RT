@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_normal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:11:09 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 17:10:11 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/13 15:23:14 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	tmp2 = vector_double_product(ray.hit_dir,
 	vector_dot_product(ray.hit_dir, tmp));
 	normal = (t_vec){2 * (tmp.x - tmp2.x),
-		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
+		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z), 0};
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
 			powf(cos(ray.hit_obj->rad * (M_PI * 180.0f)), 2));
@@ -45,7 +45,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	t_vec perturbation; //test
 	//int bump; // A remplacer par un obj->bump lié au parsing a terme; // test
 
-	perturbation = (t_vec){50, 80, 47};
+	perturbation = (t_vec){50, 80, 47, 0};
 	//bump = 1; // test
 	if (ray.hit_obj->type == PLA)
 	{
@@ -58,7 +58,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL)
 		normal = get_normal_2(hit_point, ray);
 	else
-		normal = (t_vec){0, 0, 0};
+		normal = (t_vec){0, 0, 0, 0};
 	normal = vector_normalize(normal);
 	//if (ray.hit_obj->type == SPH && bump == 1) // test
 	//	normal = bump_mapping(hit_point, normal); // test

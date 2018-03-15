@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/26 12:49:52 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/13 15:21:49 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ typedef	struct	s_vec
 	double	x;
 	double	y;
 	double	z;
+	double	h;
 }				t_vec;
 
 typedef	struct	s_point

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: gnegri <gnegri@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 11:27:13 by gnegri            #+#    #+#             */
-/*   Updated: 2018/02/27 14:31:28 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/13 15:22:27 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static t_vec	ft_translation(t_vec ex_pos, t_vec param)
 
 void			transformations(t_obj *obj)
 {
-	obj->dir = (t_vec){0, 1, 0};
+	obj->dir = (t_vec){0, 1, 0, 0};
 	obj->dir = ft_rotation_x(obj->dir, obj->rot.x);
 	obj->dir = ft_rotation_y(obj->dir, obj->rot.y);
 	obj->dir = ft_rotation_z(obj->dir, obj->rot.z);

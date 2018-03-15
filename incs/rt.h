@@ -136,6 +136,7 @@ typedef struct		s_cam
 	t_vec			forward;
 	t_obj			*prev_ray_obj;
 	t_point			samp;
+	double			cam_to_world[3][3];
 }					t_cam;
 
 typedef struct		s_env
@@ -157,6 +158,7 @@ void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
 void				set_cam_coordinates(t_env *e);
+void				cam_to_world_matrix(t_env *e);
 t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
 
 char				get_type(char *str_obj);
