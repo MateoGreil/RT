@@ -12,36 +12,20 @@
 
 #include "rt.h"
 
-t_color cel_shading_shape(t_env *e, t_ray ray, t_color color)
+void change_object_color(t_color *color)
 {
-  if (!e->cam.prev_ray_obj)
-    e->cam.prev_ray_obj = ray.hit_obj;
-  if (e->cam.cel_shading == ON)
-  {
-    if (e->cam.prev_ray_obj != ray.hit_obj)
-    {
-      e->cam.prev_ray_obj = ray.hit_obj;
-      return ((t_color){0, 0, 0});
-    }
-  }
-  e->cam.prev_ray_obj = ray.hit_obj;
-  return (color);
-}
+  int i;
 
-double  cel_shading(t_env *e, double d)
-{
-  if (e->cam.cel_shading == ON)
-  {
-    if (d < 0.2)
-      d = 0;
-    else if (d >= 0.2 && d < 0.4)
-      d = 0.2;
-    else if (d >= 0.4 && d < 0.6)
-      d = 0.4;
-    else if (d >= 0.6)
-      d = 1;
-  }
-  return (d);
+  if (color->r <= 0)
+    color->r = 255;
+  if (color->g <= 0)
+    color->g = 255;
+  if (color->b <= 0)
+    color->b = 255;
+  i = ft_clamp(rand(), 0, 17);
+  color->r = (255 - i * 4) * color->r;
+	color->g = (255 - i * 3) * color->g;
+	color->b = (255 - i * 12) * color->b;
 }
 
 void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i)

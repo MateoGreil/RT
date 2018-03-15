@@ -43,7 +43,6 @@ t_color	search_color(void *e, int x, int y, int s)
 	if (ray.length < INFINITE && ray.hit_obj && !ray.hit_obj->mirror)
 	{
 		color = light_calc(e, ray);
-		//color = color_division(color, ((t_env*)e)->cam.num_samples);
 	}
 	else
 		color = (t_color){0, 0, 0};
@@ -77,6 +76,8 @@ static void	*ray_loop(void *e)
 			ray_loop_inter(((t_env*)e), compteur);
 			compteur.x++;
 		}
+	//if (((t_env*)e)->i_thread == NB_THREADS - 1 && (int)compteur.y % 100 == 0)
+	//	update_loading((t_env*)e, (int)compteur.y / 100);
 		compteur.y++;
 	}
 	return (NULL);

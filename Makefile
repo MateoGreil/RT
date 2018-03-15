@@ -26,7 +26,9 @@ SRC_NAME =	main.c \
 			get_objs_and_cam.c \
 			draw.c \
 			inter_objs.c \
+			inter_objs2.c \
 			key_hook.c \
+			key_hook2.c \
 			tools_mlx.c \
 			light.c \
 			transformations.c \
@@ -38,9 +40,12 @@ SRC_NAME =	main.c \
 			colors.c \
 			mirror.c \
 			filter.c \
-			key_hook2.c \
+			cel_shading.c \
 			cam.c \
 			screenshot.c \
+			equation_second.c \
+			interface.c \
+			mouse_hook.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -21,8 +21,8 @@
 # include <pthread.h>
 # include <stdio.h> //<- A SUPPRIMER
 
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
+# define WIN_WIDTH 1000
+# define WIN_HEIGHT 800
 
 # define KEY_PRESS 2
 # define MOUSE_PRESS 4
@@ -47,11 +47,16 @@
 # define KEY_N 45
 # define KEY_M 46
 # define KEY_SPACE 49
+# define KEY_DEL 51
+# define KEY_ECHAP 53
+# define KEY_PUP 116
+# define KEY_PDOWN 121
 # define KEY_ECHAP 53
 # define KEYPAD_RIGHT 124
 # define KEYPAD_LEFT 123
 # define KEYPAD_UP 126
 # define KEYPAD_DOWN 125
+# define KEY_LCTRL 256
 
 # define INVALID_FILE_DESCRIPTION 0
 # define INVALID_FILE 1
@@ -67,22 +72,29 @@
 # define PLA 1
 # define CYL 2
 # define CON 3
-# define LIG 4
+# define PAR 4
+# define HYP 5
+# define LIG 6
 
-# define ROT_SPEED 0.1
+# define ROT_SPEED 10
 # define MOVE_SPEED 10
 
 # define INFINITE 1000000000
+# define ZERO 0.0000001
 
-# define NB_THREADS 1
+# define NB_THREADS 8
 
 # define TRUE 1
 # define FALSE 0
 
 # define NB_MIRRORING 0
 
+# define BLACK (t_color){0, 0, 0}
+# define WHITE (t_color){255, 255, 255}
+
 typedef struct		s_obj
 {
+	int				id;
 	char			type;
 	t_vec			pos;
 	t_vec			dir;
@@ -134,6 +146,8 @@ typedef struct		s_cam
 	t_vec			right;
 	t_vec			up;
 	t_vec			forward;
+	int				selection;
+	t_obj			*select_obj;
 	t_obj			*prev_ray_obj;
 	t_point			samp;
 	double			cam_to_world[3][3];
@@ -143,7 +157,9 @@ typedef struct		s_env
 {
 	void			*mlx;
 	void			*win;
+	void			*wait_win;
 	t_img			img;
+	t_img			wait_img;
 	int				y_start;
 	int				y_end;
 	t_cam			cam;
@@ -172,31 +188,45 @@ double				cone_inter(t_env *e, t_ray *ray);
 double				plan_inter(t_env *e, t_ray *ray);
 double				cylindre_inter(t_env *e, t_ray *ray);
 double				sphere_inter(t_env *e, t_ray *ray);
-void				draw(t_env *e);
+void				draw(t_env *e, int loading);
 void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
 void				transformations(t_obj *obj);
+t_vec				ft_rotation_x(t_vec ex_pos, double angle);
+t_vec				ft_rotation_y(t_vec ex_pos, double angle);
+t_vec				ft_rotation_z(t_vec ex_pos, double angle);
 t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
+void    		sampling_color(t_env *e, t_vec compteur);
+t_color			search_color(void *e, int x, int y, int s);
+
 
 // PARTIE BENJAMIN //
+double		equation_second(t_vec a, double *b);
+double		parab_inter(t_env *e, t_ray *ray);
+double		hyper_inter(t_env *e, t_ray *ray);
+
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
+void				antialiasing(t_env *e, t_vec compteur, t_color *color);
+
+void 				init_loading(t_env *e);
+int					mouse_hook(int button, int x, int y, t_env *e);
+void 				change_object(t_env *e, int keycode);
+void 				change_object_color(t_color *color);
+int					change_filter(int keycode, t_env *e);
+t_color 			filter_color(t_env *e, t_color color, t_ray ray);
+int					key_filter(int keycode, t_env *e);
+
 t_color				damier_texture(t_vec hit_point);
-void				turbulence(t_vec hit_point, t_color *color, double size);
-void				marble_texture(t_vec hit_point, t_color *color);
+void 				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
 t_color 				perlin_color(t_vec hit_point);
 t_vec				bump_mapping(t_vec hit_point, t_vec normal);
 void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
-void				antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
-void    			sampling_color(t_env *e, t_vec compteur);
-t_color				search_color(void *e, int x, int y, int s);
-t_color 			filter_color(t_env *e, t_color color, t_ray ray);
-int					key_filter(int keycode, t_env *e);
 
 double				noise(double x, double y, double z);
 double				fade(double t);
