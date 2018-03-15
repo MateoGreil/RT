@@ -44,11 +44,18 @@
 # define KEY_B 11
 # define KEY_W 13
 # define KEY_R 15
+# define KEY_T 17
+# define KEY_I 34
+# define KEY_L 37
+# define KEY_J 38
+# define KEY_K 40
 # define KEY_N 45
 # define KEY_M 46
 # define KEY_SPACE 49
 # define KEY_DEL 51
 # define KEY_ECHAP 53
+# define KEY_PLUS 69
+# define KEY_MINUS 78
 # define KEY_PUP 116
 # define KEY_PDOWN 121
 # define KEY_ECHAP 53
@@ -82,12 +89,14 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 8
+# define NB_THREADS 10
 
 # define TRUE 1
 # define FALSE 0
 
 # define NB_MIRRORING 0
+
+# define NB_TEXTURES 2
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
@@ -103,6 +112,7 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 	char			mirror;
+	int				num_texture;
 }					t_obj;
 
 typedef struct		s_ray
@@ -165,6 +175,8 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
+	t_img				*texture;
+	t_img				*bump;
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -225,13 +237,18 @@ t_color				damier_color(t_vec hit_point);
 void 				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
 t_color 				perlin_color(t_vec hit_point);
-t_vec				bump_mapping(t_vec hit_point, t_vec normal);
 void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 
 double				noise(double x, double y, double z);
 double				fade(double t);
 double				lerp(double t, double a, double b);
 double				grad(int hash, double x, double y, double z);
-/////////////////////
+
+int					load_texture_img(t_env *e);
+int					load_texture_bump(t_env *e);
+t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
+t_vec    	bump_mapping(t_env *e, t_vec normal, t_vec hit_pos);
+
+////////////////////
 
 #endif

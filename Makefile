@@ -46,6 +46,7 @@ SRC_NAME =	main.c \
 			equation_second.c \
 			interface.c \
 			mouse_hook.c \
+			bump_mapping.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -86,22 +86,3 @@ void		marble_texture(t_vec hit_point, t_color *color)
 	color->g = color->g + 255 * (1 - res);
 	color->b = color->b + 255 * (1 - res);
 }
-
-t_vec    bump_mapping(t_vec hit_point, t_vec normal)
-{
-  double  noisecx;
-  double  noisecy;
-  double  noisecz;
-  double  bump;
-  t_vec   new_normal;
-
-  bump = 5;
-  noisecx = noise(0.1 * hit_point.x, 0.1 * hit_point.y, 0.1 * hit_point.z);
-  noisecy = noise(0.1 * hit_point.y, 0.1 * hit_point.z, 0.1 * hit_point.x);
-  noisecz = noise(0.1 * hit_point.z, 0.1 * hit_point.x, 0.1 * hit_point.y);
-  new_normal.x = (1.0f - bump ) * normal.x + bump * noisecx;
-  new_normal.y = (1.0f - bump ) * normal.y + bump * noisecy;
-  new_normal.z = (1.0f - bump ) * normal.z + bump * noisecz;
-  new_normal = vector_normalize(new_normal);
-  return (new_normal);
-}
