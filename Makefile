@@ -29,6 +29,7 @@ SRC_NAME =	main.c \
 			key_hook.c \
 			tools_mlx.c \
 			light.c \
+			light2.c \
 			transformations.c \
 			get_normal.c \
 			perlin_materials.c \

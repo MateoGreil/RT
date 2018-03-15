@@ -86,8 +86,6 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 		d = cel_shading(e, d);
 	specular = specular_light(e, light_ray);
 	color = ((t_obj*)e->lights->content)->color;
-	//color = color_double_product(((t_obj*)e->lights->content)->color,
-	//	((t_obj*)e->lights->content)->rad); // A retirer surement
 	color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	//color = color_average(tmp_color, color); /// test
@@ -136,14 +134,17 @@ t_color			light_calc(t_env *e, t_ray ray)
 	while (e->lights != NULL)
 	{
 		light_ray.hit_obj = ray.hit_obj;
-		if (((t_obj*)e->lights->content)->type == LIG)
+		if (((t_obj*)e->lights->content)->type == LIG || 
+			((t_obj*)e->lights->content)->type == LID)
 		{
-			tmp_color = diffuse_light(e, ray, &light_ray);
+			if (((t_obj*)e->lights->content)->type == LIG)
+				tmp_color = diffuse_light(e, ray, &light_ray);
+			else if (((t_obj*)e->lights->content)->type == LID)
+				tmp_color = directional_light(e, ray, &light_ray);
 			if (inter_shadow(e, light_ray) == 1)
 				tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
 			if (i == 0)
 				color = color_balanced(tmp_color, color, 0.5, 0.5);
-				//color = tmp_color;
 			else
 				color = color_average(color, tmp_color);
 			color = color_double_product(color,
@@ -153,9 +154,6 @@ t_color			light_calc(t_env *e, t_ray ray)
 		e->lights = e->lights->next;
 	}
 	e->lights = tmp;
-	//color = ambient_color(e, ray);
-
-	//color = color_balanced(color, ambient_color(e, ray), 0, 1);
 	color = filter_color(e, color, ray);
 	return (color);
 }

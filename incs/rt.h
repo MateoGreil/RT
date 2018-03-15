@@ -179,6 +179,7 @@ void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
+t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
 void				transformations(t_obj *obj);
 t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
