@@ -37,7 +37,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z)};
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
-			pow(sinf(ft_deg2rad(ray.hit_obj->rad)), 2));
+			pow(cosf(ft_deg2rad(ray.hit_obj->rad)), 2));
 	return (normal);
 }
 

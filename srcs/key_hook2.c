@@ -15,29 +15,32 @@
 static void move_object(t_env *e, int keycode)
 {
   if (keycode == KEYPAD_UP)
-    e->cam.select_obj->pos.y += 30;
+    e->cam.select_obj->pos.y += 15;
   else if (keycode == KEYPAD_DOWN)
-    e->cam.select_obj->pos.y -= 30;
+    e->cam.select_obj->pos.y -= 15;
   else if (keycode == KEYPAD_LEFT)
-    e->cam.select_obj->pos.x -= 30;
+    e->cam.select_obj->pos.x -= 15;
   else if (keycode == KEYPAD_RIGHT)
-    e->cam.select_obj->pos.x += 30;
+    e->cam.select_obj->pos.x += 15;
+  else if (keycode == KEY_PUP)
+    e->cam.select_obj->pos.z -= 15;
+  else if (keycode == KEY_PDOWN)
+    e->cam.select_obj->pos.z += 15;
 }
 
 void change_object(t_env *e, int keycode)
 {
   if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT
-    || keycode == KEYPAD_RIGHT || keycode == KEY_D || keycode == KEY_A ||
-    keycode == KEY_W || keycode == KEY_S)
+    || keycode == KEYPAD_RIGHT || keycode == KEY_PUP || keycode == KEY_PDOWN)
     move_object(e, keycode);
   else if (keycode == KEY_LCTRL)
   	e->cam.selection = OFF;
   else if (keycode == KEY_DEL)
-    e->cam.select_obj->pos = (t_vec){0, 0, 100000000000}; // Faut faire un lst remove if mais ca c est plus drole
+    e->cam.select_obj->pos = (t_vec){0, 0, INFINITE}; // Faut faire un lst remove if mais ca c est plus drole
   else if (keycode == KEY_C)
     change_object_color(&e->cam.select_obj->color);
   else if (keycode == KEY_V)
-    ft_lstaddback(&(e->objs), ft_lstnew(&e->cam.select_obj, sizeof(t_obj)));
+    ft_lstaddback(&(e->objs), ft_lstnew(e->cam.select_obj, sizeof(t_obj)));
   else if (keycode == KEY_ECHAP)
   	button_exit(keycode, e);
 }

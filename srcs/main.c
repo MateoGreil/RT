@@ -28,8 +28,10 @@ void	draw(t_env *e, int loading)
 	e->img = new_image(e->mlx, WIN_WIDTH, WIN_HEIGHT);
 	e->wait_img = new_image(e->mlx, 400, 100);
 	if (loading == 1)
+	{
 		init_loading(e);
-	mlx_do_sync(e->mlx);
+		mlx_do_sync(e->mlx);
+	}
 	cam_to_world_matrix(e);
 	multi_thread(e);
 	if (loading == 1)
