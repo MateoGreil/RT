@@ -28,7 +28,10 @@ t_color		directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 		d = cel_shading(e, d);
 	//specular = specular_light(e, light_ray);
 	color = ((t_obj*)e->lights->content)->color;
-	color = color_average(ray.hit_obj->color, color);
+	if (ray.hit_obj->num_texture != 0)
+		color = color_average(print_texture(e, ray.hit_obj, ray.hit_pos), color);
+	else
+		color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	//color = color_average(color, specular);
 	return (color);
