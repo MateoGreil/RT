@@ -45,10 +45,8 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 {
 	t_vec normal;
 	t_vec perturbation; //test
-	//int bump; // A remplacer par un obj->bump lié au parsing a terme; // test
 
-	perturbation = (t_vec){1, 1, 1, 0};
-	//bump = 1; // test
+	perturbation = (t_vec){1, 1, 1, 0}; // test
 	if (ray.hit_obj->type == PLA)
 	{
 		normal = ray.hit_obj->dir;
@@ -62,8 +60,6 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	else
 		normal = (t_vec){0, 0, 0, 0};
 	normal = vector_normalize(normal);
-	//if (ray.hit_obj->type == SPH && bump == 1) // test
-	//	normal = bump_mapping(hit_point, normal); // test
 	perturbation_normal(ray, normal, perturbation);
 	normal = vector_normalize(normal);
 	return (normal);

@@ -12,6 +12,26 @@
 
 #include "rt.h"
 
+static void change_tex_or_rad(t_env *e, int keycode)
+{
+  if (keycode == KEY_T)
+  {
+    if (e->cam.select_obj->num_texture < NB_TEXTURES)
+      e->cam.select_obj->num_texture += 1;
+    else
+      e->cam.select_obj->num_texture = 0;
+  }
+  if (keycode == KEY_PLUS)
+    e->cam.select_obj->rad += 2;
+  if (keycode == KEY_MINUS)
+  {
+    if (e->cam.select_obj->rad <= 2)
+      e->cam.select_obj->rad = 1;
+    else
+      e->cam.select_obj->rad -= 2;
+  }
+}
+
 static void move_object(t_env *e, int keycode)
 {
   if (keycode == KEYPAD_UP)
@@ -41,6 +61,8 @@ void change_object(t_env *e, int keycode)
     change_object_color(&e->cam.select_obj->color);
   else if (keycode == KEY_V)
     ft_lstaddback(&(e->objs), ft_lstnew(e->cam.select_obj, sizeof(t_obj)));
+  else if (keycode == KEY_T || keycode == KEY_PLUS || keycode == KEY_MINUS)
+    change_tex_or_rad(e, keycode);
   else if (keycode == KEY_ECHAP)
   	button_exit(keycode, e);
 }
