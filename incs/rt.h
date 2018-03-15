@@ -77,7 +77,6 @@
 # define LID 6
 # define PAR 7
 # define HYP 8
-# define LIG 9
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
