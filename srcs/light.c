@@ -90,7 +90,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	//color = color_average(tmp_color, color); /// test
-	//color = damier_texture(light_ray->hit_pos); /// test
+	//color = damier_color(light_ray->hit_pos); /// test
 	//color = perlin_color(light_ray->hit_pos); /// test
 	color = color_average(color, specular);
 	return (color);

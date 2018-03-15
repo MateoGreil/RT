@@ -221,7 +221,7 @@ int					change_filter(int keycode, t_env *e);
 t_color 			filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 
-t_color				damier_texture(t_vec hit_point);
+t_color				damier_color(t_vec hit_point);
 void 				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
 t_color 				perlin_color(t_vec hit_point);
