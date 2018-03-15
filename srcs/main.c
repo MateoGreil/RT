@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:38:03 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/28 20:01:28 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/15 16:14:14 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	draw(t_env *e, int loading)
 		init_loading(e);
 		mlx_do_sync(e->mlx);
 	}
-	cam_to_world_matrix(e);
 	multi_thread(e);
 	if (loading == 1)
 	{

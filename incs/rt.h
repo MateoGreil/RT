@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/12 17:06:13 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:22:14 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -175,7 +175,12 @@ void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
 
 void				set_cam_coordinates(t_env *e);
 void				cam_to_world_matrix(t_env *e);
+void				world_to_cam_matrix(t_env *e);
 t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
+
+void				x_rotation(t_cam *cam, double a);
+void				y_rotation(t_cam *cam, double a);
+void				z_rotation(t_cam *cam, double a);
 
 char				get_type(char *str_obj);
 t_vec				get_vec(char *str_obj, int *i_str);

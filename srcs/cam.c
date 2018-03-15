@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 11:57:16 by gnegri            #+#    #+#             */
-/*   Updated: 2018/03/13 15:24:00 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/15 16:17:02 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,19 @@ void	cam_to_world_matrix(t_env *e)
 	e->cam.cam_to_world[2][0] = e->cam.forward.x;
 	e->cam.cam_to_world[2][1] = e->cam.forward.y;
 	e->cam.cam_to_world[2][2] = e->cam.forward.z;
+}
+
+void	world_to_cam_matrix(t_env *e)
+{
+	e->cam.right.x = e->cam.cam_to_world[0][0];
+	e->cam.right.y = e->cam.cam_to_world[0][1];
+	e->cam.right.z = e->cam.cam_to_world[0][2];
+	e->cam.up.x = e->cam.cam_to_world[1][0];
+	e->cam.up.y = e->cam.cam_to_world[1][1];
+	e->cam.up.z = e->cam.cam_to_world[1][2];
+	e->cam.forward.x = e->cam.cam_to_world[2][0];
+	e->cam.forward.y = e->cam.cam_to_world[2][1];
+	e->cam.forward.z = e->cam.cam_to_world[2][2];
 }
 
 void	set_cam_coordinates(t_env *e)

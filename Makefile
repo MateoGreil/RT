@@ -6,7 +6,7 @@
 #    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/13 15:24:46 by nghaddar         ###   ########.fr        #
+#    Updated: 2018/03/15 16:22:35 by nghaddar         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,6 +46,7 @@ SRC_NAME =	main.c \
 			equation_second.c \
 			interface.c \
 			mouse_hook.c \
+			matrices.c 
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
