@@ -47,7 +47,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	t_vec perturbation; //test
 	//int bump; // A remplacer par un obj->bump lié au parsing a terme; // test
 
-	perturbation = (t_vec){1, 1, 1};
+	perturbation = (t_vec){1, 1, 1, 0};
 	//bump = 1; // test
 	if (ray.hit_obj->type == PLA)
 	{

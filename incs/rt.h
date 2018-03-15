@@ -211,7 +211,7 @@ double		hyper_inter(t_env *e, t_ray *ray);
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
-void				antialiasing(t_env *e, t_vec compteur, t_color *color);
+void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
 
 void 				init_loading(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);

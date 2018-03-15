@@ -36,7 +36,7 @@ void change_object(t_env *e, int keycode)
   else if (keycode == KEY_LCTRL)
   	e->cam.selection = OFF;
   else if (keycode == KEY_DEL)
-    e->cam.select_obj->pos = (t_vec){0, 0, INFINITE}; // Faut faire un lst remove if mais ca c est plus drole
+    e->cam.select_obj->pos = (t_vec){0, 0, 10000000000000, 0}; // Faut faire un lst remove if mais ca c est plus drole
   else if (keycode == KEY_C)
     change_object_color(&e->cam.select_obj->color);
   else if (keycode == KEY_V)
