@@ -12,7 +12,40 @@
 
 #include "rt.h"
 
-static int key_filter_next(int keycode, t_env *e)
+static void move_object(t_env *e, int keycode)
+{
+  if (keycode == KEYPAD_UP)
+    e->cam.select_obj->pos.y += 15;
+  else if (keycode == KEYPAD_DOWN)
+    e->cam.select_obj->pos.y -= 15;
+  else if (keycode == KEYPAD_LEFT)
+    e->cam.select_obj->pos.x -= 15;
+  else if (keycode == KEYPAD_RIGHT)
+    e->cam.select_obj->pos.x += 15;
+  else if (keycode == KEY_PUP)
+    e->cam.select_obj->pos.z -= 15;
+  else if (keycode == KEY_PDOWN)
+    e->cam.select_obj->pos.z += 15;
+}
+
+void change_object(t_env *e, int keycode)
+{
+  if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT
+    || keycode == KEYPAD_RIGHT || keycode == KEY_PUP || keycode == KEY_PDOWN)
+    move_object(e, keycode);
+  else if (keycode == KEY_LCTRL)
+  	e->cam.selection = OFF;
+  else if (keycode == KEY_DEL)
+    e->cam.select_obj->pos = (t_vec){0, 0, 10000000000000, 0}; // Faut faire un lst remove if mais ca c est plus drole
+  else if (keycode == KEY_C)
+    change_object_color(&e->cam.select_obj->color);
+  else if (keycode == KEY_V)
+    ft_lstaddback(&(e->objs), ft_lstnew(e->cam.select_obj, sizeof(t_obj)));
+  else if (keycode == KEY_ECHAP)
+  	button_exit(keycode, e);
+}
+
+static int change_filter_next(int keycode, t_env *e)
 {
   if (keycode == KEY_B)
 	{
@@ -38,7 +71,7 @@ static int key_filter_next(int keycode, t_env *e)
   return (0);
 }
 
-int key_filter(int keycode, t_env *e)
+int change_filter(int keycode, t_env *e)
 {
 	if (keycode == KEY_X)
 	{
@@ -61,6 +94,6 @@ int key_filter(int keycode, t_env *e)
 		else
 			e->cam.sepia = OFF;
 	}
-  key_filter_next(keycode, e);
+  change_filter_next(keycode, e);
 	return (0);
 }
