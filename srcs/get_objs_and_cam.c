@@ -81,6 +81,10 @@ static void		get_objs(t_list **line_lst, t_env *e)
 				str_obj = ft_strstr((*line_lst)->content, "CON");
 			if (!str_obj)
 				str_obj = ft_strstr((*line_lst)->content, "LIG");
+			if (!str_obj)
+				str_obj = ft_strstr((*line_lst)->content, "LIA");
+			if (!str_obj)
+				str_obj = ft_strstr((*line_lst)->content, "LID");
 			*line_lst = (*line_lst)->next;
 		}
 		obj = get_one_obj(str_obj);

@@ -85,14 +85,40 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	if (e->cam.cel_shading == ON)
 		d = cel_shading(e, d);
 	specular = specular_light(e, light_ray);
-	color = color_double_product(((t_obj*)e->lights->content)->color,
-		((t_obj*)e->lights->content)->rad);
+	color = ((t_obj*)e->lights->content)->color;
+	//color = color_double_product(((t_obj*)e->lights->content)->color,
+	//	((t_obj*)e->lights->content)->rad); // A retirer surement
 	color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
 	//color = color_average(tmp_color, color); /// test
 	//color = damier_texture(light_ray->hit_pos); /// test
 	//color = perlin_color(light_ray->hit_pos); /// test
 	color = color_average(color, specular);
+	return (color);
+}
+
+static t_color	ambient_color(t_env *e, t_ray ray)
+{
+	t_color	color;
+	t_list	*tmp;
+
+	tmp = e->lights;
+	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
+	color = color_double_product(color,
+			0.2);
+	while (e->lights != NULL)
+	{
+		if (((t_obj*)e->lights->content)->type == LIA)
+		{
+			color = color_average(ray.hit_obj->color, ((t_obj*)e->lights->content)->color);
+			if (((t_obj*)e->lights->content)->rad > 20 || ((t_obj*)e->lights->content)->rad < 10)
+				((t_obj*)e->lights->content)->rad = 15;
+			color = color_double_product(color,
+				(((t_obj*)e->lights->content)->rad / 100));
+		}
+		e->lights = e->lights->next;
+	}
+	e->lights = tmp;
 	return (color);
 }
 
@@ -105,21 +131,24 @@ t_color			light_calc(t_env *e, t_ray ray)
 	int		i;
 
 	tmp = e->lights;
+	color = ambient_color(e, ray);
 	i = 0;
-	color = (t_color){0, 0, 0};
 	while (e->lights != NULL)
 	{
 		light_ray.hit_obj = ray.hit_obj;
-		tmp_color = diffuse_light(e, ray, &light_ray);
-		if (inter_shadow(e, light_ray) == 1)
-			tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
-		if (i == 0)
-			color = tmp_color;
-		color = color_average(color, tmp_color);
-		color = color_double_product(color,
-		(((t_obj*)e->lights->content)->rad / 100));
+		if (((t_obj*)e->lights->content)->type == LIG)
+		{
+			tmp_color = diffuse_light(e, ray, &light_ray);
+			if (inter_shadow(e, light_ray) == 1)
+				tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
+			if (i == 0)
+				color = tmp_color;
+			color = color_average(color, tmp_color);
+			color = color_double_product(color,
+				(((t_obj*)e->lights->content)->rad / 100));
+			i++;
+		}
 		e->lights = e->lights->next;
-		i++;
 	}
 	e->lights = tmp;
 	color = filter_color(e, color, ray);

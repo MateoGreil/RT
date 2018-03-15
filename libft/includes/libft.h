@@ -174,5 +174,6 @@ t_color			color_product(t_color v1, t_color v2);
 t_color			color_addition(t_color v1, t_color v2);
 t_color			color_division(t_color v1, double i);
 t_color			color_average(t_color v1, t_color v2);
+t_color			color_balanced(t_color v1, t_color v2, double a, double b);
 
 #endif
