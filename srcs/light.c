@@ -131,6 +131,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	int		i;
 
 	tmp = e->lights;
+	color = ambient_color(e, ray);
 	i = 0;
 	while (e->lights != NULL)
 	{
@@ -141,7 +142,8 @@ t_color			light_calc(t_env *e, t_ray ray)
 			if (inter_shadow(e, light_ray) == 1)
 				tmp_color = color_average(tmp_color, (t_color){0, 0, 0});
 			if (i == 0)
-				color = tmp_color;
+				color = color_balanced(tmp_color, color, 0.5, 0.5);
+				//color = tmp_color;
 			else
 				color = color_average(color, tmp_color);
 			color = color_double_product(color,
@@ -151,7 +153,9 @@ t_color			light_calc(t_env *e, t_ray ray)
 		e->lights = e->lights->next;
 	}
 	e->lights = tmp;
-	color = color_balanced(color, ambient_color(e, ray), 0.9, 0.1);
+	//color = ambient_color(e, ray);
+
+	//color = color_balanced(color, ambient_color(e, ray), 0, 1);
 	color = filter_color(e, color, ray);
 	return (color);
 }
