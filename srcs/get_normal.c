@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation) // A ENLEVER SI CA MARCHE PAS A TERME
 {
 	//printf("1 %f ", normal.x);
@@ -23,7 +23,7 @@ static void perturbation_normal(t_ray ray, t_vec normal, t_vec perturbation) // 
 						* (vector_length(normal) / perturbation.z);
 	//printf("2 : %f\n", normal.x);
 }
-
+*/
 static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 {
 	t_vec tmp;
@@ -38,15 +38,20 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
 			pow(cosf(ft_deg2rad(ray.hit_obj->rad)), 2));
+	if (ray.hit_obj->type == PLA)
+	{
+		normal = vector_double_product(normal,
+			pow(sinf(ft_deg2rad(ray.hit_obj->rad)), 2)); /// TROUVER LA NORMALE
+	}
 	return (normal);
 }
 
 t_vec	get_normal(t_vec hit_point, t_ray ray)
 {
 	t_vec normal;
-	t_vec perturbation; //test
+	//t_vec perturbation; //test
 
-	perturbation = (t_vec){1, 1, 1, 0}; // test
+	//perturbation = (t_vec){1, 1, 1, 0}; // test
 	if (ray.hit_obj->type == PLA)
 	{
 		normal = ray.hit_obj->dir;
@@ -55,12 +60,13 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	}
 	else if (ray.hit_obj->type == SPH)
 		normal = vector_substraction(hit_point, ray.hit_obj->pos);
-	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL)
+	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL ||
+		ray.hit_obj->type == PLA)
 		normal = get_normal_2(hit_point, ray);
 	else
 		normal = (t_vec){0, 0, 0, 0};
 	normal = vector_normalize(normal);
-	perturbation_normal(ray, normal, perturbation);
+	//perturbation_normal(ray, normal, perturbation);
 	normal = vector_normalize(normal);
 	return (normal);
 }
