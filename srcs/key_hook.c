@@ -77,12 +77,12 @@ int			key_hook(int keycode, t_env *e)
 		else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 						keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
 						translate_camXZ(&e->cam, keycode);
+		else if (keycode == KEY_SPACE)
+			screenshot(e);
+		else if (keycode == KEY_ECHAP)
+			button_exit(keycode, e);
 		change_filter(keycode, e);
 	}
-	else if (keycode == KEY_SPACE)
-		screenshot(e);
-	else if (keycode == KEY_ECHAP)
-		button_exit(keycode, e);
 	world_to_cam_matrix(e);
 	draw(e, 0);
 	return (0);
