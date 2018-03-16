@@ -79,10 +79,10 @@
 # define PLA 1
 # define CYL 2
 # define CON 3
-# define LIG 4
-# define LIA 5
-# define LID 6
-# define PAR 7
+# define PAR 4
+# define LIG 5
+# define LIA 6
+# define LID 7
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
@@ -90,7 +90,7 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 1
+# define NB_THREADS 8
 
 # define TRUE 1
 # define FALSE 0
