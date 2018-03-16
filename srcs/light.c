@@ -37,6 +37,8 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 				light_ray.length = cone_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == PLA)
 				light_ray.length = plan_inter(e, &light_ray);
+			if (((t_obj*)e->objs->content)->type == PAR)
+				light_ray.length = parab_inter(e, &light_ray, temp);
 			if (light_ray.length < dist_obj_to_light)
 			{
 				e->objs = tmp;
