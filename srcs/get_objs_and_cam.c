@@ -87,8 +87,6 @@ static void		get_objs(t_list **line_lst, t_env *e)
 			if (!str_obj)
 				str_obj = ft_strstr((*line_lst)->content, "PAR");
 			if (!str_obj)
-				str_obj = ft_strstr((*line_lst)->content, "HYP");
-			if (!str_obj)
 				str_obj = ft_strstr((*line_lst)->content, "LIG");
 			if (!str_obj)
 				str_obj = ft_strstr((*line_lst)->content, "LIA");

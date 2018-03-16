@@ -16,19 +16,15 @@ int		load_texture_img(t_env *e)
 {
 	int a;
 	int	b;
-	int c;
-	int d;
 
 	e->texture = malloc(sizeof(t_img) * (NB_TEXTURES + 1));
 	a = 64;
 	b = 64;
-	c = 500;
-	d = 1000;
 	e->texture[0].img = NULL;
 	e->texture[1].img = mlx_xpm_file_to_image(e->mlx,
-		"textures/earthmap.xpm", &c, &d);
-	e->texture[1].size_x = c;
-	e->texture[1].size_y = d;
+		"textures/stone.xpm", &a, &b);
+	e->texture[1].size_x = a;
+	e->texture[1].size_y = b;
 	e->texture[1].data = mlx_get_data_addr(e->texture[1].img,
 		&e->texture[1].bpp, &e->texture[1].size_line, &e->texture[1].endian);
 	e->texture[2].img = mlx_xpm_file_to_image(e->mlx,

@@ -83,7 +83,6 @@
 # define LIA 5
 # define LID 6
 # define PAR 7
-# define HYP 8
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
@@ -91,7 +90,7 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 10
+# define NB_THREADS 1
 
 # define TRUE 1
 # define FALSE 0
@@ -203,10 +202,10 @@ int					get_nbr(char *str_obj, int *i_str);
 void				get_objs_and_cam(t_env *e, char *path_file);
 int					check_inter_objects(t_env *e, t_ray *ray);
 
-double				cone_inter(t_env *e, t_ray *ray);
+double				cone_inter(t_env *e, t_ray *ray, t_vec temp);
 double				plan_inter(t_env *e, t_ray *ray);
-double				cylindre_inter(t_env *e, t_ray *ray);
-double				sphere_inter(t_env *e, t_ray *ray);
+double				cylindre_inter(t_env *e, t_ray *ray, t_vec temp);
+double				sphere_inter(t_env *e, t_ray *ray, t_vec temp);
 void				draw(t_env *e, int loading);
 void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int					key_hook(int keycode, t_env *e);
@@ -225,8 +224,7 @@ t_color			search_color(void *e, int x, int y, int s);
 
 // PARTIE BENJAMIN //
 double		equation_second(t_vec a, double *b);
-double		parab_inter(t_env *e, t_ray *ray);
-double		hyper_inter(t_env *e, t_ray *ray);
+double		parab_inter(t_env *e, t_ray *ray, t_vec temp);
 
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);

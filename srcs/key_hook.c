@@ -56,7 +56,7 @@ static void	rotate_X_cam(t_cam *cam, int keycode)
 		x_rotation(cam, ft_deg2rad(-20));
 }
 static void	rotate_Y_cam(t_cam *cam, int keycode)
-{	
+{
 	if (keycode == KEY_A)
 		y_rotation(cam, ft_deg2rad(-20));
 	else if (keycode == KEY_D)
@@ -68,19 +68,21 @@ int			key_hook(int keycode, t_env *e)
 	cam_to_world_matrix(e);
 	if (e->cam.selection == ON)
 		change_object(e, keycode);
-	if (keycode == KEY_D || keycode == KEY_A)
-		rotate_Y_cam(&e->cam, keycode);
-	else if (keycode == KEY_W || keycode == KEY_S)
-		rotate_X_cam(&e->cam, keycode);
-	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
-							keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
-		translate_camXZ(&e->cam, keycode);
+	else if (e->cam.selection == OFF)
+	{
+		if (keycode == KEY_D || keycode == KEY_A)
+			rotate_Y_cam(&e->cam, keycode);
+		else if (keycode == KEY_W || keycode == KEY_S)
+			rotate_X_cam(&e->cam, keycode);
+		else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
+						keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
+						translate_camXZ(&e->cam, keycode);
+		change_filter(keycode, e);
+	}
 	else if (keycode == KEY_SPACE)
 		screenshot(e);
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
-	if (e->cam.selection == OFF)
-		change_filter(keycode, e);
 	world_to_cam_matrix(e);
 	draw(e, 0);
 	return (0);

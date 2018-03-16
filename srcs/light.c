@@ -16,7 +16,9 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 {
 	double	dist_obj_to_light;
 	t_list *tmp;
+	t_vec	temp;
 
+	temp = vector_substraction(e->cam.pos, ((t_obj*)e->objs->content)->pos);
 	dist_obj_to_light = length_between_vectors(light_ray.hit_pos,
 		((t_obj*)e->lights->content)->pos);
 	light_ray.length = INFINITE;
@@ -28,11 +30,11 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 		if (((t_obj*)e->objs->content) != light_ray.hit_obj)
 		{
 			if (((t_obj*)e->objs->content)->type == SPH)
-				light_ray.length = sphere_inter(e, &light_ray);
+				light_ray.length = sphere_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == CYL)
-				light_ray.length = cylindre_inter(e, &light_ray);
+				light_ray.length = cylindre_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == CON)
-				light_ray.length = cone_inter(e, &light_ray);
+				light_ray.length = cone_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == PLA)
 				light_ray.length = plan_inter(e, &light_ray);
 			if (light_ray.length < dist_obj_to_light)
@@ -81,7 +83,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 			pos, light_ray->hit_pos);
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
-	//if (ray.hit_obj->num_texture == 1) /// test
+	//if (ray.hit_obj->type == PLA) /// test
 	//	light_ray->normal = bump_mapping(e, light_ray->normal, ray.hit_pos); /// test
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
 	if (e->cam.cel_shading == ON)
