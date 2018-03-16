@@ -18,7 +18,6 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	t_list *tmp;
 	t_vec	temp;
 
-	temp = vector_substraction(e->cam.pos, ((t_obj*)e->objs->content)->pos);
 	dist_obj_to_light = length_between_vectors(light_ray.hit_pos,
 		((t_obj*)e->lights->content)->pos);
 	light_ray.length = INFINITE;
@@ -29,7 +28,8 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	{
 		if (((t_obj*)e->objs->content) != light_ray.hit_obj)
 		{
-			if (((t_obj*)e->objs->content)->type == SPH)
+			temp = vector_substraction(light_ray.pos, ((t_obj*)e->objs->content)->pos);
+			if (((t_obj*)e->objs->content)->type == SPH)	//pointeur sur ft
 				light_ray.length = sphere_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == CYL)
 				light_ray.length = cylindre_inter(e, &light_ray, temp);
@@ -37,6 +37,8 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 				light_ray.length = cone_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == PLA)
 				light_ray.length = plan_inter(e, &light_ray);
+			//printf(" dist %f ", dist_obj_to_light);
+			//printf("ll %f\n", light_ray.length);
 			if (light_ray.length < dist_obj_to_light)
 			{
 				e->objs = tmp;
@@ -74,7 +76,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	double	d;
 	t_color color;
 	t_color specular;
-	
+
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
