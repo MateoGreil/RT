@@ -66,7 +66,7 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	else
 		normal = (t_vec){0, 0, 0, 0};
 	normal = vector_normalize(normal);
-	//perturbation_normal(ray, normal, perturbation);
-	normal = vector_normalize(normal);
+	/*if (ray.hit_obj->type == SPH)
+		normal = bump_mapping(normal, hit_point);*/
 	return (normal);
 }

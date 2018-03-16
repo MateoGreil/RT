@@ -76,6 +76,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	double	d;
 	t_color color;
 	t_color specular;
+	//t_color tmp_color; // test
 
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
@@ -93,6 +94,12 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	else
 		color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
+	/*if (ray.hit_obj->type == SPH)
+	{
+		tmp_color = (t_color){0, 0, 0}; // test
+		wood_texture(light_ray->hit_pos, &tmp_color); // test
+		color = color_average(color, tmp_color); // test
+	}*/
 	color = color_average(color, specular);
 	return (color);
 }

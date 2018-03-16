@@ -90,7 +90,7 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 6
+# define NB_THREADS 8
 
 # define TRUE 1
 # define FALSE 0
@@ -253,7 +253,8 @@ double				grad(int hash, double x, double y, double z);
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec    	bump_mapping(t_env *e, t_vec normal, t_vec hit_pos);
+t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
+
 
 ////////////////////
 

@@ -61,11 +61,11 @@ void		wood_texture(t_vec hit_point, t_color *color)
 	double	res;
 	double	v;
 
-	scale = 40;
+	scale = 2;
 	res = 0.0;
-	v = 20 * fabs(noise(hit_point.x * scale, hit_point.y
+	v = 5 * fabs(noise(hit_point.x * scale, hit_point.y
 		* scale, hit_point.z * scale));
-	res += v - (int)v;
+	res = v - (int)v;
 	res = ft_clamp(res, 0.0, 1.0);
   color->r = color->r + 255 * (1.0 - res);
   color->g = color->g + 255 * (1.0 - res);
@@ -79,10 +79,20 @@ void		marble_texture(t_vec hit_point, t_color *color)
 
 	res = 0.0;
 	i = 0;
-	while (++i < 6)
+	while (++i < 8)
 		res += cos(hit_point.x + noise(hit_point.x, hit_point.y, hit_point.z));
 	res = ft_clamp(res, 0.0, 1.0);
 	color->r = color->r + 255 * (1 - res);
 	color->g = color->g + 255 * (1 - res);
 	color->b = color->b + 255 * (1 - res);
+/*  while (i < 8)
+  {
+    res += (1.0 / i) * fabs(noise(i * 0.05 * hit_point.x, i * 0.15 * hit_point.y, i * 0.05 * hit_point.z));
+    i++;
+  }
+  res = 0.5 * sinf((hit_point.x + hit_point.y) * 0.05 + res) + 0.5;
+  res = ft_clamp(res, 0.0, 1.0);
+  color->r = 145 * res + 255 * (1 - res);
+  color->g = 145 * res + 255 * (1 - res);
+  color->b = 145 * res + 255 * (1 - res);*/
 }
