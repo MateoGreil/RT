@@ -31,8 +31,14 @@ char	get_type(char *str_obj)
 		return (CYL);
 	else if (ft_strstr(str_obj, "CON"))
 		return (CON);
+	else if (ft_strstr(str_obj, "PAR"))
+		return (PAR);
 	else if (ft_strstr(str_obj, "LIG"))
 		return (LIG);
+	else if (ft_strstr(str_obj, "LIA"))
+		return (LIA);
+	else if (ft_strstr(str_obj, "LID"))
+		return (LID);
 	else
 		return (ERROR);
 }
