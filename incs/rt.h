@@ -255,6 +255,8 @@ int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
 t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
 
+t_vec perturbation_normal_plan(t_vec hit_point, t_vec normal, double p);
+double  calc_bump(t_env *e, t_vec hit_pos, int i);
 
 ////////////////////
 

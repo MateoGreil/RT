@@ -11,6 +11,25 @@
 /* ************************************************************************** */
 
 #include "rt.h"
+t_vec perturbation_normal_plan(t_vec hit_point, t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
+{
+	double x;
+	double y;
+	double z;
+	double a;
+	double b;
+	double c;
+	t_vec new_normal;
+
+	a = normal.x + hit_point.x;
+	b = 50 * normal.y + 100 * hit_point.y;
+	c = normal.z + hit_point.z;
+	x = noise(a - p, b, c) - noise(a + p, b, c);
+	y = noise(a, b - p, c) - noise(a, b + p, c);
+	z = noise(a, b, c - p) - noise(a, b, c + p);
+	new_normal = (t_vec){normal.x + x, normal.y + y, normal.z + z, 0};
+	return (new_normal);
+}
 /*
 static t_vec perturbation_normal(t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
 {
@@ -54,9 +73,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 t_vec	get_normal(t_vec hit_point, t_ray ray)
 {
 	t_vec normal;
-	//double perturbation; //test
 
-	//perturbation = 0.012; // test
 	if (ray.hit_obj->type == PLA)
 	{
 		normal = ray.hit_obj->dir;
@@ -71,8 +88,5 @@ t_vec	get_normal(t_vec hit_point, t_ray ray)
 	else
 		normal = (t_vec){0, 0, 0, 0};
 	normal = vector_normalize(normal);
-	/*if (ray.hit_obj->type == SPH)
-		normal = perturbation_normal(normal, perturbation);
-		normal = bump_mapping(normal, hit_point);*/
 	return (normal);
 }
