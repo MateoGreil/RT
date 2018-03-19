@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/02/26 12:49:52 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/13 15:21:49 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,14 @@ typedef	struct	s_vec
 	double	x;
 	double	y;
 	double	z;
+	double	h;
 }				t_vec;
+
+typedef	struct	s_point
+{
+	double	x;
+	double	y;
+}				t_point;
 
 typedef struct	s_list
 {
@@ -157,6 +164,7 @@ t_vec			vector_substraction(t_vec v1, t_vec v2);
 t_vec			vector_int_product(t_vec v1, int i);
 t_vec			vector_assign_values(double x, double y, double z);
 t_vec			vector_addition(t_vec v1, t_vec v2);
+t_vec			vector_double_division(t_vec v1, double i);
 t_vec			vector_double_product(t_vec v1, double i);
 double			vector_dot_product(t_vec v1, t_vec v2);
 double			vector_length(t_vec v1);
@@ -165,7 +173,8 @@ double			length_between_vectors(t_vec v1, t_vec v2);
 t_color			color_double_product(t_color v1, double i);
 t_color			color_product(t_color v1, t_color v2);
 t_color			color_addition(t_color v1, t_color v2);
-t_color			color_mix(t_color v1, t_color v2);
+t_color			color_division(t_color v1, double i);
 t_color			color_average(t_color v1, t_color v2);
+t_color			color_balanced(t_color v1, t_color v2, double a, double b);
 
 #endif

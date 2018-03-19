@@ -28,3 +28,13 @@ double		length_between_vectors(t_vec v1, t_vec v2)
 				(v2.z - v1.z) * (v2.z - v1.z));
 	return (length);
 }
+
+t_vec	vector_double_division(t_vec v1, double i)
+{
+	t_vec	res;
+
+	res.x = v1.x / i;
+	res.y = v1.y / i;
+	res.z = v1.z / i;
+	return (res);
+}

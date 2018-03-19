@@ -1,5 +1,5 @@
 FICHIER DE PARAMETRES DE RTV1. TYPES DISPONIBLES : SPH/PLA/CYL/CON/LGT
-CAM	 0 0 0  0 0 1
+CAM	 0 0 200  0 0 100
 TYPE	POSITION	  RAYON   INTENSITE	 	COULEUR		 ROTATION		TRANSLATION
-LIG	 	 |  0 0 10 	| /	 | 150 | 	255 255 255  |	\		|	/		|
-CON 	 |  0 0 100   | 30 | 		|	250 0 250 	 |	0 0 0	|	0 0 0	|
+LIG	 	 |  0 0 300 	| /	 | 150 | 	255 255 255  |	\		|	/		|
+CON 	 |  0 0 100   | 10 | 		|	250 0 250 	 |	0 0 0	|	0 0 0	|

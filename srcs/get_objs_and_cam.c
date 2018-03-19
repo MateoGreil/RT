@@ -43,6 +43,9 @@ static t_obj	get_one_obj(char *str_obj)
 	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
 		i_str++;
 	obj.mirror = get_nbr(str_obj, &i_str);
+	while (str_obj[(i_str)] && !ft_isnum(str_obj[(i_str)]))
+		i_str++;
+	obj.num_texture = get_nbr(str_obj, &i_str);
 /*
 	printf("type :%c\n", obj.type);
 	printf("pos: %f\n", obj.pos.x);
@@ -66,7 +69,9 @@ static void		get_objs(t_list **line_lst, t_env *e)
 {
 	t_obj	obj;
 	char	*str_obj;
+	int 	id;
 
+	id = 0;
 	while (*line_lst)
 	{
 		str_obj = NULL;
@@ -80,10 +85,18 @@ static void		get_objs(t_list **line_lst, t_env *e)
 			if (!str_obj)
 				str_obj = ft_strstr((*line_lst)->content, "CON");
 			if (!str_obj)
+				str_obj = ft_strstr((*line_lst)->content, "PAR");
+			if (!str_obj)
 				str_obj = ft_strstr((*line_lst)->content, "LIG");
+			if (!str_obj)
+				str_obj = ft_strstr((*line_lst)->content, "LIA");
+			if (!str_obj)
+				str_obj = ft_strstr((*line_lst)->content, "LID");
 			*line_lst = (*line_lst)->next;
 		}
 		obj = get_one_obj(str_obj);
+		obj.id = id;
+		id++; //// ALORS ON A LE SEUM ?
 		if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
 			obj.rad = 100;
 		if (obj.mirror > 100)
