@@ -11,7 +11,8 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-t_vec perturbation_normal_plan(t_vec hit_point, t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
+/*
+static t_vec perturbation_normal_plan(t_vec hit_point, t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
 {
 	double x;
 	double y;
@@ -30,7 +31,7 @@ t_vec perturbation_normal_plan(t_vec hit_point, t_vec normal, double p) // A ENL
 	new_normal = (t_vec){normal.x + x, normal.y + y, normal.z + z, 0};
 	return (new_normal);
 }
-/*
+
 static t_vec perturbation_normal(t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
 {
 	double x;

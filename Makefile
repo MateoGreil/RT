@@ -49,6 +49,7 @@ SRC_NAME =	main.c \
 			mouse_hook.c \
 			matrices.c \
 			bump_mapping.c \
+			stereoscopy.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

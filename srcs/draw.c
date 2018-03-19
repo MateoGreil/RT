@@ -49,7 +49,7 @@ t_color	search_color(void *e, int x, int y, int s)
 	return (color);
 }
 
-static void ray_loop_inter(t_env *e, t_vec compteur)
+void ray_loop_inter(t_env *e, t_vec compteur, t_img *img)
 {
 	t_color final_color;
 
@@ -58,7 +58,7 @@ static void ray_loop_inter(t_env *e, t_vec compteur)
 	else
 	{
 		final_color = search_color(e, compteur.x, compteur.y, compteur.z);
-		put_pixel_to_image(&e->img, compteur.x, compteur.y, final_color);
+		put_pixel_to_image(img, compteur.x, compteur.y, final_color);
 	}
 }
 
@@ -73,11 +73,9 @@ static void	*ray_loop(void *e)
 		compteur.x = 0;
 		while (compteur.x < WIN_WIDTH)
 		{
-			ray_loop_inter(((t_env*)e), compteur);
+			ray_loop_inter(((t_env*)e), compteur, &((t_env*)e)->img);
 			compteur.x++;
 		}
-	//if (((t_env*)e)->i_thread == NB_THREADS - 1 && (int)compteur.y % 100 == 0)
-	//	update_loading((t_env*)e, (int)compteur.y / 100);
 		compteur.y++;
 	}
 	return (NULL);

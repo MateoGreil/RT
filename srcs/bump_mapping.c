@@ -31,8 +31,8 @@ int		load_texture_bump(t_env *e)
     return (FALSE);
   return (TRUE);
 }
-
-double  calc_bump(t_env *e, t_vec hit_pos, int i)
+/*
+static double  calc_bump(t_env *e, t_vec hit_pos, int i)
 {
 	int x;
 	int y;
@@ -48,7 +48,7 @@ double  calc_bump(t_env *e, t_vec hit_pos, int i)
   bump = ft_clamp((double)pixel_pos[pixel_size - i] / 255, 0, 1);
 	return (bump);
 }
-
+*/
 //t_vec    bump_mapping(t_env *e, t_vec normal, t_vec hit_pos)
 t_vec    bump_mapping(t_vec normal, t_vec hit_pos)
 {
