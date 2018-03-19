@@ -87,35 +87,7 @@ void    blend_color(t_env *e, t_color *color, t_vec compteur, int n)
 }
 
 t_color damier_color(t_vec hit_point)
-{/*
-  double  l;
-  int x1;
-  int y1;
-  int z1;
-  t_color color;
-
-  l = 30;
-  x1 = (int)(hit_point.x / l);
-  y1 = (int)(hit_point.y / l);
-  z1 = (int)(hit_point.z / l);
-  if (z1 % 2 == 0)
-    {
-      if ((x1 % 2 == 0 && y1 % 2 == 0) ||
-      (x1 % 2 != 0 && y1 % 2 != 0))
-        color = (t_color){0, 0, 255};
-      else
-        color = (t_color){255, 0, 0};
-    }
-  else
-    {
-      if ((x1 % 2 == 0 && y1 % 2 == 0) ||
-      (x1 % 2 != 0 && y1 % 2 != 0))
-        color = (t_color){255, 0, 0};
-      else
-        color = (t_color){0, 0, 255};
-    }
-  return (color);*/
-
+{
   double x;
   double y;
   double z;

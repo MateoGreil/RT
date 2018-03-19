@@ -16,7 +16,7 @@ t_color		directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
 	t_color color;
-	//t_color specular;
+	t_color specular;
 
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
@@ -26,13 +26,13 @@ t_color		directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
 	if (e->cam.cel_shading == ON)
 		d = cel_shading(e, d);
-	//specular = specular_light(e, light_ray);
+	specular = specular_light(e, light_ray);
 	color = ((t_obj*)e->lights->content)->color;
 	if (ray.hit_obj->num_texture != 0)
 		color = color_average(print_texture(e, ray.hit_obj, ray.hit_pos), color);
 	else
 		color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
-	//color = color_average(color, specular);
+	color = color_average(color, specular);
 	return (color);
 }
