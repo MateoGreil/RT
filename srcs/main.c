@@ -26,6 +26,7 @@ static void init_bool(t_env *e)
 	e->cam.reverse = OFF;
 	e->cam.fog = OFF;
 	e->cam.selection = OFF;
+	e->cam.stereo = OFF;
 }
 
 void	draw(t_env *e, int loading)
@@ -43,6 +44,8 @@ void	draw(t_env *e, int loading)
 		mlx_destroy_image(e->mlx, e->wait_img.img);
 		mlx_destroy_window(e->mlx, e->wait_win);
 	}
+	if (e->cam.stereo == ON)
+		stereoscopy(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 }
 

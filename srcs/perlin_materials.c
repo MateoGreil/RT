@@ -26,15 +26,21 @@ static t_color get_perlin_color(double n, double *v)
     color = c0;
   else if (n < v[1])
   {
-    color.r = c0.r * ((n - v[0]) / (v[1] - v[0])) + c1.r * ((v[1] - n) / (v[1] - v[0]));
-    color.g = c0.g * ((n - v[0]) / (v[1] - v[0])) + c1.g * ((v[1] - n) / (v[1] - v[0]));
-    color.b = c0.b * ((n - v[0]) / (v[1] - v[0])) + c1.b * ((v[1] - n) / (v[1] - v[0]));
+    color.r = c0.r * ((n - v[0]) / (v[1] - v[0])) +
+      c1.r * ((v[1] - n) / (v[1] - v[0]));
+    color.g = c0.g * ((n - v[0]) / (v[1] - v[0])) +
+      c1.g * ((v[1] - n) / (v[1] - v[0]));
+    color.b = c0.b * ((n - v[0]) / (v[1] - v[0])) +
+      c1.b * ((v[1] - n) / (v[1] - v[0]));
   }
   if (n < v[2])
   {
-    color.r = c0.r * ((n - v[1]) / (v[2] - v[1])) + c1.r * ((v[2] - n) / (v[2] - v[1]));
-    color.g = c0.g * ((n - v[1]) / (v[2] - v[1])) + c1.g * ((v[2] - n) / (v[2] - v[1]));
-    color.b = c0.b * ((n - v[1]) / (v[2] - v[1])) + c1.b * ((v[2] - n) / (v[2] - v[1]));
+    color.r = c0.r * ((n - v[1]) / (v[2] - v[1])) +
+      c1.r * ((v[2] - n) / (v[2] - v[1]));
+    color.g = c0.g * ((n - v[1]) / (v[2] - v[1])) +
+      c1.g * ((v[2] - n) / (v[2] - v[1]));
+    color.b = c0.b * ((n - v[1]) / (v[2] - v[1])) +
+      c1.b * ((v[2] - n) / (v[2] - v[1]));
   }
   else
     color = c2;
@@ -60,16 +66,20 @@ void		wood_texture(t_vec hit_point, t_color *color)
 	double	scale;
 	double	res;
 	double	v;
+  double ft;
+  double f;
 
-	scale = 40;
+	scale = 2;
 	res = 0.0;
-	v = 20 * fabs(noise(hit_point.x * scale, hit_point.y
+	v = 5 * fabs(noise(hit_point.x * scale, hit_point.y
 		* scale, hit_point.z * scale));
-	res += v - (int)v;
-	res = ft_clamp(res, 0.0, 1.0);
-  color->r = color->r + 255 * (1.0 - res);
-  color->g = color->g + 255 * (1.0 - res);
-  color->b = color->b + 255 * (1.0 - res);
+	res = fabs(v - (int)v);
+	ft = res * M_PI;
+  f = (1 - cos(ft)) * 0.5;
+  printf("%f\n", res);
+  color->r = color->r + 255 * f;
+  color->g = color->g + 255 * f;
+  color->b = color->b + 255 * f;
 }
 
 void		marble_texture(t_vec hit_point, t_color *color)
@@ -79,7 +89,7 @@ void		marble_texture(t_vec hit_point, t_color *color)
 
 	res = 0.0;
 	i = 0;
-	while (++i < 6)
+	while (++i < 8)
 		res += cos(hit_point.x + noise(hit_point.x, hit_point.y, hit_point.z));
 	res = ft_clamp(res, 0.0, 1.0);
 	color->r = color->r + 255 * (1 - res);

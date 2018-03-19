@@ -152,6 +152,7 @@ typedef struct		s_cam
 	int				bnw;
 	int				reverse;
 	int				fog;
+	int				stereo;
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			right;
@@ -230,6 +231,7 @@ void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
+void 			stereoscopy(t_env *e);
 
 void 				init_loading(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
@@ -253,7 +255,7 @@ double				grad(int hash, double x, double y, double z);
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec    	bump_mapping(t_env *e, t_vec normal, t_vec hit_pos);
+t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
 
 ////////////////////
 
