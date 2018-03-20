@@ -89,11 +89,11 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	specular = specular_light(e, light_ray);
 	color = ((t_obj*)e->lights->content)->color;
 	if (ray.hit_obj->num_texture != 0)
-		color = color_average(print_texture(e, ray.hit_obj, ray.hit_pos), color);
+		color = print_texture(e, ray.hit_obj, ray.hit_pos);
 	else
 		color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
-	color = color_average(color, specular);
+	//color = color_average(color, specular);
 	return (color);
 }
 
