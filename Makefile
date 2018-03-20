@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/20 11:33:05 by mgreil           ###   ########.fr        #
+#    Updated: 2018/03/20 11:37:07 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,7 @@ MLXFLAGS = -framework OpenGL -framework AppKit -lpthread
 
 LIBFT = -lft -L$(LIBFT_PATH)
 LIBMLX = -lmlx -L$(LIBMLX_PATH)
+LIBXLM = -lxml2
 
 SRC_NAME =	main.c \
 			parse_file.c \
@@ -53,7 +54,7 @@ SRC_NAME =	main.c \
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 SRC_PATH = ./srcs/
-INC_PATH = -I ./incs/ -I ./minilibx_macos/ -I ./libft/includes/ -I /usr/include/libxml2
+INC_PATH = -I ./incs/ -I ./minilibx_macos/ -I ./libft/includes/ -I/usr/include/libxml2
 OBJ_PATH = ./objs/
 LIBFT_PATH = ./libft/
 LIBMLX_PATH = ./minilibx_macos/
@@ -66,7 +67,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFT_PATH)
 	@make -C $(LIBMLX_PATH)
-	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) -o $(NAME) $(OBJS)
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) $(LIBXML) -o $(NAME) $(OBJS)
 	@echo "$(NAME) compiled ✓"
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
