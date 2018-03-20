@@ -53,7 +53,7 @@ void ray_loop_inter(t_env *e, t_vec compteur, t_img *img)
 {
 	t_color final_color;
 
-	if (e->cam.num_samples >= 1)
+	if (e->cam.num_samples >= NB_SAMPLES)
 		sampling_color(e, compteur);
 	else
 	{

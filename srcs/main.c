@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:38:03 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/15 16:14:14 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/20 13:36:35 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		get_objs_and_cam(&e, av[1]);
+		parse_file(&e, av[1]);
 		e.mlx = mlx_init();
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 0.2");
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
