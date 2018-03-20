@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/20 11:37:07 by mgreil           ###   ########.fr        #
+#    Updated: 2018/03/20 16:22:43 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,8 @@ LIBXLM = -lxml2
 
 SRC_NAME =	main.c \
 			parse_file.c \
-			get_node_for_env.c \
+			xmlGet1.c \
+			xmlGet2.c \
 			draw.c \
 			inter_objs.c \
 			inter_objs2.c \
@@ -67,7 +68,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFT_PATH)
 	@make -C $(LIBMLX_PATH)
-	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) $(LIBXML) -o $(NAME) $(OBJS)
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) $(LIBXLM) -o $(NAME) $(OBJS)
 	@echo "$(NAME) compiled ✓"
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c

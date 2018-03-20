@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/20 11:32:40 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:42:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,9 @@
 # define CYL 2
 # define CON 3
 # define PAR 4
-# define LIG 5
-# define LIA 6
-# define LID 7
+# define LIG 5 //light
+# define LIA 6 //ambient_light
+# define LID 7 //directional_light
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
@@ -108,15 +108,18 @@
 typedef struct		s_obj
 {
 	int				id;
-	char			type;
+	char				type;
 	t_vec			pos;
 	t_vec			dir;
 	double			rad;
 	t_color			color;
 	t_vec			rot;
 	t_vec			trans;
-	char			mirror;
+	char				mirror;
 	int				num_texture;
+	char				refl;
+	char				refr;
+	char				n_refr;
 }					t_obj;
 
 typedef struct		s_ray
@@ -186,6 +189,7 @@ typedef struct		s_env
 
 void				ft_delstr(void *content, size_t content_size);
 
+// LIBMLX //
 t_img				new_image(void *mlx, int img_size_x, int img_size_y);
 void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
@@ -225,7 +229,6 @@ void				screenshot(t_env *e);
 void    		sampling_color(t_env *e, t_vec compteur);
 t_color			search_color(void *e, int x, int y, int s);
 
-
 // PARTIE BENJAMIN //
 double		equation_second(t_vec a, double *b);
 double		parab_inter(t_env *e, t_ray *ray, t_vec temp);
@@ -261,7 +264,12 @@ t_vec    	bump_mapping(t_env *e, t_vec normal, t_vec hit_pos);
 
 // PARTIE PARSING XML //
 xmlNodePtr	get_node(xmlNodePtr node, char *name);
-void			get_node_for_env(t_env *e, xmlNodePtr root);
 void			parse_file(t_env *e, char *docname);
+void			xmlGet_cam(xmlNodePtr cam, t_env *e);
+void			xmlGet_objs(xmlNodePtr objs, t_env *e);
+void			xmlGet_lights(xmlNodePtr lights, t_env *e);
+t_color		xmlGet_color(xmlNodePtr cur, t_env *e);
+char			xmlGet_type(xmlNodePtr cur, t_env *e);
+t_vec		xmlGet_vec(xmlNodePtr cur, t_env *e);
 
 #endif
