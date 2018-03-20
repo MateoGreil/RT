@@ -175,15 +175,15 @@
 // 	return (color);
 // }
 
-static t_color	ambient_color(t_env *e)
+static t_color	ambient_color(t_env *e, t_ray ray)
 {
 	t_color	color;
 	t_list	*tmp;
 
 	//Bien vérifier si l'ambiente se fait avec la couleur de l'objet ou non
 	tmp = e->lights;
-	//color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
-	color = (t_color){255, 255, 255};
+	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
+	//color = (t_color){255, 255, 255};
 	color = color_double_product(color, 0.25);
 	// while (e->lights != NULL)
 	// {
@@ -252,7 +252,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 
 	tmp = e->lights;
 	color = ray.hit_obj->color;
-	ambient = ambient_color(e);
+	ambient = ambient_color(e, ray);
 	while (e->lights != NULL)
 	{
 		light_ray.hit_obj = ray.hit_obj;
@@ -264,9 +264,11 @@ t_color			light_calc(t_env *e, t_ray ray)
 		}
 		e->lights = e->lights->next;
 	}
-	diffuse_color = color_product(ambient, diffuse_color);
+	diffuse_color = color_addition(ambient, diffuse_color);
+	diffuse_color = max_color(diffuse_color);
+
 	//color = color_product(color, ambient);
-	color = color_product(color, diffuse_color);
+	color = color_addition(color, diffuse_color);
 	e->lights = tmp;
 	color = max_color(color);
 	return (color);
