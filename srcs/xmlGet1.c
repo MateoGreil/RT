@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/20 16:48:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:43:09 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ char	xmlGet_type_lights(xmlNodePtr cur, t_env *e)
 
 char	xmlGet_type(xmlNodePtr cur, t_env *e)
 {
-	printf("type = %s\n", xmlNodeListGetString(e->doc, cur, 1));
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
 		(const xmlChar *)"sphere")))
 		return (SPH);

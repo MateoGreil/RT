@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/20 17:11:24 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:56:30 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,4 +57,6 @@ void	parse_file(t_env *e, char *docname)
 		return;
 	}
 	get_node_for_env(e, root);
+	printf("type = %d, r = %d, g = %d, b = %d", ((t_obj*)e->objs->next->content)->type, ((t_obj*)e->objs->next->content)->color.r, ((t_obj*)e->objs->next->content)->color.g, ((t_obj*)e->objs->next->content)->color.b);
+	printf("reflection = %d, refraction = %d, n_refr = %d", ((t_obj*)e->objs->next->content)->refl, ((t_obj*)e->objs->next->content)->refr, ((t_obj*)e->objs->next->content)->n_refr);
 }
