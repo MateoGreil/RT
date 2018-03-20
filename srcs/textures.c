@@ -61,8 +61,8 @@ t_color  print_texture(t_env *e, t_obj *obj, t_vec hit_pos)
 	color = obj->color;
 	x = (int)hit_pos.x % (e->texture[obj->num_texture].size_x);
 	y = (int)hit_pos.y % (e->texture[obj->num_texture].size_y);
-//	if (x <= e->texture[obj->num_texture].size_x
-//		&& y <= e->texture[obj->num_texture].size_y && x > 0 && y > 0)
+	//if (x <= e->texture[obj->num_texture].size_x
+	//	&& y <= e->texture[obj->num_texture].size_y && x > 0 && y > 0)
 	color = change_pixel_data(&e->texture[obj->num_texture], abs(x), abs(y));
 	return (color);
 }
