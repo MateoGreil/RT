@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/20 16:50:30 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/20 17:11:24 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,4 @@ void	parse_file(t_env *e, char *docname)
 		return;
 	}
 	get_node_for_env(e, root);
-	printf("cam :\n");
-	printf("pos : x = %lf, y = %lf, z = %lf\n", e->cam.pos.x, e->cam.pos.y, e->cam.pos.z);
-	printf("dir : x = %lf, y = %lf, z = %lf\n", e->cam.dir.x, e->cam.dir.y, e->cam.dir.z);
-	printf("lights :\n");
-	printf("rad = %f", ((t_obj*)e->lights->content)->rad);
 }
