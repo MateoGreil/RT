@@ -6,13 +6,13 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:51:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/05 16:35:57 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 11:10:19 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
+/*void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
 {
 	t_list	*tmp;
 	t_ray	new_ray;
@@ -37,6 +37,6 @@ void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
 	}
 	e->objs = tmp;
 	*ray = new_ray;
-	if (new_ray.hit_obj && new_ray.hit_obj->mirror && nb_rebond < NB_MIRRORING)
+	if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRRORING)
 		ray_mirror(e, &new_ray, nb_rebond + 1);
-}
+}*/
