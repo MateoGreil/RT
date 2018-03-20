@@ -37,7 +37,7 @@
 	</cam>
 	<objs>
 		<obj>
-			<type>plan</type>
+			<type>sphere</type>
 			<position>
 				<x>0</x>
 				<y>0</y>
