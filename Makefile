@@ -50,6 +50,7 @@ SRC_NAME =	main.c \
 			matrices.c \
 			bump_mapping.c \
 			stereoscopy.c \
+			noise.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

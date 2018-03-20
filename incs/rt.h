@@ -103,6 +103,16 @@
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
 
+typedef struct		s_noise
+{
+	double		*noise;
+	int				size_x;
+	int				size_y;
+	int				len;
+	int				pas;
+	int				octave;
+}						t_noise;
+
 typedef struct		s_obj
 {
 	int				id;
@@ -179,7 +189,8 @@ typedef struct		s_env
 	t_list			*objs;
 	t_list			*lights;
 	t_img				*texture;
-	t_img				*bump;
+	t_noise			*noise;
+	t_img				*bump; // A supprimer ?
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -243,21 +254,25 @@ t_color 			filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 
 t_color				damier_color(t_vec hit_point);
-void 				marble_texture(t_vec hit_point, t_color *color);
-void				wood_texture(t_vec hit_point, t_color *color);
-t_color 				perlin_color(t_vec hit_point);
 void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 
-double				noise(double x, double y, double z);
+/*double				noise(double x, double y, double z);
 double				fade(double t);
 double				lerp(double t, double a, double b);
 double				grad(int hash, double x, double y, double z);
+t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
+void 				marble_texture(t_vec hit_point, t_color *color);
+void				wood_texture(t_vec hit_point, t_color *color);
+t_color 				perlin_color(t_vec hit_point);
+*/
 
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
 
+t_noise				*init_noise(t_env *e);
+double				noise(t_noise *noise, double x, double y);
+t_color			noise_marble(t_noise *n, int x, int y);
 ////////////////////
 
 #endif
