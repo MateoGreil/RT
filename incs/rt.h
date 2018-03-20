@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/15 16:22:14 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/20 11:32:40 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "mlx.h"
 # include <math.h>
 # include <pthread.h>
+
+# include <libxml/parser.h>
+
 # include <stdio.h> //<- A SUPPRIMER
 
 # define WIN_WIDTH 1000
@@ -166,18 +169,19 @@ typedef struct		s_cam
 
 typedef struct		s_env
 {
-	void			*mlx;
-	void			*win;
-	void			*wait_win;
+	void				*mlx;
+	void				*win;
+	void				*wait_win;
 	t_img			img;
 	t_img			wait_img;
 	int				y_start;
 	int				y_end;
+	xmlDocPtr		doc;
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_img				*texture;
-	t_img				*bump;
+	t_img			*texture;
+	t_img			*bump;
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -255,6 +259,9 @@ int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
 t_vec    	bump_mapping(t_env *e, t_vec normal, t_vec hit_pos);
 
-////////////////////
+// PARTIE PARSING XML //
+xmlNodePtr	get_node(xmlNodePtr node, char *name);
+void			get_node_for_env(t_env *e, xmlNodePtr root);
+void			parse_file(t_env *e, char *docname);
 
 #endif
