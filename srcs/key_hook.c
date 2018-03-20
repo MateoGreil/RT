@@ -14,9 +14,14 @@
 
 int		button_exit(int keycode, t_env *e)
 {
+	int i;
+
+	i = 1;
 	e = NULL;
 	//ft_lstdel(&e->lights, &ft_delstr);
 	//ft_lstdel(&e->objs, &ft_delstr);
+	//free(&e->noise[0].noise);
+	//free(&e->noise[0]);
 	keycode = 0;
 	exit(0);
 }

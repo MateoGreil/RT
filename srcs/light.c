@@ -90,15 +90,15 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	color = ((t_obj*)e->lights->content)->color;
 	if (ray.hit_obj->num_texture != 0)
 		color = print_texture(e, ray.hit_obj, ray.hit_pos);
-	else if (ray.hit_obj->num_texture == 3)
-	{
-		e->noise = init_noise(e);
-		color = noise_marble(e->noise, light_ray->hit_pos.x, light_ray->hit_pos.x);
-	}
 	else
 		color = color_average(ray.hit_obj->color, color);
+	/*if (ray.hit_obj->type == SPH)
+		color = noise_marble(e->noise, light_ray->hit_pos.x, light_ray->hit_pos.x); /// test
+	if (ray.hit_obj->type == CYL)
+		color = noise_wood(e->noise, light_ray->hit_pos.x, light_ray->hit_pos.x); /// test
+	*/
 	color = color_double_product(color, d);
-	color = color_average(color, specular);
+	//color = color_average(color, specular);
 	return (color);
 }
 

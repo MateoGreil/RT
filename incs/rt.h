@@ -270,9 +270,10 @@ int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
 
-t_noise				*init_noise(t_env *e);
+t_noise				*init_noise(void);
 double				noise(t_noise *noise, double x, double y);
-t_color			noise_marble(t_noise *n, int x, int y);
+t_color				noise_marble(t_noise *n, int x, int y);
+t_color				noise_wood(t_noise *n, int x, int y);
 ////////////////////
 
 #endif

@@ -17,7 +17,7 @@ int		load_texture_img(t_env *e)
 	int a;
 	int	b;
 
-	e->texture = malloc(sizeof(t_img) * (NB_TEXTURES + 1));
+	e->texture = (t_img*)malloc(sizeof(t_img) * (NB_TEXTURES + 1));
 	a = 64;
 	b = 64;
 	e->texture[0].img = NULL;
