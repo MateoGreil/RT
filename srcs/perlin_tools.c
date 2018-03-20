@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 double fade(double t)
 {
 	return t * t * t * (t * (t * 6 - 15) + 10);
@@ -39,3 +39,4 @@ double		grad(int hash, double x, double y, double z)
     vec2 = z;
   return (((h & 1) == 0 ? vec1 : -vec1) + ((h & 2) == 0 ? vec2 : -vec2));
 }
+*/
