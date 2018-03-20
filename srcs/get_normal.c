@@ -11,44 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-/*
-static t_vec perturbation_normal_plan(t_vec hit_point, t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
-{
-	double x;
-	double y;
-	double z;
-	double a;
-	double b;
-	double c;
-	t_vec new_normal;
 
-	a = normal.x + hit_point.x;
-	b = 50 * normal.y + 100 * hit_point.y;
-	c = normal.z + hit_point.z;
-	x = noise(a - p, b, c) - noise(a + p, b, c);
-	y = noise(a, b - p, c) - noise(a, b + p, c);
-	z = noise(a, b, c - p) - noise(a, b, c + p);
-	new_normal = (t_vec){normal.x + x, normal.y + y, normal.z + z, 0};
-	return (new_normal);
-}
-
-static t_vec perturbation_normal(t_vec normal, double p) // A ENLEVER SI CA MARCHE PAS A TERME
-{
-	double x;
-	double y;
-	double z;
-	t_vec new_normale;
-
-	x = noise(normal.x - p, normal.y, normal.z) -
-		noise(normal.x + p, normal.y, normal.z);
-	y = noise(normal.x, normal.y - p, normal.z) -
-		noise(normal.x, normal.y + p, normal.z);
-	z = noise(normal.x, normal.y, normal.z - p) -
-		noise(normal.x, normal.y, normal.z + p);
-	new_normale = (t_vec){normal.x + x, normal.y + y, normal.z + z, 0};
-	return (new_normale);
-}
-*/
 static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 {
 	t_vec tmp;

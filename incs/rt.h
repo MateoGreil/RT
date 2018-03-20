@@ -225,6 +225,7 @@ int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
 t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
+t_color			specular_light(t_env *e, t_ray *light_ray);
 void				transformations(t_obj *obj);
 t_vec				ft_rotation_x(t_vec ex_pos, double angle);
 t_vec				ft_rotation_y(t_vec ex_pos, double angle);
