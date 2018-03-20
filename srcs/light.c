@@ -51,7 +51,7 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	return (0);
 }
 
-static t_color	specular_light(t_env *e, t_ray *light_ray)
+t_color	specular_light(t_env *e, t_ray *light_ray)
 {
 	t_vec		reflection;
 	t_color		specular;
