@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/20 17:57:31 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/20 16:42:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,7 @@ typedef struct		s_obj
 	t_color			color;
 	t_vec			rot;
 	t_vec			trans;
+	char				mirror;
 	int				num_texture;
 	char				refl;
 	char				refr;

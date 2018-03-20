@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:51:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/20 18:03:37 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/05 16:35:57 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,6 @@ void	ray_mirror(t_env *e, t_ray *ray, int nb_rebond)
 	}
 	e->objs = tmp;
 	*ray = new_ray;
-	if (new_ray.hit_obj && new_ray.hit_obj->refl && nb_rebond < NB_MIRRORING)
+	if (new_ray.hit_obj && new_ray.hit_obj->mirror && nb_rebond < NB_MIRRORING)
 		ray_mirror(e, &new_ray, nb_rebond + 1);
 }

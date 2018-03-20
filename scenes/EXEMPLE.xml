@@ -63,33 +63,6 @@
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
 		</obj>
-		<obj>
-			<type>cylindre</type>
-			<position>
-				<x>50</x>
-				<y>0</y>
-				<z>100</z>
-			</position>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-			<rad>50</rad>
-			<color>
-				<r>250</r>
-				<g>0</g>
-				<b>0</b>
-			</color>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
 	</objs>
 	<lights>
 		<light>
