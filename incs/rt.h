@@ -90,7 +90,7 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 1
+# define NB_THREADS 8
 
 # define TRUE 1
 # define FALSE 0
