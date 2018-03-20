@@ -232,6 +232,7 @@ t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
 void    		sampling_color(t_env *e, t_vec compteur);
 t_color			search_color(void *e, int x, int y, int s);
+void    blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 
 // PARTIE BENJAMIN //
 double		equation_second(t_vec a, double *b);
