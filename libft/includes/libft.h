@@ -25,9 +25,9 @@
 
 typedef struct	s_color
 {
-	unsigned char	r;
-	unsigned char	g;
-	unsigned char	b;
+	double	r;
+	double	g;
+	double	b;
 }				t_color;
 
 typedef	struct	s_vec

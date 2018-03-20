@@ -36,9 +36,9 @@ t_vec	ray_dir_cal(t_env *e, double x, double y, int s)
 	e->cam.focal = 5;
 	e->cam.samp = (t_point){(double)s /
 		(double)e->cam.num_samples, hammersley(s)};
-	pixel.x = 0.7 * (x - 0.5 * WIN_WIDTH + e->cam.samp.x);
+	pixel.x = 1 * (x - 0.5 * WIN_WIDTH + e->cam.samp.x);
 	//pixel.x = 0.7 * (x - 0.5 * WIN_WIDTH);
-	pixel.y = -1 * (0.7 * (y - 0.5 * WIN_HEIGHT + e->cam.samp.y));
+	pixel.y = -1 * (1 * (y - 0.5 * WIN_HEIGHT + e->cam.samp.y));
 	//pixel.y = -1 * (0.7 * (y - 0.5 * WIN_HEIGHT));
 	dir = vector_substraction(vector_addition(
 		vector_double_product(e->cam.right, pixel.x),
@@ -93,7 +93,7 @@ void	set_cam_coordinates(t_env *e)
 	}
 	else
 	{
-		e->cam.dist = 250;
+		e->cam.dist = 300;
 		e->cam.forward = vector_substraction(e->cam.pos, e->cam.dir);
 		e->cam.forward = vector_normalize(e->cam.forward);
 		tmp = (t_vec){0, 1, 0, 0};
