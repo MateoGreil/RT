@@ -51,6 +51,7 @@
 # define KEY_K 40
 # define KEY_N 45
 # define KEY_M 46
+# define KEY_TAB 48
 # define KEY_SPACE 49
 # define KEY_DEL 51
 # define KEY_ECHAP 53
@@ -105,7 +106,7 @@
 typedef struct		s_obj
 {
 	int				id;
-	char			type;
+	int			type;
 	t_vec			pos;
 	t_vec			dir;
 	double			rad;

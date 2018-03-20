@@ -12,6 +12,7 @@
 
 #include "rt.h"
 
+/*
 static t_color get_perlin_color(double n, double *v)
 {
   t_color c0;
@@ -96,3 +97,4 @@ void		marble_texture(t_vec hit_point, t_color *color)
 	color->g = color->g + 255 * (1 - res);
 	color->b = color->b + 255 * (1 - res);
 }
+*/
