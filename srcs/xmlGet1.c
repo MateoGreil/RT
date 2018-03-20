@@ -68,7 +68,6 @@ char	xmlGet_type_lights(xmlNodePtr cur, t_env *e)
 
 char	xmlGet_type(xmlNodePtr cur, t_env *e)
 {
-	printf("type = %s\n", xmlNodeListGetString(e->doc, cur, 1));
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
 		(const xmlChar *)"sphere")))
 		return (SPH);

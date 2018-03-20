@@ -61,6 +61,7 @@ int	main(int ac, char **av)
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
 		init_bool(&e);
 		set_cam_coordinates(&e);
+		print_keys();
 		draw(&e, 1);
 		mlx_hook(e.win, KEY_PRESS, KEY_PRESS_MASK, &key_hook, &e);
 		mlx_hook(e.win, MOUSE_PRESS, MOUSE_PRESS_MASK, &mouse_hook, &e);

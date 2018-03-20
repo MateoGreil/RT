@@ -68,6 +68,7 @@
 # define KEYPAD_UP 126
 # define KEYPAD_DOWN 125
 # define KEY_LCTRL 256
+# define KEY_FN 279
 
 # define INVALID_FILE_DESCRIPTION 0
 # define INVALID_FILE 1
@@ -241,6 +242,8 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
 void 			stereoscopy(t_env *e);
+void				save_scene(t_env *e);
+void 				print_keys(void);
 
 void 				init_loading(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
@@ -249,7 +252,7 @@ void 				change_object_color(t_color *color);
 int					change_filter(int keycode, t_env *e);
 t_color 			filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
-
+/*
 t_color				damier_color(t_vec hit_point);
 void 				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
@@ -260,7 +263,7 @@ double				noise(double x, double y, double z);
 double				fade(double t);
 double				lerp(double t, double a, double b);
 double				grad(int hash, double x, double y, double z);
-
+*/ // A supprimer ??
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);

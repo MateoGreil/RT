@@ -79,6 +79,8 @@ int			key_hook(int keycode, t_env *e)
 						translate_camXZ(&e->cam, keycode);
 		else if (keycode == KEY_SPACE)
 			screenshot(e);
+		else if (keycode == KEY_FN)
+			save_scene(e);
 		else if (keycode == KEY_ECHAP)
 			button_exit(keycode, e);
 		change_filter(keycode, e);
