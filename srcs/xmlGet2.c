@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2018/03/21 15:47:02 by bmuselet          #+#    #+#             */
 /*   Updated: 2018/03/21 15:54:51 by bmuselet         ###   ########.fr       */
+=======
+/*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
+/*   Updated: 2018/03/21 15:32:40 by mgreil           ###   ########.fr       */
+>>>>>>> b140cb934effbc6a58540552b5e6476de1faa142
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +98,8 @@ void			xmlGet_objs(xmlNodePtr objs, t_env *e)
 			obj = xmlGet_one_obj(cur->xmlChildrenNode, e);
 			obj.id = id;
 			obj.num_texture = 0;
+			if (obj.type == PLA)
+				transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
 			id++;
 		}

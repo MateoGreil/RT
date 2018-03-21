@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/03/21 15:30:37 by bmuselet         ###   ########.fr       */
+=======
+/*   Updated: 2018/03/21 15:24:14 by mgreil           ###   ########.fr       */
+>>>>>>> b140cb934effbc6a58540552b5e6476de1faa142
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +18,7 @@
 
 int			button_exit(int keycode, t_env *e)
 {
+	xmlFreeDoc(e->doc);
 	e = NULL;
 	//ft_lstdel(&e->lights, &ft_delstr);
 	//ft_lstdel(&e->objs, &ft_delstr);

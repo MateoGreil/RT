@@ -5,8 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+<<<<<<< HEAD
 /*   Created: 2018/03/21 15:45:34 by bmuselet          #+#    #+#             */
 /*   Updated: 2018/03/21 15:51:53 by bmuselet         ###   ########.fr       */
+=======
+/*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
+/*   Updated: 2018/03/21 15:41:38 by mgreil           ###   ########.fr       */
+>>>>>>> b140cb934effbc6a58540552b5e6476de1faa142
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +100,7 @@ void	xmlGet_cam(xmlNodePtr cam, t_env *e)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			e->cam.pos = xmlGet_vec(cur->xmlChildrenNode, e);
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
 			e->cam.dir = xmlGet_vec(cur->xmlChildrenNode, e);
 		cur = cur->next;
 	}
