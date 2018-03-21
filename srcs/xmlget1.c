@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xmlget1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 15:59:11 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:49:34 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,75 +15,105 @@
 t_vec	xmlGet_vec(xmlNodePtr cur, t_env *e)
 {
 	t_vec	vec;
+	char		*str;
 
 	while (cur)
 	{
+		str = (char*)xmlNodeListGetString(e->doc,
+			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"x")))
-			vec.x = ft_atoi((char*)xmlNodeListGetString(e->doc,
-						cur->xmlChildrenNode, 1));
+		{
+			vec.x = ft_atoi(str);
+		}
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"y")))
-			vec.y = ft_atoi((char*)xmlNodeListGetString(e->doc,
-						cur->xmlChildrenNode, 1));
+		{
+			vec.y = ft_atoi(str);
+		}
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"z")))
-			vec.z = ft_atoi((char*)xmlNodeListGetString(e->doc,
-						cur->xmlChildrenNode, 1));
+		{
+			vec.z = ft_atoi(str);
+		}
+		free(str);
 		cur = cur->next;
 	}
+	//xmlFreeNode(cur);
 	return (vec);
 }
 
 t_color	xmlGet_color(xmlNodePtr cur, t_env *e)
 {
 	t_color	color;
+	char		*str;
 
 	while (cur)
 	{
+		str = (char*)xmlNodeListGetString(e->doc,
+			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"r")))
-			color.r = ft_atoi((char*)xmlNodeListGetString(e->doc,
-						cur->xmlChildrenNode, 1));
+			color.r = ft_atoi(str);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"g")))
-			color.g = ft_atoi((char*)xmlNodeListGetString(e->doc,
-						cur->xmlChildrenNode, 1));
+			color.g = ft_atoi(str);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"b")))
-			color.b = ft_atoi((char*)xmlNodeListGetString(e->doc,
-						cur->xmlChildrenNode, 1));
+			color.b = ft_atoi(str);
+		free(str);
 		cur = cur->next;
 	}
 	return (color);
 }
 
-char	xmlGet_type_lights(xmlNodePtr cur, t_env *e)
+char	xmlGet_type_lights(char *str)
 {
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"light")))
+	if (!ft_strcmp(str, "paraboloide"))
+	{
+		free(str);
+		return (PAR);
+	}
+	if (!ft_strcmp(str, "light"))
+	{
+		free(str);
 		return (LIG);
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"ambient")))
+	}
+	if (!ft_strcmp(str, "ambient"))
+	{
+		free(str);
 		return (LIA);
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"directional")))
+	}
+	if (!ft_strcmp(str, "directional"))
+	{
+		free(str);
 		return (LID);
+	}
+	free(str);
 	return (ERROR);
 }
 
 char	xmlGet_type(xmlNodePtr cur, t_env *e)
 {
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"sphere")))
+	char	*str;
+
+	str = (char*)xmlNodeListGetString(e->doc,
+		cur, 1);
+	if (!ft_strcmp(str, "sphere"))
+	{
+		free(str);
 		return (SPH);
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"plan")))
+	}
+	if (!ft_strcmp(str, "plan"))
+	{
+		free(str);
 		return (PLA);
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"cylindre")))
+	}
+	if (!ft_strcmp(str, "cylinde"))
+	{
+		free(str);
 		return (CYL);
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"cone")))
+	}
+	if (!ft_strcmp(str, "cone"))
+	{
+		free(str);
 		return (CON);
-	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-					(const xmlChar *)"paraboloide")))
-		return (PAR);
-	return (xmlGet_type_lights(cur, e));
+	}
+	return (xmlGet_type_lights(str));
 }
 
 void	xmlGet_cam(xmlNodePtr cam, t_env *e)
