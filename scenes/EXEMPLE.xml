@@ -65,24 +65,5 @@
 		</obj>
 	</objs>
 	<lights>
-		<light>
-			<type>light</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<intensity>100</intensity>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-			</color>
-		</light>
 	</lights>
 </rt>
