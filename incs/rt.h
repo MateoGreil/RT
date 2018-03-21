@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/20 16:42:11 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 11:26:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,15 +109,14 @@
 
 typedef struct		s_obj
 {
-	int				id;
-	char			type;
+	char				id;
+	char				type;
 	t_vec			pos;
 	t_vec			dir;
 	double			rad;
 	t_color			color;
 	t_vec			rot;
 	t_vec			trans;
-	char				mirror;
 	int				num_texture;
 	char				refl;
 	char				refr;
@@ -138,8 +137,8 @@ typedef struct		s_ray
 
 typedef struct		s_img
 {
-	void			*img;
-	char			*data;
+	void				*img;
+	char				*data;
 	int				size_x;
 	int				size_y;
 	int				bpp;
@@ -154,7 +153,7 @@ typedef struct		s_cam
 	double			lens_rad;
 	double			zoom;
 	int				num_samples;
-	int 			antialiasing;
+	int 				antialiasing;
 	int				cel_shading;
 	int				sepia;
 	int				bnw;
