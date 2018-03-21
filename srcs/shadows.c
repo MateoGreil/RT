@@ -28,8 +28,6 @@ static void	inter_shadow(t_env *e, t_ray light_ray)
 		light_ray.length = plan_inter(e, &light_ray);
 	else if (((t_obj*)e->objs->content)->type == PAR)
 		light_ray.length = parab_inter(e, &light_ray, temp);
-//	if (light_ray.length != INFINITE)
-//	printf("length %f\n", light_ray.length);
 }
 
 int			calc_shadow(t_env *e, t_ray light_ray)
@@ -48,7 +46,6 @@ int			calc_shadow(t_env *e, t_ray light_ray)
 		if (((t_obj*)e->objs->content) != light_ray.hit_obj)
 		{
 			inter_shadow(e, light_ray);
-			//printf("dist %f\n", dist_obj_to_light);
 			if (light_ray.length < dist_obj_to_light)
 			{
 				e->objs = tmp;
