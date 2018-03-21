@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 11:26:25 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 16:14:40 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -254,6 +254,7 @@ void				change_object_color(t_color *color);
 int					change_filter(int keycode, t_env *e);
 t_color				filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
+int					calc_shadow(t_env *e, t_ray light_ray);
 /*
 *
 *t_color				damier_color(t_vec hit_point);

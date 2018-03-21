@@ -34,6 +34,7 @@ SRC_NAME =	main.c \
 			tools_mlx.c \
 			light.c \
 			light2.c \
+			shadows.c \
 			transformations.c \
 			get_normal.c \
 			perlin_materials.c \
