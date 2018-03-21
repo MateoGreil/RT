@@ -101,22 +101,15 @@ static t_color	max_color(t_color color)
 	return (color);
 }
 
-t_color			light_calc(t_env *e, t_ray ray)
+static t_color	calc_all_lights(t_env *e, t_ray ray)
 {
-	t_color	color;
-	t_color	tmp_color;
-	t_color	diffuse_color;
-	t_color ambient;
 	t_ray	light_ray;
+	t_color	diffuse_color;
+	t_color	tmp_color;
 	t_list	*tmp;
 
 	tmp = e->lights;
-	color = color_division(ray.hit_obj->color, 255);
-	ambient = ambient_color(e, ray);
-	ambient = color_division(ambient, 255);
 	diffuse_color = (t_color){0, 0, 0};
-	if (e->lights == NULL)
-		color = ambient;
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)
@@ -133,9 +126,27 @@ t_color			light_calc(t_env *e, t_ray ray)
 		}
 		e->lights = e->lights->next;
 	}
-	color = color_product(color, diffuse_color);
-	color = color_addition(color, ambient);
 	e->lights = tmp;
+	return (diffuse_color);
+}
+
+t_color			light_calc(t_env *e, t_ray ray)
+{
+	t_color	color;
+	t_color	diffuse_color;
+	t_color ambient;
+
+	color = color_division(ray.hit_obj->color, 255);
+	ambient = ambient_color(e, ray);
+	ambient = color_division(ambient, 255);
+	if (e->lights == NULL)
+		color = ambient;
+	else
+	{
+		diffuse_color = calc_all_lights(e, ray);
+		color = color_product(color, diffuse_color);
+	}
+	color = color_addition(color, ambient);
 	color = color_double_product(color, 255);
 	color = max_color(color);
 	return (color);
