@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 16:49:34 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 16:59:57 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	xmlGet_type(xmlNodePtr cur, t_env *e)
 		free(str);
 		return (PLA);
 	}
-	if (!ft_strcmp(str, "cylinde"))
+	if (!ft_strcmp(str, "cylindre"))
 	{
 		free(str);
 		return (CYL);
