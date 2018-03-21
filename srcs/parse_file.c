@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 12:11:19 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 15:41:49 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,17 @@ static void	get_node_for_env(t_env *e, xmlNodePtr root)
 	while (cur)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"cam")))
+		{
 			xmlGet_cam(cur, e);
+		}
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"objs")))
+		{
 			xmlGet_objs(cur, e);
+		}
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"lights")))
+		{
 			xmlGet_lights(cur, e);
+		}
 		cur = cur->next;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/20 17:43:09 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 15:41:38 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void			xmlGet_cam(xmlNodePtr cam, t_env *e)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			e->cam.pos = xmlGet_vec(cur->xmlChildrenNode, e);
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
 			e->cam.dir = xmlGet_vec(cur->xmlChildrenNode, e);
 		cur = cur->next;
 	}
