@@ -48,7 +48,7 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 	e->objs = tmp;
 	return (0);
 }
-
+/*
 static t_color	specular_light(t_env *e, t_ray *light_ray)
 {
 	t_vec		reflection;
@@ -68,13 +68,12 @@ static t_color	specular_light(t_env *e, t_ray *light_ray)
 	specular = color_double_product(specular, pow(max_calc, shininess));
 	return (specular);
 }
-
+*/
 static t_color	ambient_color(t_env *e, t_ray ray)
 {
 	t_color	color;
 	t_list	*tmp;
 
-	//Bien vérifier si l'ambiente se fait avec la couleur de l'objet ou non
 	tmp = e->lights;
 	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
 	color = color_double_product(color, 0.25);
@@ -82,7 +81,7 @@ static t_color	ambient_color(t_env *e, t_ray ray)
 	{
 		if (((t_obj*)e->lights->content)->type == LIA)
 		{
-			color = ((t_obj*)e->lights->content)->color;
+			color = color_average(ray.hit_obj->color, ((t_obj*)e->lights->content)->color);
 			if (((t_obj*)e->lights->content)->rad > 30 ||
 				((t_obj*)e->lights->content)->rad < 5)
 				((t_obj*)e->lights->content)->rad = 20;
@@ -92,6 +91,7 @@ static t_color	ambient_color(t_env *e, t_ray ray)
 		e->lights = e->lights->next;
 	}
 	e->lights = tmp;
+
 	return (color);
 }
 
@@ -141,7 +141,6 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_color ambient;
 	t_ray 	light_ray;
 	t_list	*tmp;
-	int i;
 
 	tmp = e->lights;
 	color = color_division(ray.hit_obj->color, 255);
@@ -150,17 +149,20 @@ t_color			light_calc(t_env *e, t_ray ray)
 	diffuse_color = (t_color){0, 0, 0};
 	if (e->lights == NULL)
 		color = ambient;
-	i = 0;
 	while (e->lights != NULL)
 	{
-		light_ray.hit_obj = ray.hit_obj;
-		if (((t_obj*)e->lights->content)->type == LIG)
+		if (((t_obj*)e->lights->content)->type != LIA)
 		{
-			tmp_color = diffuse_light(e, ray, &light_ray);
-			tmp_color = color_division(tmp_color, 255);
-		}
+			light_ray.hit_obj = ray.hit_obj;
+			if (((t_obj*)e->lights->content)->type == LIG)
+			{
+				tmp_color = diffuse_light(e, ray, &light_ray);
+				tmp_color = color_division(tmp_color, 255);
+				if (inter_shadow(e, light_ray) == 1)
+					tmp_color = (t_color){0, 0, 0};
+			}
 			diffuse_color = color_addition(diffuse_color, tmp_color);
-		i++;
+		}
 		e->lights = e->lights->next;
 	}
 	color = color_product(color, diffuse_color);
@@ -170,4 +172,3 @@ t_color			light_calc(t_env *e, t_ray ray)
 	color = max_color(color);
 	return (color);
 }
-
