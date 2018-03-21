@@ -30,14 +30,14 @@ static void	change_tex_or_rad(t_env *e, int keycode)
 	}
 	if (keycode == KEY_TAB)
 	{
+		if (e->cam.select_obj->rad == 0)
+			e->cam.select_obj->rad = 5;
 		if (e->cam.select_obj->type <= 2)
-		{
 			e->cam.select_obj->type += 1;
-			if (e->cam.select_obj->rad == 0)
-				e->cam.select_obj->rad = 5;
-		}
 		else
 			e->cam.select_obj->type = 0;
+		if (e->cam.select_obj->type == 1)
+			transformations(e->cam.select_obj);
 	}
 }
 
