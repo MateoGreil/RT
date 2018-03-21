@@ -12,7 +12,7 @@
 
 #include "libft.h"
 
-double		vector_length(t_vec v1)
+double	vector_length(t_vec v1)
 {
 	double length;
 
@@ -20,9 +20,10 @@ double		vector_length(t_vec v1)
 	return (length);
 }
 
-double		length_between_vectors(t_vec v1, t_vec v2)
+double	length_between_vectors(t_vec v1, t_vec v2)
 {
 	double	length;
+
 	length = sqrt((v2.x - v1.x) * (v2.x - v1.x) +
 				(v2.y - v1.y) * (v2.y - v1.y) +
 				(v2.z - v1.z) * (v2.z - v1.z));

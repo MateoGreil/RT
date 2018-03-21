@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmlGet2.c                                          :+:      :+:    :+:   */
+/*   xmlget2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 14:58:48 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 15:59:17 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
+static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 {
 	if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
 		obj->refr = ft_atoi((char*)xmlNodeListGetString(e->doc,
@@ -51,7 +51,7 @@ static t_obj	xmlGet_one_obj(xmlNodePtr cur, t_env *e)
 	return (obj);
 }
 
-void	init_obj(t_obj *obj)
+void			init_obj(t_obj *obj)
 {
 	obj->id = 0;
 	obj->type = 0;
@@ -102,7 +102,7 @@ void			xmlGet_objs(xmlNodePtr objs, t_env *e)
 	}
 }
 
-void	xmlGet_lights(xmlNodePtr lights, t_env *e)
+void			xmlGet_lights(xmlNodePtr lights, t_env *e)
 {
 	xmlNodePtr	cur;
 	t_obj		light;

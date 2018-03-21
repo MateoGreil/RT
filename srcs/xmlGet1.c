@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   xmlGet1.c                                          :+:      :+:    :+:   */
+/*   xmlget1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/20 17:43:09 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 15:59:11 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,13 +20,13 @@ t_vec	xmlGet_vec(xmlNodePtr cur, t_env *e)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"x")))
 			vec.x = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+						cur->xmlChildrenNode, 1));
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"y")))
 			vec.y = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+						cur->xmlChildrenNode, 1));
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"z")))
 			vec.z = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+						cur->xmlChildrenNode, 1));
 		cur = cur->next;
 	}
 	return (vec);
@@ -40,13 +40,13 @@ t_color	xmlGet_color(xmlNodePtr cur, t_env *e)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"r")))
 			color.r = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+						cur->xmlChildrenNode, 1));
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"g")))
 			color.g = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+						cur->xmlChildrenNode, 1));
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"b")))
 			color.b = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+						cur->xmlChildrenNode, 1));
 		cur = cur->next;
 	}
 	return (color);
@@ -55,13 +55,13 @@ t_color	xmlGet_color(xmlNodePtr cur, t_env *e)
 char	xmlGet_type_lights(xmlNodePtr cur, t_env *e)
 {
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-	(const xmlChar *)"light")))
+					(const xmlChar *)"light")))
 		return (LIG);
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-	(const xmlChar *)"ambient")))
+					(const xmlChar *)"ambient")))
 		return (LIA);
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-	(const xmlChar *)"directional")))
+					(const xmlChar *)"directional")))
 		return (LID);
 	return (ERROR);
 }
@@ -69,24 +69,24 @@ char	xmlGet_type_lights(xmlNodePtr cur, t_env *e)
 char	xmlGet_type(xmlNodePtr cur, t_env *e)
 {
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-		(const xmlChar *)"sphere")))
+					(const xmlChar *)"sphere")))
 		return (SPH);
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-		(const xmlChar *)"plan")))
+					(const xmlChar *)"plan")))
 		return (PLA);
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-		(const xmlChar *)"cylindre")))
+					(const xmlChar *)"cylindre")))
 		return (CYL);
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-		(const xmlChar *)"cone")))
+					(const xmlChar *)"cone")))
 		return (CON);
 	if ((!xmlStrcmp(xmlNodeListGetString(e->doc, cur, 1),
-		(const xmlChar *)"paraboloide")))
+					(const xmlChar *)"paraboloide")))
 		return (PAR);
 	return (xmlGet_type_lights(cur, e));
 }
 
-void			xmlGet_cam(xmlNodePtr cam, t_env *e)
+void	xmlGet_cam(xmlNodePtr cam, t_env *e)
 {
 	xmlNodePtr	cur;
 
@@ -95,7 +95,7 @@ void			xmlGet_cam(xmlNodePtr cam, t_env *e)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			e->cam.pos = xmlGet_vec(cur->xmlChildrenNode, e);
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
 			e->cam.dir = xmlGet_vec(cur->xmlChildrenNode, e);
 		cur = cur->next;
 	}

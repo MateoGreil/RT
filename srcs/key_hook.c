@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/15 16:26:03 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:59:36 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-int		button_exit(int keycode, t_env *e)
+int			button_exit(int keycode, t_env *e)
 {
+	xmlFreeDoc(e->doc);
 	e = NULL;
 	//ft_lstdel(&e->lights, &ft_delstr);
 	//ft_lstdel(&e->objs, &ft_delstr);
@@ -21,7 +22,7 @@ int		button_exit(int keycode, t_env *e)
 	exit(0);
 }
 
-static void	translate_camXZ(t_cam *cam, int keycode)
+static void	translate_camxy(t_cam *cam, int keycode)
 {
 	t_vec	dir;
 
@@ -48,14 +49,15 @@ static void	translate_camXZ(t_cam *cam, int keycode)
 	}
 }
 
-static void	rotate_X_cam(t_cam *cam, int keycode)
+static void	rotate_x_cam(t_cam *cam, int keycode)
 {
 	if (keycode == KEY_W)
 		x_rotation(cam, ft_deg2rad(-20));
 	else if (keycode == KEY_S)
 		x_rotation(cam, ft_deg2rad(20));
 }
-static void	rotate_Y_cam(t_cam *cam, int keycode)
+
+static void	rotate_y_cam(t_cam *cam, int keycode)
 {
 	if (keycode == KEY_A)
 		y_rotation(cam, ft_deg2rad(-20));
@@ -71,12 +73,12 @@ int			key_hook(int keycode, t_env *e)
 	else if (e->cam.selection == OFF)
 	{
 		if (keycode == KEY_D || keycode == KEY_A)
-			rotate_Y_cam(&e->cam, keycode);
+			rotate_y_cam(&e->cam, keycode);
 		else if (keycode == KEY_W || keycode == KEY_S)
-			rotate_X_cam(&e->cam, keycode);
+			rotate_x_cam(&e->cam, keycode);
 		else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
-						keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
-						translate_camXZ(&e->cam, keycode);
+				keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
+			translate_camxy(&e->cam, keycode);
 		else if (keycode == KEY_SPACE)
 			screenshot(e);
 		else if (keycode == KEY_FN)

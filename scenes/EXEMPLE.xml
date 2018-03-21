@@ -29,15 +29,15 @@
 			<y>0</y>
 			<z>0</z>
 		</position>
-		<rotation>
+		<direction>
 			<x>0</x>
 			<y>0</y>
 			<z>1</z>
-		</rotation>
+		</direction>
 	</cam>
 	<objs>
 		<obj>
-			<type>plan</type>
+			<type>sphere</type>
 			<position>
 				<x>0</x>
 				<y>0</y>
