@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 11:09:46 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 15:14:43 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static t_ray	create_ray(t_env *e, double x, double y, double s)
 {
-	t_list *tmp;
+	t_list	*tmp;
 	t_ray	ray;
 
 	ray.dir = ray_dir_cal(e, x, y, s);
@@ -29,12 +29,14 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	/*if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
-		ray_mirror(e, &ray, 0);*/
+	/*
+	 * if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
+	 * ray_mirror(e, &ray, 0);
+	*/
 	return (ray);
 }
 
-t_color	search_color(void *e, int x, int y, int s)
+t_color			search_color(void *e, int x, int y, int s)
 {
 	t_ray	ray;
 	t_color	color;
@@ -49,7 +51,7 @@ t_color	search_color(void *e, int x, int y, int s)
 	return (color);
 }
 
-void ray_loop_inter(t_env *e, t_vec compteur, t_img *img)
+void			ray_loop_inter(t_env *e, t_vec compteur, t_img *img)
 {
 	t_color final_color;
 
@@ -62,7 +64,7 @@ void ray_loop_inter(t_env *e, t_vec compteur, t_img *img)
 	}
 }
 
-static void	*ray_loop(void *e)
+static void		*ray_loop(void *e)
 {
 	t_vec	compteur;
 
@@ -81,7 +83,7 @@ static void	*ray_loop(void *e)
 	return (NULL);
 }
 
-void	multi_thread(t_env *e)
+void			multi_thread(t_env *e)
 {
 	pthread_t	thread[NB_THREADS];
 	t_env		env[NB_THREADS];

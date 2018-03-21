@@ -24,8 +24,8 @@ LIBXLM = -lxml2
 
 SRC_NAME =	main.c \
 			parse_file.c \
-			xmlGet1.c \
-			xmlGet2.c \
+			xmlget1.c \
+			xmlget2.c \
 			draw.c \
 			inter_objs.c \
 			inter_objs2.c \
@@ -45,6 +45,7 @@ SRC_NAME =	main.c \
 			filter.c \
 			cel_shading.c \
 			cam.c \
+			cam_tool.c \
 			screenshot.c \
 			equation_second.c \
 			interface.c \

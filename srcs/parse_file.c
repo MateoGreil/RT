@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 12:11:19 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 15:50:07 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	parse_file(t_env *e, char *docname)
 	{
 		//RETURN FILE ERROR
 		xmlFreeDoc(e->doc);
-		return;
+		return ;
 	}
 	get_node_for_env(e, root);
 	//printf_obj(*(t_obj*)e->objs->content);

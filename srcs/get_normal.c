@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:11:09 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/13 15:23:14 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:17:02 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	return (normal);
 }
 
-t_vec	get_normal(t_vec hit_point, t_ray ray)
+t_vec			get_normal(t_vec hit_point, t_ray ray)
 {
 	t_vec normal;
 

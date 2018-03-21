@@ -10,7 +10,6 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #ifndef RT_H
 
 # define RT_H
@@ -95,7 +94,6 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-
 # define TRUE 1
 # define FALSE 0
 
@@ -109,8 +107,8 @@
 
 typedef struct		s_obj
 {
-	char				id;
-	char				type;
+	char			id;
+	char			type;
 	t_vec			pos;
 	t_vec			dir;
 	double			rad;
@@ -118,14 +116,14 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 	int				num_texture;
-	char				refl;
-	char				refr;
-	char				n_refr;
+	char			refl;
+	char			refr;
+	char			n_refr;
 }					t_obj;
 
 typedef struct		s_ray
 {
-	t_vec 			pos;
+	t_vec			pos;
 	t_vec			dir;
 	double			length;
 	double			disc;
@@ -137,8 +135,8 @@ typedef struct		s_ray
 
 typedef struct		s_img
 {
-	void				*img;
-	char				*data;
+	void			*img;
+	char			*data;
 	int				size_x;
 	int				size_y;
 	int				bpp;
@@ -153,7 +151,7 @@ typedef struct		s_cam
 	double			lens_rad;
 	double			zoom;
 	int				num_samples;
-	int 				antialiasing;
+	int				antialiasing;
 	int				cel_shading;
 	int				sepia;
 	int				bnw;
@@ -174,9 +172,9 @@ typedef struct		s_cam
 
 typedef struct		s_env
 {
-	void				*mlx;
-	void				*win;
-	void				*wait_win;
+	void			*mlx;
+	void			*win;
+	void			*wait_win;
 	t_img			img;
 	t_img			wait_img;
 	int				y_start;
@@ -191,7 +189,6 @@ typedef struct		s_env
 
 void				ft_delstr(void *content, size_t content_size);
 
-// LIBMLX //
 t_img				new_image(void *mlx, int img_size_x, int img_size_y);
 void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
@@ -199,6 +196,7 @@ void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
 void				set_cam_coordinates(t_env *e);
 void				cam_to_world_matrix(t_env *e);
 void				world_to_cam_matrix(t_env *e);
+double				hammersley(int j);
 t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
 
 void				x_rotation(t_cam *cam, double a);
@@ -211,6 +209,7 @@ t_color				get_color(char *str_obj, int *i_str);
 int					get_nbr(char *str_obj, int *i_str);
 void				get_objs_and_cam(t_env *e, char *path_file);
 int					check_inter_objects(t_env *e, t_ray *ray);
+t_color				search_color(void *e, int x, int y, int s);
 
 double				cone_inter(t_env *e, t_ray *ray, t_vec temp);
 double				plan_inter(t_env *e, t_ray *ray);
@@ -220,63 +219,64 @@ void				draw(t_env *e, int loading);
 void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
 int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
-t_color 			light_calc(t_env *e, t_ray ray);
+t_color				light_calc(t_env *e, t_ray ray);
 t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
-t_color			specular_light(t_env *e, t_ray *light_ray);
+t_color				specular_light(t_env *e, t_ray *light_ray);
 void				transformations(t_obj *obj);
 t_vec				ft_rotation_x(t_vec ex_pos, double angle);
 t_vec				ft_rotation_y(t_vec ex_pos, double angle);
 t_vec				ft_rotation_z(t_vec ex_pos, double angle);
 t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
-void    		sampling_color(t_env *e, t_vec compteur);
-t_color			search_color(void *e, int x, int y, int s);
-void    blend_color(t_env *e, t_color *color, t_vec compteur, int n);
+void				sampling_color(t_env *e, t_vec compteur);
+t_color				screenshotearch_color(void *e, int x, int y, int s);
+void				blend_color(t_env *e, t_color *color,
+					t_vec compteur, int n);
 
-// PARTIE BENJAMIN //
-double		equation_second(t_vec a, double *b);
-double		parab_inter(t_env *e, t_ray *ray, t_vec temp);
+double				equation_second(t_vec a, double *b);
+double				parab_inter(t_env *e, t_ray *ray, t_vec temp);
 
 void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
-void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
-void 			stereoscopy(t_env *e);
+void				antialiasing(t_env *e, t_vec compteur,
+					t_color *color, int i);
+void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
-void 				print_keys(void);
+void				print_keys(void);
 
-void 				init_loading(t_env *e);
+void				init_loading(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
-void 				change_object(t_env *e, int keycode);
-void 				change_object_color(t_color *color);
+void				change_object(t_env *e, int keycode);
+void				change_object_color(t_color *color);
 int					change_filter(int keycode, t_env *e);
-t_color 			filter_color(t_env *e, t_color color, t_ray ray);
+t_color				filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 /*
-t_color				damier_color(t_vec hit_point);
-void 				marble_texture(t_vec hit_point, t_color *color);
-void				wood_texture(t_vec hit_point, t_color *color);
-t_color 				perlin_color(t_vec hit_point);
-void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
-
-double				noise(double x, double y, double z);
-double				fade(double t);
-double				lerp(double t, double a, double b);
-double				grad(int hash, double x, double y, double z);
-*/ // A supprimer ??
+*
+*t_color				damier_color(t_vec hit_point);
+*void 				marble_texture(t_vec hit_point, t_color *color);
+*void				wood_texture(t_vec hit_point, t_color *color);
+*t_color 				perlin_color(t_vec hit_point);
+*
+*double				noise(double x, double y, double z);
+*double				fade(double t);
+*double				lerp(double t, double a, double b);
+*double				grad(int hash, double x, double y, double z);
+*/
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
-t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
+t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
+t_vec				bump_mapping(t_vec normal, t_vec hit_pos);
 
 // PARTIE PARSING XML //
-xmlNodePtr	get_node(xmlNodePtr node, char *name);
-void			parse_file(t_env *e, char *docname);
-void			xmlGet_cam(xmlNodePtr cam, t_env *e);
-void			xmlGet_objs(xmlNodePtr objs, t_env *e);
-void			xmlGet_lights(xmlNodePtr lights, t_env *e);
-t_color		xmlGet_color(xmlNodePtr cur, t_env *e);
-char			xmlGet_type(xmlNodePtr cur, t_env *e);
-t_vec		xmlGet_vec(xmlNodePtr cur, t_env *e);
+xmlNodePtr			get_node(xmlNodePtr node, char *name);
+void				parse_file(t_env *e, char *docname);
+void				xmlGet_cam(xmlNodePtr cam, t_env *e);
+void				xmlGet_objs(xmlNodePtr objs, t_env *e);
+void				xmlGet_lights(xmlNodePtr lights, t_env *e);
+t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
+char				xmlGet_type(xmlNodePtr cur, t_env *e);
+t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
 
 #endif
