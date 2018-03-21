@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/02 16:53:07 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/21 11:09:46 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
-		ray_mirror(e, &ray, 0);
+	/*if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
+		ray_mirror(e, &ray, 0);*/
 	return (ray);
 }
 
@@ -40,7 +40,7 @@ t_color	search_color(void *e, int x, int y, int s)
 	t_color	color;
 
 	ray = create_ray(((t_env*)e), x, y, s);
-	if (ray.length < INFINITE && ray.hit_obj && !ray.hit_obj->mirror)
+	if (ray.length < INFINITE && ray.hit_obj)
 	{
 		color = light_calc(e, ray);
 	}
