@@ -59,7 +59,9 @@ static void	move_object(t_env *e, int keycode)
 
 void		change_object(t_env *e, int keycode)
 {
-	if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN
+	if (keycode == KEY_PLUS)
+		e->cam.select_obj->rad += 2;
+	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN
 			|| keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT
 			|| keycode == KEY_PUP || keycode == KEY_PDOWN)
 		move_object(e, keycode);
@@ -75,8 +77,6 @@ void		change_object(t_env *e, int keycode)
 	else if (keycode == KEY_T || keycode == KEY_PLUS || keycode == KEY_MINUS
 			|| keycode == KEY_TAB)
 		change_tex_or_rad(e, keycode);
-	else if (keycode == KEY_PLUS)
-		e->cam.select_obj->rad += 2;
 	else if (keycode == KEY_ECHAP)
 		button_exit(keycode, e);
 }
