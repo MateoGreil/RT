@@ -184,7 +184,7 @@ static t_color	ambient_color(t_env *e, t_ray ray)
 	tmp = e->lights;
 	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
 	//color = (t_color){255, 255, 255};
-	color = color_double_product(color, 0.25);
+	color = color_double_product(color, 0.025);
 	// while (e->lights != NULL)
 	// {
 	// 	if (((t_obj*)e->lights->content)->type == LIA)
@@ -217,7 +217,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	d = ft_clamp(vector_dot_product(light_ray->normal, light_ray->hit_dir), 0.0, 1.0);
 	if (e->cam.cel_shading == ON)
 		d = cel_shading(e, d);
-	d = d * (((t_obj*)e->lights->content)->rad / 100);
+	//d = d + (((t_obj*)e->lights->content)->rad / 100);
 	color = ((t_obj*)e->lights->content)->color;
 	if (ray.hit_obj->num_texture != 0)
 		color = color_average(print_texture(e, ray.hit_obj, ray.hit_pos), color);
@@ -251,7 +251,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_list	*tmp;
 
 	tmp = e->lights;
-	color = ray.hit_obj->color;
+	color = color_double_product(ray.hit_obj->color, 0.01);
 	ambient = ambient_color(e, ray);
 	while (e->lights != NULL)
 	{
@@ -264,11 +264,11 @@ t_color			light_calc(t_env *e, t_ray ray)
 		}
 		e->lights = e->lights->next;
 	}
-	diffuse_color = color_addition(ambient, diffuse_color);
-	diffuse_color = max_color(diffuse_color);
+	//diffuse_color = color_addition(ambient, diffuse_color);
+	//diffuse_color = max_color(diffuse_color);
 
-	//color = color_product(color, ambient);
-	color = color_addition(color, diffuse_color);
+	color = color_product(color, ambient);
+	color = color_product(color, diffuse_color);
 	e->lights = tmp;
 	color = max_color(color);
 	return (color);
