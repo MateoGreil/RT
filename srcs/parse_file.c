@@ -64,6 +64,7 @@ void	printf_obj(t_obj obj)
 void	parse_file(t_env *e, char *docname)
 {
 	xmlNodePtr		root;
+	//t_list 	*tmp;
 
 	e->doc = xmlParseFile(docname);
 	if (e->doc == NULL)
@@ -79,5 +80,14 @@ void	parse_file(t_env *e, char *docname)
 		return ;
 	}
 	get_node_for_env(e, root);
-	//printf_obj(*(t_obj*)e->objs->content);
+
+	/*tmp = e->objs;
+	while (e->objs != NULL)
+	{
+		printf("------------------\n");
+		printf_obj(*(t_obj*)e->objs->content);
+		printf_obj(*(t_obj*)e->lights->content);
+		e->objs = e->objs->next;
+	}
+	e->objs = tmp;*/
 }
