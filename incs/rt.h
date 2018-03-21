@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 16:14:40 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:36:25 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -223,6 +223,7 @@ int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color				light_calc(t_env *e, t_ray ray);
 t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
+t_color				ambient_color(t_env *e, t_ray ray);
 t_color				specular_light(t_env *e, t_ray *light_ray);
 void				transformations(t_obj *obj);
 t_vec				ft_rotation_x(t_vec ex_pos, double angle);

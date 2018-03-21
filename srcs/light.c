@@ -35,32 +35,6 @@
    }
    */
 
-static t_color	ambient_color(t_env *e, t_ray ray)
-{
-	t_color	color;
-	t_list	*tmp;
-
-	tmp = e->lights;
-	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
-	color = color_double_product(color, 0.25);
-	while (e->lights != NULL)
-	{
-		if (((t_obj*)e->lights->content)->type == LIA)
-		{
-			color = color_average(ray.hit_obj->color,
-					((t_obj*)e->lights->content)->color);
-			if (((t_obj*)e->lights->content)->rad > 30 ||
-					((t_obj*)e->lights->content)->rad < 5)
-				((t_obj*)e->lights->content)->rad = 20;
-			color = color_double_product(color,
-					(((t_obj*)e->lights->content)->rad / 100));
-		}
-		e->lights = e->lights->next;
-	}
-	e->lights = tmp;
-	return (color);
-}
-
 static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
