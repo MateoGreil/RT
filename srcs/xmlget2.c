@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   xmlget2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 15:59:17 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/21 16:49:45 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,23 +14,34 @@
 
 static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 {
-	if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
-		obj->refr = ft_atoi((char*)xmlNodeListGetString(e->doc,
-			cur->xmlChildrenNode, 1));
+	char	*str;
+
+	str = (char*)xmlNodeListGetString(e->doc,
+		cur->xmlChildrenNode, 1);
+	if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
+		obj->color = xmlGet_color(cur->xmlChildrenNode, e);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
+		obj->refl = ft_atoi(str);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
+		obj->refr = ft_atoi(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"n_refr")))
-		obj->n_refr = ft_atoi((char*)xmlNodeListGetString(e->doc,
-			cur->xmlChildrenNode, 1));
+		obj->n_refr = ft_atoi(str);
+	free(str);
 }
 
 static t_obj	xmlGet_one_obj(xmlNodePtr cur, t_env *e)
 {
 	t_obj	obj;
+	char		*str;
+
 
 	while (cur)
 	{
+		str = (char*)xmlNodeListGetString(e->doc,
+			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")))
 			obj.type = xmlGet_type(cur->xmlChildrenNode, e);
-		if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			obj.pos = xmlGet_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
 			obj.rot = xmlGet_vec(cur->xmlChildrenNode, e);
@@ -38,15 +49,10 @@ static t_obj	xmlGet_one_obj(xmlNodePtr cur, t_env *e)
 			obj.trans = xmlGet_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rad")) ||
 				(!xmlStrcmp(cur->name, (const xmlChar *)"intensity")))
-			obj.rad = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
-			obj.color = xmlGet_color(cur->xmlChildrenNode, e);
-		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
-			obj.refl = ft_atoi((char*)xmlNodeListGetString(e->doc,
-				cur->xmlChildrenNode, 1));
+			obj.rad = ft_atoi(str);
 		xmlGet_one_obj_pt2(cur, e, &obj);
 		cur = cur->next;
+		free(str);
 	}
 	return (obj);
 }
