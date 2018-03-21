@@ -37,6 +37,8 @@ static int  inter_shadow(t_env *e, t_ray light_ray)
 				light_ray.length = cone_inter(e, &light_ray, temp);
 			if (((t_obj*)e->objs->content)->type == PLA)
 				light_ray.length = plan_inter(e, &light_ray);
+			if (((t_obj*)e->objs->content)->type == PAR)
+				light_ray.length = parab_inter(e, &light_ray, temp);
 			if (light_ray.length < dist_obj_to_light)
 			{
 				e->objs = tmp;
@@ -112,7 +114,7 @@ static t_color		diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	d = d * (((t_obj*)e->lights->content)->rad / 100);
 	color = ((t_obj*)e->lights->content)->color;
 	if (ray.hit_obj->num_texture != 0)
-		color = color_average(print_texture(e, ray.hit_obj, ray.hit_pos), color);
+		color = print_texture(e, ray.hit_obj, ray.hit_pos);
 	color = color_double_product(color, d);
 	return (color);
 }

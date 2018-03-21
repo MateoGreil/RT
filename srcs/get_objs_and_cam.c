@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:46:39 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/05 11:55:01 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/20 12:01:30 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,6 +99,8 @@ static void		get_objs(t_list **line_lst, t_env *e)
 		id++; //// ALORS ON A LE SEUM ?
 		if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
 			obj.rad = 100;
+		if (obj.mirror > 100)
+			obj.mirror = 100;
 		transformations(&obj);
 		if (obj.type < LIG)
 			ft_lstaddback(&(e->objs), ft_lstnew(&obj, sizeof(t_obj)));

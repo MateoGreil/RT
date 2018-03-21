@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/15 16:22:14 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/21 11:26:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # include "mlx.h"
 # include <math.h>
 # include <pthread.h>
+
+# include <libxml/parser.h>
+
 # include <stdio.h> //<- A SUPPRIMER
 
 # define WIN_WIDTH 1000
@@ -51,6 +54,7 @@
 # define KEY_K 40
 # define KEY_N 45
 # define KEY_M 46
+# define KEY_TAB 48
 # define KEY_SPACE 49
 # define KEY_DEL 51
 # define KEY_ECHAP 53
@@ -64,6 +68,7 @@
 # define KEYPAD_UP 126
 # define KEYPAD_DOWN 125
 # define KEY_LCTRL 256
+# define KEY_FN 279
 
 # define INVALID_FILE_DESCRIPTION 0
 # define INVALID_FILE 1
@@ -80,9 +85,9 @@
 # define CYL 2
 # define CON 3
 # define PAR 4
-# define LIG 5
-# define LIA 6
-# define LID 7
+# define LIG 5 //light
+# define LIA 6 //ambient_light
+# define LID 7 //directional_light
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
@@ -96,7 +101,8 @@
 # define FALSE 0
 
 # define NB_MIRRORING 0
-
+# define NB_THREADS 8
+# define NB_SAMPLES 1
 # define NB_TEXTURES 2
 
 # define BLACK (t_color){0, 0, 0}
@@ -104,16 +110,18 @@
 
 typedef struct		s_obj
 {
-	int				id;
-	char			type;
+	char				id;
+	char				type;
 	t_vec			pos;
 	t_vec			dir;
 	double			rad;
 	t_color			color;
 	t_vec			rot;
 	t_vec			trans;
-	char			mirror;
 	int				num_texture;
+	char				refl;
+	char				refr;
+	char				n_refr;
 }					t_obj;
 
 typedef struct		s_ray
@@ -130,8 +138,8 @@ typedef struct		s_ray
 
 typedef struct		s_img
 {
-	void			*img;
-	char			*data;
+	void				*img;
+	char				*data;
 	int				size_x;
 	int				size_y;
 	int				bpp;
@@ -146,12 +154,13 @@ typedef struct		s_cam
 	double			lens_rad;
 	double			zoom;
 	int				num_samples;
-	int 			antialiasing;
+	int 				antialiasing;
 	int				cel_shading;
 	int				sepia;
 	int				bnw;
 	int				reverse;
 	int				fog;
+	int				stereo;
 	t_vec			pos;
 	t_vec			dir;
 	t_vec			right;
@@ -166,22 +175,24 @@ typedef struct		s_cam
 
 typedef struct		s_env
 {
-	void			*mlx;
-	void			*win;
-	void			*wait_win;
+	void				*mlx;
+	void				*win;
+	void				*wait_win;
 	t_img			img;
 	t_img			wait_img;
 	int				y_start;
 	int				y_end;
+	xmlDocPtr		doc;
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_img				*texture;
-	t_img				*bump;
+	t_img			*texture;
+	t_img			*bump;
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
 
+// LIBMLX //
 t_img				new_image(void *mlx, int img_size_x, int img_size_y);
 void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
@@ -212,6 +223,7 @@ int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color 			light_calc(t_env *e, t_ray ray);
 t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
+t_color			specular_light(t_env *e, t_ray *light_ray);
 void				transformations(t_obj *obj);
 t_vec				ft_rotation_x(t_vec ex_pos, double angle);
 t_vec				ft_rotation_y(t_vec ex_pos, double angle);
@@ -220,7 +232,7 @@ t_vec				get_normal(t_vec hit_point, t_ray ray);
 void				screenshot(t_env *e);
 void    		sampling_color(t_env *e, t_vec compteur);
 t_color			search_color(void *e, int x, int y, int s);
-
+void    blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 
 // PARTIE BENJAMIN //
 double		equation_second(t_vec a, double *b);
@@ -230,6 +242,9 @@ void				multi_thread(t_env *e);
 double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void    antialiasing(t_env *e, t_vec compteur, t_color *color, int i);
+void 			stereoscopy(t_env *e);
+void				save_scene(t_env *e);
+void 				print_keys(void);
 
 void 				init_loading(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
@@ -238,7 +253,7 @@ void 				change_object_color(t_color *color);
 int					change_filter(int keycode, t_env *e);
 t_color 			filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
-
+/*
 t_color				damier_color(t_vec hit_point);
 void 				marble_texture(t_vec hit_point, t_color *color);
 void				wood_texture(t_vec hit_point, t_color *color);
@@ -249,12 +264,20 @@ double				noise(double x, double y, double z);
 double				fade(double t);
 double				lerp(double t, double a, double b);
 double				grad(int hash, double x, double y, double z);
-
+*/ // A supprimer ??
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color  		print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec    	bump_mapping(t_env *e, t_vec normal, t_vec hit_pos);
+t_vec    bump_mapping(t_vec normal, t_vec hit_pos);
 
-////////////////////
+// PARTIE PARSING XML //
+xmlNodePtr	get_node(xmlNodePtr node, char *name);
+void			parse_file(t_env *e, char *docname);
+void			xmlGet_cam(xmlNodePtr cam, t_env *e);
+void			xmlGet_objs(xmlNodePtr objs, t_env *e);
+void			xmlGet_lights(xmlNodePtr lights, t_env *e);
+t_color		xmlGet_color(xmlNodePtr cur, t_env *e);
+char			xmlGet_type(xmlNodePtr cur, t_env *e);
+t_vec		xmlGet_vec(xmlNodePtr cur, t_env *e);
 
 #endif

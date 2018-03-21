@@ -21,14 +21,23 @@ static void change_tex_or_rad(t_env *e, int keycode)
     else
       e->cam.select_obj->num_texture = 0;
   }
-  if (keycode == KEY_PLUS)
-    e->cam.select_obj->rad += 2;
   if (keycode == KEY_MINUS)
   {
     if (e->cam.select_obj->rad <= 2)
       e->cam.select_obj->rad = 1;
     else
       e->cam.select_obj->rad -= 2;
+  }
+  if (keycode == KEY_TAB)
+  {
+    if (e->cam.select_obj->type <= 2)
+    {
+      e->cam.select_obj->type += 1;
+      if (e->cam.select_obj->rad == 0)
+        e->cam.select_obj->rad = 5;
+    }
+    else
+      e->cam.select_obj->type = 0;
   }
 }
 
@@ -61,61 +70,30 @@ void change_object(t_env *e, int keycode)
     change_object_color(&e->cam.select_obj->color);
   else if (keycode == KEY_V)
     ft_lstaddback(&(e->objs), ft_lstnew(e->cam.select_obj, sizeof(t_obj)));
-  else if (keycode == KEY_T || keycode == KEY_PLUS || keycode == KEY_MINUS)
+  else if (keycode == KEY_T || keycode == KEY_PLUS || keycode == KEY_MINUS
+    || keycode == KEY_TAB)
     change_tex_or_rad(e, keycode);
+  else if (keycode == KEY_PLUS)
+    e->cam.select_obj->rad += 2;
   else if (keycode == KEY_ECHAP)
   	button_exit(keycode, e);
-}
-
-static int change_filter_next(int keycode, t_env *e)
-{
-  if (keycode == KEY_B)
-	{
-		if (e->cam.bnw == OFF)
-			e->cam.bnw = ON;
-		else
-			e->cam.bnw = OFF;
-	}
-  if (keycode == KEY_V)
-	{
-		if (e->cam.reverse == OFF)
-			e->cam.reverse = ON;
-		else
-			e->cam.reverse = OFF;
-	}
-  if (keycode == KEY_N)
-  {
-    if (e->cam.fog == OFF)
-      e->cam.fog = ON;
-    else
-      e->cam.fog = OFF;
-  }
-  return (0);
 }
 
 int change_filter(int keycode, t_env *e)
 {
 	if (keycode == KEY_X)
-	{
-		if (e->cam.antialiasing == 0)
-			e->cam.antialiasing = 8;
-		else
-			e->cam.antialiasing = 0;
-	}
+    e->cam.antialiasing = (e->cam.antialiasing == OFF) ? ON : OFF;
 	else if (keycode == KEY_C)
-	{
-		if (e->cam.cel_shading == OFF)
-			e->cam.cel_shading = ON;
-		else
-			e->cam.cel_shading = OFF;
-	}
-	else if (keycode == KEY_Z)
-	{
-		if (e->cam.sepia == OFF)
-			e->cam.sepia = ON;
-		else
-			e->cam.sepia = OFF;
-	}
-  change_filter_next(keycode, e);
+		e->cam.cel_shading = (e->cam.cel_shading == OFF) ? ON : OFF;
+  else if (keycode == KEY_Z)
+    e->cam.sepia = (e->cam.sepia == OFF) ? ON : OFF;
+  else if (keycode == KEY_N)
+    e->cam.fog = (e->cam.fog == OFF) ? ON : OFF;
+  else if (keycode == KEY_V)
+    e->cam.reverse = (e->cam.reverse == OFF) ? ON : OFF;
+  else if (keycode == KEY_B)
+    e->cam.bnw = (e->cam.bnw == OFF) ? ON : OFF;
+  else if (keycode == KEY_M)
+    e->cam.stereo = (e->cam.stereo == OFF) ? ON : OFF;
 	return (0);
 }

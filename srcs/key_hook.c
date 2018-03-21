@@ -28,32 +28,32 @@ static void	translate_camXZ(t_cam *cam, int keycode)
 	dir = vector_normalize(cam->dir);
 	if (keycode == KEYPAD_UP)
 	{
-		cam->dir.z -= MOVE_SPEED;
-		cam->pos.z -= MOVE_SPEED;
-	}
-	else if (keycode == KEYPAD_DOWN)
-	{
 		cam->dir.z += MOVE_SPEED;
 		cam->pos.z += MOVE_SPEED;
 	}
-	else if (keycode == KEYPAD_RIGHT)
+	else if (keycode == KEYPAD_DOWN)
 	{
-		cam->dir.x += MOVE_SPEED;
-		cam->pos.x += MOVE_SPEED;
+		cam->dir.z -= MOVE_SPEED;
+		cam->pos.z -= MOVE_SPEED;
 	}
-	else
+	else if (keycode == KEYPAD_RIGHT)
 	{
 		cam->dir.x -= MOVE_SPEED;
 		cam->pos.x -= MOVE_SPEED;
+	}
+	else
+	{
+		cam->dir.x += MOVE_SPEED;
+		cam->pos.x += MOVE_SPEED;
 	}
 }
 
 static void	rotate_X_cam(t_cam *cam, int keycode)
 {
 	if (keycode == KEY_W)
-		x_rotation(cam, ft_deg2rad(20));
-	else if (keycode == KEY_S)
 		x_rotation(cam, ft_deg2rad(-20));
+	else if (keycode == KEY_S)
+		x_rotation(cam, ft_deg2rad(20));
 }
 static void	rotate_Y_cam(t_cam *cam, int keycode)
 {
@@ -79,6 +79,8 @@ int			key_hook(int keycode, t_env *e)
 						translate_camXZ(&e->cam, keycode);
 		else if (keycode == KEY_SPACE)
 			screenshot(e);
+		else if (keycode == KEY_FN)
+			save_scene(e);
 		else if (keycode == KEY_ECHAP)
 			button_exit(keycode, e);
 		change_filter(keycode, e);

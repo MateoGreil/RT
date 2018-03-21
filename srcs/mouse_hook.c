@@ -42,8 +42,6 @@ int			mouse_hook(int button, int x, int y, t_env *e)
 {
   t_ray	ray;
 
-  //printf("x %d\n", x);
-  //printf("y %d\n", y);
   if (button == 1)
   {
     ray = find_object(e, x, y);
@@ -55,6 +53,5 @@ int			mouse_hook(int button, int x, int y, t_env *e)
     e->cam.selection = ON;
     e->cam.select_obj = ray.hit_obj;
   }
-  //printf("y %d\n", ray.hit_obj->type);
   return (0);
 }

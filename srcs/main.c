@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:38:03 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/15 16:14:14 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/20 18:07:14 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ static void init_bool(t_env *e)
 	e->cam.reverse = OFF;
 	e->cam.fog = OFF;
 	e->cam.selection = OFF;
+	e->cam.stereo = OFF;
 }
 
 void	draw(t_env *e, int loading)
@@ -43,6 +44,8 @@ void	draw(t_env *e, int loading)
 		mlx_destroy_image(e->mlx, e->wait_img.img);
 		mlx_destroy_window(e->mlx, e->wait_win);
 	}
+	if (e->cam.stereo == ON)
+		stereoscopy(e);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 }
 
@@ -52,12 +55,13 @@ int	main(int ac, char **av)
 
 	if (ac == 2)
 	{
-		get_objs_and_cam(&e, av[1]);
+		parse_file(&e, av[1]);
 		e.mlx = mlx_init();
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 0.2");
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
 		init_bool(&e);
 		set_cam_coordinates(&e);
+		print_keys();
 		draw(&e, 1);
 		mlx_hook(e.win, KEY_PRESS, KEY_PRESS_MASK, &key_hook, &e);
 		mlx_hook(e.win, MOUSE_PRESS, MOUSE_PRESS_MASK, &mouse_hook, &e);

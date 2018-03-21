@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 double fade(double t)
 {
 	return t * t * t * (t * (t * 6 - 15) + 10);
@@ -22,14 +22,21 @@ double lerp(double t, double a, double b)
 	return (a + t * (b - a));
 }
 
-double grad(int hash, double x, double y, double z)
+double		grad(int hash, double x, double y, double z)
 {
-	int h;
-	double u;
-	double v;
+  int		h;
+  double	vec1;
+  double	vec2;
 
-	h = hash & 15;
-	u = (h < 8 || h == 12 || h == 13) ? x : y,
-	  v = (h < 4 || h == 12 || h == 13) ? y : z;
-	return ((h & 1) == 0 ? u : -u) + ((h & 2) == 0 ? v : -v);
+  h = hash & 15;
+  if (h < 8 || h == 12 || h == 13)
+    vec1 = x;
+  else
+    vec1 = y;
+  if (h < 4 || h == 12 || h == 13)
+    vec2 = y;
+  else
+    vec2 = z;
+  return (((h & 1) == 0 ? vec1 : -vec1) + ((h & 2) == 0 ? vec2 : -vec2));
 }
+*/

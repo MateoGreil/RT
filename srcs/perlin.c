@@ -12,6 +12,7 @@
 
 #include "rt.h"
 
+/*
 static void get_fading(t_vec *fading, double *x, double *y, double *z)
 {
 	*x -= floor(*x);
@@ -61,3 +62,4 @@ double noise(double x, double y, double z)
         x-1, y, z-1)), lerp(fading.x, grad(p[(int)a.z+1],
         x, y-1, z-1), grad(p[(int)b.z+1], x-1, y-1, z-1 ))));
 }
+*/
