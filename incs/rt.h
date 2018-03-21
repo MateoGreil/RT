@@ -283,4 +283,6 @@ t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
 char				xmlGet_type(xmlNodePtr cur, t_env *e);
 t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
 
+void	printf_obj(t_obj obj);
+
 #endif
