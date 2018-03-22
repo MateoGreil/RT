@@ -58,21 +58,25 @@ static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	return (color);
 }
 
-static t_color	max_color(t_color color)
+static t_color	calc_diff_dir(t_env *e, t_ray ray, t_ray *light_ray)
 {
-	double	max;
+	t_color	tmp_color;
 
-	max = color.r;
-	if (max < color.g)
-		max = color.g;
-	if (max < color.b)
-		max = color.b;
-	if (max > 255)
+	if (((t_obj*)e->lights->content)->type == LIG)
 	{
-		color = color_division(color, max);
-		color = color_double_product(color, 255);
+		tmp_color = diffuse_light(e, ray, light_ray);
+		tmp_color = color_division(tmp_color, 255);
+		if (calc_shadow(e, *light_ray) == 1)
+			tmp_color = (t_color){0, 0, 0};
 	}
-	return (color);
+	if (((t_obj*)e->lights->content)->type == LID)
+	{
+		tmp_color = directional_light(e, ray, light_ray);
+		tmp_color = color_division(tmp_color, 255);
+		if (calc_shadow(e, *light_ray) == 1)
+			tmp_color = (t_color){0, 0, 0};
+	}
+	return (tmp_color);
 }
 
 static t_color	calc_all_lights(t_env *e, t_ray ray)
@@ -89,13 +93,7 @@ static t_color	calc_all_lights(t_env *e, t_ray ray)
 		if (((t_obj*)e->lights->content)->type != LIA)
 		{
 			light_ray.hit_obj = ray.hit_obj;
-			if (((t_obj*)e->lights->content)->type == LIG)
-			{
-				tmp_color = diffuse_light(e, ray, &light_ray);
-				tmp_color = color_division(tmp_color, 255);
-				if (calc_shadow(e, light_ray) == 1)
-					tmp_color = (t_color){0, 0, 0};
-			}
+			tmp_color = calc_diff_dir(e, ray, &light_ray);
 			diffuse_color = color_addition(diffuse_color, tmp_color);
 		}
 		e->lights = e->lights->next;

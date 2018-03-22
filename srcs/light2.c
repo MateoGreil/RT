@@ -12,30 +12,44 @@
 
 #include "rt.h"
 
+t_color	max_color(t_color color)
+{
+	double	max;
+
+	max = color.r;
+	if (max < color.g)
+		max = color.g;
+	if (max < color.b)
+		max = color.b;
+	if (max > 255)
+	{
+		color = color_division(color, max);
+		color = color_double_product(color, 255);
+	}
+	return (color);
+}
+
 t_color	directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double		d;
-	//t_color	specular;
 	t_color		color;
 
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = ((t_obj*)e->lights->content)->pos;
+	light_ray->hit_dir = vector_double_product(light_ray->hit_dir, -1);
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
 	d = ft_clamp(vector_dot_product(light_ray->normal,
 				light_ray->hit_dir), 0.0, 1.0);
 	if (e->cam.cel_shading == ON)
 		d = cel_shading(e, d);
-	//specular = specular_light(e, light_ray);
+	d = d * (((t_obj*)e->lights->content)->rad / 100);
 	color = ((t_obj*)e->lights->content)->color;
 	if (ray.hit_obj->num_texture != 0)
 		color = color_average(print_texture(e, ray.hit_obj,
 					ray.hit_pos), color);
-	else
-		color = color_average(ray.hit_obj->color, color);
 	color = color_double_product(color, d);
-	//color = color_average(color, specular);
 	return (color);
 }
 

@@ -210,6 +210,7 @@ int					get_nbr(char *str_obj, int *i_str);
 void				get_objs_and_cam(t_env *e, char *path_file);
 int					check_inter_objects(t_env *e, t_ray *ray);
 t_color				search_color(void *e, int x, int y, int s);
+t_color				max_color(t_color color);
 
 double				cone_inter(t_env *e, t_ray *ray, t_vec temp);
 double				plan_inter(t_env *e, t_ray *ray);
