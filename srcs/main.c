@@ -60,7 +60,7 @@ int			main(int ac, char **av)
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 0.2");
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
 		init_bool(&e);
-	//	e.noise = init_noise(); /// test
+		//e.noise = init_noise(); /// test
 		set_cam_coordinates(&e);
 		print_keys();
 		draw(&e, 1);

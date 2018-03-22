@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 16:36:25 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:17:12 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@
 # define FALSE 0
 
 # define NB_MIRRORING 0
-# define NB_THREADS 1
+# define NB_THREADS 8
 # define NB_SAMPLES 1
 # define NB_TEXTURES 2
 
@@ -193,14 +193,9 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-<<<<<<< HEAD
 	t_img				*texture;
 	t_noise			*noise;
 	t_img				*bump; // A supprimer ?
-=======
-	t_img			*texture;
-	t_img			*bump;
->>>>>>> master
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -277,6 +272,7 @@ double				noise(t_noise *noise, double x, double y);
 t_color				noise_marble(t_noise *n, int x, int y);
 t_color				noise_wood(t_noise *n, int x, int y);
 void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
+t_color				tex_or_not(t_env *e, t_ray ray);
 
 /*
 *void 				marble_texture(t_vec hit_point, t_color *color);
