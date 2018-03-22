@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 15:59:36 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/22 14:31:37 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,10 @@ int			key_hook(int keycode, t_env *e)
 		else if (keycode == KEY_SPACE)
 			screenshot(e);
 		else if (keycode == KEY_FN)
+		{
+			ft_putendl("File name : ");
 			save_scene(e);
+		}
 		else if (keycode == KEY_ECHAP)
 			button_exit(keycode, e);
 		change_filter(keycode, e);
