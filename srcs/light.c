@@ -22,23 +22,6 @@ t_color	tex_or_not(t_env *e, t_ray ray)
 	return (color);
 }
 
-static t_color	max_color(t_color color)
-{
-	double	max;
-
-	max = color.r;
-	if (max < color.g)
-		max = color.g;
-	if (max < color.b)
-		max = color.b;
-	if (max > 255)
-	{
-		color = color_division(color, max);
-		color = color_double_product(color, 255);
-	}
-	return (color);
-}
-
 static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
@@ -60,33 +43,48 @@ static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	return (color);
 }
 
-static t_color	calc_all_diffuse(t_env *e, t_ray ray)
+static t_color	calc_diff_dir(t_env *e, t_ray ray, t_ray *light_ray)
+{
+	t_color	tmp_color;
+
+	if (((t_obj*)e->lights->content)->type == LIG)
+	{
+		tmp_color = diffuse_light(e, ray, light_ray);
+		tmp_color = color_division(tmp_color, 255);
+		if (calc_shadow(e, *light_ray) == 1)
+			tmp_color = (t_color){0, 0, 0};
+	}
+	if (((t_obj*)e->lights->content)->type == LID)
+	{
+		tmp_color = directional_light(e, ray, light_ray);
+		tmp_color = color_division(tmp_color, 255);
+		if (calc_shadow(e, *light_ray) == 1)
+			tmp_color = (t_color){0, 0, 0};
+	}
+	return (tmp_color);
+}
+
+static t_color	calc_all_lights(t_env *e, t_ray ray)
 {
 	t_ray	light_ray;
-	t_color	diffuse_color;
+	t_color	lights_color;
 	t_color	tmp_color;
 	t_list	*tmp;
 
 	tmp = e->lights;
-	diffuse_color = (t_color){0, 0, 0};
+	lights_color = (t_color){0, 0, 0};
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)
 		{
 			light_ray.hit_obj = ray.hit_obj;
-			if (((t_obj*)e->lights->content)->type == LIG)
-			{
-				tmp_color = diffuse_light(e, ray, &light_ray);
-				tmp_color = color_division(tmp_color, 255);
-				if (calc_shadow(e, light_ray) == 1)
-					tmp_color = (t_color){0, 0, 0};
-			}
-			diffuse_color = color_addition(diffuse_color, tmp_color);
+			tmp_color = calc_diff_dir(e, ray, &light_ray);
+			lights_color = color_addition(lights_color, tmp_color);
 		}
 		e->lights = e->lights->next;
 	}
 	e->lights = tmp;
-	return (diffuse_color);
+	return (lights_color);
 }
 
 t_color			light_calc(t_env *e, t_ray ray)
@@ -102,7 +100,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 		color = ambient;
 	else
 	{
-		diffuse_color = calc_all_diffuse(e, ray);
+		diffuse_color = calc_all_lights(e, ray);
 		color = color_product(color, diffuse_color);
 	}
 	color = color_addition(color, ambient);
