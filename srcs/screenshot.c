@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/08 18:07:38 by nghaddar          #+#    #+#             */
-/*   Updated: 2018/03/12 17:02:48 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:41:48 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static void		put_pixel_to_screenshot(char *data, int x, int y, t_color color)
 static t_color	get_pixel_color(char *data, int x, int y)
 {
 	int		pos;
-	t_color pixel;
+	t_color	pixel;
 
 	pos = (y * (WIN_WIDTH * 4)) + (x * 4);
 	pixel.b = data[pos];
@@ -39,7 +39,7 @@ static t_color	get_pixel_color(char *data, int x, int y)
 	return (pixel);
 }
 
-static	char	*get_screenshot_name(void)
+static char		*get_screenshot_name(void)
 {
 	static	int	screen_id;
 	char	*name;
@@ -76,7 +76,7 @@ void			screenshot(t_env *e)
 		}
 	}
 	stbi_write_jpg(name, WIN_WIDTH, WIN_HEIGHT, 3, data, 100);
-	ft_putendl("screenshot!");
+	ft_putendl("Screenshot!");
 	free(data);
 	free(name);
 }

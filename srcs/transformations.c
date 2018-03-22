@@ -6,16 +6,16 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 11:27:13 by gnegri            #+#    #+#             */
-/*   Updated: 2018/03/13 15:22:27 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/03/21 15:44:49 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_vec	ft_rotation_z(t_vec ex_pos, double angle)
+t_vec			ft_rotation_z(t_vec ex_pos, double angle)
 {
-	double new_x;
-	double new_y;
+	double	new_x;
+	double	new_y;
 	t_vec	new_pos;
 
 	angle = ft_deg2rad(angle);
@@ -27,10 +27,10 @@ t_vec	ft_rotation_z(t_vec ex_pos, double angle)
 	return (new_pos);
 }
 
-t_vec	ft_rotation_y(t_vec ex_pos, double angle)
+t_vec			ft_rotation_y(t_vec ex_pos, double angle)
 {
-	double new_x;
-	double new_z;
+	double	new_x;
+	double	new_z;
 	t_vec	new_pos;
 
 	angle = ft_deg2rad(angle);
@@ -42,10 +42,10 @@ t_vec	ft_rotation_y(t_vec ex_pos, double angle)
 	return (new_pos);
 }
 
-t_vec	ft_rotation_x(t_vec ex_pos, double angle)
+t_vec			ft_rotation_x(t_vec ex_pos, double angle)
 {
-	double 	new_y;
-	double 	new_z;
+	double	new_y;
+	double	new_z;
 	t_vec	new_pos;
 
 	angle = ft_deg2rad(angle);

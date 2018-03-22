@@ -12,26 +12,10 @@
 
 #include "rt.h"
 
-double	hammersley(int j)
+t_vec		ray_dir_cal(t_env *e, double x, double y, int s)
 {
-	double	x;
-	double	i;
-
-	x = 0;
-	i = 0.5;
-	while (j)
-	{
-		x += i * (double) (j % 2);
-		j /= 2;
-		i *= 0.5;
-	}
-	return (x);
-}
-
-t_vec	ray_dir_cal(t_env *e, double x, double y, int s)
-{
-	t_vec dir;
-	t_point pixel;
+	t_vec	dir;
+	t_point	pixel;
 
 	e->cam.focal = 5;
 	e->cam.samp = (t_point){(double)s /
@@ -45,7 +29,7 @@ t_vec	ray_dir_cal(t_env *e, double x, double y, int s)
 	return (dir);
 }
 
-void	cam_to_world_matrix(t_env *e)
+void		cam_to_world_matrix(t_env *e)
 {
 	e->cam.cam_to_world[0][0] = e->cam.right.x;
 	e->cam.cam_to_world[0][1] = e->cam.right.y;
@@ -58,7 +42,7 @@ void	cam_to_world_matrix(t_env *e)
 	e->cam.cam_to_world[2][2] = e->cam.forward.z;
 }
 
-void	world_to_cam_matrix(t_env *e)
+void		world_to_cam_matrix(t_env *e)
 {
 	e->cam.right.x = e->cam.cam_to_world[0][0];
 	e->cam.right.y = e->cam.cam_to_world[0][1];
@@ -71,10 +55,21 @@ void	world_to_cam_matrix(t_env *e)
 	e->cam.forward.z = e->cam.cam_to_world[2][2];
 }
 
-void	set_cam_coordinates(t_env *e)
+static void	set_cam_coordinates_next(t_env *e)
 {
 	t_vec	tmp;
-	//POUR EVITER DE SEGFAULT SI ON REGARDE EXACTEMENT EN BAS OU EN HAUT
+
+	e->cam.dist = 250;
+	e->cam.forward = vector_substraction(e->cam.pos, e->cam.dir);
+	e->cam.forward = vector_normalize(e->cam.forward);
+	tmp = (t_vec){0, 1, 0, 0};
+	e->cam.right = vector_cross(tmp, e->cam.forward);
+	e->cam.right = vector_normalize(e->cam.right);
+	e->cam.up = vector_cross(e->cam.forward, e->cam.right);
+}
+
+void		set_cam_coordinates(t_env *e)
+{
 	if (e->cam.pos.x == e->cam.dir.x && e->cam.pos.z == e->cam.dir.z &&
 		e->cam.dir.y < e->cam.pos.y)
 	{
@@ -90,13 +85,5 @@ void	set_cam_coordinates(t_env *e)
 		e->cam.forward = (t_vec){0, -1, 0, 0};
 	}
 	else
-	{
-		e->cam.dist = 250;
-		e->cam.forward = vector_substraction(e->cam.pos, e->cam.dir);
-		e->cam.forward = vector_normalize(e->cam.forward);
-		tmp = (t_vec){0, 1, 0, 0};
-		e->cam.right = vector_cross(tmp, e->cam.forward);
-		e->cam.right = vector_normalize(e->cam.right);
-		e->cam.up = vector_cross(e->cam.forward, e->cam.right);
-	}
+		set_cam_coordinates_next(e);
 }

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+         #
+#    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/15 16:22:35 by nghaddar         ###   ########.fr        #
+#    Updated: 2018/03/20 16:22:43 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,12 @@ MLXFLAGS = -framework OpenGL -framework AppKit -lpthread
 
 LIBFT = -lft -L$(LIBFT_PATH)
 LIBMLX = -lmlx -L$(LIBMLX_PATH)
+LIBXLM = -lxml2
 
 SRC_NAME =	main.c \
-			get_obj_detail.c \
-			get_objs_and_cam.c \
+			parse_file.c \
+			xmlget1.c \
+			xmlget2.c \
 			draw.c \
 			inter_objs.c \
 			inter_objs2.c \
@@ -32,6 +34,7 @@ SRC_NAME =	main.c \
 			tools_mlx.c \
 			light.c \
 			light2.c \
+			shadows.c \
 			transformations.c \
 			get_normal.c \
 			perlin_materials.c \
@@ -43,6 +46,7 @@ SRC_NAME =	main.c \
 			filter.c \
 			cel_shading.c \
 			cam.c \
+			cam_tool.c \
 			screenshot.c \
 			equation_second.c \
 			interface.c \
@@ -55,7 +59,7 @@ SRC_NAME =	main.c \
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
 SRC_PATH = ./srcs/
-INC_PATH = -I ./incs/ -I ./minilibx_macos/ -I ./libft/includes/
+INC_PATH = -I ./incs/ -I ./minilibx_macos/ -I ./libft/includes/ -I/usr/include/libxml2
 OBJ_PATH = ./objs/
 LIBFT_PATH = ./libft/
 LIBMLX_PATH = ./minilibx_macos/
@@ -68,7 +72,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	@make -C $(LIBFT_PATH)
 	@make -C $(LIBMLX_PATH)
-	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) -o $(NAME) $(OBJS)
+	@$(CC) $(FLAGS) $(MLXFLAGS) $(LIBFT) $(LIBMLX) $(LIBXLM) -o $(NAME) $(OBJS)
 	@echo "$(NAME) compiled ✓"
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
