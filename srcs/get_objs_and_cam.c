@@ -96,7 +96,7 @@ static void		get_objs(t_list **line_lst, t_env *e)
 		}
 		obj = get_one_obj(str_obj);
 		obj.id = id;
-		id++; //// ALORS ON A LE SEUM ?
+		id++;
 		if (obj.type >= LIG && (obj.rad > 100 || obj.rad < 0))
 			obj.rad = 100;
 		if (obj.mirror > 100)

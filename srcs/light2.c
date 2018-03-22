@@ -12,11 +12,35 @@
 
 #include "rt.h"
 
+/*
+   static t_color	specular_light(t_env *e, t_ray *light_ray)
+   {
+   t_vec		reflection;
+   t_color		specular;
+   double		max_calc;
+   double		shininess;
+
+   shininess = 200;
+   specular = (t_color){255, 255, 255};
+   reflection = vector_double_product(light_ray->normal,
+   vector_dot_product(light_ray->hit_dir, light_ray->normal) * 2);
+   reflection = vector_normalize(
+   vector_substraction(reflection, light_ray->hit_dir));
+   max_calc = vector_dot_product(reflection, vector_normalize(
+   vector_substraction(((t_obj*)e->lights->content)->pos, light_ray->hit_pos)));
+   if (max_calc < 0)
+   max_calc = 0;
+   specular = color_double_product(specular, pow(max_calc, shininess));
+   return (specular);
+   }
+   */
+
 t_color	directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double		d;
 	//t_color	specular;
 	t_color		color;
+	t_color		tmp_color;
 
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
@@ -29,11 +53,8 @@ t_color	directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 		d = cel_shading(e, d);
 	//specular = specular_light(e, light_ray);
 	color = ((t_obj*)e->lights->content)->color;
-	if (ray.hit_obj->num_texture != 0)
-		color = color_average(print_texture(e, ray.hit_obj,
-					ray.hit_pos), color);
-	else
-		color = color_average(ray.hit_obj->color, color);
+	tmp_color = tex_or_not(e, ray);
+	color = color_average(tmp_color, color);
 	color = color_double_product(color, d);
 	//color = color_average(color, specular);
 	return (color);
@@ -42,10 +63,12 @@ t_color	directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 t_color	ambient_color(t_env *e, t_ray ray)
 {
 	t_color	color;
+	t_color	tmp_color;
 	t_list	*tmp;
 
 	tmp = e->lights;
-	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
+	tmp_color = tex_or_not(e, ray);
+	color = color_average(tmp_color, (t_color){255, 255, 255});
 	color = color_double_product(color, 0.25);
 	while (e->lights != NULL)
 	{
