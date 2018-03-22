@@ -39,7 +39,7 @@ void	antialiasing(t_env *e, t_vec compteur, t_color *color, int i)
 
 void	sampling_color(t_env *e, t_vec compteur)
 {
-	t_color	color[e->cam.num_samples + e->cam.antialiasing];
+	t_color	color[e->cam.num_samples + 8];
 	int		i;
 
 	i = 0;
