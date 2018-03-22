@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/22 14:51:43 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:31:47 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -253,6 +253,8 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void				antialiasing(t_env *e, t_vec compteur,
 					t_color *color, int i);
+void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
+
 void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
 void				print_keys(void);
@@ -271,7 +273,6 @@ t_noise				*init_noise(void);
 double				noise(t_noise *noise, double x, double y);
 t_color				noise_marble(t_noise *n, int x, int y);
 t_color				noise_wood(t_noise *n, int x, int y);
-void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 t_color				tex_or_not(t_env *e, t_ray ray);
 
 /*
@@ -300,6 +301,8 @@ t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
 char				xmlGet_type(xmlNodePtr cur, t_env *e);
 t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
 void				save_scene(t_env *e);
+
+void	save_scene(t_env *e);
 
 void	printf_obj(t_obj obj);
 
