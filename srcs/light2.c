@@ -36,7 +36,7 @@ t_color	directional_light(t_env *e, t_ray ray, t_ray *light_ray)
 
 	light_ray->hit_pos = vector_addition(e->cam.pos,
 			vector_double_product(ray.dir, ray.length));
-	light_ray->hit_dir = ((t_obj*)e->lights->content)->pos;
+	light_ray->hit_dir = ((t_obj*)e->lights->content)->dir;
 	light_ray->hit_dir = vector_double_product(light_ray->hit_dir, -1);
 	light_ray->hit_dir = vector_normalize(light_ray->hit_dir);
 	light_ray->normal = get_normal(light_ray->hit_pos, ray);
