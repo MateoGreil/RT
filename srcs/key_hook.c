@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/10 18:18:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/22 14:33:17 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/22 15:10:35 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,29 +67,42 @@ static void	rotate_y_cam(t_cam *cam, int keycode)
 		y_rotation(cam, ft_deg2rad(20));
 }
 
-int			key_hook(int keycode, t_env *e)
+void			change_pos_cam(t_env *e, int keycode)
 {
 	cam_to_world_matrix(e);
-	if (e->cam.selection == ON)
-		change_object(e, keycode);
-	else if (e->cam.selection == OFF)
-	{
-		if (keycode == KEY_D || keycode == KEY_A)
-			rotate_y_cam(&e->cam, keycode);
-		else if (keycode == KEY_W || keycode == KEY_S)
-			rotate_x_cam(&e->cam, keycode);
-		else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
-				keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
-			translate_camxy(&e->cam, keycode);
-		else if (keycode == KEY_SPACE)
-			screenshot(e);
-		else if (keycode == KEY_FN)
-			save_scene(e);
-		else if (keycode == KEY_ECHAP)
-			button_exit(keycode, e);
-		change_filter(keycode, e);
-	}
+	if (keycode == KEY_D || keycode == KEY_A)
+		rotate_y_cam(&e->cam, keycode);
+	else if (keycode == KEY_W || keycode == KEY_S)
+		rotate_x_cam(&e->cam, keycode);
+	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
+			keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
+		translate_camxy(&e->cam, keycode);
 	world_to_cam_matrix(e);
 	draw(e, 0);
+}
+
+int			key_hook(int keycode, t_env *e)
+{
+	if (keycode == KEY_SPACE)
+		screenshot(e);
+	else if (keycode == KEY_FN)
+		save_scene(e);
+	else if (keycode == KEY_ECHAP)
+		button_exit(keycode, e);
+	else if (e->cam.selection == ON)
+	{
+		change_object(e, keycode);
+		draw(e, 0);
+	}
+	else if (e->cam.selection == OFF)
+	{
+		if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
+			keycode == KEY_S || keycode == KEYPAD_UP ||
+			keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
+			keycode == KEYPAD_RIGHT)
+			change_pos_cam(e, keycode);
+		else
+			change_filter(keycode, e);
+	}
 	return (0);
 }

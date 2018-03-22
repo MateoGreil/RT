@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:45:34 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 15:32:46 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:28:39 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,8 +77,6 @@ void		change_object(t_env *e, int keycode)
 	else if (keycode == KEY_T || keycode == KEY_PLUS || keycode == KEY_MINUS
 			|| keycode == KEY_TAB)
 		change_tex_or_rad(e, keycode);
-	else if (keycode == KEY_ECHAP)
-		button_exit(keycode, e);
 }
 
 int			change_filter(int keycode, t_env *e)
@@ -97,5 +95,6 @@ int			change_filter(int keycode, t_env *e)
 		e->cam.bnw = (e->cam.bnw == OFF) ? ON : OFF;
 	else if (keycode == KEY_M)
 		e->cam.stereo = (e->cam.stereo == OFF) ? ON : OFF;
+	draw(e, 0);
 	return (0);
 }
