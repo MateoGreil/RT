@@ -14,18 +14,15 @@
 
 void	change_object_color(t_color *color)
 {
-	int i;
-
 	if (color->r <= 0)
 		color->r = 255;
 	if (color->g <= 0)
 		color->g = 255;
 	if (color->b <= 0)
 		color->b = 255;
-	i = ft_clamp(rand(), 0, 17);
-	color->r = (255 - i * 4) * color->r;
-	color->g = (255 - i * 3) * color->g;
-	color->b = (255 - i * 12) * color->b;
+	color->r = rand()%255;
+	color->g = rand()%255;
+	color->b = rand()%255;
 }
 
 void	antialiasing(t_env *e, t_vec compteur, t_color *color, int i)
