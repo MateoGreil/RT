@@ -125,4 +125,3 @@ t_color			light_calc(t_env *e, t_ray ray)
 	color = max_color(color);
 	return (color);
 }
-
