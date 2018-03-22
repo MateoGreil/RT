@@ -31,15 +31,11 @@ static t_color	fog(t_color color, t_ray ray)
 
 static t_color	filter_reverse(t_color color)
 {
-	unsigned char	col[3];
 	t_color			f_color;
 
-	col[0] = color.r;
-	col[1] = color.g;
-	col[2] = color.b;
-	f_color.r = ft_clamp(2.0 * (128 - col[0]) + col[0], 0, 255);
-	f_color.g = ft_clamp(2.0 * (128 - col[0]) + col[1], 0, 255);
-	f_color.b = ft_clamp(2.0 * (128 - col[0]) + col[2], 0, 255);
+	f_color.r = 1.0 - color.r;
+	f_color.g = 1.0 - color.g;
+	f_color.b = 1.0 - color.b;
 	return (f_color);
 }
 
