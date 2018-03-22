@@ -17,7 +17,7 @@ int				load_texture_img(t_env *e)
 	int a;
 	int	b;
 
-	e->texture = malloc(sizeof(t_img) * (NB_TEXTURES + 1));
+	e->texture = (t_img*)malloc(sizeof(t_img) * (NB_TEXTURES + 1));
 	a = 64;
 	b = 64;
 	e->texture[0].img = NULL;
@@ -60,8 +60,11 @@ t_color			print_texture(t_env *e, t_obj *obj, t_vec hit_pos)
 	int		y;
 	t_color	color;
 
+	color = obj->color;
 	x = (int)hit_pos.x % (e->texture[obj->num_texture].size_x);
 	y = (int)hit_pos.y % (e->texture[obj->num_texture].size_y);
+	//if (x <= e->texture[obj->num_texture].size_x
+	//	&& y <= e->texture[obj->num_texture].size_y && x > 0 && y > 0)
 	color = change_pixel_data(&e->texture[obj->num_texture], abs(x), abs(y));
 	return (color);
 }

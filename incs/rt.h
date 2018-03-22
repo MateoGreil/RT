@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 16:36:25 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/22 12:17:12 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,22 @@
 # define FALSE 0
 
 # define NB_MIRRORING 0
-# define NB_THREADS 1
+# define NB_THREADS 8
 # define NB_SAMPLES 1
 # define NB_TEXTURES 2
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
+
+typedef struct		s_noise
+{
+	double		*noise;
+	int				size_x;
+	int				size_y;
+	int				len;
+	int				pas;
+	int				octave;
+}						t_noise;
 
 typedef struct		s_obj
 {
@@ -183,8 +193,9 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_img			*texture;
-	t_img			*bump;
+	t_img				*texture;
+	t_noise			*noise;
+	t_img				*bump; // A supprimer ?
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -243,6 +254,8 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void				antialiasing(t_env *e, t_vec compteur,
 					t_color *color, int i);
+void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
+
 void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
 void				print_keys(void);
@@ -255,9 +268,15 @@ int					change_filter(int keycode, t_env *e);
 t_color				filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 int					calc_shadow(t_env *e, t_ray light_ray);
+
+t_color				damier_color(t_vec hit_point);
+t_noise				*init_noise(void);
+double				noise(t_noise *noise, double x, double y);
+t_color				noise_marble(t_noise *n, int x, int y);
+t_color				noise_wood(t_noise *n, int x, int y);
+t_color				tex_or_not(t_env *e, t_ray ray);
+
 /*
-*
-*t_color				damier_color(t_vec hit_point);
 *void 				marble_texture(t_vec hit_point, t_color *color);
 *void				wood_texture(t_vec hit_point, t_color *color);
 *t_color 				perlin_color(t_vec hit_point);
@@ -267,6 +286,7 @@ int					calc_shadow(t_env *e, t_ray light_ray);
 *double				lerp(double t, double a, double b);
 *double				grad(int hash, double x, double y, double z);
 */
+
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
