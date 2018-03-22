@@ -79,7 +79,4 @@ void	parse_file(t_env *e, char *docname)
 		return ;
 	}
 	get_node_for_env(e, root);
-	printf_obj(*(t_obj*)e->objs->content);
-	ft_putchar('\n');
-	printf_obj(*(t_obj*)e->lights->content);
 }
