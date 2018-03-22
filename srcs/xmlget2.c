@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 16:49:45 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/22 11:30:18 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,8 +99,7 @@ void			xmlGet_objs(xmlNodePtr objs, t_env *e)
 			obj = xmlGet_one_obj(cur->xmlChildrenNode, e);
 			obj.id = id;
 			obj.num_texture = 0;
-			if (obj.type == PLA)
-				transformations(&obj);
+			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
 			id++;
 		}

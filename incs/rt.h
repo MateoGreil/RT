@@ -94,13 +94,11 @@
 # define INFINITE 1000000000
 # define ZERO 0.0000001
 
-# define NB_THREADS 8
-
 # define TRUE 1
 # define FALSE 0
 
 # define NB_MIRRORING 0
-# define NB_THREADS 8
+# define NB_THREADS 1
 # define NB_SAMPLES 1
 # define NB_TEXTURES 2
 
@@ -282,5 +280,7 @@ void				xmlGet_lights(xmlNodePtr lights, t_env *e);
 t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
 char				xmlGet_type(xmlNodePtr cur, t_env *e);
 t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
+
+void	printf_obj(t_obj obj);
 
 #endif
