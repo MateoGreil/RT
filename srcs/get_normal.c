@@ -47,7 +47,7 @@ t_vec			get_normal(t_vec hit_point, t_ray ray)
 	else if (ray.hit_obj->type == SPH)
 		normal = vector_substraction(hit_point, ray.hit_obj->pos);
 	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL ||
-		ray.hit_obj->type == PLA)
+		ray.hit_obj->type == PAR)
 		normal = get_normal_2(hit_point, ray);
 	else
 		normal = (t_vec){0, 0, 0, 0};
