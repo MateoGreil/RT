@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/22 15:31:43 by mgreil           ###   ########.fr        #
+#    Updated: 2018/03/22 16:36:05 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,7 +55,8 @@ SRC_NAME =	main.c \
 			bump_mapping.c \
 			stereoscopy.c \
 			noise.c \
-			save_scene.c
+			save_scene.c \
+			xml_set.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/17 16:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/22 15:46:33 by mgreil           ###   ########.fr        #
+#    Updated: 2018/03/22 16:22:44 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,6 @@ SRC_NAME =	ft_memset.c \
 			ft_strcmp.c \
 			ft_strncmp.c \
 			ft_atoi.c \
-			ft_atod.c \
 			ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isalnum.c \

@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/22 15:57:08 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/22 16:21:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 	str = (char*)xmlNodeListGetString(e->doc,
 		cur->xmlChildrenNode, 1);
 	if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
-		obj.dir = xmlGet_vec(cur->xmlChildrenNode, e);
+		obj->dir = xmlGet_vec(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
 		obj->color = xmlGet_color(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
