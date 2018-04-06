@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 16:31:25 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/06 14:14:21 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/06 15:22:45 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	xml_set_vec(xmlNodePtr cur, t_vec vec)
 	}
 }
 
-
 void	xml_set_type(xmlNodePtr cur, int type)
 {
 	if (type == SPH)
@@ -51,4 +50,24 @@ void	xml_set_type(xmlNodePtr cur, int type)
 		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 	if (type == SPH)
 		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
+}
+
+void	xml_set_color(xmlNodePtr cur, t_color color)
+{
+	while (cur)
+	{
+		if ((!xmlStrcmp(cur->name, (const xmlChar *)"r")))
+		{
+			xmlNodeSetContent(cur, (xmlChar*)ft_itoa(color.r));
+		}
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"g")))
+		{
+			xmlNodeSetContent(cur, (xmlChar*)ft_itoa(color.g));
+		}
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"b")))
+		{
+			xmlNodeSetContent(cur, (xmlChar*)ft_itoa(color.b));
+		}
+		cur = cur->next;
+	}
 }
