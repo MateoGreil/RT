@@ -6,7 +6,11 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/12 13:45:34 by bmuselet          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/03/22 15:28:39 by mgreil           ###   ########.fr       */
+=======
+/*   Updated: 2018/03/22 14:59:09 by bmuselet         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +44,24 @@ static void	change_tex_or_rad(t_env *e, int keycode)
 			transformations(e->cam.select_obj);
 	}
 }
+/*
+static void rotate_object(t_env *e, int keycode)
+{
+	if (keycode == KEY_W)
 
-static void	move_object(t_env *e, int keycode)
+	else if (keycode == KEY_S)
+
+	else if (keycode == KEY_A)
+
+	else if (keycode == KEY_D)
+
+	else if (keycode == KEY_R)
+
+	else if (keycode == KEY_F)
+
+}
+*/
+static void	translate_object(t_env *e, int keycode)
 {
 	if (keycode == KEYPAD_UP)
 		e->cam.select_obj->pos.y += 15;
@@ -64,10 +84,14 @@ void		change_object(t_env *e, int keycode)
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN
 			|| keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT
 			|| keycode == KEY_PUP || keycode == KEY_PDOWN)
-		move_object(e, keycode);
+		translate_object(e, keycode);
+/*	else if (keycode == KEY_A || keycode == KEY_W
+			|| keycode == KEY_S || keycode == KEY_D
+			|| keycode == KEY_F || keycode == KEY_R)
+		rotate_object(e, keycode);*/
 	else if (keycode == KEY_LCTRL)
 		e->cam.selection = OFF;
-		// Faut faire un lst remove if mais ca c est plus drole
+	// Faut faire un lst remove if mais ca c est plus drole
 	else if (keycode == KEY_DEL)
 		e->cam.select_obj->pos = (t_vec){0, 0, 10000000000000, 0};
 	else if (keycode == KEY_C)

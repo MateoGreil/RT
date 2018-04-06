@@ -68,7 +68,7 @@ static void		*ray_loop(void *e)
 {
 	t_vec	compteur;
 
-	((t_env*)e)->cam.num_samples = 4; // Initialisation du nombre de samples.
+	((t_env*)e)->cam.num_samples = 1; // Initialisation du nombre de samples.
 	compteur.y = ((t_env*)e)->y_start;
 	while (compteur.y < ((t_env*)e)->y_end)
 	{
