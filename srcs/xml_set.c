@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 16:31:25 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/22 16:54:55 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/06 14:14:21 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,19 +36,19 @@ void	xml_set_vec(xmlNodePtr cur, t_vec vec)
 void	xml_set_type(xmlNodePtr cur, int type)
 {
 	if (type == SPH)
-		xmlNodeSetContent(cur, "sphere");
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 	if (type == SPH)
-		xmlNodeSetContent(cur, "sphere");
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 	if (type == SPH)
-		xmlNodeSetContent(cur, "sphere");
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 	if (type == SPH)
-		xmlNodeSetContent(cur, "sphere");
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 	if (type == SPH)
-		xmlNodeSetContent(cur, "sphere");
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 	if (type == SPH)
-		xmlNodeSetContent(cur, "sphere");
-						if (type == SPH)
-							xmlNodeSetContent(cur, "sphere");
-							if (type == SPH)
-								xmlNodeSetContent(cur, "sphere");
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
+	if (type == SPH)
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
+	if (type == SPH)
+		xmlNodeSetContent(cur, (const xmlChar*)"sphere");
 }
