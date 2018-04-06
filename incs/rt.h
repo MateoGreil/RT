@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/22 16:36:27 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/06 16:44:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@
 # define FOV 2
 
 # define ERROR -1
-# define SPH 0
-# define PLA 1
-# define CYL 2
-# define CON 3
-# define PAR 4
+# define SPH 0 //sphere
+# define PLA 1 //plan
+# define CYL 2 //cylindre
+# define CON 3 //cone
+# define PAR 4 //par
 # define LIG 5 //light
 # define LIA 6 //ambient_light
 # define LID 7 //directional_light
@@ -304,6 +304,8 @@ t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
 
 void	save_scene(t_env *e);
 void	xml_set_vec(xmlNodePtr cur, t_vec vec);
+void	xml_set_type(xmlNodePtr cur, int type);
+void	xml_set_color(xmlNodePtr cur, t_color color);
 
 void	printf_obj(t_obj obj);
 
