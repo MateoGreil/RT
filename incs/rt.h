@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 16:36:25 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/06 16:44:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,11 +79,11 @@
 # define FOV 2
 
 # define ERROR -1
-# define SPH 0
-# define PLA 1
-# define CYL 2
-# define CON 3
-# define PAR 4
+# define SPH 0 //sphere
+# define PLA 1 //plan
+# define CYL 2 //cylindre
+# define CON 3 //cone
+# define PAR 4 //par
 # define LIG 5 //light
 # define LIA 6 //ambient_light
 # define LID 7 //directional_light
@@ -93,8 +93,6 @@
 
 # define INFINITE 1000000000
 # define ZERO 0.0000001
-
-# define NB_THREADS 8
 
 # define TRUE 1
 # define FALSE 0
@@ -106,6 +104,16 @@
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
+
+typedef struct		s_noise
+{
+	double		*noise;
+	int				size_x;
+	int				size_y;
+	int				len;
+	int				pas;
+	int				octave;
+}						t_noise;
 
 typedef struct		s_obj
 {
@@ -185,8 +193,9 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_img			*texture;
-	t_img			*bump;
+	t_img				*texture;
+	t_noise			*noise;
+	t_img				*bump; // A supprimer ?
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -212,6 +221,7 @@ int					get_nbr(char *str_obj, int *i_str);
 void				get_objs_and_cam(t_env *e, char *path_file);
 int					check_inter_objects(t_env *e, t_ray *ray);
 t_color				search_color(void *e, int x, int y, int s);
+t_color				max_color(t_color color);
 
 double				cone_inter(t_env *e, t_ray *ray, t_vec temp);
 double				plan_inter(t_env *e, t_ray *ray);
@@ -244,6 +254,8 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void				antialiasing(t_env *e, t_vec compteur,
 					t_color *color, int i);
+void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
+
 void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
 void				print_keys(void);
@@ -256,9 +268,15 @@ int					change_filter(int keycode, t_env *e);
 t_color				filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 int					calc_shadow(t_env *e, t_ray light_ray);
+
+t_color				damier_color(t_vec hit_point);
+t_noise				*init_noise(void);
+double				noise(t_noise *noise, double x, double y);
+t_color				noise_marble(t_noise *n, int x, int y);
+t_color				noise_wood(t_noise *n, int x, int y);
+t_color				tex_or_not(t_env *e, t_ray ray);
+
 /*
-*
-*t_color				damier_color(t_vec hit_point);
 *void 				marble_texture(t_vec hit_point, t_color *color);
 *void				wood_texture(t_vec hit_point, t_color *color);
 *t_color 				perlin_color(t_vec hit_point);
@@ -268,6 +286,7 @@ int					calc_shadow(t_env *e, t_ray light_ray);
 *double				lerp(double t, double a, double b);
 *double				grad(int hash, double x, double y, double z);
 */
+
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
@@ -282,6 +301,11 @@ void				xmlGet_lights(xmlNodePtr lights, t_env *e);
 t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
 char				xmlGet_type(xmlNodePtr cur, t_env *e);
 t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
+
+void	save_scene(t_env *e);
+void	xml_set_vec(xmlNodePtr cur, t_vec vec);
+void	xml_set_type(xmlNodePtr cur, int type);
+void	xml_set_color(xmlNodePtr cur, t_color color);
 
 void	printf_obj(t_obj obj);
 

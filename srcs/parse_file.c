@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 17:00:15 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/03/22 13:53:06 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,14 +80,5 @@ void	parse_file(t_env *e, char *docname)
 		return ;
 	}
 	get_node_for_env(e, root);
-
-	/*tmp = e->objs;
-	while (e->objs != NULL)
-	{
-		printf("------------------\n");
-		printf_obj(*(t_obj*)e->objs->content);
-		printf_obj(*(t_obj*)e->lights->content);
-		e->objs = e->objs->next;
-	}
-	e->objs = tmp;*/
+	//printf_obj((*(t_obj*)e->objs->content));
 }

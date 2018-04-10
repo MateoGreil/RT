@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_normal.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:11:09 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 15:17:02 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/22 11:18:31 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ t_vec			get_normal(t_vec hit_point, t_ray ray)
 	else if (ray.hit_obj->type == SPH)
 		normal = vector_substraction(hit_point, ray.hit_obj->pos);
 	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL ||
-		ray.hit_obj->type == PLA)
+		ray.hit_obj->type == PAR)
 		normal = get_normal_2(hit_point, ray);
 	else
 		normal = (t_vec){0, 0, 0, 0};

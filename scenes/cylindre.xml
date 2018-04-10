@@ -40,7 +40,7 @@
 			<type>cylindre</type>
 			<position>
 				<x>0</x>
-				<y>0</y>
+				<y>-100</y>
 				<z>100</z>
 			</position>
 			<rotation>

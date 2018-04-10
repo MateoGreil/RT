@@ -3,20 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   interface.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 11:41:23 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 15:28:39 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/03/22 15:31:33 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-
-void		save_scene(t_env *e)
-{
-	if (e)
-		printf("d");
-}
 
 void		init_loading(t_env *e)
 {
