@@ -26,7 +26,7 @@ static void	change_tex_or_rad(t_env *e, int keycode)
 		if (e->cam.select_obj->rad <= 2)
 			e->cam.select_obj->rad = 1;
 		else
-			e->cam.select_obj->rad -= 0.1;
+			e->cam.select_obj->rad -= 2;
 	}
 	if (keycode == KEY_TAB)
 	{
@@ -76,10 +76,8 @@ static void	translate_object(t_env *e, int keycode)
 
 void		change_object(t_env *e, int keycode)
 {
-	printf("%f\n", e->cam.select_obj->rad);
-	printf("%f\n", cos(e->cam.select_obj->rad));
 	if (keycode == KEY_PLUS)
-		e->cam.select_obj->rad += 0.1;
+		e->cam.select_obj->rad += 2;
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN
 			|| keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT
 			|| keycode == KEY_PUP || keycode == KEY_PDOWN)
