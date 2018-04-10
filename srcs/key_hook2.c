@@ -40,23 +40,24 @@ static void	change_tex_or_rad(t_env *e, int keycode)
 			transformations(e->cam.select_obj);
 	}
 }
-/*
+
 static void rotate_object(t_env *e, int keycode)
 {
 	if (keycode == KEY_W)
-
+		e->cam.select_obj->rot.x += 20;
 	else if (keycode == KEY_S)
-
+		e->cam.select_obj->rot.x -= 20;
 	else if (keycode == KEY_A)
-
+		e->cam.select_obj->rot.z -= 20;
 	else if (keycode == KEY_D)
-
+		e->cam.select_obj->rot.z += 20;
 	else if (keycode == KEY_R)
-
+		e->cam.select_obj->rot.y += 20;
 	else if (keycode == KEY_F)
-
+		e->cam.select_obj->rot.y -= 20;
+	transformations(e->cam.select_obj);
 }
-*/
+
 static void	translate_object(t_env *e, int keycode)
 {
 	if (keycode == KEYPAD_UP)
@@ -75,19 +76,19 @@ static void	translate_object(t_env *e, int keycode)
 
 void		change_object(t_env *e, int keycode)
 {
+	printf("%f\n", e->cam.select_obj->rad);
 	if (keycode == KEY_PLUS)
 		e->cam.select_obj->rad += 2;
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN
 			|| keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT
 			|| keycode == KEY_PUP || keycode == KEY_PDOWN)
 		translate_object(e, keycode);
-/*	else if (keycode == KEY_A || keycode == KEY_W
+	else if (keycode == KEY_A || keycode == KEY_W
 			|| keycode == KEY_S || keycode == KEY_D
 			|| keycode == KEY_F || keycode == KEY_R)
-		rotate_object(e, keycode);*/
+		rotate_object(e, keycode);
 	else if (keycode == KEY_LCTRL)
 		e->cam.selection = OFF;
-	// Faut faire un lst remove if mais ca c est plus drole
 	else if (keycode == KEY_DEL)
 		e->cam.select_obj->pos = (t_vec){0, 0, 10000000000000, 0};
 	else if (keycode == KEY_C)
