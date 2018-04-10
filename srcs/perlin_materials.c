@@ -61,28 +61,27 @@ t_color    perlin_color(t_vec hit_point)
   f_color = get_perlin_color(n, v);
   return (f_color);
 }
-
-void		wood_texture(t_vec hit_point, t_color *color)
-{
-	double	scale;
-	double	res;
-	double	v;
-  double ft;
-  double f;
-
-	scale = 2;
-	res = 0.0;
-	v = 5 * fabs(noise(hit_point.x * scale, hit_point.y
-		* scale, hit_point.z * scale));
-	res = fabs(v - (int)v);
-	ft = res * M_PI;
-  f = (1 - cos(ft)) * 0.5;
-  printf("%f\n", res);
-  color->r = color->r + 255 * f;
-  color->g = color->g + 255 * f;
-  color->b = color->b + 255 * f;
-}
 */
+void		grain_texture(t_vec hit_point, t_color *color)
+{
+  int		i;
+  double	noise_amount;
+
+  noise_amount = 0.0;
+  i = 0;
+  while (++i < 10)
+    noise_amount += (1.0 / i) * fabs(noise(i * 0.05 * hit_point.x,
+					   i * 0.05 * hit_point.y,
+					   i * 0.05 * hit_point.z));
+  noise_amount = (noise_amount > 1.0) ? 1.0 : noise_amount;
+  color->r = color->r + noise_amount * 0
+    + 255 * (1 - noise_amount);
+  color->g = color->g + noise_amount * 0
+    + 255 * (1 - noise_amount);
+  color->b = color->b + noise_amount * 0
+  + 255 * (1 - noise_amount);
+}
+
 void		marble_texture(t_vec hit_point, t_color *color)
 {
   int		i;

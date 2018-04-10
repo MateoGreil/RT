@@ -54,7 +54,6 @@ SRC_NAME =	main.c \
 			matrices.c \
 			bump_mapping.c \
 			stereoscopy.c \
-			noise.c \
 			save_scene.c \
 			xml_set.c
 

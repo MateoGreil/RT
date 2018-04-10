@@ -109,7 +109,8 @@ SRC_NAME =	ft_memset.c \
 			color_calc.c \
 			color_calc2.c \
 			ft_clamp.c \
-			ft_deg2rad.c
+			ft_deg2rad.c \
+			ft_int2rgb.c \
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 

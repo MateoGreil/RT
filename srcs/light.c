@@ -12,6 +12,26 @@
 
 #include "rt.h"
 
+
+static t_color	tex_or_not(t_env *e, t_color color, t_ray ray)
+{
+	if (ray.hit_obj->num_texture > 0 && ray.hit_obj->num_texture < 3)
+		color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
+	else if (ray.hit_obj->num_texture == 3) {
+		color = color_double_product(color, 255);
+		color = max_color(color);
+		marble_texture(ray.hit_pos, &color);
+		color = color_division(color, 255);
+	}
+	else if (ray.hit_obj->num_texture == 4) {
+		color = color_double_product(color, 255);
+		color = max_color(color);
+		grain_texture(ray.hit_pos, &color);
+		color = color_division(color, 255);
+	}
+	return (color);
+}
+
 static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
@@ -91,14 +111,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	else
 	{
 		diffuse_color = calc_all_lights(e, ray);
-		if (ray.hit_obj->num_texture > 0 && ray.hit_obj->num_texture < 3)
-			color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
-		else if (ray.hit_obj->num_texture == 3) {
-			color = color_double_product(color, 255);
-			color = max_color(color);
-			marble_texture(ray.hit_pos, &color);
-			color = color_division(color, 255);
-		}
+		color = tex_or_not(e, color, ray);
 		color = color_product(color, diffuse_color);
 	}
 	if (ray.hit_obj->num_texture == 0)
