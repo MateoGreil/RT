@@ -12,16 +12,6 @@
 
 #include "rt.h"
 
-t_color	tex_or_not(t_env *e, t_ray ray)
-{
-	t_color color;
-
-	color = color_division(ray.hit_obj->color, 255);
-	if (ray.hit_obj->num_texture != 0)
-		color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
-	return (color);
-}
-
 static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
@@ -93,7 +83,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_color	diffuse_color;
 	t_color ambient;
 
-	color = tex_or_not(e, ray);
+	color = color_division(ray.hit_obj->color, 255);
 	ambient = ambient_color(e, ray);
 	ambient = color_division(ambient, 255);
 	if (e->lights == NULL)
@@ -104,6 +94,8 @@ t_color			light_calc(t_env *e, t_ray ray)
 		color = color_product(color, diffuse_color);
 	}
 	color = color_addition(color, ambient);
+	if (ray.hit_obj->num_texture != 0)
+		color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
 	color = color_double_product(color, 255);
 	color = max_color(color);
 	if (e->cam.cel_shading == ON)

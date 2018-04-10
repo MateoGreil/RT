@@ -254,7 +254,6 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void				antialiasing(t_env *e, t_vec compteur,
 					t_color *color, int i);
-void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 
 void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
@@ -274,7 +273,6 @@ t_noise				*init_noise(void);
 double				noise(t_noise *noise, double x, double y);
 t_color				noise_marble(t_noise *n, int x, int y);
 t_color				noise_wood(t_noise *n, int x, int y);
-t_color				tex_or_not(t_env *e, t_ray ray);
 
 /*
 *void 				marble_texture(t_vec hit_point, t_color *color);
