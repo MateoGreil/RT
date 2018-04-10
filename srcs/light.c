@@ -22,6 +22,28 @@ t_color	tex_or_not(t_env *e, t_ray ray)
 	return (color);
 }
 
+static t_color specular_light(t_env *e, t_ray *light_ray)
+{
+	double	n;
+	double	d;
+	t_color	color;
+	t_vec	r;
+	double ks; // COEFFICIENT DE REFLECTION A METTRE DANS LA STRUCTURE
+	double shininess; //TAILLE DU CERCLE DE LA SPECULAR A METTRE DANS LA STRCTURE
+
+	ks = 0.5;
+	shininess = 20;
+
+	color = ((t_obj*)e->lights->content)->color;
+	n = vector_dot_product(light_ray->normal, light_ray->hit_dir);
+	r = vector_addition(vector_double_product(light_ray->hit_dir, -1), 
+		vector_double_product(vector_double_product(light_ray->normal, 2), n));
+	d = vector_dot_product(r, e->cam.dir);
+	if (d > 0)
+		color = color_double_product(color, (ks * ft_pow(d, shininess)));
+	return (color);
+}
+
 static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	double	d;
@@ -50,6 +72,8 @@ static t_color	calc_diff_dir(t_env *e, t_ray ray, t_ray *light_ray)
 	if (((t_obj*)e->lights->content)->type == LIG)
 	{
 		tmp_color = diffuse_light(e, ray, light_ray);
+		tmp_color = color_addition(tmp_color, diffuse_light);
+		tmp_color = max_color(tmp_color);
 		tmp_color = color_division(tmp_color, 255);
 		if (calc_shadow(e, *light_ray) == 1)
 			tmp_color = (t_color){0, 0, 0};
