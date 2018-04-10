@@ -100,7 +100,7 @@
 # define NB_MIRRORING 0
 # define NB_THREADS 8
 # define NB_SAMPLES 1
-# define NB_TEXTURES 4
+# define NB_TEXTURES 5
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
@@ -267,7 +267,8 @@ t_color				filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 int					calc_shadow(t_env *e, t_ray light_ray);
 
-t_color				damier_color(t_vec hit_point);
+t_color				tex_or_not(t_env *e, t_color color, t_ray ray);
+t_color				damier_color(t_vec hit_point, t_color color);
 void 				marble_texture(t_vec hit_point, t_color *color);
 void				grain_texture(t_vec hit_point, t_color *color);
 t_color 			perlin_color(t_vec hit_point);
