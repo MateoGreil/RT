@@ -70,12 +70,11 @@ double	cone_inter(t_env *e, t_ray *ray, t_vec temp)
 	double	new_length;
 
 	((t_obj*)e->objs->content)->dir = vector_normalize(((t_obj*)e->objs->content)->dir);
-	r = -1 + (((t_obj*)e->objs->content)->rad *
-	((t_obj*)e->objs->content)->rad) / 1500;
+	r = ((t_obj*)e->objs->content)->rad;
 	a.x = vector_dot_product(ray->dir, ray->dir)
 		- (1 + pow(cos(r), 2)) *
 		pow(vector_dot_product(ray->dir, (t_vec)((t_obj*)e->objs->content)->dir), 2);
-	a.y = 2 * (vector_dot_product(ray->dir, temp)	-
+	a.y = 2 * (vector_dot_product(ray->dir, temp) -
 		(1 + pow(cos(r), 2)) *
 		vector_dot_product(ray->dir, (t_vec)((t_obj*)e->objs->content)->dir) *
 		vector_dot_product(temp, (t_vec)((t_obj*)e->objs->content)->dir));
