@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cam_tool.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/21 14:56:02 by bmuselet          #+#    #+#             */
 /*   Updated: 2018/03/21 14:56:03 by bmuselet         ###   ########.fr       */

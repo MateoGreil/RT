@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   equation_second.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/13 12:33:38 by bmuselet          #+#    #+#             */
 /*   Updated: 2018/03/21 15:15:08 by bmuselet         ###   ########.fr       */

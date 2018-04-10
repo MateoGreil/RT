@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   bump_mapping.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/15 16:21:48 by bmuselet          #+#    #+#             */
 /*   Updated: 2018/03/21 14:52:41 by bmuselet         ###   ########.fr       */

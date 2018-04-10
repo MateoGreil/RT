@@ -12,107 +12,106 @@
 
 #include "rt.h"
 
-t_color	noise_wood(t_noise *n, int x, int y)
-{
-	double	f;
-	double	value;
-	t_color	color;
-	t_vec	c1;
-	t_vec	c2;
-
-	c1 = (t_vec){1.0, 0.99, 0.98, 0};
-	c2 = (t_vec){0.2, 0.12, 0.02, 0};
-	value = fmod(noise(n, x, y), 0.2);
-	if (value > 0.2 / 2)
-		value = 0.2 - value;
-	f = (1 - cos(M_PI * value / (0.2 / 2))) / 2;
-	color.r = (c1.x * (1 - f) + c2.x * f) * 255;
-	color.g = (c1.y * (1 - f) + c2.y * f) * 255;
-	color.b = (c1.z * (1 - f) + c2.z * f) * 255;
-	return (color);
-}
-
-t_color	noise_marble(t_noise *n, int x, int y)
-{
-	double	f;
-	t_color	color;
-
-	f = 1 - sqrt(fabs(sin(2 * M_PI * noise(n, x, y))));
-	color.r = (1.0 * (1 - f) + 0.7 * f) * 255;
-	color.g = (1.0 * (1 - f) + 0.7 * f) * 255;
-	color.b = (1.0 * (1 - f) + 0.7 * f) * 255;
-	return (color);
-}
-
-static double		interpolate(double a, double b, double x)
-{
-	return (a * (1 - x) + b * x);
-}
-
-static double		get_value(t_noise *n, int i, int j)
-{
-	return (n->noise[(i % n->size_x) + (j % n->size_y) * n->size_x]);
-}
-
-static double		noise_generator(t_noise *n, double x, double y)
-{
-	int		i;
-	int		j;
-	double	ya[2];
-	double	xpas;
-	double	ypas;
-
-	xpas = x / n->pas;
-	ypas = y / n->pas;
-	i = (int)(xpas);
-	j = (int)(ypas);
-	ya[0] = interpolate(get_value(n, i, j), get_value(n, i + 1, j),
-					fmod(xpas, 1));
-	ya[1] = interpolate(get_value(n, i, j + 1), get_value(n, i + 1, j + 1),
-					fmod(xpas, 1));
-	return (interpolate(ya[0], ya[1], fmod(ypas, 1)));
-}
-
-double				noise(t_noise *noise, double x, double y)
-{
-	int		i;
-	int		f;
-	double	p;
-	double	ret;
-
-	i = -1;
-	f = 1;
-	p = 1.0;
-	ret = 0.0;
-	while (++i < noise->octave)
-	{
-		ret += p * noise_generator(noise, x * f, y * f);
-		p *= 0.6;
-		f *= 2;
-	}
-	return (ret * (1 - 0.6) / (1 - p));
-}
-
-t_noise				*init_noise(void)
-{
-	int		i;
-	int		poctave;
-	t_noise	*noise;
-
-	i = 0;
-  noise = (t_noise*)malloc(sizeof(t_noise));
-	noise[0].octave = 7;
-	noise[0].pas = 100;
-	poctave = pow(2, noise[0].octave - 1);
-	noise[0].size_x = (int)ceil(100 * poctave / noise[0].pas);
-	noise[0].size_y = (int)ceil(100 * poctave / noise[0].pas);
-	noise[0].len = noise[0].size_x * noise[0].size_y;
-	if (!(noise[0].noise = (double*)malloc(sizeof(double) * noise[0].len)))
+int	g_permutation[] =
   {
-    noise[0].noise = NULL;
-    return (noise);
-  }
-	while (i++ < noise[0].len)
-		noise[0].noise[i] = ft_clamp(((double)rand()) / RAND_MAX, 0, 255);
-	return (noise);
+    230, 190, 33, 59, 3, 59, 75, 18, 81, 203,
+    195, 233, 104, 39, 224, 55, 97, 134, 123, 245,
+    212, 161, 235, 155, 216, 175, 9, 32, 6, 105,
+    45, 252, 117, 6, 45, 40, 189, 63, 100, 28,
+    247, 75, 168, 207, 187, 227, 81, 185, 32, 62,
+    56, 211, 191, 20, 180, 149, 175, 159, 158, 246,
+    136, 148, 77, 110, 100, 46, 154, 246, 216, 34,
+    220, 6, 254, 171, 236, 149, 110, 126, 34, 27,
+    63, 214, 85, 145, 9, 104, 221, 110, 230, 110,
+    147, 171, 107, 160, 206, 192, 178, 53, 103, 164,
+    83, 230, 181, 207, 101, 234, 145, 58, 129, 250,
+    82, 93, 190, 77, 209, 47, 180, 156, 102, 40,
+    124, 30, 231, 65, 174, 140, 175, 242, 97, 29,
+    148, 50, 46, 138, 238, 121, 44, 10, 150, 192,
+    243, 86, 227, 126, 156, 165, 174, 172, 191, 176,
+    78, 194, 115, 174, 156, 183, 81, 88, 240, 3,
+    112, 229, 32, 159, 104, 14, 135, 3, 82, 10,
+    251, 38, 198, 146, 212, 128, 219, 221, 235, 10,
+    42, 163, 151, 60, 202, 30, 177, 13, 83, 3,
+    144, 245, 223, 141, 13, 237, 3, 113, 127, 109,
+    217, 234, 191, 108, 249, 173, 37, 98, 122, 245,
+    136, 72, 244, 119, 64, 149, 129, 109, 38, 66,
+    182, 143, 145, 199, 173, 20, 90, 27, 254, 181,
+    216, 182, 192, 169, 228, 145, 140, 169, 213, 36,
+    121, 236, 132, 102, 31, 43, 73, 207, 151, 157,
+    250, 88, 121, 251, 242, 121
+  };
+
+void		init_perlin(int p[512])
+{
+  int		i;
+
+  i = 0;
+  while (i < 256)
+    {
+      p[256 + i] = p[i] = g_permutation[i];
+      i++;
+    }
+}
+
+static double	fade(double t)
+{
+  return (t * t * t * (t * (t * 6 - 15) + 10));
+}
+
+void	get_fading(t_vec *fading, double *x, double *y, double *z)
+{
+  *x -= floor(*x);
+  *y -= floor(*y);
+  *z -= floor(*z);
+  fading->x = fade(*x);
+  fading->y = fade(*y);
+  fading->z = fade(*z);
+}
+
+
+static double	lerp(double t, double a, double b)
+{
+  return (a + t * (b - a));
+}
+
+static double	grad(int hash, double x, double y, double z)
+{
+  int		h;
+  double	u;
+  double	v;
+
+  h = hash & 15;
+  u = (h < 8 || h == 12 || h == 13) ? x : y;
+  v = (h < 4 || h == 12 || h == 13) ? y : z;
+  return ((((h & 1) == 0) ? u : -u) + (((h & 2) == 0) ? v : -v));
+}
+
+double		noise(double x, double y, double z)
+{
+  int		p[512];
+  t_vec		fading;
+  int		a;
+  int		aa;
+  int		ab;
+  int		b;
+  int		ba;
+  int		bb;
+
+  init_perlin(p);
+  a = p[(int)floor(x) & 255] + ((int)floor(y) & 255);
+  aa = p[a] + ((int)floor(z) & 255);
+  ab = p[a + 1] + ((int)floor(z) & 255);
+  b = p[((int)floor(x) & 255) + 1] + ((int)floor(y) & 255);
+  ba = p[b] + ((int)floor(z) & 255);
+  bb = p[b + 1] + ((int)floor(z) & 255);
+  get_fading(&fading, &x, &y, &z);
+  return (lerp(fading.z, lerp(fading.y, lerp(fading.x, grad(p[aa], x, y, z),
+					     grad(p[ba], x - 1, y, z)),
+			      lerp(fading.x, grad(p[ab], x, y - 1, z),
+				   grad(p[bb], x - 1, y - 1, z))),
+	       lerp(fading.y, lerp(fading.x, grad(p[aa + 1], x, y, z - 1),
+				   grad(p[ba + 1], x - 1, y, z - 1)),
+		    lerp(fading.x, grad(p[ab + 1], x, y - 1, z - 1),
+			 grad(p[bb + 1], x - 1, y - 1, z - 1)))));
 }

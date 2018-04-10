@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   cel_shading.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/14 18:26:04 by bmuselet          #+#    #+#             */
 /*   Updated: 2018/03/21 15:04:01 by bmuselet         ###   ########.fr       */

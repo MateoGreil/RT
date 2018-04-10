@@ -20,6 +20,7 @@ static void	change_tex_or_rad(t_env *e, int keycode)
 			e->cam.select_obj->num_texture += 1;
 		else
 			e->cam.select_obj->num_texture = 0;
+		printf("%d ", e->cam.select_obj->num_texture);
 	}
 	if (keycode == KEY_MINUS)
 	{

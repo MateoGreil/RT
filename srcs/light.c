@@ -91,8 +91,14 @@ t_color			light_calc(t_env *e, t_ray ray)
 	else
 	{
 		diffuse_color = calc_all_lights(e, ray);
-		if (ray.hit_obj->num_texture != 0)
+		if (ray.hit_obj->num_texture > 0 && ray.hit_obj->num_texture < 3)
 			color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
+		else if (ray.hit_obj->num_texture == 3) {
+			color = color_double_product(color, 255);
+			color = max_color(color);
+			marble_texture(ray.hit_pos, &color);
+			color = color_division(color, 255);
+		}
 		color = color_product(color, diffuse_color);
 	}
 	if (ray.hit_obj->num_texture == 0)
