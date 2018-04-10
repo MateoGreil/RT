@@ -91,11 +91,12 @@ t_color			light_calc(t_env *e, t_ray ray)
 	else
 	{
 		diffuse_color = calc_all_lights(e, ray);
+		if (ray.hit_obj->num_texture != 0)
+			color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
 		color = color_product(color, diffuse_color);
 	}
-	color = color_addition(color, ambient);
-	if (ray.hit_obj->num_texture != 0)
-		color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
+	if (ray.hit_obj->num_texture == 0)
+		color = color_addition(color, ambient);
 	color = color_double_product(color, 255);
 	color = max_color(color);
 	if (e->cam.cel_shading == ON)

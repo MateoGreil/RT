@@ -51,6 +51,12 @@ static t_color	change_pixel_data(t_img *texture, int x, int y)
 	color.r = pixel_pos[pixel_size - 2];
 	color.g = pixel_pos[pixel_size - 3];
 	color.b = pixel_pos[pixel_size - 4];
+	if (color.r < 0)
+		color.r *= -1;
+	if (color.g < 0)
+		color.g *= -1;
+	if (color.b < 0)
+		color.b *= -1;
 	return (color);
 }
 
@@ -66,5 +72,8 @@ t_color			print_texture(t_env *e, t_obj *obj, t_vec hit_pos)
 	//if (x <= e->texture[obj->num_texture].size_x
 	//	&& y <= e->texture[obj->num_texture].size_y && x > 0 && y > 0)
 	color = change_pixel_data(&e->texture[obj->num_texture], abs(x), abs(y));
+	/*printf("x %f", color.r);
+	printf("y %f", color.g);
+	printf("z %f\n", color.b);*/
 	return (color);
 }
