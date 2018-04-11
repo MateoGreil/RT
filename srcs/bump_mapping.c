@@ -75,7 +75,7 @@ t_vec    bump_mapping(t_vec normal, t_vec hit_point)
     t_vec noise_v;
     double epsilon;
     
-    epsilon = 0.09;
+    epsilon = 0.0976;
     coef.x = normal.x + hit_point.x;
     coef.y = 50 * normal.y + 100 * hit_point.x;
     coef.z = normal.z + hit_point.z;
