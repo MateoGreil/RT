@@ -14,16 +14,23 @@
 
 double	plan_inter(t_env *e, t_ray *ray)
 {
-	double	new_length;
+	float	a;
+	float	b;
+	float	new_length;
 
-	new_length = ((vector_dot_product((t_vec)((t_obj*)e->objs->content)->dir,
-					((t_obj*)e->objs->content)->pos) -
-				vector_dot_product((t_vec)((t_obj*)e->objs->content)->dir,
-					e->cam.pos)) / vector_dot_product(
-					(t_vec)((t_obj*)e->objs->content)->dir, ray->dir));
-	if (new_length < 0.0001)
-		return (ray->length);
-	return (new_length);
+	a = ((t_obj*)e->objs->content)->dir.x *
+		(((t_obj*)e->objs->content)->dir.x - ray->pos.x)
+		+ ((t_obj*)e->objs->content)->dir.y *
+		(((t_obj*)e->objs->content)->dir.y - ray->pos.y)
+		+ ((t_obj*)e->objs->content)->dir.z *
+		(((t_obj*)e->objs->content)->dir.z - ray->pos.z);
+	b = ((t_obj*)e->objs->content)->dir.x * ray->dir.x
+		+ ((t_obj*)e->objs->content)->dir.y * ray->dir.y
+		+ ((t_obj*)e->objs->content)->dir.z * ray->dir.z;
+	if ((new_length = a / b) > 0)
+		return (new_length);
+	else
+		return (INFINITE);
 }
 
 double	cylindre_inter(t_env *e, t_ray *ray, t_vec temp)
@@ -32,9 +39,15 @@ double	cylindre_inter(t_env *e, t_ray *ray, t_vec temp)
 	t_vec	a;
 	double	b[2];
 
-	a.x = pow(ray->dir.x, 2) + pow(ray->dir.z, 2);
-	a.y = 2 * (temp.x * ray->dir.x + temp.z * ray->dir.z);
-	a.z = pow(temp.x, 2) + pow(temp.z, 2) -
+	((t_obj*)e->objs->content)->dir = vector_normalize(((t_obj*)e->objs->content)->dir);
+	a.x = vector_dot_product(ray->dir, ray->dir) -
+		pow(vector_dot_product(ray->dir,
+			((t_obj*)e->objs->content)->dir), 2);
+	a.y = 2 * (vector_dot_product(ray->dir, temp) -
+		(vector_dot_product(ray->dir, ((t_obj*)e->objs->content)->dir) *
+		vector_dot_product(temp, ((t_obj*)e->objs->content)->dir)));
+	a.z = vector_dot_product(temp, temp) -
+		pow(vector_dot_product(temp, (t_vec)((t_obj*)e->objs->content)->dir), 2) -
 		pow(((t_obj*)e->objs->content)->rad, 2);
 	if ((new_length = equation_second(a, b)) == -1)
 		return (ray->length);
@@ -59,23 +72,23 @@ double	sphere_inter(t_env *e, t_ray *ray, t_vec temp)
 double	cone_inter(t_env *e, t_ray *ray, t_vec temp)
 {
 	t_vec	a;
-	t_vec	i;
 	double	b[2];
-	double	new_length;
 	double	r;
+	double	new_length;
 
+	if (e->cam.select_obj->rad > 63)
+		e->cam.select_obj->rad = 63;
 	r = (((t_obj*)e->objs->content)->rad *
 			((t_obj*)e->objs->content)->rad) / (50 * 50);
-	i.x = r * ray->dir.y * ray->dir.y;
-	i.y = (2.0 * r * temp.y * ray->dir.y) -
-		(2.0 * (((t_obj*)e->objs->content)->rad *
-				((t_obj*)e->objs->content)->rad) / 50) * ray->dir.y;
-	i.z = (r * temp.y * temp.y) - ((2.0 * (((t_obj*)e->objs->content)->rad *
-					((t_obj*)e->objs->content)->rad) / 50) * temp.y) +
-		(((t_obj*)e->objs->content)->rad) * ((t_obj*)e->objs->content)->rad;
-	a.x = (ray->dir.x * ray->dir.x) + (ray->dir.z * ray->dir.z) - i.x;
-	a.y = (2.0 * temp.x * ray->dir.x) + (2.0 * temp.z * ray->dir.z) - i.y;
-	a.z = (temp.x * temp.x) + (temp.z * temp.z) - i.z;
+	a.x = vector_dot_product(ray->dir, ray->dir)
+		- (1 + pow(tan(r), 2)) *
+		pow(vector_dot_product(ray->dir, (t_vec)((t_obj*)e->objs->content)->dir), 2);
+	a.y = 2 * (vector_dot_product(ray->dir, temp) -
+		(1 + pow(tan(r), 2)) *
+		vector_dot_product(ray->dir, (t_vec)((t_obj*)e->objs->content)->dir) *
+		vector_dot_product(temp, (t_vec)((t_obj*)e->objs->content)->dir));
+	a.z = vector_dot_product(temp, temp) - (1 + pow(tan(r), 2)) *
+		pow(vector_dot_product(temp, (t_vec)((t_obj*)e->objs->content)->dir), 2);
 	if ((new_length = equation_second(a, b)) == -1)
 		return (ray->length);
 	return (new_length);

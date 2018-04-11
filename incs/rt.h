@@ -100,7 +100,7 @@
 # define NB_MIRRORING 0
 # define NB_THREADS 8
 # define NB_SAMPLES 1
-# define NB_TEXTURES 2
+# define NB_TEXTURES 6
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
@@ -253,7 +253,6 @@ double				cel_shading(t_env *e, double d);
 t_color				cel_shading_shape(t_env *e, t_ray ray, t_color color);
 void				antialiasing(t_env *e, t_vec compteur,
 					t_color *color, int i);
-void				blend_color(t_env *e, t_color *color, t_vec compteur, int n);
 
 void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
@@ -268,23 +267,16 @@ t_color				filter_color(t_env *e, t_color color, t_ray ray);
 int					key_filter(int keycode, t_env *e);
 int					calc_shadow(t_env *e, t_ray light_ray);
 
-t_color				damier_color(t_vec hit_point);
-t_noise				*init_noise(void);
-double				noise(t_noise *noise, double x, double y);
-t_color				noise_marble(t_noise *n, int x, int y);
-t_color				noise_wood(t_noise *n, int x, int y);
-t_color				tex_or_not(t_env *e, t_ray ray);
+t_color				tex_or_not(t_env *e, t_color color, t_ray ray);
+t_color				damier_color(t_vec hit_point, t_color color);
+void 				marble_texture(t_vec hit_point, t_color *color);
+void				grain_texture(t_vec hit_point, t_color *color);
+t_color 			perlin_color(t_vec hit_point);
 
-/*
-*void 				marble_texture(t_vec hit_point, t_color *color);
-*void				wood_texture(t_vec hit_point, t_color *color);
-*t_color 				perlin_color(t_vec hit_point);
-*
-*double				noise(double x, double y, double z);
-*double				fade(double t);
-*double				lerp(double t, double a, double b);
-*double				grad(int hash, double x, double y, double z);
-*/
+double				noise(double x, double y, double z);
+double				lerp(double t, double a, double b);
+double				fade(double t);
+double				grad(int hash, double x, double y, double z);
 
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);

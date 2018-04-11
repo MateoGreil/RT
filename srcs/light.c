@@ -12,16 +12,6 @@
 
 #include "rt.h"
 
-t_color	tex_or_not(t_env *e, t_ray ray)
-{
-	t_color color;
-
-	color = color_division(ray.hit_obj->color, 255);
-	if (ray.hit_obj->num_texture != 0)
-		color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
-	return (color);
-}
-
 static t_color	specular_light(t_ray ray, t_ray *light_ray)
 {
 	t_vec		reflection;
@@ -31,7 +21,7 @@ static t_color	specular_light(t_ray ray, t_ray *light_ray)
 	double		intensity;
 
 	shininess = 200;
-	intensity = 2;
+	intensity = 10;
 	specular = (t_color){255, 255, 255};
 	reflection = vector_double_product(light_ray->normal,
 	vector_dot_product(ray.dir, light_ray->normal) * 2);
@@ -125,19 +115,21 @@ t_color			light_calc(t_env *e, t_ray ray)
 {
 	t_color	color;
 	t_color ambient;
+	t_color diffuse_color;
 
-	color = tex_or_not(e, ray);
+	color = color_division(ray.hit_obj->color, 255);
 	ambient = ambient_color(e, ray);
 	ambient = color_division(ambient, 255);
 	if (e->lights == NULL)
 		color = ambient;
 	else
 	{
-		color = calc_all_lights(e, ray, color);
-		//color = color_product(color, diffuse_color);
-		//color = diffuse_color;
+		color = tex_or_not(e, color, ray);
+		diffuse_color = calc_all_lights(e, ray, color);
+		color = color_product(color, diffuse_color);
 	}
-	color = color_addition(color, ambient);
+	if (ray.hit_obj->num_texture == 0)
+		color = color_addition(color, ambient);
 	color = color_double_product(color, 255);
 	color = max_color(color);
 	if (e->cam.cel_shading == ON)

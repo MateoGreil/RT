@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 15:15:53 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 15:07:14 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/04/11 11:14:37 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/04/11 11:14:38 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,22 +83,27 @@ void	blend_color(t_env *e, t_color *color, t_vec compteur, int n)
 	put_pixel_to_image(&e->img, compteur.x, compteur.y, final_color);
 }
 
-t_color	damier_color(t_vec hit_point)
+t_color	damier_color(t_vec hit_point, t_color color)
 {
-	double x;
-	double y;
-	double z;
-	double size;
-	double eps;
+	t_color new_color;
 
-	eps = -0.0004658948651;
-	size = 1;
-	x = hit_point.x + eps;
-	y = hit_point.y + eps;
-	z = hit_point.z + eps;
-	if (((int)floor(x / size) + (int)floor(y / size)
-				+ (int)floor(z / size)) % 2 == 0)
-		return ((t_color){0, 0, 0});
+	new_color = color;
+	if ((hit_point.x >= 0.0 && hit_point.y >= 0.0)
+		|| (hit_point.x < 0.0 && hit_point.y < 0.0))
+		{
+			if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
+				new_color = WHITE;
+			else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
+				new_color = WHITE;
+		}
 	else
-		return ((t_color){255, 255, 255});
+		{
+			if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
+				new_color = color;
+			else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
+				new_color = color;
+			else
+				new_color = WHITE;
+			}
+	return (new_color);
 }

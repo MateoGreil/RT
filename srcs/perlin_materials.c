@@ -12,7 +12,6 @@
 
 #include "rt.h"
 
-/*
 static t_color get_perlin_color(double n, double *v)
 {
   t_color c0;
@@ -20,9 +19,9 @@ static t_color get_perlin_color(double n, double *v)
   t_color c2;
   t_color color;
 
-  c0 = (t_color){1, 2, 255};
-  c1 = (t_color){255, 2, 1};
-  c2 = (t_color){1, 2, 255};
+  c0 = (t_color){0, 102, 255};
+  c1 = (t_color){0, 0, 153};
+  c2 = (t_color){153, 204, 255};
   if (n <= v[0])
     color = c0;
   else if (n < v[1])
@@ -62,39 +61,43 @@ t_color    perlin_color(t_vec hit_point)
   return (f_color);
 }
 
-void		wood_texture(t_vec hit_point, t_color *color)
+void		grain_texture(t_vec hit_point, t_color *color)
 {
-	double	scale;
-	double	res;
-	double	v;
-  double ft;
-  double f;
+  int		i;
+  double	noise_amount;
 
-	scale = 2;
-	res = 0.0;
-	v = 5 * fabs(noise(hit_point.x * scale, hit_point.y
-		* scale, hit_point.z * scale));
-	res = fabs(v - (int)v);
-	ft = res * M_PI;
-  f = (1 - cos(ft)) * 0.5;
-  printf("%f\n", res);
-  color->r = color->r + 255 * f;
-  color->g = color->g + 255 * f;
-  color->b = color->b + 255 * f;
+  noise_amount = 0.0;
+  i = 0;
+  while (++i < 10)
+    noise_amount += (1.0 / i) * fabs(noise(i * 0.05 * hit_point.x,
+					   i * 0.05 * hit_point.y,
+					   i * 0.05 * hit_point.z));
+  noise_amount = (noise_amount > 1.0) ? 1.0 : noise_amount;
+  color->r = color->r + noise_amount * 0
+    + 255 * (1 - noise_amount);
+  color->g = color->g + noise_amount * 0
+    + 255 * (1 - noise_amount);
+  color->b = color->b + noise_amount * 0
+  + 255 * (1 - noise_amount);
 }
 
 void		marble_texture(t_vec hit_point, t_color *color)
 {
-	int		i;
-	double	res;
+  int		i;
+  double	noise_amount;
 
-	res = 0.0;
-	i = 0;
-	while (++i < 8)
-		res += cos(hit_point.x + noise(hit_point.x, hit_point.y, hit_point.z));
-	res = ft_clamp(res, 0.0, 1.0);
-	color->r = color->r + 255 * (1 - res);
-	color->g = color->g + 255 * (1 - res);
-	color->b = color->b + 255 * (1 - res);
+  noise_amount = 0.0;
+  i = 0;
+  while (++i < 10)
+    noise_amount += (1.0 / i) * fabs(noise(i * 0.05 * hit_point.x,
+					   i * 0.15 * hit_point.y,
+					   i * 0.05 * hit_point.z));
+  noise_amount = 0.5 * sinf((hit_point.x + hit_point.y) * 0.05 + noise_amount) + 0.5;
+  color->r = color->r + noise_amount * 25
+    + 233 * (1 - noise_amount);
+  color->g = color->g + noise_amount * 25
+    + 233 * (1 - noise_amount);
+  color->b = color->b + noise_amount * 25
+  + 233 * (1 - noise_amount);
 }
-*/
+

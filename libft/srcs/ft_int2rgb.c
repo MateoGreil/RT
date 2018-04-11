@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   equation_second.c                                  :+:      :+:    :+:   */
+/*   ft_int2rgb.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/11 11:14:48 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 11:14:50 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/04/10 17:41:57 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/04/10 17:41:58 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include "libft.h"
 
-double		equation_second(t_vec a, double *b)
+void	ft_int2rgb(t_color *color, int i)
 {
-	double	disc;
-
-	disc = a.y * a.y - 4.0 * a.x * a.z;
-	if (disc < ZERO)
-		return (-1);
-	b[0] = (-a.y - sqrt(disc)) / (2 * a.x);
-	b[1] = (-a.y + sqrt(disc)) / (2 * a.x);
-	if (b[0] < ZERO && b[1] < ZERO)
-		return (-1);
-	else if (b[1] < b[0] && b[1] >= ZERO)
-		return (b[1]);
-	return (b[0]);
+  color->r = (i & 0xFF0000) >> 16;
+  color->g = (i & 0xFF00) >> 8;
+  color->b = i & 0xFF;
 }
