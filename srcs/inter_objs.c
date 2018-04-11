@@ -27,7 +27,7 @@ double	plan_inter(t_env *e, t_ray *ray)
 	b = ((t_obj*)e->objs->content)->dir.x * ray->dir.x
 		+ ((t_obj*)e->objs->content)->dir.y * ray->dir.y
 		+ ((t_obj*)e->objs->content)->dir.z * ray->dir.z;
-	if ((new_length = a / b) > 0)
+	if ((new_length = a / b) > ZERO)
 		return (new_length);
 	else
 		return (INFINITE);

@@ -281,7 +281,7 @@ double				grad(int hash, double x, double y, double z);
 int					load_texture_img(t_env *e);
 int					load_texture_bump(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec				bump_mapping(t_vec normal, t_vec hit_pos);
+t_vec				bump_mapping(t_vec normal, t_vec hit_point);
 
 // PARTIE PARSING XML //
 xmlNodePtr			get_node(xmlNodePtr node, char *name);

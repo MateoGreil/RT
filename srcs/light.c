@@ -90,8 +90,8 @@ t_color			light_calc(t_env *e, t_ray ray)
 		color = ambient;
 	else
 	{
+		color = tex_or_not(e, color, ray);		
 		diffuse_color = calc_all_lights(e, ray);
-		color = tex_or_not(e, color, ray);
 		color = color_product(color, diffuse_color);
 	}
 	if (ray.hit_obj->num_texture == 0)

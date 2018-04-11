@@ -31,23 +31,6 @@ int		load_texture_bump(t_env *e)
 		return (FALSE);
 	return (TRUE);
 }
-/*
-t_vec    bump_mapping(t_vec normal, t_vec hit_pos)
-{
-    double x; = point.x / scale;
-    double y; = point.y / scale;
-    double z; = point.z / scale;
-    
-    x = hit_point / scale;
-    y = hit_point / scale;
-    z = hit_point.z / scale;
-    noise.x = noise(x, y, z));
-    noise.y = noise(y, z, x));
-    noise.z = noise(z, x, y));
-    noise = vector_double_product(noise, amount);
-    normal = vector_addition(normal, noise);
-    return (normal);
-}*/
 
 /*
 static double  calc_bump(t_env *e, t_vec hit_pos, int i)
@@ -85,3 +68,22 @@ t_vec    bump_mapping(t_env *e, t_vec normal, t_vec hit_pos)
    return (new_normal);
 }
 */
+
+t_vec    bump_mapping(t_vec normal, t_vec hit_point)
+{
+    t_vec coef;
+    t_vec noise_v;
+    double epsilon;
+    
+    epsilon = 0.09;
+    coef.x = normal.x + hit_point.x;
+    coef.y = 50 * normal.y + 100 * hit_point.x;
+    coef.z = normal.z + hit_point.z;
+    noise_v.x = noise(coef.x - epsilon, coef.y, coef.z) - noise(coef.x + epsilon, coef.y, coef.z);
+    noise_v.y = noise(coef.x, coef.y - epsilon, coef.z) - noise(coef.x, coef.y + epsilon, coef.z);
+    noise_v.z = noise(coef.x, coef.y, coef.z - epsilon) - noise(coef.x, coef.y, coef.z + epsilon);
+    normal.x = normal.x + noise_v.x;
+    normal.y = normal.y + noise_v.y;
+    normal.z = normal.z + noise_v.z;
+    return (normal);
+}
