@@ -45,7 +45,11 @@ t_vec			get_normal(t_vec hit_point, t_ray ray)
 		normal = get_normal_2(hit_point, ray);
 	else
 		normal = (t_vec){0, 0, 0, 0};
-	normal = bump_mapping(normal, hit_point, ray);
+	if (ray.hit_obj->bump > 0)
+		normal = bump_mapping(normal, hit_point, ray);
+	//if (ray.hit_obj->pertubation == 1)
+	//	normal = perturbation_normal();
 	normal = vector_normalize(normal);
+	printf("%d\n", ray.hit_obj->perturbation);
 	return (normal);
 }

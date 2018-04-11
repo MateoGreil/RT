@@ -85,6 +85,7 @@ void			init_obj(t_obj *obj)
 	obj->trans.z = 0;
 	obj->num_texture = 0;
 	obj->bump = 0;
+	obj->perturbation = 0;
 	obj->refl = 0;
 	obj->refr = 0;
 	obj->n_refr = 0;

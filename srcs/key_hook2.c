@@ -92,6 +92,8 @@ void		change_object(t_env *e, int keycode)
 		e->cam.select_obj->pos = (t_vec){0, 0, 10000000000000, 0};
 	else if (keycode == KEY_C)
 		change_object_color(&e->cam.select_obj->color);
+	else if (keycode == KEY_N)
+		e->cam.select_obj->perturbation = (e->cam.select_obj->perturbation == 0) ? 1 : 0;
 	else if (keycode == KEY_V)
 	{
 		ft_lstaddback(&(e->objs), ft_lstnew(e->cam.select_obj, sizeof(t_obj)));

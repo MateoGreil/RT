@@ -107,16 +107,6 @@
 
 # define N_AIR 1.000293
 
-typedef struct		s_noise
-{
-	double		*noise;
-	int				size_x;
-	int				size_y;
-	int				len;
-	int				pas;
-	int				octave;
-}						t_noise;
-
 typedef struct		s_obj
 {
 	char			id;
@@ -128,6 +118,7 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 	int				num_texture;
+	int				perturbation;
 	double			bump;
 	char			refl;
 	char			refr;
@@ -196,9 +187,7 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_img				*texture;
-	t_noise			*noise;
-	t_img				*bump; // A supprimer ?
+	t_img			*texture;
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
