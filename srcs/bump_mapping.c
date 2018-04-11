@@ -11,17 +11,17 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 int		load_texture_bump(t_env *e)
 {
 	int a;
 	int	b;
 
 	e->bump = malloc(sizeof(t_img) * 1);
-	a = 64;
-	b = 64;
+	a = 1000;
+	b = 500;
 	e->bump[0].img = mlx_xpm_file_to_image(e->mlx,
-			"textures/stone.xpm", &a, &b);
+			"textures/earthbump.xpm", &a, &b);
 	e->bump[0].size_x = a;
 	e->bump[0].size_y = b;
 	e->bump[0].data = mlx_get_data_addr(e->bump[0].img,
@@ -32,7 +32,6 @@ int		load_texture_bump(t_env *e)
 	return (TRUE);
 }
 
-/*
 static double  calc_bump(t_env *e, t_vec hit_pos, int i)
 {
    int x;
@@ -69,21 +68,17 @@ t_vec    bump_mapping(t_env *e, t_vec normal, t_vec hit_pos)
 }
 */
 
-t_vec    bump_mapping(t_vec normal, t_vec hit_point)
+t_vec    bump_mapping(t_vec normal, t_vec hit_point, t_ray ray)
 {
-    t_vec coef;
-    t_vec noise_v;
-    double epsilon;
-    
-    epsilon = 0.0976;
-    coef.x = normal.x + hit_point.x;
-    coef.y = 50 * normal.y + 100 * hit_point.x;
-    coef.z = normal.z + hit_point.z;
-    noise_v.x = noise(coef.x - epsilon, coef.y, coef.z) - noise(coef.x + epsilon, coef.y, coef.z);
-    noise_v.y = noise(coef.x, coef.y - epsilon, coef.z) - noise(coef.x, coef.y + epsilon, coef.z);
-    noise_v.z = noise(coef.x, coef.y, coef.z - epsilon) - noise(coef.x, coef.y, coef.z + epsilon);
-    normal.x = normal.x + noise_v.x;
-    normal.y = normal.y + noise_v.y;
-    normal.z = normal.z + noise_v.z;
+	double	noisecoefx;
+	double	noisecoefy;
+	double	noisecoefz;
+
+	noisecoefx = noise(0.05 * hit_point.x, 0.05 * hit_point.y, 0.05 * hit_point.z);
+	noisecoefy = noise(0.05 * hit_point.y, 0.05 * hit_point.z, 0.05 * hit_point.x);
+	noisecoefz = noise(0.05 * hit_point.z, 0.05 * hit_point.x, 0.05 * hit_point.y);
+	normal.x = (1.0f - ray.hit_obj->bump) * normal.x + ray.hit_obj->bump * noisecoefx;
+	normal.y = (1.0f - ray.hit_obj->bump) * normal.y + ray.hit_obj->bump * noisecoefy;
+	normal.z = (1.0f - ray.hit_obj->bump) * normal.z + ray.hit_obj->bump * noisecoefz;
     return (normal);
 }

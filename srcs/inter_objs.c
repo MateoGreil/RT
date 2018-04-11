@@ -108,8 +108,6 @@ int		check_inter_objects(t_env *e, t_ray *ray)
 		new_length = cone_inter(e, ray, temp);
 	if (((t_obj*)e->objs->content)->type == PLA)
 		new_length = plan_inter(e, ray);
-	if (((t_obj*)e->objs->content)->type == PAR)
-		new_length = parab_inter(e, ray, temp);
 	if (new_length < ray->length && new_length > 0)
 	{
 		ray->length = new_length;

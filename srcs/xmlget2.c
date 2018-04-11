@@ -22,6 +22,10 @@ static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 		obj->dir = xmlGet_vec(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
 		obj->color = xmlGet_color(cur->xmlChildrenNode, e);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"texture")))
+		obj->num_texture = ft_atoi(str);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"bump")))
+		obj->bump = ft_atof(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
 		obj->refl = ft_atoi(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
@@ -80,6 +84,7 @@ void			init_obj(t_obj *obj)
 	obj->trans.y = 0;
 	obj->trans.z = 0;
 	obj->num_texture = 0;
+	obj->bump = 0;
 	obj->refl = 0;
 	obj->refr = 0;
 	obj->n_refr = 0;

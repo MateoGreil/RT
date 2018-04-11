@@ -100,7 +100,7 @@
 # define NB_MIRRORING 0
 # define NB_THREADS 8
 # define NB_SAMPLES 1
-# define NB_TEXTURES 6
+# define NB_TEXTURES 5
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
@@ -128,6 +128,7 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 	int				num_texture;
+	double			bump;
 	char			refl;
 	char			refr;
 	double			n_refr;
@@ -285,9 +286,8 @@ double				fade(double t);
 double				grad(int hash, double x, double y, double z);
 
 int					load_texture_img(t_env *e);
-int					load_texture_bump(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec				bump_mapping(t_vec normal, t_vec hit_point);
+t_vec				bump_mapping(t_vec normal, t_vec hit_point, t_ray ray);
 
 // PARTIE PARSING XML //
 xmlNodePtr			get_node(xmlNodePtr node, char *name);

@@ -14,7 +14,7 @@
 
 static void	init_bool(t_env *e)
 {
-	if (load_texture_img(e) == FALSE || load_texture_bump(e) == FALSE)
+	if (load_texture_img(e) == FALSE)
 	{
 		ft_putstr("Error : Failed to load textures.");
 		exit(0);

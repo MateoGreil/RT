@@ -26,11 +26,6 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
 			pow(cosf(ft_deg2rad(ray.hit_obj->rad)), 2));
-	if (ray.hit_obj->type == PLA)
-	{
-		normal = vector_double_product(normal,
-			pow(sinf(ft_deg2rad(ray.hit_obj->rad)), 2)); /// TROUVER LA NORMALE
-	}
 	return (normal);
 }
 
@@ -46,11 +41,11 @@ t_vec			get_normal(t_vec hit_point, t_ray ray)
 	}
 	else if (ray.hit_obj->type == SPH)
 		normal = vector_substraction(hit_point, ray.hit_obj->pos);
-	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL ||
-		ray.hit_obj->type == PAR)
+	else if (ray.hit_obj->type == CON || ray.hit_obj->type == CYL)
 		normal = get_normal_2(hit_point, ray);
 	else
 		normal = (t_vec){0, 0, 0, 0};
+	normal = bump_mapping(normal, hit_point, ray);
 	normal = vector_normalize(normal);
 	return (normal);
 }
