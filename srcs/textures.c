@@ -51,6 +51,12 @@ static t_color	change_pixel_data(t_img *texture, int x, int y)
 	color.r = pixel_pos[pixel_size - 2];
 	color.g = pixel_pos[pixel_size - 3];
 	color.b = pixel_pos[pixel_size - 4];
+	if (color.r < 0)
+		color.r *= -1;
+	if (color.g < 0)
+		color.g *= -1;
+	if (color.b < 0)
+		color.b *= -1;
 	return (color);
 }
 
@@ -66,5 +72,37 @@ t_color			print_texture(t_env *e, t_obj *obj, t_vec hit_pos)
 	//if (x <= e->texture[obj->num_texture].size_x
 	//	&& y <= e->texture[obj->num_texture].size_y && x > 0 && y > 0)
 	color = change_pixel_data(&e->texture[obj->num_texture], abs(x), abs(y));
+	/*printf("x %f", color.r);
+	printf("y %f", color.g);
+	printf("z %f\n", color.b);*/
+	return (color);
+}
+
+t_color	tex_or_not(t_env *e, t_color color, t_ray ray)
+{
+	if (ray.hit_obj->num_texture > 0 && ray.hit_obj->num_texture < 3)
+		color = color_division(print_texture(e, ray.hit_obj, ray.hit_pos), 255);
+	else if (ray.hit_obj->num_texture == 3) {
+		color = color_double_product(color, 255);
+		color = max_color(color);
+		marble_texture(ray.hit_pos, &color);
+		color = color_division(color, 255);
+	}
+	else if (ray.hit_obj->num_texture == 4) {
+		color = color_double_product(color, 255);
+		color = max_color(color);
+		grain_texture(ray.hit_pos, &color);
+		color = color_division(color, 255);
+	}
+	else if (ray.hit_obj->num_texture == 5) {
+		color = color_double_product(color, 255);
+		color = max_color(color);
+		color = perlin_color(ray.hit_pos);
+		color = color_division(color, 255);
+	}
+	else if (ray.hit_obj->num_texture == 6) {
+		color = damier_color(ray.hit_pos, color);
+		color = color_division(color, 255);
+	}
 	return (color);
 }

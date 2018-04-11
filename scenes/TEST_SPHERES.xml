@@ -159,7 +159,7 @@
 			<type>light</type>
 			<position>
 				<x>0</x>
-				<y>20</y>
+				<y>0</y>
 				<z>100</z>
 			</position>
 			<rotation>
@@ -167,7 +167,7 @@
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<intensity>100</intensity>
+			<intensity>70</intensity>
 			<color>
 				<r>255</r>
 				<g>255</g>

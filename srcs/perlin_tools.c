@@ -5,38 +5,31 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/05 16:30:54 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/05 16:30:55 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/04/11 11:15:41 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/04/11 11:15:43 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-/*
-double fade(double t)
+
+double	lerp(double t, double a, double b)
 {
-	return t * t * t * (t * (t * 6 - 15) + 10);
+  return (a + t * (b - a));
 }
 
-double lerp(double t, double a, double b)
-{
-	return (a + t * (b - a));
-}
-
-double		grad(int hash, double x, double y, double z)
+double	grad(int hash, double x, double y, double z)
 {
   int		h;
-  double	vec1;
-  double	vec2;
+  double	u;
+  double	v;
 
   h = hash & 15;
-  if (h < 8 || h == 12 || h == 13)
-    vec1 = x;
-  else
-    vec1 = y;
-  if (h < 4 || h == 12 || h == 13)
-    vec2 = y;
-  else
-    vec2 = z;
-  return (((h & 1) == 0 ? vec1 : -vec1) + ((h & 2) == 0 ? vec2 : -vec2));
+  u = (h < 8 || h == 12 || h == 13) ? x : y;
+  v = (h < 4 || h == 12 || h == 13) ? y : z;
+  return ((((h & 1) == 0) ? u : -u) + (((h & 2) == 0) ? v : -v));
 }
-*/
+
+double	fade(double t)
+{
+  return (t * t * t * (t * (t * 6 - 15) + 10));
+}

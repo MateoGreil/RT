@@ -64,6 +64,7 @@ void	printf_obj(t_obj obj)
 void	parse_file(t_env *e, char *docname)
 {
 	xmlNodePtr		root;
+	//t_list 	*tmp;
 
 	e->doc = xmlParseFile(docname);
 	if (e->doc == NULL)

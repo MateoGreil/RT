@@ -67,7 +67,7 @@ void			init_obj(t_obj *obj)
 	obj->pos.y = 0;
 	obj->pos.z = 0;
 	obj->dir.x = 0;
-	obj->dir.y = 0;
+	obj->dir.y = 1;
 	obj->dir.z = 0;
 	obj->rad = 0;
 	obj->color.r = 0;
