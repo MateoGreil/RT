@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 10:38:03 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 15:36:56 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/11 17:16:53 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			main(int ac, char **av)
 	{
 		parse_file(&e, av[1]);
 		e.mlx = mlx_init();
-		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 0.2");
+		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 1.6");
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
 		init_bool(&e);
 		//e.noise = init_noise(); /// test
