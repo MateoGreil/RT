@@ -31,6 +31,7 @@ SRC_NAME =	main.c \
 			inter_objs2.c \
 			key_hook.c \
 			key_hook2.c \
+			key_hook3.c \
 			tools_mlx.c \
 			light.c \
 			light2.c \

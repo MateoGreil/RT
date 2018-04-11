@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/28 15:11:09 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/22 11:18:31 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 18:17:35 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static t_vec	perturbation_normal(t_vec normal, t_vec hit_point)
 {
-    normal.x = normal.x + cos(hit_point.x / 10.f);
-    normal.y = normal.y + cos(hit_point.y / 10.f);
+	normal.x = normal.x + cos(hit_point.x / 10.f);
+	normal.y = normal.y + cos(hit_point.y / 10.f);
 	normal.z = normal.z + cos(hit_point.z / 10.f);
 	return (normal);
 }
@@ -28,12 +28,12 @@ static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 
 	tmp = vector_substraction(hit_point, ray.hit_obj->pos);
 	tmp2 = vector_double_product(ray.hit_dir,
-	vector_dot_product(ray.hit_dir, tmp));
+			vector_dot_product(ray.hit_dir, tmp));
 	normal = (t_vec){2 * (tmp.x - tmp2.x),
 		2 * (tmp.y - tmp2.y), 2 * (tmp.z - tmp2.z), 0};
 	if (ray.hit_obj->type == CON)
 		normal = vector_double_product(normal,
-			pow(cosf(ft_deg2rad(ray.hit_obj->rad)), 2));
+				pow(cosf(ft_deg2rad(ray.hit_obj->rad)), 2));
 	return (normal);
 }
 
