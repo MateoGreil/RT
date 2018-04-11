@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/10 14:38:04 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:32:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,8 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 	e->objs = tmp;
 	if (ray.hit_obj && ray.hit_obj->refr > 0)
 		ray_refr(e, &ray, 0);
-	/*
-	 * ese if (ray.hit_obj && ray.hit_obj->mirror == TRUE)
-	 * ray_refl(e, &ray, 0);
-	*/
+	else if (ray.hit_obj && ray.hit_obj->refl > 0)
+		ray_refl(e, &ray, 0);
 	return (ray);
 }
 
