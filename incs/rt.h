@@ -206,11 +206,6 @@ void				x_rotation(t_cam *cam, double a);
 void				y_rotation(t_cam *cam, double a);
 void				z_rotation(t_cam *cam, double a);
 
-char				get_type(char *str_obj);
-t_vec				get_vec(char *str_obj, int *i_str);
-t_color				get_color(char *str_obj, int *i_str);
-int					get_nbr(char *str_obj, int *i_str);
-void				get_objs_and_cam(t_env *e, char *path_file);
 int					check_inter_objects(t_env *e, t_ray *ray);
 t_color				search_color(void *e, int x, int y, int s);
 t_color				max_color(t_color color);

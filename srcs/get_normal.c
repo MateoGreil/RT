@@ -12,6 +12,14 @@
 
 #include "rt.h"
 
+static t_vec	perturbation_normal(t_vec normal, t_vec hit_point)
+{
+    normal.x = normal.x + cos(hit_point.x / 10.f);
+    normal.y = normal.y + cos(hit_point.y / 10.f);
+	normal.z = normal.z + cos(hit_point.z / 10.f);
+	return (normal);
+}
+
 static t_vec	get_normal_2(t_vec hit_point, t_ray ray)
 {
 	t_vec tmp;
@@ -47,9 +55,8 @@ t_vec			get_normal(t_vec hit_point, t_ray ray)
 		normal = (t_vec){0, 0, 0, 0};
 	if (ray.hit_obj->bump > 0)
 		normal = bump_mapping(normal, hit_point, ray);
-	//if (ray.hit_obj->pertubation == 1)
-	//	normal = perturbation_normal();
+	if (ray.hit_obj->perturbation == 1)
+		normal = perturbation_normal(normal, hit_point);
 	normal = vector_normalize(normal);
-	printf("%d\n", ray.hit_obj->perturbation);
 	return (normal);
 }
