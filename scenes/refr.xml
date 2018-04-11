@@ -132,7 +132,7 @@
 			<rad>10</rad>
 			<reflection>0</reflection>
 			<refraction>100</refraction>
-			<n_refr>1.333</n_refr>
+			<n_refr>1.62</n_refr>
 		</obj>
 		<obj>
 			<type>sphere</type>
