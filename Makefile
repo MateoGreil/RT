@@ -6,7 +6,7 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/19 14:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/22 16:36:05 by mgreil           ###   ########.fr        #
+#    Updated: 2018/04/10 13:14:55 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ SRC_NAME =	main.c \
 			perlin_tools.c \
 			textures.c \
 			colors.c \
-			mirror.c \
+			refr.c \
+			refl.c \
 			filter.c \
 			cel_shading.c \
 			cam.c \

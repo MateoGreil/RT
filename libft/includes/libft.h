@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/22 16:22:37 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:11:35 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ typedef struct	s_list
 	struct s_list	*next;
 }				t_list;
 
+void			ft_dswap(double *a, double *b);
 void			*ft_memset(void *b, int c, size_t len);
 void			ft_bzero(void *s, size_t n);
 void			*ft_memcpy(void *dst, const void *src, size_t n);
@@ -74,6 +75,7 @@ char			*ft_strnstr(const char *haystack, const char *needle,
 int				ft_strcmp(const char *s1, const char *s2);
 int				ft_strncmp(const char *s1, const char *s2, size_t n);
 int				ft_atoi(const char *str);
+double			ft_atof(const char *str);
 int				ft_atoi_base(char *str, int base);
 int				ft_isalpha(int c);
 int				ft_isdigit(int c);

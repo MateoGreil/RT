@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/22 13:58:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/06 16:39:16 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:14:58 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,12 +32,10 @@ static void		objs_to_xml_pt2(xmlNodePtr cur, t_list *obj)
 	if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
 	{
 		xml_set_vec(cur->xmlChildrenNode, ((t_obj*)obj->content)->dir);
-		printf("6\n");
 	}
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
 	{
 		xml_set_color(cur->xmlChildrenNode, ((t_obj*)obj->content)->color);
-		printf("7\n");
 	}
 	/*else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
 		xml_set_type(cur->xmlChildrenNode, ((t_obj*)obj->content)->refl);
@@ -55,36 +53,29 @@ void	objs_to_xml(t_list *objs, xmlNodePtr objs_xml)
 	obj = objs;
 	while (objs_xml)
 	{
-		printf("objs_xml: %s\n", objs_xml->name);
 		cur = objs_xml->xmlChildrenNode;
 		while (cur)
 		{
-			printf("cur: %s\n", cur->name);
 			if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")))
 			{
 					xml_set_type(cur->xmlChildrenNode, ((t_obj*)obj->content)->type);
-					printf("1\n");
 			}
 			else if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			{
 				xml_set_vec(cur->xmlChildrenNode, ((t_obj*)obj->content)->pos);
-				printf("2\n");
 			}
 			else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
 			{
 				xml_set_vec(cur->xmlChildrenNode, ((t_obj*)obj->content)->rot);
-				printf("3\n");
 			}
 			else if ((!xmlStrcmp(cur->name, (const xmlChar *)"translation")))
 			{
 				xml_set_vec(cur->xmlChildrenNode, (t_vec){0, 0, 0, 0});
-				printf("4\n");
 			}
 			else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rad")) ||
 			(!xmlStrcmp(cur->name, (const xmlChar *)"intensity")))
 			{
 				xmlNodeSetContent(cur, (xmlChar*)ft_itoa(((t_obj*)obj->content)->rad));
-				printf("5\n");
 			}
 			objs_to_xml_pt2(cur, obj);
 			cur = cur->next;
