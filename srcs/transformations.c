@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   transformations.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: gnegri <gnegri@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 11:27:13 by gnegri            #+#    #+#             */
-/*   Updated: 2018/03/21 15:44:49 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/11 16:11:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,4 +74,6 @@ void			transformations(t_obj *obj)
 	obj->dir = ft_rotation_y(obj->dir, obj->rot.y);
 	obj->dir = ft_rotation_z(obj->dir, obj->rot.z);
 	obj->pos = ft_translation(obj->pos, obj->trans);
+	/*if (obj->type == PLA)
+		printf("x= %f, y= %f, z=%f\n", obj->dir.x, obj->dir.y, obj->dir.z);*/
 }
