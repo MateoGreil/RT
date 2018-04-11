@@ -126,7 +126,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	{
 		color = tex_or_not(e, color, ray);
 		diffuse_color = calc_all_lights(e, ray, color);
-		color = color_product(color, diffuse_color);
+		color = diffuse_color;
 	}
 	if (ray.hit_obj->num_texture == 0)
 		color = color_addition(color, ambient);
