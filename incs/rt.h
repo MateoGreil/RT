@@ -100,7 +100,7 @@
 # define NB_MIRRORING 0
 # define NB_THREADS 8
 # define NB_SAMPLES 1
-# define NB_TEXTURES 5
+# define NB_TEXTURES 6
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}

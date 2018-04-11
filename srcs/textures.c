@@ -95,6 +95,12 @@ t_color	tex_or_not(t_env *e, t_color color, t_ray ray)
 		color = color_division(color, 255);
 	}
 	else if (ray.hit_obj->num_texture == 5) {
+		color = color_double_product(color, 255);
+		color = max_color(color);
+		color = perlin_color(ray.hit_pos);
+		color = color_division(color, 255);
+	}
+	else if (ray.hit_obj->num_texture == 6) {
 		color = damier_color(ray.hit_pos, color);
 		color = color_division(color, 255);
 	}

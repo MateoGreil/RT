@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <bmuselet@student.42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/09 15:15:53 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/21 15:07:14 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/04/11 11:14:37 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/04/11 11:14:38 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,19 +91,19 @@ t_color	damier_color(t_vec hit_point, t_color color)
 	if ((hit_point.x >= 0.0 && hit_point.y >= 0.0)
 		|| (hit_point.x < 0.0 && hit_point.y < 0.0))
 		{
-		if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
-		new_color = WHITE;
-		else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
-		new_color = WHITE;
+			if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
+				new_color = WHITE;
+			else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
+				new_color = WHITE;
 		}
 	else
 		{
-		if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
-		new_color = color;
-		else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
-		new_color = color;
-		else
-		new_color = WHITE;
-		}
+			if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
+				new_color = color;
+			else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
+				new_color = color;
+			else
+				new_color = WHITE;
+			}
 	return (new_color);
 }

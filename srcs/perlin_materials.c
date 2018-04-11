@@ -12,7 +12,6 @@
 
 #include "rt.h"
 
-/*
 static t_color get_perlin_color(double n, double *v)
 {
   t_color c0;
@@ -20,9 +19,9 @@ static t_color get_perlin_color(double n, double *v)
   t_color c2;
   t_color color;
 
-  c0 = (t_color){1, 2, 255};
-  c1 = (t_color){255, 2, 1};
-  c2 = (t_color){1, 2, 255};
+  c0 = (t_color){0, 102, 255};
+  c1 = (t_color){0, 0, 153};
+  c2 = (t_color){153, 204, 255};
   if (n <= v[0])
     color = c0;
   else if (n < v[1])
@@ -61,7 +60,7 @@ t_color    perlin_color(t_vec hit_point)
   f_color = get_perlin_color(n, v);
   return (f_color);
 }
-*/
+
 void		grain_texture(t_vec hit_point, t_color *color)
 {
   int		i;
