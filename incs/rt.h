@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 12:07:59 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 14:02:09 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,8 +128,8 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 	int				num_texture;
-	char			refl;
-	char			refr;
+	int				refl;
+	int				refr;
 	double			n_refr;
 }					t_obj;
 
@@ -137,6 +137,7 @@ typedef struct		s_ray
 {
 	t_vec			pos;
 	t_vec			dir;
+	t_color			color;
 	double			length;
 	double			disc;
 	t_vec			normal;

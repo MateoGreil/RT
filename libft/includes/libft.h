@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/06 18:17:21 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/11 12:11:35 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 14:02:36 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,7 +177,7 @@ t_color			color_product(t_color v1, t_color v2);
 t_color			color_addition(t_color v1, t_color v2);
 t_color			color_division(t_color v1, double i);
 t_color			color_average(t_color v1, t_color v2);
-t_color			color_balanced(t_color v1, t_color v2, double a, double b);
+t_color			color_balanced(t_color v1, t_color v2, int a, int b);
 void			ft_int2rgb(t_color *color, int i);
 
 #endif

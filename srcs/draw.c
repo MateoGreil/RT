@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 12:32:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 15:15:15 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,13 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
+	if (ray.hit_obj)
+	{
+		//printf("ray r = %f,g= %f,b= %f\n", ray.hit_obj->color.r, ray.hit_obj->color.g, ray.hit_obj->color.b);
+		ray.color = ray.hit_obj->color;
+		//printf("ray r = %f,g= %f,b= %f\n", ray.color.r, ray.color.g, ray.color.b);
+
+	}
 	if (ray.hit_obj && ray.hit_obj->refr > 0)
 		ray_refr(e, &ray, 0);
 	else if (ray.hit_obj && ray.hit_obj->refl > 0)

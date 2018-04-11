@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/22 11:08:20 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 13:44:52 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_color ambient;
 	t_color diffuse_color;
 
-	color = color_division(ray.hit_obj->color, 255);
+	color = color_division(ray.color, 255);
 	ambient = ambient_color(e, ray);
 	ambient = color_division(ambient, 255);
 	if (e->lights == NULL)

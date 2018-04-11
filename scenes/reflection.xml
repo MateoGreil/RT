@@ -130,7 +130,7 @@
 				<b>0</b>
 			</color>
 			<rad>10</rad>
-			<reflection>100</reflection>
+			<reflection>50</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
 		</obj>

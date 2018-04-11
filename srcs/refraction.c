@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   refr.c                                             :+:      :+:    :+:   */
+/*   refraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 11:28:28 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/11 12:16:08 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 14:27:11 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ void	ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 	new_ray.hit_obj = NULL;
 	new_ray.pos = ray->hit_pos;
 	new_ray.dir = ray_refr_dir(normal, ray->dir, ray->hit_obj->n_refr);
+	new_ray.color = ray->color;
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
@@ -52,6 +53,9 @@ void	ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
+	if (new_ray.hit_obj)
+		new_ray.color = color_balanced(new_ray.color, new_ray.hit_obj->color,
+			100 - ray->hit_obj->refr, ray->hit_obj->refr);
 	*ray = new_ray;
 	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0 && nb_rebond < NB_MIRRORING)
 		ray_refr(e, &new_ray, nb_rebond + 1);
