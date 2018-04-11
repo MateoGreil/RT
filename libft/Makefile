@@ -6,13 +6,14 @@
 #    By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/17 16:56:26 by mgreil            #+#    #+#              #
-#    Updated: 2018/03/22 16:22:44 by mgreil           ###   ########.fr        #
+#    Updated: 2018/04/11 12:09:30 by mgreil           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = libft.a
 
 SRC_NAME =	ft_memset.c \
+			ft_dswap.c \
 			ft_bzero.c \
 			ft_memcpy.c \
 			ft_memccpy.c \
@@ -34,6 +35,7 @@ SRC_NAME =	ft_memset.c \
 			ft_strcmp.c \
 			ft_strncmp.c \
 			ft_atoi.c \
+			ft_atof.c \
 			ft_isalpha.c \
 			ft_isdigit.c \
 			ft_isalnum.c \

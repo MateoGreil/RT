@@ -1,4 +1,4 @@
-<?xml version="1.0" standalone='yes'?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!--
 - TOUTES LES VARIABLES NON INITIALISÉS ICI, LE SERONT DANS LE PROGRAMME A LA
 	VALEUR 0.
@@ -25,12 +25,12 @@
 <rt>
 	<cam>
 		<position>
-			<x>-50</x>
+			<x>-40</x>
 			<y>0</y>
 			<z>100</z>
 		</position>
 		<direction>
-			<x>0</x>
+			<x>10</x>
 			<y>0</y>
 			<z>0</z>
 		</direction>
@@ -58,9 +58,7 @@
 				<g>130</g>
 				<b>130</b>
 			</color>
-			<rad>
-				30
-			</rad>
+			<rad>30</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -122,9 +120,9 @@
 		<obj>
 			<type>sphere</type>
 			<position>
-				<x>0</x>
+				<x>-30</x>
 				<y>0</y>
-				<z>70</z>
+				<z>85</z>
 			</position>
 			<color>
 				<r>0</r>
@@ -133,8 +131,8 @@
 			</color>
 			<rad>10</rad>
 			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
+			<refraction>100</refraction>
+			<n_refr>1.62</n_refr>
 		</obj>
 		<obj>
 			<type>sphere</type>
@@ -159,7 +157,7 @@
 			<type>light</type>
 			<position>
 				<x>0</x>
-				<y>0</y>
+				<y>20</y>
 				<z>100</z>
 			</position>
 			<rotation>
@@ -167,7 +165,7 @@
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<intensity>70</intensity>
+			<intensity>100</intensity>
 			<color>
 				<r>255</r>
 				<g>255</g>

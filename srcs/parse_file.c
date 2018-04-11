@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/22 13:53:06 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:15:25 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,12 +58,13 @@ void	printf_obj(t_obj obj)
 	printf("num_texture = %d\n", obj.num_texture);
 	printf("refl = %d\n", obj.refl);
 	printf("refr = %d\n", obj.refr);
-	printf("n_refr = %d\n", obj.n_refr);
+	printf("n_refr = %f\n", obj.n_refr);
 }
 
 void	parse_file(t_env *e, char *docname)
 {
 	xmlNodePtr		root;
+	//t_list 	*tmp;
 
 	e->doc = xmlParseFile(docname);
 	if (e->doc == NULL)

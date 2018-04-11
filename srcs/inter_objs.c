@@ -19,11 +19,11 @@ double	plan_inter(t_env *e, t_ray *ray)
 	float	new_length;
 
 	a = ((t_obj*)e->objs->content)->dir.x *
-		(((t_obj*)e->objs->content)->dir.x - ray->pos.x)
+		(((t_obj*)e->objs->content)->pos.x - ray->pos.x)
 		+ ((t_obj*)e->objs->content)->dir.y *
-		(((t_obj*)e->objs->content)->dir.y - ray->pos.y)
+		(((t_obj*)e->objs->content)->pos.y - ray->pos.y)
 		+ ((t_obj*)e->objs->content)->dir.z *
-		(((t_obj*)e->objs->content)->dir.z - ray->pos.z);
+		(((t_obj*)e->objs->content)->pos.z - ray->pos.z);
 	b = ((t_obj*)e->objs->content)->dir.x * ray->dir.x
 		+ ((t_obj*)e->objs->content)->dir.y * ray->dir.y
 		+ ((t_obj*)e->objs->content)->dir.z * ray->dir.z;

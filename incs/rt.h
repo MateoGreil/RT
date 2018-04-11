@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/06 16:44:25 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:07:59 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,8 @@
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
 
+# define N_AIR 1.000293
+
 typedef struct		s_noise
 {
 	double		*noise;
@@ -128,7 +130,7 @@ typedef struct		s_obj
 	int				num_texture;
 	char			refl;
 	char			refr;
-	char			n_refr;
+	double			n_refr;
 }					t_obj;
 
 typedef struct		s_ray
@@ -228,7 +230,11 @@ double				plan_inter(t_env *e, t_ray *ray);
 double				cylindre_inter(t_env *e, t_ray *ray, t_vec temp);
 double				sphere_inter(t_env *e, t_ray *ray, t_vec temp);
 void				draw(t_env *e, int loading);
-void				ray_mirror(t_env *e, t_ray *ray, int nb_rebond);
+
+
+void				ray_refl(t_env *e, t_ray *ray, int nb_rebond);
+void				ray_refr(t_env *e, t_ray *ray, int nb_rebond);
+
 int					key_hook(int keycode, t_env *e);
 int					button_exit(int keycode, t_env *e);
 t_color				light_calc(t_env *e, t_ray ray);

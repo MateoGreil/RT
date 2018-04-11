@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/06 15:17:12 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:13:34 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
 		obj->refr = ft_atoi(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"n_refr")))
-		obj->n_refr = ft_atoi(str);
+		obj->n_refr = ft_atof(str);
 	free(str);
 }
 
