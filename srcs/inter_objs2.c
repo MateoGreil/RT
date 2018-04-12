@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-
+/*
 double	parab_inter(t_env *e, t_ray *ray, t_vec temp)
 {
 	t_vec	a;
@@ -30,3 +30,4 @@ double	parab_inter(t_env *e, t_ray *ray, t_vec temp)
 		return (ray->length);
 	return (new_length);
 }
+*/

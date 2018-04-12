@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/06 15:17:12 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/11 12:13:34 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,12 +22,16 @@ static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 		obj->dir = xmlGet_vec(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
 		obj->color = xmlGet_color(cur->xmlChildrenNode, e);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"texture")))
+		obj->num_texture = ft_atoi(str);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"bump")))
+		obj->bump = ft_atof(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
 		obj->refl = ft_atoi(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
 		obj->refr = ft_atoi(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"n_refr")))
-		obj->n_refr = ft_atoi(str);
+		obj->n_refr = ft_atof(str);
 	free(str);
 }
 
@@ -79,7 +83,6 @@ void			init_obj(t_obj *obj)
 	obj->trans.x = 0;
 	obj->trans.y = 0;
 	obj->trans.z = 0;
-	obj->num_texture = 0;
 	obj->refl = 0;
 	obj->refr = 0;
 	obj->n_refr = 0;
@@ -101,10 +104,12 @@ void			xmlGet_objs(xmlNodePtr objs, t_env *e)
 			obj = xmlGet_one_obj(cur->xmlChildrenNode, e);
 			obj.id = id;
 			obj.num_texture = 0;
+			obj.perturbation = 0;
+			obj.bump = 0;
 			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
 			id++;
-		}
+		}	
 		cur = cur->next;
 	}
 }
