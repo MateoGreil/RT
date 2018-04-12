@@ -12,16 +12,16 @@
 
 #include "rt.h"
 
-static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
+static void		xml_get_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 {
 	char	*str;
 
 	str = (char*)xmlNodeListGetString(e->doc,
 		cur->xmlChildrenNode, 1);
 	if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
-		obj->dir = xmlGet_vec(cur->xmlChildrenNode, e);
+		obj->dir = xml_get_vec(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"color")))
-		obj->color = xmlGet_color(cur->xmlChildrenNode, e);
+		obj->color = xml_get_color(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"texture")))
 		obj->num_texture = ft_atoi(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"bump")))
@@ -35,28 +35,27 @@ static void		xmlGet_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 	free(str);
 }
 
-static t_obj	xmlGet_one_obj(xmlNodePtr cur, t_env *e)
+static t_obj	xml_get_one_obj(xmlNodePtr cur, t_env *e)
 {
 	t_obj	obj;
-	char		*str;
-
+	char	*str;
 
 	while (cur)
 	{
 		str = (char*)xmlNodeListGetString(e->doc,
 			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")))
-			obj.type = xmlGet_type(cur->xmlChildrenNode, e);
+			obj.type = xml_get_type(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
-			obj.pos = xmlGet_vec(cur->xmlChildrenNode, e);
+			obj.pos = xml_get_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
-			obj.rot = xmlGet_vec(cur->xmlChildrenNode, e);
+			obj.rot = xml_get_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"translation")))
-			obj.trans = xmlGet_vec(cur->xmlChildrenNode, e);
+			obj.trans = xml_get_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rad")) ||
 				(!xmlStrcmp(cur->name, (const xmlChar *)"intensity")))
 			obj.rad = ft_atoi(str);
-		xmlGet_one_obj_pt2(cur, e, &obj);
+		xml_get_one_obj_pt2(cur, e, &obj);
 		cur = cur->next;
 		free(str);
 	}
@@ -90,7 +89,7 @@ void			init_obj(t_obj *obj)
 	obj->n_refr = 0;
 }
 
-void			xmlGet_objs(xmlNodePtr objs, t_env *e)
+void			xml_get_objs(xmlNodePtr objs, t_env *e)
 {
 	xmlNodePtr	cur;
 	t_obj		obj;
@@ -103,18 +102,18 @@ void			xmlGet_objs(xmlNodePtr objs, t_env *e)
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"obj")))
 		{
 			init_obj(&obj);
-			obj = xmlGet_one_obj(cur->xmlChildrenNode, e);
+			obj = xml_get_one_obj(cur->xmlChildrenNode, e);
 			obj.id = id;
 			obj.perturbation = 0;
 			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
 			id++;
-		}	
+		}
 		cur = cur->next;
 	}
 }
 
-void			xmlGet_lights(xmlNodePtr lights, t_env *e)
+void			xml_get_lights(xmlNodePtr lights, t_env *e)
 {
 	xmlNodePtr	cur;
 	t_obj		light;
@@ -127,7 +126,7 @@ void			xmlGet_lights(xmlNodePtr lights, t_env *e)
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"light")))
 		{
 			init_obj(&light);
-			light = xmlGet_one_obj(cur->xmlChildrenNode, e);
+			light = xml_get_one_obj(cur->xmlChildrenNode, e);
 			light.id = id;
 			ft_lstaddback(&e->lights, ft_lstnew(&light, sizeof(t_obj)));
 			id++;
