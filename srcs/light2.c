@@ -12,6 +12,17 @@
 
 #include "rt.h"
 
+t_color	calc_specular(t_ray ray, t_ray *light_ray,
+	t_color light_color, t_color spec)
+{
+	t_color tmp_spec;
+
+	tmp_spec = specular_light(ray, light_ray, light_color);
+	tmp_spec = color_division(tmp_spec, 255);
+	spec = color_addition(spec, tmp_spec);
+	return (spec);
+}
+
 t_color	max_color(t_color color)
 {
 	double	max;
