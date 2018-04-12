@@ -83,6 +83,8 @@ void			init_obj(t_obj *obj)
 	obj->trans.x = 0;
 	obj->trans.y = 0;
 	obj->trans.z = 0;
+	obj->num_texture = 0;
+	obj->bump = 0;
 	obj->refl = 0;
 	obj->refr = 0;
 	obj->n_refr = 0;
@@ -103,9 +105,7 @@ void			xmlGet_objs(xmlNodePtr objs, t_env *e)
 			init_obj(&obj);
 			obj = xmlGet_one_obj(cur->xmlChildrenNode, e);
 			obj.id = id;
-			obj.num_texture = 0;
 			obj.perturbation = 0;
-			obj.bump = 0;
 			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
 			id++;
