@@ -100,22 +100,12 @@
 # define NB_MIRRORING 0
 # define NB_THREADS 8
 # define NB_SAMPLES 1
-# define NB_TEXTURES 6
+# define NB_TEXTURES 5
 
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
 
 # define N_AIR 1.000293
-
-typedef struct		s_noise
-{
-	double		*noise;
-	int				size_x;
-	int				size_y;
-	int				len;
-	int				pas;
-	int				octave;
-}						t_noise;
 
 typedef struct		s_obj
 {
@@ -128,6 +118,8 @@ typedef struct		s_obj
 	t_vec			rot;
 	t_vec			trans;
 	int				num_texture;
+	int				perturbation;
+	double			bump;
 	char			refl;
 	char			refr;
 	double			n_refr;
@@ -195,9 +187,7 @@ typedef struct		s_env
 	t_cam			cam;
 	t_list			*objs;
 	t_list			*lights;
-	t_img				*texture;
-	t_noise			*noise;
-	t_img				*bump; // A supprimer ?
+	t_img			*texture;
 }					t_env;
 
 void				ft_delstr(void *content, size_t content_size);
@@ -216,11 +206,6 @@ void				x_rotation(t_cam *cam, double a);
 void				y_rotation(t_cam *cam, double a);
 void				z_rotation(t_cam *cam, double a);
 
-char				get_type(char *str_obj);
-t_vec				get_vec(char *str_obj, int *i_str);
-t_color				get_color(char *str_obj, int *i_str);
-int					get_nbr(char *str_obj, int *i_str);
-void				get_objs_and_cam(t_env *e, char *path_file);
 int					check_inter_objects(t_env *e, t_ray *ray);
 t_color				search_color(void *e, int x, int y, int s);
 t_color				max_color(t_color color);
@@ -285,19 +270,18 @@ double				fade(double t);
 double				grad(int hash, double x, double y, double z);
 
 int					load_texture_img(t_env *e);
-int					load_texture_bump(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
-t_vec				bump_mapping(t_vec normal, t_vec hit_pos);
+t_vec				bump_mapping(t_vec normal, t_vec hit_point, t_ray ray);
 
 // PARTIE PARSING XML //
 xmlNodePtr			get_node(xmlNodePtr node, char *name);
 void				parse_file(t_env *e, char *docname);
-void				xmlGet_cam(xmlNodePtr cam, t_env *e);
-void				xmlGet_objs(xmlNodePtr objs, t_env *e);
-void				xmlGet_lights(xmlNodePtr lights, t_env *e);
-t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
-char				xmlGet_type(xmlNodePtr cur, t_env *e);
-t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
+void				xml_get_cam(xmlNodePtr cam, t_env *e);
+void				xml_get_objs(xmlNodePtr objs, t_env *e);
+void				xml_get_lights(xmlNodePtr lights, t_env *e);
+t_color				xml_get_color(xmlNodePtr cur, t_env *e);
+char				xml_get_type(xmlNodePtr cur, t_env *e);
+t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
 
 void	save_scene(t_env *e);
 void	xml_set_vec(xmlNodePtr cur, t_vec vec);

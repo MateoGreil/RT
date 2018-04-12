@@ -69,11 +69,11 @@ static t_vec	ft_translation(t_vec ex_pos, t_vec param)
 
 void			transformations(t_obj *obj)
 {
+	if (obj->rot.x == 0 && obj->type == PLA)
+		obj->rot.x = 1;
 	obj->dir = (t_vec){0, 1, 0, 0};
 	obj->dir = ft_rotation_x(obj->dir, obj->rot.x);
 	obj->dir = ft_rotation_y(obj->dir, obj->rot.y);
 	obj->dir = ft_rotation_z(obj->dir, obj->rot.z);
 	obj->pos = ft_translation(obj->pos, obj->trans);
-	/*if (obj->type == PLA)
-		printf("x= %f, y= %f, z=%f\n", obj->dir.x, obj->dir.y, obj->dir.z);*/
 }

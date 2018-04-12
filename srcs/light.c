@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static t_color	specular_light(t_ray ray, t_ray *light_ray)
+static t_color	specular_light(t_ray ray, t_ray *light_ray, t_color light_color)
 {
 	t_vec		reflection;
 	t_color		specular;
@@ -21,8 +21,9 @@ static t_color	specular_light(t_ray ray, t_ray *light_ray)
 	double		intensity;
 
 	shininess = 200;
-	intensity = 10;
+	intensity = 1;
 	specular = (t_color){255, 255, 255};
+	specular = color_product(specular, light_color);
 	reflection = vector_double_product(light_ray->normal,
 	vector_dot_product(ray.dir, light_ray->normal) * 2);
 	reflection = vector_normalize(
@@ -96,7 +97,7 @@ static t_color	calc_all_lights(t_env *e, t_ray ray, t_color obj_color)
 			tmp_color = calc_diff_dir(e, ray, &light_ray);
 			if (tmp_color.r != 0 && tmp_color.g != 0 && tmp_color.b != 0)
 			{
-				spec = specular_light(ray, &light_ray);
+				spec = specular_light(ray, &light_ray, ((t_obj*)e->lights->content)->color);
 				spec = color_division(spec, 255);
 			}
 			else
@@ -126,7 +127,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	{
 		color = tex_or_not(e, color, ray);
 		diffuse_color = calc_all_lights(e, ray, color);
-		color = color_product(color, diffuse_color);
+		color = diffuse_color;
 	}
 	if (ray.hit_obj->num_texture == 0)
 		color = color_addition(color, ambient);

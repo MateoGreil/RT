@@ -14,7 +14,7 @@
 
 static void	init_bool(t_env *e)
 {
-	if (load_texture_img(e) == FALSE || load_texture_bump(e) == FALSE)
+	if (load_texture_img(e) == FALSE)
 	{
 		ft_putstr("Error : Failed to load textures.");
 		exit(0);
@@ -60,7 +60,6 @@ int			main(int ac, char **av)
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 1.6");
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
 		init_bool(&e);
-		//e.noise = init_noise(); /// test
 		set_cam_coordinates(&e);
 		print_keys();
 		draw(&e, 1);

@@ -6,7 +6,7 @@
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 11:14:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 11:14:38 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/11 18:15:49 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	change_object_color(t_color *color)
 		color->g = 255;
 	if (color->b <= 0)
 		color->b = 255;
-	color->r = rand()%255;
-	color->g = rand()%255;
-	color->b = rand()%255;
+	color->r = rand() % 255;
+	color->g = rand() % 255;
+	color->b = rand() % 255;
 }
 
 void	antialiasing(t_env *e, t_vec compteur, t_color *color, int i)
@@ -89,21 +89,25 @@ t_color	damier_color(t_vec hit_point, t_color color)
 
 	new_color = color;
 	if ((hit_point.x >= 0.0 && hit_point.y >= 0.0)
-		|| (hit_point.x < 0.0 && hit_point.y < 0.0))
-		{
-			if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
-				new_color = WHITE;
-			else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
-				new_color = WHITE;
-		}
+			|| (hit_point.x < 0.0 && hit_point.y < 0.0))
+	{
+		if ((int)fabs(hit_point.x) % 100 <= 50
+				&& (int)fabs(hit_point.y) % 100 <= 50)
+			new_color = WHITE;
+		else if ((int)fabs(hit_point.x) % 100 > 50
+				&& (int)fabs(hit_point.y) % 100 > 50)
+			new_color = WHITE;
+	}
 	else
-		{
-			if ((int)fabs(hit_point.x) % 100 <= 50 && (int)fabs(hit_point.y) % 100 <= 50)
-				new_color = color;
-			else if ((int)fabs(hit_point.x) % 100 > 50 && (int)fabs(hit_point.y) % 100 > 50)
-				new_color = color;
-			else
-				new_color = WHITE;
-			}
+	{
+		if ((int)fabs(hit_point.x) % 100 <= 50
+				&& (int)fabs(hit_point.y) % 100 <= 50)
+			new_color = color;
+		else if ((int)fabs(hit_point.x) % 100 > 50
+				&& (int)fabs(hit_point.y) % 100 > 50)
+			new_color = color;
+		else
+			new_color = WHITE;
+	}
 	return (new_color);
 }
