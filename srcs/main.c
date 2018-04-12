@@ -68,7 +68,7 @@ int			main(int ac, char **av)
 		mlx_hook(e.win, EXIT_PRESS, EXIT_PRESS_MASK, &button_exit, &e);
 		mlx_loop(e.mlx);
 	}
-	/*else
-		error(INVALID_ARG);*/
+	else
+		ft_putstr("Usage : ./rt input_file.xml\n");
 	return (0);
 }

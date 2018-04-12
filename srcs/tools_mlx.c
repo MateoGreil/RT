@@ -38,7 +38,6 @@ void	put_pixel_to_image(t_img *img, int x, int y, t_color color)
 	int	pos;
 
 	pos = (x + img->size_x * y) * (img->bpp / 8);
-	//color = color_double_product(color, 255);
 	if (x < img->size_x && x >= 0 && y >= 0 && y < img->size_y)
 	{
 		img->data[pos] = color.b;

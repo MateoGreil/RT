@@ -70,14 +70,16 @@ static t_color	calc_diff_dir(t_env *e, t_ray ray, t_ray *light_ray)
 		tmp_color = diffuse_light(e, ray, light_ray);
 		tmp_color = color_division(tmp_color, 255);
 		if (calc_shadow(e, *light_ray) == 1)
-			tmp_color = (t_color){0, 0, 0};
+			tmp_color = color_balanced((t_color){0, 0, 0},
+				((t_obj*)e->lights->content)->color, 0.99999, 0.00001);
 	}
 	if (((t_obj*)e->lights->content)->type == LID)
 	{
 		tmp_color = directional_light(e, ray, light_ray);
 		tmp_color = color_division(tmp_color, 255);
 		if (calc_shadow(e, *light_ray) == 1)
-			tmp_color = (t_color){0, 0, 0};
+			tmp_color = color_balanced((t_color){0, 0, 0},
+				((t_obj*)e->lights->content)->color, 0.99999, 0.00001);
 	}
 	return (tmp_color);
 }
@@ -93,12 +95,13 @@ static t_color	calc_all_lights(t_env *e, t_ray ray, t_color obj_color)
 	tmp = e->lights;
 	lights_color = (t_color){0, 0, 0};
 	spec = (t_color){0, 0, 0};
+	light_ray.nb_shadow = 0;
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)
 		{
 			tmp_color = calc_diff_dir(e, ray, &light_ray);
-			if (tmp_color.r != 0 && tmp_color.g != 0 && tmp_color.b != 0)
+			if (calc_shadow(e, light_ray) == 0)
 				spec = calc_specular(ray, &light_ray,
 					((t_obj*)e->lights->content)->color, spec);
 			lights_color = color_addition(lights_color, tmp_color);
@@ -128,7 +131,6 @@ t_color			light_calc(t_env *e, t_ray ray)
 		diffuse_color = calc_all_lights(e, ray, color);
 		color = diffuse_color;
 	}
-	//if (ray.hit_obj->num_texture == 0)
 	color = color_addition(color, ambient);
 	color = color_double_product(color, 255);
 	color = max_color(color);

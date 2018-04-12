@@ -135,6 +135,7 @@ typedef struct		s_ray
 	t_obj			*hit_obj;
 	t_vec			hit_pos;
 	t_vec			hit_dir;
+	int				nb_shadow;
 }					t_ray;
 
 typedef struct		s_img
@@ -195,6 +196,7 @@ void				ft_delstr(void *content, size_t content_size);
 t_img				new_image(void *mlx, int img_size_x, int img_size_y);
 void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
+void				error_multithread(t_env *e);
 
 void				set_cam_coordinates(t_env *e);
 void				cam_to_world_matrix(t_env *e);

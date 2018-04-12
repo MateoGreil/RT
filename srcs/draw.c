@@ -101,7 +101,7 @@ void			multi_thread(t_env *e)
 	while (i_thread < NB_THREADS)
 	{
 		if (pthread_create(&thread[i_thread], NULL, &ray_loop, &env[i_thread]))
-			return ; //ERROR? 
+			error_multithread(e);
 		i_thread++;
 	}
 	i_thread = 0;
