@@ -212,7 +212,7 @@ t_color				max_color(t_color color);
 t_color				specular_light(t_ray ray, t_ray *light_ray,
 					t_color light_color);
 t_color				calc_specular(t_ray ray, t_ray *light_ray,
-					t_color light_color, t_color tmp_color);
+					t_color light_color, t_color spec);
 
 double				cone_inter(t_env *e, t_ray *ray, t_vec temp);
 double				plan_inter(t_env *e, t_ray *ray);

@@ -20,7 +20,7 @@ t_color			specular_light(t_ray ray, t_ray *light_ray, t_color light_color)
 	double		shininess;
 	double		intensity;
 
-	shininess = 15;
+	shininess = 200;
 	intensity = 1;
 	specular = (t_color){255, 255, 255};
 	specular = color_product(specular, light_color);
@@ -64,6 +64,7 @@ static t_color	calc_diff_dir(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	t_color	tmp_color;
 
+	light_ray->hit_obj = ray.hit_obj;
 	if (((t_obj*)e->lights->content)->type == LIG)
 	{
 		tmp_color = diffuse_light(e, ray, light_ray);
@@ -91,14 +92,15 @@ static t_color	calc_all_lights(t_env *e, t_ray ray, t_color obj_color)
 
 	tmp = e->lights;
 	lights_color = (t_color){0, 0, 0};
+	spec = (t_color){0, 0, 0};
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)
 		{
-			light_ray.hit_obj = ray.hit_obj;
 			tmp_color = calc_diff_dir(e, ray, &light_ray);
-			spec = calc_specular(ray, &light_ray,
-				((t_obj*)e->lights->content)->color, tmp_color);
+			if (tmp_color.r != 0 && tmp_color.g != 0 && tmp_color.b != 0)
+				spec = calc_specular(ray, &light_ray,
+					((t_obj*)e->lights->content)->color, spec);
 			lights_color = color_addition(lights_color, tmp_color);
 			lights_color = color_product(obj_color, lights_color);
 			lights_color = color_addition(lights_color, spec);
