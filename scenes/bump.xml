@@ -6,17 +6,19 @@
 	position (x, y, z);
 	rotation (x, y, z);
 - parametres d'objs :
-	type (sphere, plan, cylindre, cone, paraboloide);
+	type (sphere, plan, cylindre, cone);
 	position (x, y, z);
 	rotation (x, y, z);
 	translation (x, y, z);
 	rad;
 	color (r, g, b);
+	num_texture;
+	bump;
 	reflection;
 	refraction;
 	n_refr;
 - parametres de lights :
-	type (light, ambient, directional)
+	type (light, ambient, directional);
 	position (x, y, z);
 	direction (x, y, z);
 	color (r, g, b);
