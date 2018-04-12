@@ -12,6 +12,21 @@
 
 #include "rt.h"
 
+t_color	calc_specular(t_ray ray, t_ray *light_ray,
+	t_color light_color, t_color tmp_color)
+{
+	t_color	spec;
+
+	if (tmp_color.r != 0 && tmp_color.g != 0 && tmp_color.b != 0)
+	{
+		spec = specular_light(ray, light_ray, light_color);
+		spec = color_division(spec, 255);
+	}
+	else
+		spec = (t_color){0, 0, 0};
+	return (spec);
+}
+
 t_color	max_color(t_color color)
 {
 	double	max;
