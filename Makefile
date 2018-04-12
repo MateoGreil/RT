@@ -28,7 +28,6 @@ SRC_NAME =	main.c \
 			xmlget2.c \
 			draw.c \
 			inter_objs.c \
-			inter_objs2.c \
 			key_hook.c \
 			key_hook2.c \
 			key_hook3.c \

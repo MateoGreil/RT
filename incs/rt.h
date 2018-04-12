@@ -280,12 +280,12 @@ t_vec				bump_mapping(t_vec normal, t_vec hit_point, t_ray ray);
 // PARTIE PARSING XML //
 xmlNodePtr			get_node(xmlNodePtr node, char *name);
 void				parse_file(t_env *e, char *docname);
-void				xmlGet_cam(xmlNodePtr cam, t_env *e);
-void				xmlGet_objs(xmlNodePtr objs, t_env *e);
-void				xmlGet_lights(xmlNodePtr lights, t_env *e);
-t_color				xmlGet_color(xmlNodePtr cur, t_env *e);
-char				xmlGet_type(xmlNodePtr cur, t_env *e);
-t_vec				xmlGet_vec(xmlNodePtr cur, t_env *e);
+void				xml_get_cam(xmlNodePtr cam, t_env *e);
+void				xml_get_objs(xmlNodePtr objs, t_env *e);
+void				xml_get_lights(xmlNodePtr lights, t_env *e);
+t_color				xml_get_color(xmlNodePtr cur, t_env *e);
+char				xml_get_type(xmlNodePtr cur, t_env *e);
+t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
 
 void	save_scene(t_env *e);
 void	xml_set_vec(xmlNodePtr cur, t_vec vec);
