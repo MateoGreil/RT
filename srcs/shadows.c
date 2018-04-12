@@ -12,10 +12,10 @@
 
 #include "rt.h"
 
-static void calc_shadow_pt2(t_env *e, t_ray *light_ray)
+static void	calc_shadow_pt2(t_env *e, t_ray *light_ray)
 {
 	t_vec	temp;
-	
+
 	if (((t_obj*)e->objs->content) != light_ray->hit_obj)
 	{
 		temp = vector_substraction(light_ray->pos,
@@ -31,7 +31,7 @@ static void calc_shadow_pt2(t_env *e, t_ray *light_ray)
 	}
 }
 
-int	calc_shadow(t_env *e, t_ray light_ray)
+int			calc_shadow(t_env *e, t_ray light_ray)
 {
 	double	dist_obj_to_light;
 	t_list	*tmp;
