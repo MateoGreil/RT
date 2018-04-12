@@ -12,10 +12,10 @@
 
 #include "rt.h"
 
-t_vec	xmlGet_vec(xmlNodePtr cur, t_env *e)
+t_vec	xml_get_vec(xmlNodePtr cur, t_env *e)
 {
 	t_vec	vec;
-	char		*str;
+	char	*str;
 
 	while (cur)
 	{
@@ -36,14 +36,13 @@ t_vec	xmlGet_vec(xmlNodePtr cur, t_env *e)
 		free(str);
 		cur = cur->next;
 	}
-	//xmlFreeNode(cur);
 	return (vec);
 }
 
-t_color	xmlGet_color(xmlNodePtr cur, t_env *e)
+t_color	xml_get_color(xmlNodePtr cur, t_env *e)
 {
 	t_color	color;
-	char		*str;
+	char	*str;
 
 	while (cur)
 	{
@@ -61,7 +60,7 @@ t_color	xmlGet_color(xmlNodePtr cur, t_env *e)
 	return (color);
 }
 
-char	xmlGet_type_lights(char *str)
+char	xml_get_type_lights(char *str)
 {
 	if (!ft_strcmp(str, "paraboloide"))
 	{
@@ -87,7 +86,7 @@ char	xmlGet_type_lights(char *str)
 	return (ERROR);
 }
 
-char	xmlGet_type(xmlNodePtr cur, t_env *e)
+char	xml_get_type(xmlNodePtr cur, t_env *e)
 {
 	char	*str;
 
@@ -113,10 +112,10 @@ char	xmlGet_type(xmlNodePtr cur, t_env *e)
 		free(str);
 		return (CON);
 	}
-	return (xmlGet_type_lights(str));
+	return (xml_get_type_lights(str));
 }
 
-void	xmlGet_cam(xmlNodePtr cam, t_env *e)
+void	xml_get_cam(xmlNodePtr cam, t_env *e)
 {
 	xmlNodePtr	cur;
 
@@ -124,9 +123,9 @@ void	xmlGet_cam(xmlNodePtr cam, t_env *e)
 	while (cur)
 	{
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
-			e->cam.pos = xmlGet_vec(cur->xmlChildrenNode, e);
+			e->cam.pos = xml_get_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
-			e->cam.dir = xmlGet_vec(cur->xmlChildrenNode, e);
+			e->cam.dir = xml_get_vec(cur->xmlChildrenNode, e);
 		cur = cur->next;
 	}
 }

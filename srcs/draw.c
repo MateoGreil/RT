@@ -6,7 +6,11 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2018/04/11 15:15:15 by mgreil           ###   ########.fr       */
+=======
+/*   Updated: 2018/04/11 18:16:43 by bmuselet         ###   ########.fr       */
+>>>>>>> master
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +79,7 @@ static void		*ray_loop(void *e)
 {
 	t_vec	compteur;
 
-	((t_env*)e)->cam.num_samples = NB_SAMPLES; // Initialisation du nombre de samples.
+	((t_env*)e)->cam.num_samples = NB_SAMPLES;
 	compteur.y = ((t_env*)e)->y_start;
 	while (compteur.y < ((t_env*)e)->y_end)
 	{
@@ -108,7 +112,7 @@ void			multi_thread(t_env *e)
 	while (i_thread < NB_THREADS)
 	{
 		if (pthread_create(&thread[i_thread], NULL, &ray_loop, &env[i_thread]))
-			return ;//ERROR?
+			return ; //ERROR? 
 		i_thread++;
 	}
 	i_thread = 0;

@@ -12,23 +12,9 @@
 
 #include "rt.h"
 
-void	print_matrice(double mat[3][3])
-{
-	int	y = -1;
-	int	i;
-
-	while (++y < 3)
-	{
-		i = -1;
-		while (++i < 3)
-			printf("%f ", mat[y][i]);
-		printf("\n");
-	}
-}
-
 void	mult_matrix_to_matrix(double mat[3][3], double mat_rot[3][3])
 {
-	double tmp[3][3];
+	double	tmp[3][3];
 	int		i;
 	int		x;
 	int		y;
@@ -43,7 +29,7 @@ void	mult_matrix_to_matrix(double mat[3][3], double mat_rot[3][3])
 							(mat[y][1] * mat_rot[x][1]) +
 							(mat[y][2] * mat_rot[x][2]);
 		}
-	}	
+	}
 	y = -1;
 	while (++y < 3)
 	{
@@ -55,7 +41,7 @@ void	mult_matrix_to_matrix(double mat[3][3], double mat_rot[3][3])
 
 void	mult_vec_to_matrix(t_vec *vec, double matrix[3][3])
 {
-	double	vec_val[4]; // vec.x , vec.y etc...
+	double	vec_val[4];
 
 	vec_val[0] = (vec->x * matrix[0][0] + vec->y * matrix[1][0] +
 					vec->z * matrix[2][0] + vec->h * matrix[3][0]);
