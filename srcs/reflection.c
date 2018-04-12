@@ -24,6 +24,7 @@ void	ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 	new_ray.pos = ray->hit_pos;
 	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);
 	//printf("normal = {%lf, %lf, %lf}\n", normal.x, normal.y, normal.z);
+	// R = -2N * V.N + R 
 	new_ray.dir = vector_normalize(vector_substraction(ray->dir,
 		vector_product(vector_int_product(vector_product(normal, ray->dir), 2), normal)));
 	//printf("new_ray.dir = {%lf, %lf, %lf}\n", new_ray.dir.x, new_ray.dir.y, new_ray.dir.z);
