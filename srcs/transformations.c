@@ -76,6 +76,4 @@ void			transformations(t_obj *obj)
 	obj->dir = ft_rotation_y(obj->dir, obj->rot.y);
 	obj->dir = ft_rotation_z(obj->dir, obj->rot.z);
 	obj->pos = ft_translation(obj->pos, obj->trans);
-	/*if (obj->type == PLA)
-		printf("x= %f, y= %f, z=%f\n", obj->dir.x, obj->dir.y, obj->dir.z);*/
 }
