@@ -44,34 +44,34 @@ static void	change_tex_or_rad(t_env *e, int keycode)
 static void	rotate_object(t_env *e, int keycode)
 {
 	if (keycode == KEY_W)
-		e->cam.select_obj->rot.x += 20;
+		e->cam.select_obj->rot.x += 10;
 	else if (keycode == KEY_S)
-		e->cam.select_obj->rot.x -= 20;
+		e->cam.select_obj->rot.x -= 10;
 	else if (keycode == KEY_A)
-		e->cam.select_obj->rot.z -= 20;
+		e->cam.select_obj->rot.z -= 10;
 	else if (keycode == KEY_D)
-		e->cam.select_obj->rot.z += 20;
+		e->cam.select_obj->rot.z += 10;
 	else if (keycode == KEY_R)
-		e->cam.select_obj->rot.y += 20;
+		e->cam.select_obj->rot.y += 10;
 	else if (keycode == KEY_F)
-		e->cam.select_obj->rot.y -= 20;
+		e->cam.select_obj->rot.y -= 10;
 	transformations(e->cam.select_obj);
 }
 
 static void	translate_object(t_env *e, int keycode)
 {
 	if (keycode == KEYPAD_UP)
-		e->cam.select_obj->pos.y += 15;
+		e->cam.select_obj->pos.y += 10;
 	else if (keycode == KEYPAD_DOWN)
-		e->cam.select_obj->pos.y -= 15;
+		e->cam.select_obj->pos.y -= 10;
 	else if (keycode == KEYPAD_LEFT)
-		e->cam.select_obj->pos.x -= 15;
+		e->cam.select_obj->pos.x -= 10;
 	else if (keycode == KEYPAD_RIGHT)
-		e->cam.select_obj->pos.x += 15;
+		e->cam.select_obj->pos.x += 10;
 	else if (keycode == KEY_PUP)
-		e->cam.select_obj->pos.z -= 15;
+		e->cam.select_obj->pos.z -= 10;
 	else if (keycode == KEY_PDOWN)
-		e->cam.select_obj->pos.z += 15;
+		e->cam.select_obj->pos.z += 10;
 }
 
 static void	change_object_pt2(t_env *e, int keycode)
@@ -86,7 +86,7 @@ static void	change_object_pt2(t_env *e, int keycode)
 	else if (keycode == KEY_V)
 	{
 		ft_lstaddback(&(e->objs), ft_lstnew(e->cam.select_obj, sizeof(t_obj)));
-		e->cam.select_obj->pos.z += 16;
+		e->cam.select_obj->pos.z += 12;
 	}
 	else if (keycode == KEY_T || keycode == KEY_PLUS || keycode == KEY_MINUS
 			|| keycode == KEY_TAB)

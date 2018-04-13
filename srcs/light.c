@@ -22,16 +22,15 @@ t_color			specular_light(t_ray ray, t_ray *light_ray, t_color light_color)
 
 	shininess = 200;
 	intensity = 1;
-	specular = (t_color){255, 255, 255};
+	specular = (t_color){1, 1, 1};
 	specular = color_product(specular, light_color);
 	specular = max_color(specular);
 	reflection = vector_double_product(light_ray->normal,
 	vector_dot_product(ray.dir, light_ray->normal) * 2);
 	reflection = vector_normalize(
 	vector_substraction(ray.dir, reflection));
-	//max_calc = vector_dot_product(reflection, vector_substraction(light_ray->hit_pos, e->cam.pos));
-	max_calc = vector_dot_product(reflection, light_ray->hit_dir); //A VOIR QUAND ON AURA LS MOUVEMENTS DE CAMERA POUR REMPLACER LIGHT_RAY->HIT_DIR PAR E->CAM.DIR
-	if (max_calc > 0)
+	max_calc = vector_dot_product(reflection, light_ray->hit_dir);
+	if (max_calc > 0.001)
 		specular = color_double_product(specular, intensity *
 			pow(ft_clamp(max_calc, 0.0, 1.0), shininess));
 	else
@@ -95,7 +94,6 @@ static t_color	calc_all_lights(t_env *e, t_ray ray, t_color obj_color)
 	tmp = e->lights;
 	lights_color = (t_color){0, 0, 0};
 	spec = (t_color){0, 0, 0};
-	light_ray.nb_shadow = 0;
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)
