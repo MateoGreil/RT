@@ -225,7 +225,7 @@ void				ray_refl(t_env *e, t_ray *ray, int nb_rebond);
 void				ray_refr(t_env *e, t_ray *ray, int nb_rebond);
 
 int					key_hook(int keycode, t_env *e);
-int					button_exit(int keycode, t_env *e);
+int					button_exit(t_env *e);
 t_color				light_calc(t_env *e, t_ray ray);
 t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
 t_color				ambient_color(t_env *e, t_ray ray);
