@@ -70,13 +70,13 @@ t_color	ambient_color(t_env *e, t_ray ray)
 	t_list	*tmp;
 
 	tmp = e->lights;
-	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
+	color = color_average(ray.color, (t_color){255, 255, 255});
 	color = color_double_product(color, 0.12);
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type == LIA)
 		{
-			color = color_average(ray.hit_obj->color,
+			color = color_average(ray.color,
 					((t_obj*)e->lights->content)->color);
 			if (((t_obj*)e->lights->content)->rad > 30 ||
 					((t_obj*)e->lights->content)->rad < 5)

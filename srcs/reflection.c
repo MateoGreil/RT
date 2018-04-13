@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:51:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/11 17:16:21 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 15:06:27 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 	//printf("new_ray.pos.x = %f, y = %f, z = %f;\n", new_ray.pos.x, new_ray.pos.y, new_ray.pos.z);
 	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);
 	//printf("normal = {%lf, %lf, %lf}\n", normal.x, normal.y, normal.z);
-	// R = -2N * V.N + R 
+	// R = -2N * V.N + R
 	new_ray.dir = vector_normalize(vector_substraction(ray->dir,
 		vector_product(vector_int_product(vector_product(normal, ray->dir), 2), normal)));
 	//printf("new_ray.dir = {%lf, %lf, %lf}\n", new_ray.dir.x, new_ray.dir.y, new_ray.dir.z);
@@ -39,7 +39,9 @@ void	ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRRORING)
+	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0)
+		ray_refr(e, &new_ray, nb_rebond + 1);
+	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRRORING)
 		ray_refl(e, &new_ray, nb_rebond + 1);
 	*ray = new_ray;
 }

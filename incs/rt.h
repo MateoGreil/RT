@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 12:07:59 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 15:05:13 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,6 +136,7 @@ typedef struct		s_ray
 	t_vec			hit_pos;
 	t_vec			hit_dir;
 	int				nb_shadow;
+	t_color			color;
 }					t_ray;
 
 typedef struct		s_img

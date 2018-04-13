@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   refr.c                                             :+:      :+:    :+:   */
+/*   refraction.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 11:28:28 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/11 12:16:08 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 15:05:37 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,6 @@ void	ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 	*ray = new_ray;
 	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0 && nb_rebond < NB_MIRRORING)
 		ray_refr(e, &new_ray, nb_rebond + 1);
-	/*else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRRORING)
-		ray_refr(e, &new_ray, nb_rebond + 1);*/
+	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRRORING)
+		ray_refr(e, &new_ray, nb_rebond + 1);
 }

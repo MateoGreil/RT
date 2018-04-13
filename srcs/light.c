@@ -120,7 +120,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_color ambient;
 	t_color diffuse_color;
 
-	color = color_division(ray.hit_obj->color, 255);
+	color = color_division(ray.color, 255);
 	ambient = ambient_color(e, ray);
 	ambient = color_division(ambient, 255);
 	if (e->lights == NULL)
