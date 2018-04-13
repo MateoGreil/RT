@@ -6,7 +6,7 @@
 /*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 17:41:57 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/10 17:41:58 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/13 10:45:55 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_int2rgb(t_color *color, int i)
 {
-  color->r = (i & 0xFF0000) >> 16;
-  color->g = (i & 0xFF00) >> 8;
-  color->b = i & 0xFF;
+	color->r = (i & 0xFF0000) >> 16;
+	color->g = (i & 0xFF00) >> 8;
+	color->b = i & 0xFF;
 }
