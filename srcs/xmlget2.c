@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/13 15:29:03 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 16:12:21 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,9 +83,6 @@ void			init_obj(t_obj *obj)
 	obj->trans.y = 0;
 	obj->trans.z = 0;
 	obj->bump = 0;
-	obj->refl = 0;
-	obj->refr = 0;
-	obj->n_refr = 0;
 }
 
 void			xml_get_objs(xmlNodePtr objs, t_env *e)
@@ -105,6 +102,9 @@ void			xml_get_objs(xmlNodePtr objs, t_env *e)
 			obj.id = id;
 			obj.perturbation = 0;
 			obj.num_texture = 0;
+			obj.refl = 0;
+			obj.refr = 0;
+			obj.n_refr = 0;
 			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
 			id++;
