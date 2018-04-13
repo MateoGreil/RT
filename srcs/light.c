@@ -20,7 +20,7 @@ t_color			specular_light(t_ray ray, t_ray *light_ray, t_color light_color)
 	double		shininess;
 	double		intensity;
 
-	shininess = 200;
+	shininess = 100;
 	intensity = 1;
 	specular = (t_color){1, 1, 1};
 	specular = color_product(specular, light_color);

@@ -25,26 +25,26 @@
 <rt>
 	<cam>
 		<position>
-			<x>-50</x>
+			<x>0</x>
 			<y>0</y>
-			<z>160</z>
+			<z>200</z>
 		</position>
 		<direction>
 			<x>0</x>
 			<y>0</y>
-			<z>60</z>
+			<z>0</z>
 		</direction>
 	</cam>
 	<objs>
 		<obj>
 			<type>plan</type>
 			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>-80</z>
+			</position>
+			<rotation>
 				<x>90</x>
-				<y>345</y>
-				<z>-523</z>
-			</position>
-			<rotation>
-				<x>190</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -54,11 +54,10 @@
 				<z>0</z>
 			</translation>
 			<color>
-				<r>130</r>
-				<g>130</g>
-				<b>130</b>
+				<r>0</r>
+				<g>0</g>
+				<b>255</b>
 			</color>
-			<rad>30</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -67,8 +66,8 @@
 			<type>plan</type>
 			<position>
 				<x>0</x>
-				<y>345</y>
-				<z>-523</z>
+				<y>80</y>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -85,7 +84,6 @@
 				<g>130</g>
 				<b>130</b>
 			</color>
-			<rad>30</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -94,8 +92,8 @@
 			<type>plan</type>
 			<position>
 				<x>0</x>
-				<y>345</y>
-				<z>-523</z>
+				<y>-80</y>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -112,7 +110,6 @@
 				<g>130</g>
 				<b>130</b>
 			</color>
-			<rad>30</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -120,9 +117,9 @@
 		<obj>
 			<type>cylindre</type>
 			<position>
-				<x>160</x>
+				<x>140</x>
 				<y>0</y>
-				<z>-47</z>
+				<z>-45</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -139,7 +136,7 @@
 				<g>158</g>
 				<b>159</b>
 			</color>
-			<rad>29</rad>
+			<rad>15</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -147,9 +144,9 @@
 		<obj>
 			<type>cylindre</type>
 			<position>
-				<x>160</x>
+				<x>-140</x>
 				<y>0</y>
-				<z>-47</z>
+				<z>-45</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -166,7 +163,7 @@
 				<g>158</g>
 				<b>159</b>
 			</color>
-			<rad>29</rad>
+			<rad>15</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -174,9 +171,9 @@
 		<obj>
 			<type>cylindre</type>
 			<position>
-				<x>160</x>
+				<x>100</x>
 				<y>0</y>
-				<z>-47</z>
+				<z>90</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -193,7 +190,7 @@
 				<g>158</g>
 				<b>159</b>
 			</color>
-			<rad>29</rad>
+			<rad>15</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -201,9 +198,9 @@
 		<obj>
 			<type>cylindre</type>
 			<position>
-				<x>160</x>
+				<x>-100</x>
 				<y>0</y>
-				<z>-47</z>
+				<z>90</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -220,34 +217,26 @@
 				<g>158</g>
 				<b>159</b>
 			</color>
-			<rad>29</rad>
+			<rad>15</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
 		</obj>
+
 		<obj>
-			<type>cylindre</type>
+			<type>sphere</type>
 			<position>
-				<x>160</x>
-				<y>0</y>
-				<z>-47</z>
+				<x>140</x>
+				<y>80</y>
+				<z>-45</z>
 			</position>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
 			<color>
 				<r>162</r>
 				<g>158</g>
 				<b>159</b>
 			</color>
-			<rad>29</rad>
+			<rad>25</rad>
+			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -255,14 +244,122 @@
 		<obj>
 			<type>sphere</type>
 			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
+				<x>-140</x>
+				<y>80</y>
+				<z>-45</z>
 			</position>
 			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
+			</color>
+			<rad>25</rad>
+			<bump>0.68</bump>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>sphere</type>
+			<position>
+				<x>140</x>
+				<y>-80</y>
+				<z>-45</z>
+			</position>
+			<color>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
+			</color>
+			<rad>25</rad>
+			<bump>0.68</bump>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>sphere</type>
+			<position>
+				<x>-140</x>
+				<y>-80</y>
+				<z>-45</z>
+			</position>
+			<color>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
+			</color>
+			<rad>25</rad>
+			<bump>0.68</bump>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>sphere</type>
+			<position>
+				<x>100</x>
+				<y>80</y>
+				<z>90</z>
+			</position>
+			<color>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
+			</color>
+			<rad>25</rad>
+			<bump>0.68</bump>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>sphere</type>
+			<position>
+				<x>-100</x>
+				<y>80</y>
+				<z>90</z>
+			</position>
+			<color>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
+			</color>
+			<rad>25</rad>
+			<bump>0.68</bump>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>sphere</type>
+			<position>
+				<x>100</x>
+				<y>-80</y>
+				<z>90</z>
+			</position>
+			<color>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
+			</color>
+			<rad>25</rad>
+			<bump>0.68</bump>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>sphere</type>
+			<position>
+				<x>-100</x>
+				<y>-80</y>
+				<z>90</z>
+			</position>
+			<color>
+				<r>162</r>
+				<g>158</g>
+				<b>159</b>
 			</color>
 			<rad>25</rad>
 			<bump>0.68</bump>
@@ -274,141 +371,15 @@
 			<type>sphere</type>
 			<position>
 				<x>0</x>
-				<y>0</y>
-				<z>0</z>
+				<y>-60</y>
+				<z>60</z>
 			</position>
 			<color>
 				<r>255</r>
-				<g>255</g>
+				<g>0</g>
 				<b>0</b>
 			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>25</rad>
+			<rad>15</rad>
 			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
@@ -419,9 +390,9 @@
 		<light>
 			<type>light</type>
 			<position>
-				<x>100</x>
-				<y>0</y>
-				<z>200</z>
+				<x>190</x>
+				<y>30</y>
+				<z>180</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -438,9 +409,9 @@
 		<light>
 			<type>light</type>
 			<position>
-				<x>-150</x>
-				<y>0</y>
-				<z>200</z>
+				<x>-190</x>
+				<y>30</y>
+				<z>180</z>
 			</position>
 			<rotation>
 				<x>0</x>
