@@ -95,7 +95,6 @@ static t_color	calc_all_lights(t_env *e, t_ray ray, t_color obj_color)
 	tmp = e->lights;
 	lights_color = (t_color){0, 0, 0};
 	spec = (t_color){0, 0, 0};
-	light_ray.nb_shadow = 0;
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)

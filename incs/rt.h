@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 12:07:59 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 14:41:02 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@
 # define FOV 2
 
 # define ERROR -1
-# define SPH 0 //sphere
-# define PLA 1 //plan
-# define CYL 2 //cylindre
-# define CON 3 //cone
-# define PAR 4 //par
-# define LIG 5 //light
-# define LIA 6 //ambient_light
-# define LID 7 //directional_light
+# define SPH 0
+# define PLA 1
+# define CYL 2
+# define CON 3
+# define PAR 4
+# define LIG 5
+# define LIA 6
+# define LID 7
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
@@ -135,7 +135,6 @@ typedef struct		s_ray
 	t_obj			*hit_obj;
 	t_vec			hit_pos;
 	t_vec			hit_dir;
-	int				nb_shadow;
 }					t_ray;
 
 typedef struct		s_img
@@ -222,7 +221,6 @@ double				cylindre_inter(t_env *e, t_ray *ray, t_vec temp);
 double				sphere_inter(t_env *e, t_ray *ray, t_vec temp);
 void				draw(t_env *e, int loading);
 
-
 void				ray_refl(t_env *e, t_ray *ray, int nb_rebond);
 void				ray_refr(t_env *e, t_ray *ray, int nb_rebond);
 
@@ -279,7 +277,6 @@ int					load_texture_img(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
 t_vec				bump_mapping(t_vec normal, t_vec hit_point, t_ray ray);
 
-// PARTIE PARSING XML //
 xmlNodePtr			get_node(xmlNodePtr node, char *name);
 void				parse_file(t_env *e, char *docname);
 void				xml_get_cam(xmlNodePtr cam, t_env *e);
@@ -289,11 +286,11 @@ t_color				xml_get_color(xmlNodePtr cur, t_env *e);
 char				xml_get_type(xmlNodePtr cur, t_env *e);
 t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
 
-void	save_scene(t_env *e);
-void	xml_set_vec(xmlNodePtr cur, t_vec vec);
-void	xml_set_type(xmlNodePtr cur, int type);
-void	xml_set_color(xmlNodePtr cur, t_color color);
+void				save_scene(t_env *e);
+void				xml_set_vec(xmlNodePtr cur, t_vec vec);
+void				xml_set_type(xmlNodePtr cur, int type);
+void				xml_set_color(xmlNodePtr cur, t_color color);
 
-void	printf_obj(t_obj obj);
+void				printf_obj(t_obj obj);
 
 #endif
