@@ -22,6 +22,8 @@ void	ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 	new_ray.length = INFINITE;
 	new_ray.hit_obj = NULL;
 	new_ray.pos = ray->hit_pos;
+	new_ray.pos.y = -10;
+	//printf("new_ray.pos.x = %f, y = %f, z = %f;\n", new_ray.pos.x, new_ray.pos.y, new_ray.pos.z);
 	//printf("ray->dir = {%lf, %lf, %lf}\n", ray->dir.x, ray->dir.y, ray->dir.z);
 	//printf("normal = {%lf, %lf, %lf}\n", normal.x, normal.y, normal.z);
 	// R = -2N * V.N + R 
