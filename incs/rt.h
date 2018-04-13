@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/13 15:05:13 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 15:51:30 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define NB_MIRRORING 0
+# define NB_MIRRORING 5
 # define NB_THREADS 8
 # define NB_SAMPLES 1
 # define NB_TEXTURES 5
@@ -120,8 +120,8 @@ typedef struct		s_obj
 	int				num_texture;
 	int				perturbation;
 	double			bump;
-	char			refl;
-	char			refr;
+	double			refl;
+	double			refr;
 	double			n_refr;
 }					t_obj;
 

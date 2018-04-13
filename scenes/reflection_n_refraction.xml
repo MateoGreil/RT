@@ -83,8 +83,8 @@
 				<b>0</b>
 			</color>
 			<rad>25</rad>
-			<reflection>100</reflection>
-			<refraction>0</refraction>
+			<reflection>0</reflection>
+			<refraction>1</refraction>
 			<n_refr>0</n_refr>
 		</obj>
 	</objs>
