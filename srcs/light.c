@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 t_color			specular_light(t_ray ray, t_ray *light_ray, t_color light_color)
 {
