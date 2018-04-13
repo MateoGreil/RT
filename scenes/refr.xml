@@ -118,10 +118,10 @@
 			<n_refr>0</n_refr>
 		</obj>
 		<obj>
-			<type>sphere</type>
+			<type>plan</type>
 			<position>
 				<x>15</x>
-				<y>15</y>
+				<y>-75</y>
 				<z>70</z>
 			</position>
 			<color>
@@ -130,9 +130,9 @@
 				<b>0</b>
 			</color>
 			<rad>10</rad>
-			<reflection>0.5</reflection>
+			<reflection>0</reflection>
 			<refraction>0.5</refraction>
-			<n_refr>1.62</n_refr>
+			<n_refr>1.000293</n_refr>
 		</obj>
 		<obj>
 			<type>sphere</type>

@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/13 16:15:36 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 16:35:21 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static t_obj	xml_get_one_obj(xmlNodePtr cur, t_env *e)
 t_obj			init_obj(void)
 {
 	t_obj	obj;
-	obj.type = 0;
+	
 	obj.pos.x = 0;
 	obj.pos.y = 0;
 	obj.pos.z = 0;
