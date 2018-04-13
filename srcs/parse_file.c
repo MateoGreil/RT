@@ -69,21 +69,19 @@ void		printf_obj(t_obj obj)
 void		parse_file(t_env *e, char *docname)
 {
 	xmlNodePtr		root;
-	//t_list 	*tmp;
 
 	e->doc = xmlParseFile(docname);
 	if (e->doc == NULL)
 	{
-		//RETURN ERROR PARSING
-		return ;
+		ft_putstr("Ce fichier est introuvable ou vide.\n");
+		exit(0);
 	}
 	root = xmlDocGetRootElement(e->doc);
 	if (root == NULL)
 	{
-		//RETURN FILE ERROR
+		ft_putstr("Ce fichier n'est pas valide.\n");
 		xmlFreeDoc(e->doc);
-		return ;
+		exit(0);
 	}
 	get_node_for_env(e, root);
-	//printf_obj((*(t_obj*)e->objs->content));
 }

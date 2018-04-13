@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_dswap.c                                         :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
+/*   By: gnegri <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/10 15:12:34 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/13 10:46:11 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/04/12 17:15:18 by gnegri            #+#    #+#             */
+/*   Updated: 2018/04/12 17:15:20 by gnegri           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_dswap(double *a, double *b)
-{
-	double	tmp;
+#include "rt.h"
 
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
+void	error_multithread(t_env *e)
+{
+	ft_putstr("Erreur lors de la mise en place du multi_threading."
+		"Veuillez relancer le programme");
+	xmlFreeDoc(e->doc);
+	exit(0);
 }
