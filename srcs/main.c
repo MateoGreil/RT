@@ -57,7 +57,8 @@ int			main(int ac, char **av)
 	if (ac == 2)
 	{
 		parse_file(&e, av[1]);
-		e.mlx = mlx_init();
+		if ((e.mlx = mlx_init()) == NULL)
+			return (0);
 		e.win = mlx_new_window(e.mlx, WIN_WIDTH, WIN_HEIGHT, "RT beta 1.6");
 		e.wait_win = mlx_new_window(e.mlx, 400, 100, "Loading ...");
 		init_bool(&e);

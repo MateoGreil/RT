@@ -17,12 +17,14 @@ int				load_texture_img(t_env *e)
 	int a;
 	int	b;
 
-	e->texture = (t_img*)malloc(sizeof(t_img) * (NB_TEXTURES + 1));
+	if ((e->texture = (t_img*)malloc(sizeof(t_img) * (NB_TEXTURES + 1))) == NULL)
+		return (FALSE);
 	a = 64;
 	b = 64;
 	e->texture[0].img = NULL;
-	e->texture[1].img = mlx_xpm_file_to_image(e->mlx,
-			"textures/stone.xpm", &a, &b);
+	if ((e->texture[1].img = mlx_xpm_file_to_image(e->mlx,
+			"textures/stone.xpm", &a, &b)) == NULL)
+		return (FALSE);
 	e->texture[1].size_x = a;
 	e->texture[1].size_y = b;
 	e->texture[1].data = mlx_get_data_addr(e->texture[1].img,
