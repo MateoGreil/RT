@@ -6,13 +6,13 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/03/22 11:08:20 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 16:38:41 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static t_color	specular_light(t_ray ray, t_ray *light_ray)
+t_color			specular_light(t_ray ray, t_ray *light_ray, t_color light_color)
 {
 	t_vec		reflection;
 	t_color		specular;
@@ -20,17 +20,19 @@ static t_color	specular_light(t_ray ray, t_ray *light_ray)
 	double		shininess;
 	double		intensity;
 
-	shininess = 200;
-	intensity = 10;
-	specular = (t_color){255, 255, 255};
+	shininess = 100;
+	intensity = 1;
+	specular = (t_color){1, 1, 1};
+	specular = color_product(specular, light_color);
+	specular = max_color(specular);
 	reflection = vector_double_product(light_ray->normal,
 	vector_dot_product(ray.dir, light_ray->normal) * 2);
 	reflection = vector_normalize(
 	vector_substraction(ray.dir, reflection));
-	//max_calc = vector_dot_product(reflection, vector_substraction(light_ray->hit_pos, e->cam.pos));
-	max_calc = vector_dot_product(reflection,light_ray->hit_dir); //A VOIR QUAND ON AURA LS MOUVEMENTS DE CAMERA POUR REMPLACER LIGHT_RAY->HIT_DIR PAR E->CAM.DIR
-	if (max_calc > 0)
-		specular = color_double_product(specular, intensity * pow(ft_clamp(max_calc, 0.0, 1.0), shininess));
+	max_calc = vector_dot_product(reflection, light_ray->hit_dir);
+	if (max_calc > 0.001)
+		specular = color_double_product(specular, intensity *
+			pow(ft_clamp(max_calc, 0.0, 1.0), shininess));
 	else
 		specular = (t_color){0, 0, 0};
 	return (specular);
@@ -61,19 +63,22 @@ static t_color	calc_diff_dir(t_env *e, t_ray ray, t_ray *light_ray)
 {
 	t_color	tmp_color;
 
+	light_ray->hit_obj = ray.hit_obj;
 	if (((t_obj*)e->lights->content)->type == LIG)
 	{
 		tmp_color = diffuse_light(e, ray, light_ray);
 		tmp_color = color_division(tmp_color, 255);
 		if (calc_shadow(e, *light_ray) == 1)
-			tmp_color = (t_color){0, 0, 0};
+			tmp_color = color_balanced((t_color){0, 0, 0},
+				((t_obj*)e->lights->content)->color, 0.99999, 0.00001);
 	}
 	if (((t_obj*)e->lights->content)->type == LID)
 	{
 		tmp_color = directional_light(e, ray, light_ray);
 		tmp_color = color_division(tmp_color, 255);
 		if (calc_shadow(e, *light_ray) == 1)
-			tmp_color = (t_color){0, 0, 0};
+			tmp_color = color_balanced((t_color){0, 0, 0},
+				((t_obj*)e->lights->content)->color, 0.99999, 0.00001);
 	}
 	return (tmp_color);
 }
@@ -88,19 +93,15 @@ static t_color	calc_all_lights(t_env *e, t_ray ray, t_color obj_color)
 
 	tmp = e->lights;
 	lights_color = (t_color){0, 0, 0};
+	spec = (t_color){0, 0, 0};
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type != LIA)
 		{
-			light_ray.hit_obj = ray.hit_obj;
 			tmp_color = calc_diff_dir(e, ray, &light_ray);
-			if (tmp_color.r != 0 && tmp_color.g != 0 && tmp_color.b != 0)
-			{
-				spec = specular_light(ray, &light_ray);
-				spec = color_division(spec, 255);
-			}
-			else
-				spec = (t_color){0, 0, 0};
+			if (calc_shadow(e, light_ray) == 0)
+				spec = calc_specular(ray, &light_ray,
+					((t_obj*)e->lights->content)->color, spec);
 			lights_color = color_addition(lights_color, tmp_color);
 			lights_color = color_product(obj_color, lights_color);
 			lights_color = color_addition(lights_color, spec);
@@ -117,7 +118,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 	t_color ambient;
 	t_color diffuse_color;
 
-	color = color_division(ray.hit_obj->color, 255);
+	color = color_division(ray.color, 255);
 	ambient = ambient_color(e, ray);
 	ambient = color_division(ambient, 255);
 	if (e->lights == NULL)
@@ -128,8 +129,7 @@ t_color			light_calc(t_env *e, t_ray ray)
 		diffuse_color = calc_all_lights(e, ray, color);
 		color = diffuse_color;
 	}
-	if (ray.hit_obj->num_texture == 0)
-		color = color_addition(color, ambient);
+	color = color_addition(color, ambient);
 	color = color_double_product(color, 255);
 	color = max_color(color);
 	if (e->cam.cel_shading == ON)

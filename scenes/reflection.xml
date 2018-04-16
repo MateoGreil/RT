@@ -39,33 +39,6 @@
 	</cam>
 	<objs>
 		<obj>
-			<type>plan</type>
-			<position>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</position>
-			<rotation>
-				<x>90</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<translation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</translation>
-			<color>
-				<r>130</r>
-				<g>130</g>
-				<b>130</b>
-			</color>
-			<rad>30</rad>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
 			<type>sphere</type>
 			<position>
 				<x>0</x>
@@ -89,13 +62,18 @@
 				<y>-10</y>
 				<z>0</z>
 			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
 			<color>
 				<r>255</r>
 				<g>255</g>
 				<b>0</b>
 			</color>
 			<rad>25</rad>
-			<reflection>100</reflection>
+			<reflection>0.1</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
 		</obj>

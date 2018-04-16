@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/19 17:58:33 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/11 12:15:25 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 15:51:52 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,45 +45,22 @@ static void	get_node_for_env(t_env *e, xmlNodePtr root)
 	}
 }
 
-void		printf_obj(t_obj obj)
-{
-	printf("id = %d\n", obj.id);
-	printf("type = %d\n", obj.type);
-	printf("pos.x = %lf, pos.y = %lf, pos.z = %lf\n",
-		obj.pos.x, obj.pos.y, obj.pos.z);
-	printf("dir.x = %lf, dir.y = %lf, dir.z = %lf\n",
-		obj.dir.x, obj.dir.y, obj.dir.z);
-	printf("rad = %lf\n", obj.rad);
-	printf("color.r = %f, color.g = %f, color.b = %f\n",
-		obj.color.r, obj.color.g, obj.color.b);
-	printf("rot.x = %lf, rot.y = %lf, rot.z = %lf\n",
-		obj.rot.x, obj.rot.y, obj.rot.z);
-	printf("trans.x = %lf, trans.y = %lf, trans.z = %lf\n",
-		obj.trans.x, obj.trans.y, obj.trans.z);
-	printf("num_texture = %d\n", obj.num_texture);
-	printf("refl = %d\n", obj.refl);
-	printf("refr = %d\n", obj.refr);
-	printf("n_refr = %f\n", obj.n_refr);
-}
-
 void		parse_file(t_env *e, char *docname)
 {
 	xmlNodePtr		root;
-	//t_list 	*tmp;
 
 	e->doc = xmlParseFile(docname);
 	if (e->doc == NULL)
 	{
-		//RETURN ERROR PARSING
-		return ;
+		ft_putstr("Ce fichier est introuvable ou vide.\n");
+		exit(0);
 	}
 	root = xmlDocGetRootElement(e->doc);
 	if (root == NULL)
 	{
-		//RETURN FILE ERROR
+		ft_putstr("Ce fichier n'est pas valide.\n");
 		xmlFreeDoc(e->doc);
-		return ;
+		exit(0);
 	}
 	get_node_for_env(e, root);
-	//printf_obj((*(t_obj*)e->objs->content));
 }

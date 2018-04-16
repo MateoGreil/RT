@@ -12,15 +12,10 @@
 
 #include "rt.h"
 
-int			button_exit(int keycode, t_env *e)
+int			button_exit(t_env *e)
 {
 	xmlFreeDoc(e->doc);
 	e = NULL;
-	//ft_lstdel(&e->lights, &ft_delstr);
-	//ft_lstdel(&e->objs, &ft_delstr);
-	//free(&e->noise[0].noise);
-	//free(&e->noise[0]);
-	keycode = 0;
 	exit(0);
 }
 
@@ -83,7 +78,7 @@ int			key_hook(int keycode, t_env *e)
 	else if (keycode == KEY_FN)
 		save_scene(e);
 	else if (keycode == KEY_ECHAP)
-		button_exit(keycode, e);
+		button_exit(e);
 	else if (e->cam.selection == ON)
 	{
 		change_object(e, keycode);

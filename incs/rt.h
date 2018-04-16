@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 12:07:59 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/13 16:09:53 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,14 @@
 # define FOV 2
 
 # define ERROR -1
-# define SPH 0 //sphere
-# define PLA 1 //plan
-# define CYL 2 //cylindre
-# define CON 3 //cone
-# define PAR 4 //par
-# define LIG 5 //light
-# define LIA 6 //ambient_light
-# define LID 7 //directional_light
+# define SPH 0
+# define PLA 1
+# define CYL 2
+# define CON 3
+# define PAR 4
+# define LIG 5
+# define LIA 6
+# define LID 7
 
 # define ROT_SPEED 10
 # define MOVE_SPEED 10
@@ -97,7 +97,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define NB_MIRRORING 0
+# define NB_MIRRORING 5
 # define NB_THREADS 8
 # define NB_SAMPLES 1
 # define NB_TEXTURES 5
@@ -120,8 +120,8 @@ typedef struct		s_obj
 	int				num_texture;
 	int				perturbation;
 	double			bump;
-	char			refl;
-	char			refr;
+	double			refl;
+	double			refr;
 	double			n_refr;
 }					t_obj;
 
@@ -135,6 +135,8 @@ typedef struct		s_ray
 	t_obj			*hit_obj;
 	t_vec			hit_pos;
 	t_vec			hit_dir;
+	int				nb_shadow;
+	t_color			color;
 }					t_ray;
 
 typedef struct		s_img
@@ -195,6 +197,7 @@ void				ft_delstr(void *content, size_t content_size);
 t_img				new_image(void *mlx, int img_size_x, int img_size_y);
 void				del_image(void *mlx, t_img *img);
 void				put_pixel_to_image(t_img *img, int x, int y, t_color color);
+void				error_multithread(t_env *e);
 
 void				set_cam_coordinates(t_env *e);
 void				cam_to_world_matrix(t_env *e);
@@ -209,6 +212,10 @@ void				z_rotation(t_cam *cam, double a);
 int					check_inter_objects(t_env *e, t_ray *ray);
 t_color				search_color(void *e, int x, int y, int s);
 t_color				max_color(t_color color);
+t_color				specular_light(t_ray ray, t_ray *light_ray,
+					t_color light_color);
+t_color				calc_specular(t_ray ray, t_ray *light_ray,
+					t_color light_color, t_color spec);
 
 double				cone_inter(t_env *e, t_ray *ray, t_vec temp);
 double				plan_inter(t_env *e, t_ray *ray);
@@ -216,12 +223,11 @@ double				cylindre_inter(t_env *e, t_ray *ray, t_vec temp);
 double				sphere_inter(t_env *e, t_ray *ray, t_vec temp);
 void				draw(t_env *e, int loading);
 
-
 void				ray_refl(t_env *e, t_ray *ray, int nb_rebond);
 void				ray_refr(t_env *e, t_ray *ray, int nb_rebond);
 
 int					key_hook(int keycode, t_env *e);
-int					button_exit(int keycode, t_env *e);
+int					button_exit(t_env *e);
 t_color				light_calc(t_env *e, t_ray ray);
 t_color				directional_light(t_env *e, t_ray ray, t_ray *light_ray);
 t_color				ambient_color(t_env *e, t_ray ray);
@@ -273,7 +279,6 @@ int					load_texture_img(t_env *e);
 t_color				print_texture(t_env *e, t_obj *obj, t_vec hit_pos);
 t_vec				bump_mapping(t_vec normal, t_vec hit_point, t_ray ray);
 
-// PARTIE PARSING XML //
 xmlNodePtr			get_node(xmlNodePtr node, char *name);
 void				parse_file(t_env *e, char *docname);
 void				xml_get_cam(xmlNodePtr cam, t_env *e);
@@ -283,11 +288,11 @@ t_color				xml_get_color(xmlNodePtr cur, t_env *e);
 char				xml_get_type(xmlNodePtr cur, t_env *e);
 t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
 
-void	save_scene(t_env *e);
-void	xml_set_vec(xmlNodePtr cur, t_vec vec);
-void	xml_set_type(xmlNodePtr cur, int type);
-void	xml_set_color(xmlNodePtr cur, t_color color);
+void				save_scene(t_env *e);
+void				xml_set_vec(xmlNodePtr cur, t_vec vec);
+void				xml_set_type(xmlNodePtr cur, int type);
+void				xml_set_color(xmlNodePtr cur, t_color color);
 
-void	printf_obj(t_obj obj);
+void				printf_obj(t_obj obj);
 
 #endif

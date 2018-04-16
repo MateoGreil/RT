@@ -12,6 +12,17 @@
 
 #include "rt.h"
 
+t_color	calc_specular(t_ray ray, t_ray *light_ray,
+	t_color light_color, t_color spec)
+{
+	t_color tmp_spec;
+
+	tmp_spec = specular_light(ray, light_ray, light_color);
+	tmp_spec = color_division(tmp_spec, 255);
+	spec = color_addition(spec, tmp_spec);
+	return (spec);
+}
+
 t_color	max_color(t_color color)
 {
 	double	max;
@@ -59,13 +70,13 @@ t_color	ambient_color(t_env *e, t_ray ray)
 	t_list	*tmp;
 
 	tmp = e->lights;
-	color = color_average(ray.hit_obj->color, (t_color){255, 255, 255});
-	color = color_double_product(color, 0.25);
+	color = color_average(ray.color, (t_color){255, 255, 255});
+	color = color_double_product(color, 0.12);
 	while (e->lights != NULL)
 	{
 		if (((t_obj*)e->lights->content)->type == LIA)
 		{
-			color = color_average(ray.hit_obj->color,
+			color = color_average(ray.color,
 					((t_obj*)e->lights->content)->color);
 			if (((t_obj*)e->lights->content)->rad > 30 ||
 					((t_obj*)e->lights->content)->rad < 5)

@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 18:16:43 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/13 16:08:12 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,13 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
+	if (ray.hit_obj)
+		ray.color = ray.hit_obj->color;
+	else
+		ray.color = BLACK;
 	if (ray.hit_obj && ray.hit_obj->refr > 0)
 		ray_refr(e, &ray, 0);
-	else if (ray.hit_obj && ray.hit_obj->refl > 0)
+	if (ray.hit_obj && ray.hit_obj->refl > 0)
 		ray_refl(e, &ray, 0);
 	return (ray);
 }
@@ -101,7 +105,7 @@ void			multi_thread(t_env *e)
 	while (i_thread < NB_THREADS)
 	{
 		if (pthread_create(&thread[i_thread], NULL, &ray_loop, &env[i_thread]))
-			return ; //ERROR? 
+			error_multithread(e);
 		i_thread++;
 	}
 	i_thread = 0;

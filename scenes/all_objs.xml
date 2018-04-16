@@ -6,19 +6,17 @@
 	position (x, y, z);
 	rotation (x, y, z);
 - parametres d'objs :
-	type (sphere, plan, cylindre, cone);
+	type (sphere, plan, cylindre, cone, paraboloide);
 	position (x, y, z);
 	rotation (x, y, z);
 	translation (x, y, z);
 	rad;
 	color (r, g, b);
-	num_texture;
-	bump;
 	reflection;
 	refraction;
 	n_refr;
 - parametres de lights :
-	type (light, ambient, directional);
+	type (light, ambient, directional)
 	position (x, y, z);
 	direction (x, y, z);
 	color (r, g, b);
@@ -27,9 +25,9 @@
 <rt>
 	<cam>
 		<position>
-			<x>-50</x>
+			<x>0</x>
 			<y>0</y>
-			<z>100</z>
+			<z>150</z>
 		</position>
 		<direction>
 			<x>0</x>
@@ -43,7 +41,7 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>0</z>
+				<z>-80</z>
 			</position>
 			<rotation>
 				<x>90</x>
@@ -56,13 +54,36 @@
 				<z>0</z>
 			</translation>
 			<color>
-				<r>130</r>
-				<g>130</g>
-				<b>130</b>
+				<r>0</r>
+				<g>102</g>
+				<b>255</b>
 			</color>
-			<rad>
-				30
-			</rad>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>plan</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+			<color>
+				<r>80</r>
+				<g>80</g>
+				<b>80</b>
+			</color>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -70,9 +91,9 @@
 		<obj>
 			<type>cylindre</type>
 			<position>
-				<x>70</x>
+				<x>0</x>
 				<y>0</y>
-				<z>10</z>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -84,12 +105,12 @@
 				<y>0</y>
 				<z>0</z>
 			</translation>
+			<rad>30</rad>
 			<color>
-				<r>250</r>
-				<g>250</g>
+				<r>0</r>
+				<g>255</g>
 				<b>0</b>
 			</color>
-			<rad>25</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -97,9 +118,9 @@
 		<obj>
 			<type>cone</type>
 			<position>
-				<x>-40</x>
+				<x>0</x>
 				<y>0</y>
-				<z>20</z>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
@@ -111,13 +132,12 @@
 				<y>0</y>
 				<z>0</z>
 			</translation>
+			<rad>40</rad>
 			<color>
-				<r>250</r>
-				<g>0</g>
-				<b>250</b>
+				<r>255</r>
+				<g>255</g>
+				<b>0</b>
 			</color>
-			<rad>10</rad>
-			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -127,32 +147,24 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>70</z>
+				<z>0</z>
 			</position>
-			<color>
-				<r>0</r>
-				<g>255</g>
-				<b>0</b>
-			</color>
-			<rad>10</rad>
-			<reflection>0</reflection>
-			<refraction>0</refraction>
-			<n_refr>0</n_refr>
-		</obj>
-		<obj>
-			<type>sphere</type>
-			<position>
+			<rotation>
 				<x>0</x>
-				<y>-50</y>
-				<z>50</z>
-			</position>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+			<rad>40</rad>
 			<color>
 				<r>255</r>
-				<g>255</g>
+				<g>0</g>
 				<b>0</b>
 			</color>
-			<rad>25</rad>
-			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -162,28 +174,9 @@
 		<light>
 			<type>light</type>
 			<position>
-				<x>0</x>
+				<x>150</x>
 				<y>0</y>
-				<z>100</z>
-			</position>
-			<rotation>
-				<x>0</x>
-				<y>0</y>
-				<z>0</z>
-			</rotation>
-			<intensity>70</intensity>
-			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>255</b>
-			</color>
-		</light>
-		<light>
-			<type>light</type>
-			<position>
-				<x>-50</x>
-				<y>-60</y>
-				<z>100</z>
+				<z>80</z>
 			</position>
 			<rotation>
 				<x>0</x>
