@@ -41,11 +41,89 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
+				<z>200</z>
+			</position>
+			<rotation>
+				<x>90</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+			<color>
+				<r>0</r>
+				<g>0</g>
+				<b>255</b>
+			</color>
+			<reflection>1</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>plan</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
 				<z>-80</z>
 			</position>
 			<rotation>
 				<x>90</x>
 				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+			<color>
+				<r>0</r>
+				<g>0</g>
+				<b>255</b>
+			</color>
+			<reflection>1</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>plan</type>
+			<position>
+				<x>200</x>
+				<y>0</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>90</x>
+				<y>90</y>
+				<z>0</z>
+			</rotation>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+			<color>
+				<r>0</r>
+				<g>0</g>
+				<b>255</b>
+			</color>
+			<reflection>1</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>plan</type>
+			<position>
+				<x>-200</x>
+				<y>0</y>
+				<z>0</z>
+			</position>
+			<rotation>
+				<x>90</x>
+				<y>90</y>
 				<z>0</z>
 			</rotation>
 			<translation>

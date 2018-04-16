@@ -12,6 +12,7 @@
 
 #include "rt.h"
 
+
 void	mult_matrix_to_matrix(double mat[3][3], double mat_rot[3][3])
 {
 	double	tmp[3][3];
