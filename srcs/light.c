@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/26 12:20:24 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/13 16:38:41 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/16 15:30:33 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static t_color	diffuse_light(t_env *e, t_ray ray, t_ray *light_ray)
 	double	d;
 	t_color	color;
 
-	light_ray->hit_pos = vector_addition(e->cam.pos,
+	light_ray->hit_pos = vector_addition(ray.pos,
 			vector_double_product(ray.dir, ray.length));
 	light_ray->hit_dir = vector_substraction(((t_obj*)e->lights->content)->
 			pos, light_ray->hit_pos);

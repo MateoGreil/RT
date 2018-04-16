@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 15:15:36 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/13 16:08:12 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/16 15:24:47 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ t_color			search_color(void *e, int x, int y, int s)
 		color = light_calc(e, ray);
 	}
 	else
-		color = (t_color){0, 0, 0};
+		color = BLACK;
 	return (color);
 }
 
