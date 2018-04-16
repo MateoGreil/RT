@@ -59,10 +59,12 @@ static void	change_view(t_env *e, int keycode)
 		keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
 		keycode == KEYPAD_RIGHT)
 		change_pos_cam(e, keycode);
-	else if (keycode == KEY_O || keycode == KEY_P)
+	else if (keycode == KEY_P)
 	{
-		(keycode == 31) ? (e->cam.density = 1) : (1);
-		(keycode == 35) ? (e->cam.density += 4) : (1);
+		if (e->cam.density == 1)
+			e->cam.density += 4;
+		else if (e->cam.density != 1)
+			e->cam.density = 1;
 		draw(e, 0);
 	}
 	else
