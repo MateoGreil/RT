@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/23 11:18:08 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 18:18:51 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/16 15:04:47 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ int		check_inter_objects(t_env *e, t_ray *ray)
 	double	new_length;
 	t_vec	temp;
 
-	temp = vector_substraction(e->cam.pos, ((t_obj*)e->objs->content)->pos);
+	temp = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	if (((t_obj*)e->objs->content)->type == SPH)
 		new_length = sphere_inter(e, ray, temp);
 	if (((t_obj*)e->objs->content)->type == CYL)
