@@ -47,7 +47,9 @@
 # define KEY_W 13
 # define KEY_R 15
 # define KEY_T 17
+# define KEY_O 31
 # define KEY_I 34
+# define KEY_P 35
 # define KEY_L 37
 # define KEY_J 38
 # define KEY_K 40
@@ -156,6 +158,7 @@ typedef struct		s_cam
 	double			focal;
 	double			lens_rad;
 	double			zoom;
+	double			density;
 	int				num_samples;
 	int				antialiasing;
 	int				cel_shading;

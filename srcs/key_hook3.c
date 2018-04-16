@@ -12,6 +12,13 @@
 
 #include "rt.h"
 
+int			button_exit(t_env *e)
+{
+	xmlFreeDoc(e->doc);
+	e = NULL;
+	exit(0);
+}
+
 int			change_filter(int keycode, t_env *e)
 {
 	if (keycode == KEY_X)

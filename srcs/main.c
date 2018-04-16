@@ -19,6 +19,7 @@ static void	init_bool(t_env *e)
 		ft_putstr("Error : Failed to load textures.");
 		exit(0);
 	}
+	e->cam.density = 1;
 	e->cam.antialiasing = OFF;
 	e->cam.cel_shading = OFF;
 	e->cam.sepia = OFF;

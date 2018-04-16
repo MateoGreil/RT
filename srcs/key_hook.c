@@ -12,38 +12,19 @@
 
 #include "rt.h"
 
-int			button_exit(t_env *e)
-{
-	xmlFreeDoc(e->doc);
-	e = NULL;
-	exit(0);
-}
-
 static void	translate_camxy(t_cam *cam, int keycode)
 {
 	t_vec	dir;
 
 	dir = vector_normalize(cam->dir);
 	if (keycode == KEYPAD_UP)
-	{
-		cam->dir.z += MOVE_SPEED;
 		cam->pos.z += MOVE_SPEED;
-	}
 	else if (keycode == KEYPAD_DOWN)
-	{
-		cam->dir.z -= MOVE_SPEED;
 		cam->pos.z -= MOVE_SPEED;
-	}
 	else if (keycode == KEYPAD_RIGHT)
-	{
-		cam->dir.x -= MOVE_SPEED;
 		cam->pos.x -= MOVE_SPEED;
-	}
 	else
-	{
-		cam->dir.x += MOVE_SPEED;
 		cam->pos.x += MOVE_SPEED;
-	}
 }
 
 static void	rotate_cam(t_cam *cam, int keycode)
@@ -71,6 +52,23 @@ void		change_pos_cam(t_env *e, int keycode)
 	draw(e, 0);
 }
 
+static void change_view(t_env *e, int keycode)
+{
+	if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
+		keycode == KEY_S || keycode == KEYPAD_UP ||
+		keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
+		keycode == KEYPAD_RIGHT)
+			change_pos_cam(e, keycode);
+	else if (keycode == KEY_O || keycode == KEY_P)
+	{
+		(keycode == 31) ? (e->cam.density = 1) : (1);
+		(keycode == 35) ? (e->cam.density += 4) : (1);
+		draw(e, 0);
+	}
+	else
+		change_filter(keycode, e);
+}
+
 int			key_hook(int keycode, t_env *e)
 {
 	if (keycode == KEY_SPACE)
@@ -85,14 +83,6 @@ int			key_hook(int keycode, t_env *e)
 		draw(e, 0);
 	}
 	else if (e->cam.selection == OFF)
-	{
-		if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
-			keycode == KEY_S || keycode == KEYPAD_UP ||
-			keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
-			keycode == KEYPAD_RIGHT)
-			change_pos_cam(e, keycode);
-		else
-			change_filter(keycode, e);
-	}
+		change_view(e, keycode);
 	return (0);
 }

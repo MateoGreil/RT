@@ -80,9 +80,9 @@ static void		*ray_loop(void *e)
 		while (compteur.x < WIN_WIDTH)
 		{
 			ray_loop_inter(((t_env*)e), compteur, &((t_env*)e)->img);
-			compteur.x++;
+			compteur.x += ((t_env*)e)->cam.density;
 		}
-		compteur.y++;
+		compteur.y += ((t_env*)e)->cam.density;
 	}
 	return (NULL);
 }
