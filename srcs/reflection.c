@@ -6,29 +6,33 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/01 16:51:50 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/16 15:07:03 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/16 15:13:35 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
+t_vec	get_reflection(t_vec ray_dir, t_vec normal)
+{
+	t_vec	reflection;
+
+	reflection = vector_double_product(normal,
+		vector_dot_product(ray_dir, normal) * 2);
+	reflection = vector_normalize(
+		vector_substraction(ray_dir, reflection));
+	return (reflection);
+}
+
 void	ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 {
 	t_list	*tmp;
 	t_ray	new_ray;
-	t_vec	normal;
-	t_vec	reflection;
 
-	normal = get_normal(ray->hit_pos, *ray);
 	new_ray.length = INFINITE;
 	new_ray.hit_obj = NULL;
 	new_ray.pos = ray->hit_pos;
 	// R = -2N * V.N + V
-	reflection = vector_double_product(normal,
-	vector_dot_product(ray->dir, normal) * 2);
-	reflection = vector_normalize(
-	vector_substraction(ray->dir, reflection));
-	new_ray.dir = reflection;
+	new_ray.dir = get_reflection(ray->dir, get_normal(ray->hit_pos, *ray));
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
