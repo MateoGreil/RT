@@ -16,8 +16,8 @@ static double   limit_x(t_env *e, double length, t_vec point)
 {
 	if (((t_obj*)e->objs->content)->limit.x != 0)
 	{
-		if (point.x >= ((t_obj*)e->objs->content)->limit_x_start
-				&& point.x <= ((t_obj*)e->objs->content)->limit_x_end)
+		if (point.x > ((t_obj*)e->objs->content)->limit_x_start
+				&& point.x < ((t_obj*)e->objs->content)->limit_x_end)
 			return (length);
 		else
 			return (INFINITE);
