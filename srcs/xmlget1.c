@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/17 14:16:22 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:32:12 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,12 @@ t_color	xml_get_color(xmlNodePtr cur, t_env *e)
 	return (color);
 }
 
-char	xml_get_type_lights(char *str)
+char	xml_get_type_lights(xmlNodePtr cur, t_env *e)
 {
+	char	*str;
+
+	str = (char*)xmlNodeListGetString(e->doc,
+		cur, 1);
 	if (!ft_strcmp(str, "ambient"))
 	{
 		free(str);
