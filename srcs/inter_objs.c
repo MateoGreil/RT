@@ -28,7 +28,10 @@ double	plan_inter(t_env *e, t_ray *ray)
 		+ ((t_obj*)e->objs->content)->dir.y * ray->dir.y
 		+ ((t_obj*)e->objs->content)->dir.z * ray->dir.z;
 	if ((new_length = a / b) > ZERO)
+	{
+		new_length = limit_object(e, ray, new_length);
 		return (new_length);
+	}
 	else
 		return (INFINITE);
 }
@@ -53,6 +56,7 @@ double	cylindre_inter(t_env *e, t_ray *ray, t_vec temp)
 		pow(((t_obj*)e->objs->content)->rad, 2);
 	if ((new_length = equation_second(a, b)) == -1)
 		return (ray->length);
+	new_length = limit_object(e, ray, new_length);
 	return (new_length);
 }
 
@@ -68,6 +72,7 @@ double	sphere_inter(t_env *e, t_ray *ray, t_vec temp)
 		pow(((t_obj*)e->objs->content)->rad, 2);
 	if ((new_length = equation_second(a, b)) == -1)
 		return (ray->length);
+	new_length = limit_object(e, ray, new_length);
 	return (new_length);
 }
 
@@ -95,6 +100,7 @@ double	cone_inter(t_env *e, t_ray *ray, t_vec temp)
 					(t_vec)((t_obj*)e->objs->content)->dir), 2);
 	if ((new_length = equation_second(a, b)) == -1)
 		return (ray->length);
+	new_length = limit_object(e, ray, new_length);
 	return (new_length);
 }
 
@@ -104,6 +110,16 @@ int		check_inter_objects(t_env *e, t_ray *ray)
 	t_vec	temp;
 
 	temp = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
+	((t_obj*)e->objs->content)->limit.x = 25;
+	((t_obj*)e->objs->content)->limit_x_start = ((t_obj*)e->objs->content)->pos.x;
+	((t_obj*)e->objs->content)->limit_x_end = ((t_obj*)e->objs->content)->pos.x
+		+ ((t_obj*)e->objs->content)->limit.x;
+	/*((t_obj*)e->objs->content)->limit.y = 1;
+	((t_obj*)e->objs->content)->limit_y_start = -50;
+	((t_obj*)e->objs->content)->limit_y_end = 50;
+	((t_obj*)e->objs->content)->limit.z = 1;	
+	((t_obj*)e->objs->content)->limit_z_start = -50;
+	((t_obj*)e->objs->content)->limit_z_end = 50;*/
 	if (((t_obj*)e->objs->content)->type == SPH)
 		new_length = sphere_inter(e, ray, temp);
 	if (((t_obj*)e->objs->content)->type == CYL)

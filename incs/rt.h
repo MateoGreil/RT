@@ -119,6 +119,13 @@ typedef struct		s_obj
 	t_color			color;
 	t_vec			rot;
 	t_vec			trans;
+	t_vec			limit;
+	double			limit_x_start;
+	double			limit_x_end;	
+	double			limit_y_start;
+	double			limit_y_end;
+	double			limit_z_start;
+	double			limit_z_end;
 	int				num_texture;
 	int				perturbation;
 	double			bump;
@@ -297,5 +304,8 @@ void				xml_set_type(xmlNodePtr cur, int type);
 void				xml_set_color(xmlNodePtr cur, t_color color);
 
 void				printf_obj(t_obj obj);
+
+
+double				limit_object(t_env *e, t_ray *ray, double length);
 
 #endif

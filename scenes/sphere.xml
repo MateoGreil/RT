@@ -27,7 +27,7 @@
 <rt>
 	<cam>
 		<position>
-			<x>-50</x>
+			<x>30</x>
 			<y>0</y>
 			<z>100</z>
 		</position>
@@ -41,7 +41,7 @@
 		<obj>
 			<type>sphere</type>
 			<position>
-				<x>0</x>
+				<x>30</x>
 				<y>-50</y>
 				<z>50</z>
 			</position>

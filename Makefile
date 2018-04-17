@@ -57,7 +57,8 @@ SRC_NAME =	main.c \
 			bump_mapping.c \
 			stereoscopy.c \
 			save_scene.c \
-			xml_set.c
+			xml_set.c \
+			limits.c
 
 OBJ_NAME = $(SRC_NAME:.c=.o)
 
