@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   key_hook3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/11 18:24:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/11 18:24:53 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/17 14:24:17 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int			button_exit(t_env *e)
 {
-	xmlFreeDoc(e->doc);
+	//xmlFreeDoc(e->doc);
 	e = NULL;
 	exit(0);
 }

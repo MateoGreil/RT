@@ -60,9 +60,7 @@
 				<g>130</g>
 				<b>130</b>
 			</color>
-			<rad>
-				30
-			</rad>
+			<rad>30</rad>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>

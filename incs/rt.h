@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/16 15:07:30 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:20:34 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -289,6 +289,7 @@ void				xml_get_objs(xmlNodePtr objs, t_env *e);
 void				xml_get_lights(xmlNodePtr lights, t_env *e);
 t_color				xml_get_color(xmlNodePtr cur, t_env *e);
 char				xml_get_type(xmlNodePtr cur, t_env *e);
+char				xml_get_type_lights(xmlNodePtr cur, t_env *e);
 t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
 
 void				save_scene(t_env *e);
