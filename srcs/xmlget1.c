@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/03/21 16:59:57 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:32:12 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ t_vec	xml_get_vec(xmlNodePtr cur, t_env *e)
 			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"x")))
 		{
-			vec.x = ft_atoi(str);
+			(str != NULL) ? (vec.x = ft_atoi(str)) : (vec.x = 0);
 		}
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"y")))
 		{
-			vec.y = ft_atoi(str);
+			(str != NULL) ? (vec.y = ft_atoi(str)) : (vec.y = 0);
 		}
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"z")))
 		{
-			vec.z = ft_atoi(str);
+			(str != NULL) ? (vec.z = ft_atoi(str)) : (vec.z = 0);
 		}
 		free(str);
 		cur = cur->next;
@@ -49,41 +49,35 @@ t_color	xml_get_color(xmlNodePtr cur, t_env *e)
 		str = (char*)xmlNodeListGetString(e->doc,
 			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"r")))
-			color.r = ft_atoi(str);
+			(str != NULL) ? (color.r = ft_atoi(str)) : (color.r = 0);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"g")))
-			color.g = ft_atoi(str);
+			(str != NULL) ? (color.g = ft_atoi(str)) : (color.g = 0);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"b")))
-			color.b = ft_atoi(str);
+			(str != NULL) ? (color.b = ft_atoi(str)) : (color.b = 0);
 		free(str);
 		cur = cur->next;
 	}
 	return (color);
 }
 
-char	xml_get_type_lights(char *str)
+char	xml_get_type_lights(xmlNodePtr cur, t_env *e)
 {
-	if (!ft_strcmp(str, "paraboloide"))
-	{
-		free(str);
-		return (PAR);
-	}
-	if (!ft_strcmp(str, "light"))
-	{
-		free(str);
-		return (LIG);
-	}
+	char	*str;
+
+	str = (char*)xmlNodeListGetString(e->doc,
+		cur, 1);
 	if (!ft_strcmp(str, "ambient"))
 	{
 		free(str);
 		return (LIA);
 	}
-	if (!ft_strcmp(str, "directional"))
+	if (!ft_strcmp(str, "directionnal"))
 	{
 		free(str);
 		return (LID);
 	}
 	free(str);
-	return (ERROR);
+	return (LIG);
 }
 
 char	xml_get_type(xmlNodePtr cur, t_env *e)
@@ -92,11 +86,8 @@ char	xml_get_type(xmlNodePtr cur, t_env *e)
 
 	str = (char*)xmlNodeListGetString(e->doc,
 		cur, 1);
-	if (!ft_strcmp(str, "sphere"))
-	{
-		free(str);
-		return (SPH);
-	}
+	if (str == NULL)
+		return (-1);
 	if (!ft_strcmp(str, "plan"))
 	{
 		free(str);
@@ -112,7 +103,8 @@ char	xml_get_type(xmlNodePtr cur, t_env *e)
 		free(str);
 		return (CON);
 	}
-	return (xml_get_type_lights(str));
+	free(str);
+	return (SPH);
 }
 
 void	xml_get_cam(xmlNodePtr cam, t_env *e)

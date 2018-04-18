@@ -18,7 +18,7 @@
 	refraction;
 	n_refr;
 - parametres de lights :
-	type (light, ambient, directional);
+	type (light, ambient, directionnal);
 	position (x, y, z);
 	direction (x, y, z);
 	color (r, g, b);

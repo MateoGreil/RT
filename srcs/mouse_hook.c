@@ -52,6 +52,7 @@ int				mouse_hook(int button, int x, int y, t_env *e)
 		}
 		e->cam.selection = ON;
 		e->cam.select_obj = ray.hit_obj;
+		print_object_type(e);
 	}
 	return (0);
 }

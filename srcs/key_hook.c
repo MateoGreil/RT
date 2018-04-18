@@ -83,6 +83,7 @@ int			key_hook(int keycode, t_env *e)
 	{
 		change_object(e, keycode);
 		draw(e, 0);
+		print_object_type(e);
 	}
 	else if (e->cam.selection == OFF)
 		change_view(e, keycode);

@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/13 16:35:21 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:21:00 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void		xml_get_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 	free(str);
 }
 
-static t_obj	xml_get_one_obj(xmlNodePtr cur, t_env *e)
+static t_obj	xml_get_one_obj(xmlNodePtr cur, t_env *e, int type)
 {
 	t_obj	obj;
 	char	*str;
@@ -44,8 +44,10 @@ static t_obj	xml_get_one_obj(xmlNodePtr cur, t_env *e)
 	{
 		str = (char*)xmlNodeListGetString(e->doc,
 			cur->xmlChildrenNode, 1);
-		if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")))
+		if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")) && type == 0)
 			obj.type = xml_get_type(cur->xmlChildrenNode, e);
+		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")) && type == 1)
+			obj.type = xml_get_type_lights(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			obj.pos = xml_get_vec(cur->xmlChildrenNode, e);
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rotation")))
@@ -65,7 +67,7 @@ static t_obj	xml_get_one_obj(xmlNodePtr cur, t_env *e)
 t_obj			init_obj(void)
 {
 	t_obj	obj;
-	
+
 	obj.pos.x = 0;
 	obj.pos.y = 0;
 	obj.pos.z = 0;
@@ -104,7 +106,7 @@ void			xml_get_objs(xmlNodePtr objs, t_env *e)
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"obj")))
 		{
 			obj = init_obj();
-			obj = xml_get_one_obj(cur->xmlChildrenNode, e);
+			obj = xml_get_one_obj(cur->xmlChildrenNode, e, 0);
 			obj.id = id;
 			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
@@ -127,7 +129,7 @@ void			xml_get_lights(xmlNodePtr lights, t_env *e)
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"light")))
 		{
 			light = init_obj();
-			light = xml_get_one_obj(cur->xmlChildrenNode, e);
+			light = xml_get_one_obj(cur->xmlChildrenNode, e, 1);
 			light.id = id;
 			ft_lstaddback(&e->lights, ft_lstnew(&light, sizeof(t_obj)));
 			id++;

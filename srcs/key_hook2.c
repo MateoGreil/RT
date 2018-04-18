@@ -106,6 +106,9 @@ void		change_object(t_env *e, int keycode)
 			|| keycode == KEY_F || keycode == KEY_R)
 		rotate_object(e, keycode);
 	else if (keycode == KEY_LCTRL)
+	{
+		mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 		e->cam.selection = OFF;
+	}
 	change_object_pt2(e, keycode);
 }
