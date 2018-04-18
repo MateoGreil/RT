@@ -110,6 +110,10 @@ int		check_inter_objects(t_env *e, t_ray *ray)
 	t_vec	temp;
 
 	temp = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
+	((t_obj*)e->objs->content)->limit.x = 25;
+	((t_obj*)e->objs->content)->limit_x_start = ((t_obj*)e->objs->content)->pos.x;
+	((t_obj*)e->objs->content)->limit_x_end = ((t_obj*)e->objs->content)->pos.x
+		+ ((t_obj*)e->objs->content)->limit.x;
 	if (((t_obj*)e->objs->content)->type == SPH)
 		new_length = sphere_inter(e, ray, temp);
 	if (((t_obj*)e->objs->content)->type == CYL)
