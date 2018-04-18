@@ -11,7 +11,44 @@
 /* ************************************************************************** */
 
 #include "rt.h"
+/*
+double	disk_inter(t_env *e, t_ray *ray)
+{
+	float	a;
+	float	b;
+	float	new_length;
 
+	a = ((t_obj*)e->objs->content)->dir.x *
+		(((t_obj*)e->objs->content)->pos.x - ray->pos.x)
+		+ ((t_obj*)e->objs->content)->dir.y *
+		(((t_obj*)e->objs->content)->pos.y - ray->pos.y)
+		+ ((t_obj*)e->objs->content)->dir.z *
+		(((t_obj*)e->objs->content)->pos.z - ray->pos.z);
+	b = ((t_obj*)e->objs->content)->dir.x * ray->dir.x
+		+ ((t_obj*)e->objs->content)->dir.y * ray->dir.y
+		+ ((t_obj*)e->objs->content)->dir.z * ray->dir.z;
+	if ((new_length = a / b) > ZERO)
+	{
+		new_length = limit_object(e, ray, new_length);
+		return (new_length);
+	}
+	else
+		return (INFINITE);
+}
+
+static int		check_disk_intersection(t_env *e, t_vec point)
+{
+	t_vec v;
+	double d2;
+
+	v = vector_substraction(point, ((t_obj*)e->objs->content)->pos);
+	d2 = vector_dot_product(v, v);
+	if (sqrtf(d2) < ((t_obj*)e->objs->content)->rad)
+		return (TRUE);
+	else
+		return (INFINITE);
+}
+*/
 static double   limit_x(t_env *e, double length, t_vec point)
 {
 	if (((t_obj*)e->objs->content)->limit.x != 0)

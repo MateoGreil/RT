@@ -116,8 +116,8 @@ int		check_inter_objects(t_env *e, t_ray *ray)
 	((t_obj*)e->objs->content)->limit_x_end = ((t_obj*)e->objs->content)->pos.x
 		+ ((t_obj*)e->objs->content)->limit.x;
 	//if (pos == simple)
-	((t_obj*)e->objs->content)->limit_x_start = -150;
-	((t_obj*)e->objs->content)->limit_x_end = 150;
+	//((t_obj*)e->objs->content)->limit_x_start = -150;
+	//((t_obj*)e->objs->content)->limit_x_end = 150;
 	/*((t_obj*)e->objs->content)->limit.y = 1;
 	((t_obj*)e->objs->content)->limit_y_start = -50;
 	((t_obj*)e->objs->content)->limit_y_end = 50;
