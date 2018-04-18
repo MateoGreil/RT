@@ -294,6 +294,7 @@ void				parse_file(t_env *e, char *docname);
 void				xml_get_cam(xmlNodePtr cam, t_env *e);
 void				xml_get_objs(xmlNodePtr objs, t_env *e);
 void				xml_get_lights(xmlNodePtr lights, t_env *e);
+char				xml_get_type_lights(xmlNodePtr cur, t_env *e);
 t_color				xml_get_color(xmlNodePtr cur, t_env *e);
 char				xml_get_type(xmlNodePtr cur, t_env *e);
 t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
