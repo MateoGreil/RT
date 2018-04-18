@@ -17,13 +17,13 @@ void		print_object_type(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
-	if (e->cam.select_obj->type == 0)
+	if (e->cam.selection == ON && e->cam.select_obj->type == 0)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Sphere");
-	else if (e->cam.select_obj->type == 1)
+	else if (e->cam.selection == ON && e->cam.select_obj->type == 1)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Plan");
-	else if (e->cam.select_obj->type == 2)
+	else if (e->cam.selection == ON && e->cam.select_obj->type == 2)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Cylindre");
-	else if (e->cam.select_obj->type == 3)
+	else if (e->cam.selection == ON && e->cam.select_obj->type == 3)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Cone");
 }
 
