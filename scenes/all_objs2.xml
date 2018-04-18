@@ -16,7 +16,7 @@
 	refraction;
 	n_refr;
 - parametres de lights :
-	type (light, ambient, directional)
+	type (light, ambient, directionnal)
 	position (x, y, z);
 	direction (x, y, z);
 	color (r, g, b);
@@ -25,14 +25,14 @@
 <rt>
 	<cam>
 		<position>
-			<x>0</x>
-			<y>0</y>
-			<z>150</z>
+			<x>220</x>
+			<y>50</y>
+			<z>70</z>
 		</position>
 		<direction>
 			<x>0</x>
 			<y>0</y>
-			<z>0</z>
+			<z>-80</z>
 		</direction>
 	</cam>
 	<objs>

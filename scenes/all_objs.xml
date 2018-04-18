@@ -1,4 +1,4 @@
-<?xml version="1.0" standalone='yes'?>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <!--
 - TOUTES LES VARIABLES NON INITIALISÉS ICI, LE SERONT DANS LE PROGRAMME A LA
 	VALEUR 0.
@@ -16,7 +16,7 @@
 	refraction;
 	n_refr;
 - parametres de lights :
-	type (light, ambient, directional)
+	type (light, ambient, directionnal)
 	position (x, y, z);
 	direction (x, y, z);
 	color (r, g, b);
@@ -41,7 +41,7 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>-80</z>
+				<z>-95</z>
 			</position>
 			<rotation>
 				<x>90</x>
@@ -66,11 +66,11 @@
 			<type>plan</type>
 			<position>
 				<x>0</x>
-				<y>0</y>
+				<y>-75</y>
 				<z>0</z>
 			</position>
 			<rotation>
-				<x>0</x>
+				<x>-19</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -91,14 +91,14 @@
 		<obj>
 			<type>cylindre</type>
 			<position>
-				<x>0</x>
+				<x>-60</x>
 				<y>0</y>
 				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
 				<y>0</y>
-				<z>0</z>
+				<z>-40</z>
 			</rotation>
 			<translation>
 				<x>0</x>
@@ -118,21 +118,21 @@
 		<obj>
 			<type>cone</type>
 			<position>
-				<x>0</x>
-				<y>0</y>
+				<x>75</x>
+				<y>-30</y>
 				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
 				<y>0</y>
-				<z>0</z>
+				<z>40</z>
 			</rotation>
 			<translation>
 				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</translation>
-			<rad>40</rad>
+			<rad>38</rad>
 			<color>
 				<r>255</r>
 				<g>255</g>
@@ -145,8 +145,8 @@
 		<obj>
 			<type>sphere</type>
 			<position>
-				<x>0</x>
-				<y>0</y>
+				<x>-15</x>
+				<y>-45</y>
 				<z>0</z>
 			</position>
 			<rotation>
@@ -172,18 +172,23 @@
 	</objs>
 	<lights>
 		<light>
-			<type>light</type>
+			<type>directionnal</type>
 			<position>
-				<x>150</x>
+				<x></x>
 				<y>0</y>
 				<z>80</z>
 			</position>
+			<direction>
+				<x>0</x>
+				<y>0</y>
+				<z>80</z>
+			</direction>
 			<rotation>
 				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<intensity>70</intensity>
+			<intensity>90</intensity>
 			<color>
 				<r>255</r>
 				<g>255</g>

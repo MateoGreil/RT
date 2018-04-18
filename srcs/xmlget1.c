@@ -71,7 +71,7 @@ char	xml_get_type_lights(xmlNodePtr cur, t_env *e)
 		free(str);
 		return (LIA);
 	}
-	if (!ft_strcmp(str, "directional"))
+	if (!ft_strcmp(str, "directionnal"))
 	{
 		free(str);
 		return (LID);
