@@ -73,6 +73,7 @@ void		print_keys(void)
 	ft_putstr("By left clicking on the window you enter camera mode :\n");
 	ft_putstr("   W/A/S/D = rotate camera\n");
 	ft_putstr("   right pad = move camera\n");
+	ft_putstr("   J/L = down/up camera\n");
 	ft_putstr("   Space = screenshot\n");
 	ft_putstr("   P = dé/pixelliser la scène\n");
 	ft_putstr("   Z = sepia filter\n");

@@ -18,21 +18,25 @@ static void	translate_camxy(t_cam *cam, int keycode)
 
 	dir = vector_normalize(cam->dir);
 	if (keycode == KEYPAD_UP)
-		cam->pos.z += MOVE_SPEED;
-	else if (keycode == KEYPAD_DOWN)
 		cam->pos.z -= MOVE_SPEED;
+	else if (keycode == KEYPAD_DOWN)
+		cam->pos.z += MOVE_SPEED;
 	else if (keycode == KEYPAD_RIGHT)
-		cam->pos.x -= MOVE_SPEED;
-	else
 		cam->pos.x += MOVE_SPEED;
+	else if (keycode == KEYPAD_LEFT)
+		cam->pos.x -= MOVE_SPEED;
+	else if (keycode == KEY_J)
+		cam->pos.y -= MOVE_SPEED;
+	else if (keycode == KEY_L)
+		cam->pos.y += MOVE_SPEED;
 }
 
 static void	rotate_cam(t_cam *cam, int keycode)
 {
 	if (keycode == KEY_W)
-		x_rotation(cam, ft_deg2rad(-20));
-	else if (keycode == KEY_S)
 		x_rotation(cam, ft_deg2rad(20));
+	else if (keycode == KEY_S)
+		x_rotation(cam, ft_deg2rad(-20));
 	else if (keycode == KEY_A)
 		y_rotation(cam, ft_deg2rad(-20));
 	else if (keycode == KEY_D)
@@ -46,7 +50,8 @@ void		change_pos_cam(t_env *e, int keycode)
 		keycode == KEY_W || keycode == KEY_S)
 		rotate_cam(&e->cam, keycode);
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
-			keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT)
+			keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT ||
+			keycode == KEY_J || keycode == KEY_L)
 		translate_camxy(&e->cam, keycode);
 	world_to_cam_matrix(e);
 	draw(e, 0);
@@ -57,7 +62,7 @@ static void	change_view(t_env *e, int keycode)
 	if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
 		keycode == KEY_S || keycode == KEYPAD_UP ||
 		keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
-		keycode == KEYPAD_RIGHT)
+		keycode == KEYPAD_RIGHT || keycode == KEY_J || keycode == KEY_L)
 		change_pos_cam(e, keycode);
 	else if (keycode == KEY_P)
 	{
