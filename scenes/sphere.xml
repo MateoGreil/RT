@@ -42,7 +42,7 @@
 			<type>sphere</type>
 			<position>
 				<x>30</x>
-				<y>-50</y>
+				<y>0</y>
 				<z>50</z>
 			</position>
 			<color>
@@ -51,7 +51,6 @@
 				<b>0</b>
 			</color>
 			<rad>25</rad>
-			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>

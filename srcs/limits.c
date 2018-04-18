@@ -71,10 +71,7 @@ static double   limit_x(t_env *e, double length, t_vec point)
 	{
 		if (point.x > ((t_obj*)e->objs->content)->limit_x_start
 				&& point.x < ((t_obj*)e->objs->content)->limit_x_end)
-			{
-				printf("%f\n", length);
 			return (length);
-			}
 		else
 			return (INFINITE);
 	}

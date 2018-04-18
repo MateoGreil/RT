@@ -56,7 +56,7 @@ double	cylindre_inter(t_env *e, t_ray *ray, t_vec temp)
 		pow(((t_obj*)e->objs->content)->rad, 2);
 	if ((new_length = equation_second(a, b)) == -1)
 		return (ray->length);
-//	new_length = limit_object(e, ray, new_length);
+	new_length = limit_object(e, ray, new_length);
 	return (new_length);
 }
 
@@ -109,11 +109,10 @@ int		check_inter_objects(t_env *e, t_ray *ray)
 	double	new_length;
 	t_vec	temp;
 
-	temp = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	((t_obj*)e->objs->content)->limit.x = 25;
-	((t_obj*)e->objs->content)->limit_x_start = ((t_obj*)e->objs->content)->pos.x;
-	((t_obj*)e->objs->content)->limit_x_end = ((t_obj*)e->objs->content)->pos.x
-		+ ((t_obj*)e->objs->content)->limit.x;
+	((t_obj*)e->objs->content)->limit_x_start = -150;
+	((t_obj*)e->objs->content)->limit_x_end = 150;
+	temp = vector_substraction(ray->pos, ((t_obj*)e->objs->content)->pos);
 	if (((t_obj*)e->objs->content)->type == SPH)
 		new_length = sphere_inter(e, ray, temp);
 	if (((t_obj*)e->objs->content)->type == CYL)
