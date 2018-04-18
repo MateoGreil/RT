@@ -264,6 +264,7 @@ void				antialiasing(t_env *e, t_vec compteur,
 void				stereoscopy(t_env *e);
 void				save_scene(t_env *e);
 void				print_keys(void);
+void				print_object_type(t_env *e);
 
 void				init_loading(t_env *e);
 int					mouse_hook(int button, int x, int y, t_env *e);
