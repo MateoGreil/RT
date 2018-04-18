@@ -54,21 +54,24 @@ void		change_pos_cam(t_env *e, int keycode)
 
 static void	change_view(t_env *e, int keycode)
 {
-	if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
-		keycode == KEY_S || keycode == KEYPAD_UP ||
-		keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
-		keycode == KEYPAD_RIGHT)
-		change_pos_cam(e, keycode);
-	else if (keycode == KEY_P)
+	if (e->cam.selection == OFF)
 	{
-		if (e->cam.density == 1)
-			e->cam.density += 4;
-		else if (e->cam.density != 1)
-			e->cam.density = 1;
-		draw(e, 0);
-	}
-	else
-		change_filter(keycode, e);
+		if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
+			keycode == KEY_S || keycode == KEYPAD_UP ||
+			keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
+			keycode == KEYPAD_RIGHT)
+			change_pos_cam(e, keycode);
+		else if (keycode == KEY_P)
+		{
+			if (e->cam.density == 1)
+				e->cam.density += 4;
+			else if (e->cam.density != 1)
+				e->cam.density = 1;
+			draw(e, 0);
+		}
+		else
+			change_filter(keycode, e);
+		}
 }
 
 int			key_hook(int keycode, t_env *e)
