@@ -309,5 +309,6 @@ void				printf_obj(t_obj obj);
 
 
 double				limit_object(t_env *e, t_ray *ray, double length);
+void				create_disk(t_env *e);
 
 #endif

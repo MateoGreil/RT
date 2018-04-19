@@ -25,6 +25,7 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 	tmp = e->objs;
 	while (e->objs != NULL)
 	{
+		create_disk(e);
 		check_inter_objects(e, &ray);
 		e->objs = e->objs->next;
 	}

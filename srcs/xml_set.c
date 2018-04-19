@@ -42,8 +42,6 @@ void	xml_set_type(xmlNodePtr cur, int type)
 		xmlNodeSetContent(cur, (const xmlChar*)"cylindre");
 	if (type == CON)
 		xmlNodeSetContent(cur, (const xmlChar*)"cone");
-	if (type == PAR)
-		xmlNodeSetContent(cur, (const xmlChar*)"paraboloide");
 }
 
 void	xml_set_color(xmlNodePtr cur, t_color color)

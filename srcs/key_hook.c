@@ -18,13 +18,13 @@ static void	translate_camxy(t_cam *cam, int keycode)
 
 	dir = vector_normalize(cam->dir);
 	if (keycode == KEYPAD_UP)
-		cam->pos.z += MOVE_SPEED;
-	else if (keycode == KEYPAD_DOWN)
 		cam->pos.z -= MOVE_SPEED;
+	else if (keycode == KEYPAD_DOWN)
+		cam->pos.z += MOVE_SPEED;
 	else if (keycode == KEYPAD_RIGHT)
-		cam->pos.x -= MOVE_SPEED;
-	else
 		cam->pos.x += MOVE_SPEED;
+	else
+		cam->pos.x -= MOVE_SPEED;
 }
 
 static void	rotate_cam(t_cam *cam, int keycode)

@@ -27,30 +27,47 @@
 <rt>
 	<cam>
 		<position>
-			<x>30</x>
-			<y>0</y>
-			<z>100</z>
-		</position>
-		<direction>
 			<x>0</x>
 			<y>0</y>
 			<z>0</z>
+		</position>
+		<direction>
+			<x>50</x>
+			<y>0</y>
+			<z>100</z>
 		</direction>
 	</cam>
 	<objs>
 		<obj>
 			<type>sphere</type>
 			<position>
-				<x>30</x>
+				<x>50</x>
 				<y>0</y>
-				<z>50</z>
+				<z>100</z>
 			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<translation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</translation>
+			<rad>50</rad>
 			<color>
-				<r>255</r>
-				<g>255</g>
-				<b>0</b>
+				<r>250</r>
+				<g>0</g>
+				<b>100</b>
 			</color>
-			<rad>25</rad>
+			<limit>
+				<x>1</x>
+				<y>0</y>
+				<z>0</z>
+			</limit>
+			<limit_x_start>50</limit_x_start>
+			<limit_x_end>100</limit_x_end>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -62,14 +79,14 @@
 			<position>
 				<x>0</x>
 				<y>0</y>
-				<z>100</z>
+				<z>0</z>
 			</position>
 			<rotation>
 				<x>0</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<intensity>70</intensity>
+			<intensity>100</intensity>
 			<color>
 				<r>255</r>
 				<g>255</g>

@@ -31,7 +31,13 @@ static void		xml_get_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
 		obj->refr = ft_atof(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"n_refr")))
-		obj->n_refr = ft_atof(str);
+		obj->n_refr = ft_atof(str);	
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"limit_x_start")))
+		obj->limit_x_start = ft_atof(str);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"limit_x_end")))
+		obj->limit_x_end = ft_atof(str);
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"limit")))
+		obj->limit = xml_get_vec(cur->xmlChildrenNode, e);
 	free(str);
 }
 
@@ -90,6 +96,15 @@ t_obj			init_obj(void)
 	obj.refl = 0;
 	obj.refr = 0;
 	obj.n_refr = 0;
+	obj.limit.x = 0;
+	obj.limit.y = 0;
+	obj.limit.z = 0;
+	obj.limit_x_start = 0;
+	obj.limit_x_end = 0;
+	obj.limit_y_start = 0;
+	obj.limit_y_end = 0;
+	obj.limit_z_start = 0;
+	obj.limit_z_end = 0;
 	return (obj);
 }
 
