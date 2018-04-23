@@ -25,35 +25,37 @@ static void	translate_camxy(t_cam *cam, int keycode)
 		cam->pos.x += MOVE_SPEED;
 	else if (keycode == KEYPAD_LEFT)
 		cam->pos.x -= MOVE_SPEED;
-	else if (keycode == KEY_J)
+	else if (keycode == KEY_F)
 		cam->pos.y -= MOVE_SPEED;
-	else if (keycode == KEY_L)
+	else if (keycode == KEY_R)
 		cam->pos.y += MOVE_SPEED;
 }
 
-static void	rotate_cam(t_cam *cam, int keycode)
+static void	rotate_cam(t_env *e, int keycode)
 {
 	if (keycode == KEY_W)
-		x_rotation(cam, ft_deg2rad(20));
+		e->cam.rotx -= 20;
 	else if (keycode == KEY_S)
-		x_rotation(cam, ft_deg2rad(-20));
+		e->cam.rotx += 20;
 	else if (keycode == KEY_A)
-		y_rotation(cam, ft_deg2rad(-20));
+		e->cam.roty -= 20;
 	else if (keycode == KEY_D)
-		y_rotation(cam, ft_deg2rad(20));
+		e->cam.roty += 20;
+	if (e->cam.rotx >= 360 || e->cam.rotx <= -360)
+		e->cam.rotx = 0;
+	if (e->cam.roty >= 360 || e->cam.roty <= -360)
+		e->cam.roty = 0;
 }
 
 void		change_pos_cam(t_env *e, int keycode)
 {
-	cam_to_world_matrix(e);
 	if (keycode == KEY_D || keycode == KEY_A ||
 		keycode == KEY_W || keycode == KEY_S)
-		rotate_cam(&e->cam, keycode);
+		rotate_cam(e, keycode);
 	else if (keycode == KEYPAD_UP || keycode == KEYPAD_DOWN ||
 			keycode == KEYPAD_LEFT || keycode == KEYPAD_RIGHT ||
-			keycode == KEY_J || keycode == KEY_L)
+			keycode == KEY_F || keycode == KEY_R)
 		translate_camxy(&e->cam, keycode);
-	world_to_cam_matrix(e);
 	draw(e, 0);
 }
 
@@ -64,7 +66,7 @@ static void	change_view(t_env *e, int keycode)
 		if (keycode == KEY_D || keycode == KEY_A || keycode == KEY_W ||
 			keycode == KEY_S || keycode == KEYPAD_UP ||
 			keycode == KEYPAD_DOWN || keycode == KEYPAD_LEFT ||
-			keycode == KEYPAD_RIGHT || keycode == KEY_J || keycode == KEY_L)
+			keycode == KEYPAD_RIGHT || keycode == KEY_R || keycode == KEY_F)
 			change_pos_cam(e, keycode);
 		else if (keycode == KEY_P)
 		{
