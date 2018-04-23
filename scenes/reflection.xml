@@ -73,7 +73,7 @@
 				<b>0</b>
 			</color>
 			<rad>25</rad>
-			<reflection>0.1</reflection>
+			<reflection>1</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
 		</obj>
