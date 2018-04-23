@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-t_vec		ray_refr_dir(t_vec normal, t_vec ray_dir, double n_refr)
+t_vec			ray_refr_dir(t_vec normal, t_vec ray_dir, double n_refr)
 {
 	double	cosi;
 	double	indice;
@@ -33,7 +33,7 @@ t_vec		ray_refr_dir(t_vec normal, t_vec ray_dir, double n_refr)
 		* (1 - cosi * cosi)))));
 }
 
-static void	init_ray(t_ray *to_init, t_ray ray)
+static void		init_ray(t_ray *to_init, t_ray ray)
 {
 	to_init->length = INFINITE;
 	to_init->hit_obj = NULL;
@@ -54,7 +54,7 @@ static t_color	color_ray(t_env *e, t_ray ray, t_ray new_ray)
 	return (new_ray.color);
 }
 
-void		ray_refr(t_env *e, t_ray *ray, int nb_rebond)
+void			ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 {
 	t_list	*tmp;
 	t_ray	new_ray;
@@ -70,7 +70,8 @@ void		ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 	e->objs = tmp;
 	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0 && nb_rebond < NB_MIRROR)
 		ray_refr(e, &new_ray, nb_rebond + 1);
-	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRROR)
+	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0
+		&& nb_rebond < NB_MIRROR)
 		ray_refl(e, &new_ray, nb_rebond + 1);
 	new_ray.color = color_ray(e, *ray, new_ray);
 	*ray = new_ray;

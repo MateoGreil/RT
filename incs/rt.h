@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/23 11:38:40 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 15:58:52 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -252,7 +252,6 @@ t_vec				ft_rotation_x(t_vec ex_pos, double angle);
 t_vec				ft_rotation_y(t_vec ex_pos, double angle);
 t_vec				ft_rotation_z(t_vec ex_pos, double angle);
 
-
 /*
 ** GESTION LUMIERES ET REFLETS
 */
@@ -298,9 +297,9 @@ t_color				damier_color(t_vec hit_point, t_color color);
 ** GESTION PERLIN ET TEXTURES
 */
 t_color				tex_or_not(t_env *e, t_color color, t_ray ray);
-void 				marble_texture(t_vec hit_point, t_color *color);
+void				marble_texture(t_vec hit_point, t_color *color);
 void				grain_texture(t_vec hit_point, t_color *color);
-t_color 			perlin_color(t_vec hit_point);
+t_color				perlin_color(t_vec hit_point);
 double				noise(double x, double y, double z);
 double				lerp(double t, double a, double b);
 double				fade(double t);
@@ -324,7 +323,5 @@ t_vec				xml_get_vec(xmlNodePtr cur, t_env *e);
 void				xml_set_vec(xmlNodePtr cur, t_vec vec);
 void				xml_set_type(xmlNodePtr cur, int type);
 void				xml_set_color(xmlNodePtr cur, t_color color);
-
-void				printf_obj(t_obj obj); //<- A SUPPRIMER
 
 #endif

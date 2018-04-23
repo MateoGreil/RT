@@ -28,7 +28,7 @@ t_vec		ray_dir_cal(t_env *e, double x, double y, int s)
 		vector_double_product(e->cam.forward, e->cam.dist));
 	dir = x_rotation(dir, e->cam.rotx);
 	dir = y_rotation(dir, e->cam.roty);
-	dir = vector_normalize(dir);	
+	dir = vector_normalize(dir);
 	return (dir);
 }
 

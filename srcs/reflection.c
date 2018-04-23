@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-t_vec		get_reflection(t_vec ray_dir, t_vec normal)
+t_vec			get_reflection(t_vec ray_dir, t_vec normal)
 {
 	t_vec	reflection;
 
@@ -23,7 +23,7 @@ t_vec		get_reflection(t_vec ray_dir, t_vec normal)
 	return (reflection);
 }
 
-static void	init_ray(t_ray *to_init, t_ray ray)
+static void		init_ray(t_ray *to_init, t_ray ray)
 {
 	to_init->length = INFINITE;
 	to_init->hit_obj = NULL;
@@ -42,7 +42,7 @@ static t_color	color_ray(t_ray ray, t_ray new_ray)
 	return (new_ray.color);
 }
 
-void		ray_refl(t_env *e, t_ray *ray, int nb_rebond)
+void			ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 {
 	t_list	*tmp;
 	t_ray	new_ray;
@@ -59,7 +59,8 @@ void		ray_refl(t_env *e, t_ray *ray, int nb_rebond)
 	new_ray.color = color_ray(*ray, new_ray);
 	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0 && nb_rebond < NB_MIRROR)
 		ray_refr(e, &new_ray, nb_rebond + 1);
-	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRROR)
+	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0
+		&& nb_rebond < NB_MIRROR)
 		ray_refl(e, &new_ray, nb_rebond + 1);
 	else if (new_ray.hit_obj && new_ray.hit_obj->refl > 0)
 		new_ray.hit_obj = NULL;
