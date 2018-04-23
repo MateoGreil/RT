@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 11:28:28 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/23 12:11:06 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 14:11:05 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ static void	init_ray(t_ray *to_init, t_ray ray)
 		ray.hit_obj->n_refr);
 }
 
+static t_color	color_ray(t_env *e, t_ray ray, t_ray new_ray)
+{
+	ray.color = light_calc(e, ray);
+	if (new_ray.hit_obj)
+		new_ray.color = color_balanced(ray.color, new_ray.hit_obj->color,
+			1 - ray.hit_obj->refr, ray.hit_obj->refr);
+	else
+		new_ray.color = color_balanced(ray.color, BLACK,
+			1 - ray.hit_obj->refr, ray.hit_obj->refr);
+	return (new_ray.color);
+}
+
 void		ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 {
 	t_list	*tmp;
@@ -56,12 +68,7 @@ void		ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	if (new_ray.hit_obj)
-		new_ray.color = color_balanced(ray->color, new_ray.hit_obj->color,
-			1 - ray->hit_obj->refr, ray->hit_obj->refr);
-	else
-		new_ray.color = color_balanced(ray->color, BLACK,
-			1 - ray->hit_obj->refr, ray->hit_obj->refr);
+	new_ray.color = color_ray(e, *ray, new_ray);
 	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0 && nb_rebond < NB_MIRROR)
 		ray_refr(e, &new_ray, nb_rebond + 1);
 	if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRROR)
