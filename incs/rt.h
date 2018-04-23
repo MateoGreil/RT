@@ -177,6 +177,8 @@ typedef struct		s_cam
 	t_obj			*prev_ray_obj;
 	t_point			samp;
 	double			cam_to_world[3][3];
+	int				rotx;
+	int				roty;
 }					t_cam;
 
 typedef struct		s_env
@@ -217,9 +219,9 @@ void				cam_to_world_matrix(t_env *e);
 void				world_to_cam_matrix(t_env *e);
 double				hammersley(int j);
 t_vec				ray_dir_cal(t_env *e, double i, double j, int s);
-void				x_rotation(t_cam *cam, double a);
-void				y_rotation(t_cam *cam, double a);
-void				z_rotation(t_cam *cam, double a);
+t_vec				x_rotation(t_vec vec, double a);
+t_vec				y_rotation(t_vec vec, double a);
+t_vec				z_rotation(t_vec vec, double a);
 
 /*
 ** GESTION COULEUR
