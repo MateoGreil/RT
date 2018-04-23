@@ -27,12 +27,12 @@
 <rt>
 	<cam>
 		<position>
-			<x>-40</x>
+			<x>-50</x>
 			<y>0</y>
 			<z>100</z>
 		</position>
 		<direction>
-			<x>10</x>
+			<x>0</x>
 			<y>0</y>
 			<z>0</z>
 		</direction>
@@ -115,15 +115,16 @@
 				<b>250</b>
 			</color>
 			<rad>10</rad>
+			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
 		</obj>
 		<obj>
-			<type>plan</type>
+			<type>sphere</type>
 			<position>
-				<x>15</x>
-				<y>-75</y>
+				<x>-30</x>
+				<y>0</y>
 				<z>70</z>
 			</position>
 			<color>
@@ -133,8 +134,8 @@
 			</color>
 			<rad>10</rad>
 			<reflection>0</reflection>
-			<refraction>0.5</refraction>
-			<n_refr>1.000293</n_refr>
+			<refraction>0.9</refraction>
+			<n_refr>1</n_refr>
 		</obj>
 		<obj>
 			<type>sphere</type>
@@ -149,6 +150,7 @@
 				<b>0</b>
 			</color>
 			<rad>25</rad>
+			<bump>0.68</bump>
 			<reflection>0</reflection>
 			<refraction>0</refraction>
 			<n_refr>0</n_refr>
@@ -159,7 +161,7 @@
 			<type>light</type>
 			<position>
 				<x>0</x>
-				<y>20</y>
+				<y>0</y>
 				<z>100</z>
 			</position>
 			<rotation>
@@ -167,7 +169,26 @@
 				<y>0</y>
 				<z>0</z>
 			</rotation>
-			<intensity>100</intensity>
+			<intensity>70</intensity>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</light>
+		<light>
+			<type>light</type>
+			<position>
+				<x>-50</x>
+				<y>-60</y>
+				<z>100</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<intensity>70</intensity>
 			<color>
 				<r>255</r>
 				<g>255</g>

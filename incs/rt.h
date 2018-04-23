@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/17 14:31:30 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 11:38:40 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,7 +107,7 @@
 # define BLACK (t_color){0, 0, 0}
 # define WHITE (t_color){255, 255, 255}
 
-# define N_AIR 1.000293
+# define N_AIR 1
 
 typedef struct		s_obj
 {
