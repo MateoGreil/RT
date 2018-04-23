@@ -17,7 +17,8 @@ int				load_texture_img(t_env *e)
 	int a;
 	int	b;
 
-	if ((e->texture = (t_img*)malloc(sizeof(t_img) * (NB_TEXTURES + 1))) == NULL)
+	if ((e->texture = (t_img*)malloc(sizeof(t_img)
+		* (NB_TEXTURES + 1))) == NULL)
 		return (FALSE);
 	a = 64;
 	b = 64;

@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-void	cam_to_xml(t_cam cam, xmlNodePtr cur)
+void		cam_to_xml(t_cam cam, xmlNodePtr cur)
 {
 	while (cur)
 	{
@@ -26,9 +26,8 @@ void	cam_to_xml(t_cam cam, xmlNodePtr cur)
 	}
 }
 
-static void		objs_to_xml_pt2(xmlNodePtr cur, t_list *obj)
+static void	objs_to_xml_pt2(xmlNodePtr cur, t_list *obj)
 {
-
 	if ((!xmlStrcmp(cur->name, (const xmlChar *)"direction")))
 	{
 		xml_set_vec(cur->xmlChildrenNode, ((t_obj*)obj->content)->dir);
@@ -45,7 +44,7 @@ static void		objs_to_xml_pt2(xmlNodePtr cur, t_list *obj)
 		xml_set_type(cur->xmlChildrenNode, ((t_obj*)obj->content)->n_refr);*/
 }
 
-void	objs_to_xml(t_list *objs, xmlNodePtr objs_xml)
+void		objs_to_xml(t_list *objs, xmlNodePtr objs_xml)
 {
 	t_list		*obj;
 	xmlNodePtr	cur;
@@ -58,7 +57,8 @@ void	objs_to_xml(t_list *objs, xmlNodePtr objs_xml)
 		{
 			if ((!xmlStrcmp(cur->name, (const xmlChar *)"type")))
 			{
-					xml_set_type(cur->xmlChildrenNode, ((t_obj*)obj->content)->type);
+				xml_set_type(cur->xmlChildrenNode,
+					((t_obj*)obj->content)->type);
 			}
 			else if ((!xmlStrcmp(cur->name, (const xmlChar *)"position")))
 			{
@@ -75,7 +75,8 @@ void	objs_to_xml(t_list *objs, xmlNodePtr objs_xml)
 			else if ((!xmlStrcmp(cur->name, (const xmlChar *)"rad")) ||
 			(!xmlStrcmp(cur->name, (const xmlChar *)"intensity")))
 			{
-				xmlNodeSetContent(cur, (xmlChar*)ft_itoa(((t_obj*)obj->content)->rad));
+				xmlNodeSetContent(cur,
+					(xmlChar*)ft_itoa(((t_obj*)obj->content)->rad));
 			}
 			objs_to_xml_pt2(cur, obj);
 			cur = cur->next;
@@ -86,7 +87,7 @@ void	objs_to_xml(t_list *objs, xmlNodePtr objs_xml)
 	}
 }
 
-void	struct_to_xml(t_env *e)
+void		struct_to_xml(t_env *e)
 {
 	xmlNodePtr	root;
 	xmlNodePtr	cur;
@@ -107,7 +108,7 @@ void	struct_to_xml(t_env *e)
 	}
 }
 
-void	save_scene(t_env *e)
+void		save_scene(t_env *e)
 {
 	char	*file_name;
 	char	*file_path;

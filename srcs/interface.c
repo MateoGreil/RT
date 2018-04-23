@@ -12,7 +12,6 @@
 
 #include "rt.h"
 
-
 void		print_object_type(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);

@@ -76,7 +76,7 @@ static void	change_view(t_env *e, int keycode)
 		}
 		else
 			change_filter(keycode, e);
-		}
+	}
 }
 
 int			key_hook(int keycode, t_env *e)
