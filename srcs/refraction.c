@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/10 11:28:28 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/23 14:11:05 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 14:42:58 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,10 @@ void		ray_refr(t_env *e, t_ray *ray, int nb_rebond)
 		e->objs = e->objs->next;
 	}
 	e->objs = tmp;
-	new_ray.color = color_ray(e, *ray, new_ray);
 	if (new_ray.hit_obj && new_ray.hit_obj->refr > 0 && nb_rebond < NB_MIRROR)
 		ray_refr(e, &new_ray, nb_rebond + 1);
 	if (new_ray.hit_obj && new_ray.hit_obj->refl > 0 && nb_rebond < NB_MIRROR)
 		ray_refl(e, &new_ray, nb_rebond + 1);
+		new_ray.color = color_ray(e, *ray, new_ray);
 	*ray = new_ray;
 }
