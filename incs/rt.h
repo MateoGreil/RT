@@ -99,7 +99,7 @@
 # define TRUE 1
 # define FALSE 0
 
-# define NB_MIRRORING 20
+# define NB_MIRROR 20
 # define NB_THREADS 8
 # define NB_SAMPLES 1
 # define NB_TEXTURES 5
