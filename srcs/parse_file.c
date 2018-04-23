@@ -52,7 +52,7 @@ void		parse_file(t_env *e, char *docname)
 	e->doc = xmlParseFile(docname);
 	if (e->doc == NULL)
 	{
-		ft_putstr("Ce fichier est introuvable ou vide.\n");
+		ft_putstr("Ce fichier n'est pas valide.\n");
 		exit(0);
 	}
 	root = xmlDocGetRootElement(e->doc);
