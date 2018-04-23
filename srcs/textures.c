@@ -45,8 +45,8 @@ static t_color	change_pixel_data(t_img *texture, int x, int y)
 	pixel_size = texture->bpp / 8;
 	pixel_pos = texture->data + y * texture->size_line + x * pixel_size;
 	color.r = pixel_pos[pixel_size - 2];
-	color.g = pixel_pos[pixel_size - 3];
-	color.b = pixel_pos[pixel_size - 4];
+	color.g = pixel_pos[pixel_size - 4];
+	color.b = pixel_pos[pixel_size - 6];
 	if (color.r < 0)
 		color.r *= -1;
 	if (color.g < 0)
