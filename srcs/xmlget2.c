@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/17 14:21:00 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 11:36:16 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,14 +24,18 @@ static void		xml_get_one_obj_pt2(xmlNodePtr cur, t_env *e, t_obj *obj)
 		obj->color = xml_get_color(cur->xmlChildrenNode, e);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"texture")))
 		obj->num_texture = ft_atoi(str);
-	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"bump")))
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"bump"))) {
+		printf("bump = %f\n", ft_atof(str));
 		obj->bump = ft_atof(str);
+	}
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"reflection")))
 		obj->refl = ft_atof(str);
 	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"refraction")))
 		obj->refr = ft_atof(str);
-	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"n_refr")))
+	else if ((!xmlStrcmp(cur->name, (const xmlChar *)"n_refr"))) {
+		printf("n_refr = %f\n", ft_atof(str));
 		obj->n_refr = ft_atof(str);
+	}
 	free(str);
 }
 
