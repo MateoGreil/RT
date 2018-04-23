@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/23 11:13:26 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 11:14:42 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	xml_get_type_lights(xmlNodePtr cur, t_env *e)
 		free(str);
 		return (LIA);
 	}
-	if (!ft_strcmp(str, "directional"))
+	if (!ft_strcmp(str, "directionnal"))
 	{
 		free(str);
 		return (LID);

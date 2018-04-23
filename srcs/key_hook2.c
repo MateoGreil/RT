@@ -110,5 +110,13 @@ void		change_object(t_env *e, int keycode)
 		mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
 		e->cam.selection = OFF;
 	}
+	if (keycode == KEY_P)
+	{
+		if (e->cam.density == 1)
+			e->cam.density += 4;
+		else if (e->cam.density != 1)
+			e->cam.density = 1;
+		draw(e, 0);
+	}
 	change_object_pt2(e, keycode);
 }

@@ -12,18 +12,17 @@
 
 #include "rt.h"
 
-
 void		print_object_type(t_env *e)
 {
 	mlx_clear_window(e->mlx, e->win);
 	mlx_put_image_to_window(e->mlx, e->win, e->img.img, 0, 0);
-	if (e->cam.select_obj->type == 0)
+	if (e->cam.selection == ON && e->cam.select_obj->type == 0)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Sphere");
-	else if (e->cam.select_obj->type == 1)
+	else if (e->cam.selection == ON && e->cam.select_obj->type == 1)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Plan");
-	else if (e->cam.select_obj->type == 2)
+	else if (e->cam.selection == ON && e->cam.select_obj->type == 2)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Cylindre");
-	else if (e->cam.select_obj->type == 3)
+	else if (e->cam.selection == ON && e->cam.select_obj->type == 3)
 		mlx_string_put(e->mlx, e->win, 10, 10, 0xFFFFFF, "Cone");
 }
 
@@ -73,6 +72,7 @@ void		print_keys(void)
 	ft_putstr("By left clicking on the window you enter camera mode :\n");
 	ft_putstr("   W/A/S/D = rotate camera\n");
 	ft_putstr("   right pad = move camera\n");
+	ft_putstr("   J/L = down/up camera\n");
 	ft_putstr("   Space = screenshot\n");
 	ft_putstr("   P = dé/pixelliser la scène\n");
 	ft_putstr("   Z = sepia filter\n");
