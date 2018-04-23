@@ -12,7 +12,6 @@
 
 #include "rt.h"
 
-
 void	mult_matrix_to_matrix(double mat[3][3], double mat_rot[3][3])
 {
 	double	tmp[3][3];
@@ -58,7 +57,7 @@ void	mult_vec_to_matrix(t_vec *vec, double matrix[3][3])
 void	z_rotation(t_cam *cam, double a)
 {
 	double rot_z[3][3];
-	
+
 	rot_z[0][0] = cos(a);
 	rot_z[0][1] = -sin(a);
 	rot_z[0][2] = 0;

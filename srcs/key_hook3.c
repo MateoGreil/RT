@@ -14,7 +14,7 @@
 
 int			button_exit(t_env *e)
 {
-	//xmlFreeDoc(e->doc);
+	xmlFreeDoc(e->doc);
 	e = NULL;
 	exit(0);
 }

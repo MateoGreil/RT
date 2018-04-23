@@ -172,7 +172,7 @@
 	</objs>
 	<lights>
 		<light>
-			<type>directionnal</type>
+			<type>light</type>
 			<position>
 				<x></x>
 				<y>0</y>

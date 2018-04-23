@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/17 14:32:12 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/23 11:14:42 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,11 @@ t_vec	xml_get_vec(xmlNodePtr cur, t_env *e)
 		str = (char*)xmlNodeListGetString(e->doc,
 			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"x")))
-		{
-			(str != NULL) ? (vec.x = ft_atoi(str)) : (vec.x = 0);
-		}
+			vec.x = (str != NULL) ? ft_atoi(str) : 0;
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"y")))
-		{
-			(str != NULL) ? (vec.y = ft_atoi(str)) : (vec.y = 0);
-		}
+			vec.y = (str != NULL) ? ft_atoi(str) : 0;
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"z")))
-		{
-			(str != NULL) ? (vec.z = ft_atoi(str)) : (vec.z = 0);
-		}
+			vec.z = (str != NULL) ? ft_atoi(str) : 0;
 		free(str);
 		cur = cur->next;
 	}
@@ -49,11 +43,11 @@ t_color	xml_get_color(xmlNodePtr cur, t_env *e)
 		str = (char*)xmlNodeListGetString(e->doc,
 			cur->xmlChildrenNode, 1);
 		if ((!xmlStrcmp(cur->name, (const xmlChar *)"r")))
-			(str != NULL) ? (color.r = ft_atoi(str)) : (color.r = 0);
+			color.r = (str != NULL) ? ft_atoi(str) : 0;
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"g")))
-			(str != NULL) ? (color.g = ft_atoi(str)) : (color.g = 0);
+			color.g = (str != NULL) ? ft_atoi(str) : 0;
 		else if ((!xmlStrcmp(cur->name, (const xmlChar *)"b")))
-			(str != NULL) ? (color.b = ft_atoi(str)) : (color.b = 0);
+			color.b = (str != NULL) ? ft_atoi(str) : 0;
 		free(str);
 		cur = cur->next;
 	}
