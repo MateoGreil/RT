@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/24 14:10:14 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:08:29 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,20 +48,15 @@ static char		*get_screenshot_name(void)
 	name = (char *)malloc(sizeof(char) * 40);
 	if (name == NULL)
 		return (FALSE);
-	name = "./screenshots";
+	ft_strcpy(name, "./screenshots");
 	while (access(name, F_OK) != -1)
 	{
-		ft_memset((void*)name, 0, 1);
-		printf("name = %s\n", name);
-		name = ft_strcat(name, "./screenshots/screenshot");
-		printf("%s\n", name);
+		ft_strcpy(name, "./screenshots/screenshot");
 		number = ft_itoa(screen_id);
 		name = ft_strcat(name, number);
 		name = ft_strcat(name, ".jpg");
 		screen_id++;
 		free(number);
-		printf("%s\n", name);
-		sleep(10);
 	}
 	return (name);
 }
@@ -97,4 +92,5 @@ void			screenshot(t_env *e)
 			free(name);
 		}
 	}
+	ft_putendl("screenshot !");
 }
