@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/24 17:03:50 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/04/24 18:06:37 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void			screenshot(t_env *e)
 
 	if (opendir("screenshots") == NULL)
 		mkdir("screenshots", 0777);
-	data = (char *)malloc(sizeof(char) * ((WIN_WIDTH * 3) * (WIN_HEIGHT * 3)));
+	data = (char *)malloc(sizeof(char)
+			* ((WIN_WIDTH * 3) * (WIN_HEIGHT * 3)));
 	if (data != NULL)
 	{
 		name = get_screenshot_name();

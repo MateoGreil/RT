@@ -21,8 +21,6 @@
 # include <libxml/parser.h>
 # include <dirent.h>
 
-# include <stdio.h> //<- A SUPPRIMER
-
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 800
 
