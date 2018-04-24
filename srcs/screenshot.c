@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/24 15:08:29 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/24 16:52:23 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,28 @@ static char		*get_screenshot_name(void)
 	return (name);
 }
 
+static	void	screenshot_operations(t_env *e, char *data)
+{
+	int			x;
+	int			y;
+	t_color 	color;
+
+	y = -1;
+	while (++y < WIN_HEIGHT)
+	{
+		x = -1;
+		while (++x < WIN_WIDTH)
+		{
+			color = get_pixel_color(e->img.data, x, y);
+			put_pixel_to_screenshot(data, x, y, color);
+		}
+	}
+}
+
 void			screenshot(t_env *e)
 {
 	char		*data;
 	char		*name;
-	int			x;
-	int			y;
-	t_color 	color;
 
 	if (opendir("screenshots") == NULL)
 		mkdir("screenshots", 0777);
@@ -77,16 +92,7 @@ void			screenshot(t_env *e)
 		name = get_screenshot_name();
 		if (name != FALSE)
 		{
-			y = -1;
-			while (++y < WIN_HEIGHT)
-			{
-				x = -1;
-				while (++x < WIN_WIDTH)
-				{
-					color = get_pixel_color(e->img.data, x, y);
-					put_pixel_to_screenshot(data, x, y, color);
-				}
-			}
+			screenshot_operations(e, data);
 			stbi_write_jpg(name, WIN_WIDTH, WIN_HEIGHT, 3, data, 100);
 			free(data);
 			free(name);
