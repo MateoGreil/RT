@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/24 12:27:41 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/24 14:10:14 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,6 @@ void			screenshot(t_env *e)
 				}
 			}
 			stbi_write_jpg(name, WIN_WIDTH, WIN_HEIGHT, 3, data, 100);
-			ft_putendl("Screenshot!");
 			free(data);
 			free(name);
 		}
