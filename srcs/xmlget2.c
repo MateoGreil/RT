@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 16:22:08 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/23 14:27:26 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/24 11:35:08 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void			xml_get_objs(xmlNodePtr objs, t_env *e)
 		{
 			obj = init_obj();
 			obj = xml_get_one_obj(cur->xmlChildrenNode, e, 0);
+			obj.refl = 0;
 			obj.id = id;
 			transformations(&obj);
 			ft_lstaddback(&e->objs, ft_lstnew(&obj, sizeof(t_obj)));
