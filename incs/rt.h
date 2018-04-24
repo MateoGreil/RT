@@ -6,7 +6,7 @@
 /*   By: bmuselet <bmuselet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/22 12:48:33 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/23 15:58:52 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/24 15:12:38 by mgreil           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,7 @@ typedef struct		s_obj
 	int				num_texture;
 	int				perturbation;
 	double			bump;
-	double			refl;
+	int				refl;
 	double			refr;
 	double			n_refr;
 }					t_obj;
