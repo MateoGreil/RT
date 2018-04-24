@@ -24,6 +24,8 @@ static t_ray	find_object(t_env *e, double x, double y)
 				vector_double_product(e->cam.right, pixel.x),
 				vector_double_product(e->cam.up, pixel.y)),
 			vector_double_product(e->cam.forward, e->cam.dist));
+	ray.dir = x_rotation(ray.dir, e->cam.rotx);
+	ray.dir = y_rotation(ray.dir, e->cam.roty);
 	ray.dir = vector_normalize(ray.dir);
 	ray.length = INFINITE;
 	ray.pos = e->cam.pos;

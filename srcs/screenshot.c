@@ -3,16 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   screenshot.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
+/*   By: bmuselet <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/08 18:07:38 by nghaddar          #+#    #+#             */
-/*   Updated: 2018/03/21 15:41:48 by bmuselet         ###   ########.fr       */
+/*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
+/*   Updated: 2018/04/24 12:27:41 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#define STB_IMAGE_WRITE_IMPLEMENTATION
-#include "stb_image_write.h"
 #include "rt.h"
+#include "stb_image_write.h"
 
 static void		put_pixel_to_screenshot(char *data, int x, int y, t_color color)
 {
@@ -46,6 +45,8 @@ static char		*get_screenshot_name(void)
 	char	*number;
 
 	name = (char *)malloc(sizeof(char) * 40);
+	if (name == NULL)
+		return (FALSE);
 	name = ft_strcat(name, "./screenshots/screenshot");
 	number = ft_itoa(screen_id);
 	name = ft_strcat(name, number);
@@ -64,19 +65,25 @@ void			screenshot(t_env *e)
 	t_color 	color;
 
 	data = (char *)malloc(sizeof(char) * ((WIN_WIDTH * 3) * (WIN_HEIGHT * 3)));
-	name = get_screenshot_name();
-	y = -1;
-	while (++y < WIN_HEIGHT)
+	if (data != NULL)
 	{
-		x = -1;
-		while (++x < WIN_WIDTH)
+		name = get_screenshot_name();
+		if (name != FALSE)
 		{
-			color = get_pixel_color(e->img.data, x, y);
-			put_pixel_to_screenshot(data, x, y, color);
+			y = -1;
+			while (++y < WIN_HEIGHT)
+			{
+				x = -1;
+				while (++x < WIN_WIDTH)
+				{
+					color = get_pixel_color(e->img.data, x, y);
+					put_pixel_to_screenshot(data, x, y, color);
+				}
+			}
+			stbi_write_jpg(name, WIN_WIDTH, WIN_HEIGHT, 3, data, 100);
+			ft_putendl("Screenshot!");
+			free(data);
+			free(name);
 		}
 	}
-	stbi_write_jpg(name, WIN_WIDTH, WIN_HEIGHT, 3, data, 100);
-	ft_putendl("Screenshot!");
-	free(data);
-	free(name);
 }

@@ -18,13 +18,14 @@
 # include "mlx.h"
 # include <math.h>
 # include <pthread.h>
-
 # include <libxml/parser.h>
 
 # include <stdio.h> //<- A SUPPRIMER
 
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 800
+
+# define STB_IMAGE_WRITE_IMPLEMENTATION
 
 # define KEY_PRESS 2
 # define MOUSE_PRESS 4
