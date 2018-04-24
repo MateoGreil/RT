@@ -67,7 +67,7 @@
 				<z>0</z>
 			</position>
 			<rotation>
-				<x>0</x>
+				<x>1</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -93,7 +93,7 @@
 				<z>0</z>
 			</position>
 			<rotation>
-				<x>0</x>
+				<x>1</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -368,8 +368,8 @@
 			<type>sphere</type>
 			<position>
 				<x>0</x>
-				<y>-60</y>
-				<z>60</z>
+				<y>-10</y>
+				<z>110</z>
 			</position>
 			<color>
 				<r>255</r>
@@ -409,6 +409,25 @@
 				<x>-190</x>
 				<y>30</y>
 				<z>180</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<intensity>70</intensity>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</light>
+		<light>
+			<type>light</type>
+			<position>
+				<x>00</x>
+				<y>30</y>
+				<z>200</z>
 			</position>
 			<rotation>
 				<x>0</x>
