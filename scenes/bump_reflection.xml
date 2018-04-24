@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+- TOUTES LES VARIABLES NON INITIALISÉS ICI, LE SERONT DANS LE PROGRAMME A LA
+	VALEUR 0.
+- parametres de cam :
+	position (x, y, z);
+	direction (x, y, z);
+	rotation (x, y, z);
+- parametres d'objs :
+	type (sphere, plan, cylindre, cone, paraboloide);
+	position (x, y, z);
+	rotation (x, y, z);
+	translation (x, y, z);
+	rad;
+	color (r, g, b);
+	reflection (0 ou 1);
+	refraction;
+	n_refr;
+- parametres de lights :
+	type (light, ambient, directionnal)
+	position (x, y, z);
+	direction (x, y, z);
+	color (r, g, b);
+	intensity;
+-->
+<rt>
+	<cam>
+		<position>
+			<x>-70</x>
+			<y>0</y>
+			<z>140</z>
+		</position>
+		<rotationX>0</rotationX>
+		<rotationY>0</rotationY>
+	</cam>
+	<objs>
+		<obj>
+			<type>plan</type>
+			<position>
+				<x>-20</x>
+				<y>-30</y>
+				<z>50</z>
+			</position>
+			<color>
+				<r>48</r>
+				<g>140</g>
+				<b>241</b>
+			</color>
+			<bump>0.2</bump>
+			<reflection>1</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+        <obj>
+			<type>sphere</type>
+			<position>
+				<x>0</x>
+				<y>10</y>
+				<z>25</z>
+			</position>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+			<rad>25</rad>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+	</objs>
+	<lights>
+		<light>
+			<type>light</type>
+			<position>
+				<x>0</x>
+				<y>0</y>
+				<z>100</z>
+			</position>
+			<rotation>
+				<x>0</x>
+				<y>0</y>
+				<z>0</z>
+			</rotation>
+			<intensity>70</intensity>
+			<color>
+				<r>255</r>
+				<g>255</g>
+				<b>255</b>
+			</color>
+		</light>
+	</lights>
+</rt>
