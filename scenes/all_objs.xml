@@ -4,7 +4,8 @@
 	VALEUR 0.
 - parametres de cam :
 	position (x, y, z);
-	rotation (x, y, z);
+	rotationX;
+	rotationY;
 - parametres d'objs :
 	type (sphere, plan, cylindre, cone, paraboloide);
 	position (x, y, z);
@@ -29,11 +30,8 @@
 			<y>0</y>
 			<z>150</z>
 		</position>
-		<direction>
-			<x>0</x>
-			<y>0</y>
-			<z>0</z>
-		</direction>
+		<rotationX>0</rotationX>
+		<rotationY>0</rotationY>
 	</cam>
 	<objs>
 		<obj>
