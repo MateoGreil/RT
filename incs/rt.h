@@ -19,6 +19,7 @@
 # include <math.h>
 # include <pthread.h>
 # include <libxml/parser.h>
+# include <dirent.h>
 
 # include <stdio.h> //<- A SUPPRIMER
 

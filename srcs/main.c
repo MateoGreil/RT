@@ -16,7 +16,7 @@ static void	init_bool(t_env *e)
 {
 	if (load_texture_img(e) == FALSE)
 	{
-		ft_putstr("Error : Failed to load textures.");
+		ft_putstr("Error : Failed to load textures.\n");
 		exit(0);
 	}
 	e->cam.density = 1;

@@ -40,19 +40,29 @@ static t_color	get_pixel_color(char *data, int x, int y)
 
 static char		*get_screenshot_name(void)
 {
-	static	int	screen_id;
+	int		screen_id;
 	char	*name;
 	char	*number;
 
+	screen_id = 0;
 	name = (char *)malloc(sizeof(char) * 40);
 	if (name == NULL)
 		return (FALSE);
-	name = ft_strcat(name, "./screenshots/screenshot");
-	number = ft_itoa(screen_id);
-	name = ft_strcat(name, number);
-	name = ft_strcat(name, ".jpg");
-	screen_id++;
-	free(number);
+	name = "./screenshots";
+	while (access(name, F_OK) != -1)
+	{
+		ft_memset((void*)name, 0, 1);
+		printf("name = %s\n", name);
+		name = ft_strcat(name, "./screenshots/screenshot");
+		printf("%s\n", name);
+		number = ft_itoa(screen_id);
+		name = ft_strcat(name, number);
+		name = ft_strcat(name, ".jpg");
+		screen_id++;
+		free(number);
+		printf("%s\n", name);
+		sleep(10);
+	}
 	return (name);
 }
 
@@ -64,6 +74,8 @@ void			screenshot(t_env *e)
 	int			y;
 	t_color 	color;
 
+	if (opendir("screenshots") == NULL)
+		mkdir("screenshots", 0777);
 	data = (char *)malloc(sizeof(char) * ((WIN_WIDTH * 3) * (WIN_HEIGHT * 3)));
 	if (data != NULL)
 	{
