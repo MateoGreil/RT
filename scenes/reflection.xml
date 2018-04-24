@@ -31,11 +31,8 @@
 			<y>0</y>
 			<z>150</z>
 		</position>
-		<direction>
-			<x>10</x>
-			<y>0</y>
-			<z>50</z>
-		</direction>
+		<rotationX>0</rotationX>
+		<rotationY>0</rotationY>
 	</cam>
 	<objs>
 		<obj>
