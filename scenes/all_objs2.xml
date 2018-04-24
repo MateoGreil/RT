@@ -4,6 +4,7 @@
 	VALEUR 0.
 - parametres de cam :
 	position (x, y, z);
+	direction (x, y, z);
 	rotation (x, y, z);
 - parametres d'objs :
 	type (sphere, plan, cylindre, cone, paraboloide);
@@ -12,7 +13,7 @@
 	translation (x, y, z);
 	rad;
 	color (r, g, b);
-	reflection;
+	reflection (0 ou 1);
 	refraction;
 	n_refr;
 - parametres de lights :
