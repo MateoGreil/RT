@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/24 16:52:23 by nghaddar         ###   ########.fr       */
+/*   Updated: 2018/04/24 17:03:50 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,8 +81,8 @@ static	void	screenshot_operations(t_env *e, char *data)
 
 void			screenshot(t_env *e)
 {
-	char		*data;
-	char		*name;
+	char	*data;
+	char	*name;
 
 	if (opendir("screenshots") == NULL)
 		mkdir("screenshots", 0777);
