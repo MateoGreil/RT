@@ -6,7 +6,7 @@
 /*   By: mgreil <mgreil@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/20 10:53:07 by mgreil            #+#    #+#             */
-/*   Updated: 2018/04/24 13:21:05 by mgreil           ###   ########.fr       */
+/*   Updated: 2018/04/24 13:47:41 by bmuselet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,7 @@ char	xml_get_type(xmlNodePtr cur, t_env *e)
 void	xml_get_cam(xmlNodePtr cam, t_env *e)
 {
 	xmlNodePtr	cur;
-	char	*str;
+	char		*str;
 
 	cur = cam->xmlChildrenNode;
 	while (cur)
