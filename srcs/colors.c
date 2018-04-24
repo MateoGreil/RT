@@ -93,10 +93,10 @@ t_color	damier_color(t_vec hit_point, t_color color)
 	{
 		if ((int)fabs(hit_point.x) % 100 <= 50
 				&& (int)fabs(hit_point.y) % 100 <= 50)
-			new_color = WHITE;
+			new_color = (t_color){255, 255, 255};
 		else if ((int)fabs(hit_point.x) % 100 > 50
 				&& (int)fabs(hit_point.y) % 100 > 50)
-			new_color = WHITE;
+			new_color = (t_color){255, 255, 255};
 	}
 	else
 	{
@@ -107,7 +107,7 @@ t_color	damier_color(t_vec hit_point, t_color color)
 				&& (int)fabs(hit_point.y) % 100 > 50)
 			new_color = color;
 		else
-			new_color = WHITE;
+			new_color = (t_color){255, 255, 255};
 	}
 	return (new_color);
 }

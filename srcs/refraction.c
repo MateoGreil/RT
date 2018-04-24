@@ -49,7 +49,7 @@ static t_color	color_ray(t_env *e, t_ray ray, t_ray new_ray)
 		new_ray.color = color_balanced(ray.color, new_ray.hit_obj->color,
 			1 - ray.hit_obj->refr, ray.hit_obj->refr);
 	else
-		new_ray.color = color_balanced(ray.color, BLACK,
+		new_ray.color = color_balanced(ray.color, (t_color){0, 0, 0},
 			1 - ray.hit_obj->refr, ray.hit_obj->refr);
 	return (new_ray.color);
 }

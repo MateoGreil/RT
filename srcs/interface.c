@@ -37,7 +37,7 @@ void		init_loading(t_env *e)
 		y = 1;
 		while (y <= 100)
 		{
-			put_pixel_to_image(&e->wait_img, x, y, WHITE);
+			put_pixel_to_image(&e->wait_img, x, y, (t_color){255, 255, 255});
 			y++;
 		}
 		x++;

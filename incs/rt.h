@@ -106,9 +106,6 @@
 # define NB_SAMPLES 1
 # define NB_TEXTURES 5
 
-# define BLACK (t_color){0, 0, 0}
-# define WHITE (t_color){255, 255, 255}
-
 # define N_AIR 1
 
 typedef struct		s_obj

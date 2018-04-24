@@ -32,7 +32,7 @@ static t_ray	create_ray(t_env *e, double x, double y, double s)
 	if (ray.hit_obj)
 		ray.color = ray.hit_obj->color;
 	else
-		ray.color = BLACK;
+		ray.color = (t_color){0, 0, 0};
 	if (ray.hit_obj && ray.hit_obj->refr > 0)
 		ray_refr(e, &ray, 0);
 	if (ray.hit_obj && ray.hit_obj->refl > 0)
@@ -51,7 +51,7 @@ t_color			search_color(void *e, int x, int y, int s)
 		color = light_calc(e, ray);
 	}
 	else
-		color = BLACK;
+		color = (t_color){0, 0, 0};
 	return (color);
 }
 
