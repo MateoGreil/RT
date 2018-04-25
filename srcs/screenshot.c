@@ -6,7 +6,7 @@
 /*   By: nghaddar <nghaddar@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/24 12:27:37 by bmuselet          #+#    #+#             */
-/*   Updated: 2018/04/24 18:06:37 by bmuselet         ###   ########.fr       */
+/*   Updated: 2018/04/25 13:46:21 by nghaddar         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void		put_pixel_to_screenshot(char *data, int x, int y, t_color color)
 {
 	int	pos;
 
-	pos = (y * (WIN_WIDTH * 3)) + (x * 3);
+	pos = (y * WIN_WIDTH * 3 + x * 3);
 	if (x < WIN_WIDTH && x >= 0 && y >= 0 && y < WIN_HEIGHT)
 	{
 		data[pos] = color.r;
@@ -31,7 +31,7 @@ static t_color	get_pixel_color(char *data, int x, int y)
 	int		pos;
 	t_color	pixel;
 
-	pos = (y * (WIN_WIDTH * 4)) + (x * 4);
+	pos = (y * WIN_WIDTH * 4 + x * 4);
 	pixel.b = data[pos];
 	pixel.g = data[pos + 1];
 	pixel.r = data[pos + 2];
@@ -61,11 +61,11 @@ static char		*get_screenshot_name(void)
 	return (name);
 }
 
-static	void	screenshot_operations(t_env *e, char *data)
+static void		screenshot_operations(t_env *e, char *data)
 {
 	int			x;
 	int			y;
-	t_color 	color;
+	t_color		color;
 
 	y = -1;
 	while (++y < WIN_HEIGHT)
