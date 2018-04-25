@@ -28,7 +28,7 @@
 		<position>
 			<x>0</x>
 			<y>0</y>
-			<z>200</z>
+			<z>-50</z>
 		</position>
 		<direction>
 			<x>0</x>
@@ -151,7 +151,7 @@
 				<z>0</z>
 			</position>
 			<rotation>
-				<x>0</x>
+				<x>1</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>
@@ -177,7 +177,7 @@
 				<z>0</z>
 			</position>
 			<rotation>
-				<x>0</x>
+				<x>1</x>
 				<y>0</y>
 				<z>0</z>
 			</rotation>

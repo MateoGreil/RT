@@ -37,6 +37,22 @@
 		<obj>
 			<type>plan</type>
 			<position>
+				<x>-10000</x>
+				<y>150</y>
+				<z>50</z>
+			</position>
+			<color>
+				<r>124</r>
+				<g>168</g>
+				<b>239</b>
+			</color>
+			<reflection>0</reflection>
+			<refraction>0</refraction>
+			<n_refr>0</n_refr>
+		</obj>
+		<obj>
+			<type>plan</type>
+			<position>
 				<x>-20</x>
 				<y>-30</y>
 				<z>50</z>
